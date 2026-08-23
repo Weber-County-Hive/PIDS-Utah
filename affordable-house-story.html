@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Story of the "Affordable" House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC;
+    --ink:#2B2118;
+    --ink-soft:#5B4E42;
+    --sale:#FFC857;
+    --pid:#FF6F59;
+    --tax:#2A9D8F;
+    --check:#52B788;
+    --flag:#E63946;
+    --paper:#FFFFFF;
+    --line:#E9DFC9;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Nunito',sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Baloo 2',sans-serif;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:92vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 24px;
+    position:relative;
+  }
+  .hero .eyebrow{
+    font-weight:800;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:.8rem;
+    color:var(--pid);
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:clamp(2.2rem,6vw,4.2rem);
+    font-weight:800;
+    max-width:900px;
+    margin:0 0 18px;
+    line-height:1.08;
+  }
+  .hero h1 span{color:var(--pid);}
+  .hero p{
+    max-width:560px;
+    font-size:1.15rem;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+  .hero-house{ margin:34px 0; }
+  .scroll-cue{
+    margin-top:36px;
+    font-weight:700;
+    font-size:.95rem;
+    color:var(--ink-soft);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    animation:bob 2s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(8px);}
+  }
+
+  /* ---------- story steps ---------- */
+  .story{
+    max-width:920px;
+    margin:0 auto;
+    padding:20px 28px 60px;
+  }
+  .step{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:28px;
+    padding:56px 0;
+    border-bottom:2px dashed var(--line);
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .step.visible{ opacity:1; transform:translateY(0); }
+  .step:last-of-type{ border-bottom:none; }
+  .step-num{
+    width:96px;height:96px;
+    border-radius:50%;
+    background:var(--paper);
+    border:4px solid var(--sale);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Baloo 2',sans-serif;
+    font-size:2.4rem;
+    font-weight:800;
+    color:var(--ink);
+    flex-shrink:0;
+    box-shadow:0 6px 0 var(--line);
+  }
+  .step:nth-of-type(3n+2) .step-num{ border-color:var(--pid); }
+  .step:nth-of-type(3n) .step-num{ border-color:var(--tax); }
+
+  .step-body h2{
+    font-size:clamp(1.4rem,3vw,1.9rem);
+    margin:0 0 10px;
+    font-weight:700;
+  }
+  .step-body p{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    font-weight:600;
+    margin:0 0 18px;
+    max-width:620px;
+  }
+  .step-body p b{ color:var(--ink); }
+
+  .illus{
+    display:flex;
+    align-items:flex-end;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-top:6px;
+  }
+
+  /* generic tag / bill chips used across illustrations */
+  .tag{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    padding:10px 18px;
+    border-radius:14px;
+    color:var(--paper);
+    font-size:1rem;
+    box-shadow:0 4px 0 rgba(0,0,0,.12);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .tag.sale{ background:var(--sale); color:var(--ink); }
+  .tag.pid{ background:var(--pid); }
+  .tag.tax{ background:var(--tax); }
+  .tag.ghost{
+    background:transparent;
+    border:3px dashed var(--ink-soft);
+    color:var(--ink-soft);
+  }
+  .stamp{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    color:var(--check);
+    border:4px solid var(--check);
+    border-radius:14px;
+    padding:8px 16px;
+    transform:rotate(-8deg);
+    display:inline-block;
+    font-size:1.05rem;
+  }
+
+  /* blocks tower */
+  .tower-wrap{
+    display:flex;
+    align-items:flex-end;
+    gap:36px;
+    flex-wrap:wrap;
+    margin-top:8px;
+  }
+  .tower{
+    display:flex;
+    flex-direction:column-reverse;
+    width:150px;
+  }
+  .block{
+    height:0;
+    border-radius:8px;
+    margin-bottom:4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--paper);
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    text-align:center;
+    padding:0 8px;
+    overflow:hidden;
+    box-shadow:inset 0 -4px 0 rgba(0,0,0,.14);
+    transition:height 1s cubic-bezier(.2,.8,.2,1);
+  }
+  .block.sale{ background:var(--sale); color:var(--ink); }
+  .block.pid{ background:var(--pid); }
+  .block.tax{ background:var(--tax); }
+  .tower-label{
+    text-align:center;
+    font-weight:800;
+    margin-top:10px;
+    font-family:'Baloo 2',sans-serif;
+    font-size:.95rem;
+  }
+  .tower-caption{
+    text-align:center;
+    font-size:.82rem;
+    color:var(--ink-soft);
+    font-weight:700;
+    max-width:150px;
+  }
+  .step.grow .block.sale{ height:70px; }
+  .step.grow .block.pid{ height:0; }
+  .step.grow .block.tax{ height:0; }
+  .step.grow.visible .block.sale{ height:70px; }
+  .step.grow.visible .block.pid{ height:60px; }
+  .step.grow.visible .block.tax{ height:50px; }
+
+  /* the-check magnifier ring */
+  .magnify{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:96px;height:96px;
+    border-radius:50%;
+    border:6px solid var(--ink);
+  }
+  .magnify::after{
+    content:'';
+    position:absolute;
+    bottom:-26px; right:-26px;
+    width:8px;height:34px;
+    background:var(--ink);
+    border-radius:4px;
+    transform:rotate(45deg);
+  }
+
+  /* mailbox */
+  .mailbox{
+    width:64px;height:44px;
+    background:var(--pid);
+    border-radius:10px 10px 4px 4px;
+    position:relative;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--paper);
+    font-weight:800;
+    font-family:'Baloo 2',sans-serif;
+  }
+  .mailbox::before{
+    content:'';
+    position:absolute;
+    top:-14px; left:6px;
+    width:52px;height:20px;
+    background:var(--pid);
+    border-radius:16px 16px 0 0;
+  }
+
+  /* ---------- funding family ---------- */
+  .family{
+    max-width:1000px;
+    margin:0 auto;
+    padding:70px 28px 30px;
+    text-align:center;
+  }
+  .family h2{
+    font-size:clamp(1.7rem,4vw,2.5rem);
+    margin:0 0 8px;
+  }
+  .family p.lead{
+    color:var(--ink-soft);
+    font-weight:700;
+    max-width:640px;
+    margin:0 auto 40px;
+  }
+  .family-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+    text-align:left;
+  }
+  .fam-card{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    border-radius:18px;
+    padding:0;
+    box-shadow:0 6px 0 var(--ink);
+    overflow:hidden;
+  }
+  .fam-card summary{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:18px 20px;
+    cursor:pointer;
+    list-style:none;
+    user-select:none;
+  }
+  .fam-card summary::-webkit-details-marker{ display:none; }
+  .fam-card summary .fam-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .fam-card summary .expand-icon{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:1.3rem;
+    color:var(--ink-soft);
+    flex-shrink:0;
+    transition:transform .25s ease;
+  }
+  .fam-card[open] summary .expand-icon{ transform:rotate(45deg); }
+  .fam-card .fam-body{
+    padding:0 20px 20px;
+  }
+  .fam-card .fam-badge{
+    align-self:flex-start;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:1.3rem;
+    padding:5px 14px;
+    border-radius:10px;
+    color:var(--paper);
+  }
+  .fam-card .fam-full{
+    font-weight:800;
+    font-size:.82rem;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    color:var(--ink-soft);
+  }
+  .fam-card p{
+    margin:0;
+    font-weight:600;
+    color:var(--ink-soft);
+    font-size:.98rem;
+  }
+  .fam-card p b{ color:var(--ink); }
+  .fam-1 .fam-badge{ background:var(--pid); }
+  .fam-2 .fam-badge{ background:var(--tax); }
+  .fam-3 .fam-badge{ background:var(--sale); color:var(--ink); }
+  .fam-4 .fam-badge{ background:#8B6DB8; }
+  .fam-5 .fam-badge{ background:#3D8FB5; }
+  .fam-6 .fam-badge{ background:#D9862F; }
+  .family-note{
+    max-width:640px;
+    margin:36px auto 0;
+    background:var(--cream);
+    border:2px dashed var(--ink-soft);
+    border-radius:16px;
+    padding:20px 24px;
+    text-align:center;
+  }
+  .family-note p{
+    margin:0;
+    font-weight:700;
+    color:var(--ink-soft);
+  }
+  .family-note p b{ color:var(--ink); }
+
+  /* ---------- doesn't live near one? ---------- */
+  .reach{
+    max-width:1000px;
+    margin:0 auto;
+    padding:70px 28px 30px;
+    text-align:center;
+  }
+  .reach h2{
+    font-size:clamp(1.7rem,4vw,2.5rem);
+    margin:0 0 8px;
+  }
+  .reach p.lead{
+    color:var(--ink-soft);
+    font-weight:700;
+    max-width:640px;
+    margin:0 auto 40px;
+  }
+  .reach-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+    text-align:left;
+  }
+  .reach-card{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    border-radius:18px;
+    padding:0;
+    box-shadow:0 6px 0 var(--ink);
+    overflow:hidden;
+  }
+  .reach-card summary{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:18px 22px;
+    cursor:pointer;
+    list-style:none;
+    user-select:none;
+  }
+  .reach-card summary::-webkit-details-marker{ display:none; }
+  .reach-card summary .r-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .reach-card summary .expand-icon{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:1.3rem;
+    color:var(--ink-soft);
+    flex-shrink:0;
+    transition:transform .25s ease;
+  }
+  .reach-card[open] summary .expand-icon{ transform:rotate(45deg); }
+  .reach-card .r-body{
+    padding:0 22px 20px;
+  }
+  .reach-card .r-num{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:2rem;
+    color:var(--pid);
+    line-height:1;
+    margin-bottom:8px;
+  }
+  .reach-card .r-title{
+    font-weight:800;
+    font-family:'Baloo 2',sans-serif;
+    font-size:1.05rem;
+    margin-bottom:8px;
+  }
+  .reach-card p{
+    margin:0;
+    font-weight:600;
+    color:var(--ink-soft);
+    font-size:.92rem;
+    line-height:1.5;
+  }
+  .reach-card p b{ color:var(--ink); }
+
+  /* final comparison */
+  .finale{
+    max-width:920px;
+    margin:0 auto;
+    padding:40px 28px 100px;
+    text-align:center;
+  }
+  .finale h2{
+    font-size:clamp(1.7rem,4vw,2.6rem);
+    margin:0 0 8px;
+  }
+  .finale p.lead{
+    color:var(--ink-soft);
+    font-weight:700;
+    max-width:620px;
+    margin:0 auto 46px;
+  }
+  .compare{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap:70px;
+    flex-wrap:wrap;
+    margin-bottom:40px;
+  }
+  .compare .tower{ width:170px; }
+  .compare .block{
+    font-size:.78rem;
+    line-height:1.35;
+    transition:height .4s ease;
+    padding:6px 8px;
+    text-align:center;
+  }
+  .compare-block.checked{ background:var(--sale); color:var(--ink); }
+  .compare-block.p1{ background:var(--sale); color:var(--ink); }
+  .compare-block.p2{ background:var(--pid); }
+  .compare-block.p3{ background:var(--tax); }
+  .compare-block.hoa{ background:#8B6DB8; transition:height .4s ease; }
+
+  /* ---------- calculator ---------- */
+  .calc{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    border-radius:24px;
+    padding:36px 32px;
+    max-width:760px;
+    margin:0 auto 50px;
+    box-shadow:0 8px 0 var(--ink);
+    text-align:left;
+  }
+  .calc h3{
+    font-size:1.4rem;
+    margin:0 0 4px;
+    text-align:center;
+  }
+  .calc .calc-sub{
+    text-align:center;
+    color:var(--ink-soft);
+    font-weight:700;
+    font-size:.92rem;
+    margin:0 0 26px;
+  }
+  .slider-row{ margin-bottom:22px; }
+  .slider-row label{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-weight:800;
+    font-family:'Baloo 2',sans-serif;
+    font-size:1rem;
+    margin-bottom:8px;
+  }
+  .slider-row label .val{
+    font-family:'Nunito',sans-serif;
+    font-weight:800;
+    color:var(--pid);
+    font-size:1.05rem;
+  }
+  input[type="range"]{
+    -webkit-appearance:none;
+    width:100%;
+    height:10px;
+    border-radius:6px;
+    background:var(--line);
+    outline:none;
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:var(--pid);
+    border:4px solid var(--paper);
+    box-shadow:0 0 0 2px var(--ink);
+    cursor:pointer;
+  }
+  input[type="range"]::-moz-range-thumb{
+    width:26px;height:26px;
+    border-radius:50%;
+    background:var(--pid);
+    border:4px solid var(--paper);
+    box-shadow:0 0 0 2px var(--ink);
+    cursor:pointer;
+  }
+  .mode-toggle{
+    display:flex;
+    gap:8px;
+    margin-bottom:8px;
+    flex-wrap:wrap;
+  }
+  .mode-btn{
+    font-family:'Nunito',sans-serif;
+    font-weight:800;
+    font-size:.85rem;
+    padding:8px 14px;
+    border-radius:10px;
+    border:2px solid var(--line);
+    background:var(--cream);
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .mode-btn.active{
+    background:var(--pid);
+    color:var(--paper);
+    border-color:var(--pid);
+  }
+  .calc-results{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:14px;
+    margin-top:26px;
+  }
+  .result-card{
+    background:var(--cream);
+    border:2px solid var(--line);
+    border-radius:14px;
+    padding:14px 16px;
+    text-align:center;
+  }
+  .result-card .r-label{
+    font-size:.78rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--ink-soft);
+    margin-bottom:4px;
+  }
+  .result-card .r-val{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:1.3rem;
+  }
+  .result-card.rc-sale .r-val{ color:var(--ink); }
+  .result-card.rc-pid .r-val{ color:var(--pid); }
+  .result-card.rc-tax .r-val{ color:var(--tax); }
+  .result-card.rc-hoa .r-val{ color:#8B6DB8; }
+  .result-card.rc-total{ background:var(--ink); }
+  .result-card.rc-total .r-label{ color:#FFDCC9; }
+  .result-card.rc-total .r-val{ color:var(--paper); }
+
+  .takeaway{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    border-radius:22px;
+    padding:34px 30px;
+    max-width:640px;
+    margin:0 auto;
+    box-shadow:0 8px 0 var(--ink);
+  }
+  .takeaway .q{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:1.35rem;
+    margin-bottom:10px;
+  }
+  .takeaway p{
+    font-weight:600;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  .takeaway p b{ color:var(--ink); }
+
+  /* grown-ups footnote */
+  details.grownups{
+    max-width:720px;
+    margin:56px auto 0;
+    background:var(--paper);
+    border:2px solid var(--line);
+    border-radius:16px;
+    padding:18px 24px;
+  }
+  details.grownups summary{
+    cursor:pointer;
+    font-weight:800;
+    font-family:'Baloo 2',sans-serif;
+    font-size:1.05rem;
+    outline:none;
+  }
+  details.grownups .gtext{
+    margin-top:14px;
+    font-size:.95rem;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+  details.grownups .gtext p{ margin:0 0 10px; }
+  details.grownups .gtext b{ color:var(--ink); }
+
+  footer{
+    text-align:center;
+    padding:30px 20px 60px;
+    font-size:.85rem;
+    color:var(--ink-soft);
+    font-weight:700;
+  }
+
+  /* ---------- tracking banner ---------- */
+  .tracking{
+    background:var(--ink);
+    color:var(--cream);
+    padding:22px 24px;
+  }
+  .tracking-inner{
+    max-width:900px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .tracking-badge{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:.82rem;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    background:var(--pid);
+    color:var(--paper);
+    padding:6px 12px;
+    border-radius:8px;
+    flex-shrink:0;
+  }
+  .tracking p{
+    margin:0;
+    font-weight:600;
+    font-size:.95rem;
+    line-height:1.5;
+    color:#F4EEE0;
+  }
+  .tracking-toggle{
+    background:none;
+    border:2px solid #5B4E42;
+    color:var(--cream);
+    font-family:'Nunito',sans-serif;
+    font-weight:800;
+    font-size:.85rem;
+    padding:7px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    flex-shrink:0;
+    margin-left:auto;
+  }
+  .tracking-toggle:hover{ border-color:var(--pid); }
+  .tracking-list{
+    max-width:900px;
+    margin:16px auto 0;
+    display:none;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:10px 24px;
+    font-size:.86rem;
+    line-height:1.5;
+    color:#D9CFC0;
+  }
+  .tracking-list.open{ display:grid; }
+  .tracking-list li{ list-style:none; }
+  .tracking-list b{ color:var(--cream); }
+</style>
+</head>
+<body>
+
+<!-- ============ TRACKING BANNER ============ -->
+<div class="tracking">
+  <div class="tracking-inner">
+    <span class="tracking-badge">On the record</span>
+    <p>Every figure, quote, and rate on this page is pulled from a named statute, agency, or news source &mdash; not summarized secondhand. We're tracking this closely.</p>
+    <button class="tracking-toggle" id="tracking-toggle-btn" onclick="document.getElementById('tracking-list').classList.toggle('open'); this.textContent = document.getElementById('tracking-list').classList.contains('open') ? 'Hide sources' : 'Show sources';">Show sources</button>
+  </div>
+  <ul class="tracking-list" id="tracking-list">
+    <li><b>PID statutory cap:</b> Utah Code 17B-2a-1209 (15 mills)</li>
+    <li><b>Residential exemption:</b> Utah's 45% property-tax exemption</li>
+    <li><b>Underwriting rules:</b> Fannie Mae B3-6-02/03; VA 38 CFR 36.4340(d); USDA HB-1-3555; HUD 4155.1</li>
+    <li><b>Board formation before residents exist:</b> Title 17B/17D + Herriman Journal, 1/28/2020</li>
+    <li><b>Statewide PID debt vs. state debt:</b> KSL / Utah Investigative Journalism Project, April 2026</li>
+    <li><b>Disclosure timeline:</b> HB507 (2026 session)</li>
+    <li><b>State's own risk framing:</b> Utah Inland Port Authority PID page; budget.utah.gov "Power of PIDs"</li>
+    <li><b>Sample disclosure language:</b> Salt Lake County countywide PID policy</li>
+    <li><b>Contract cancellation rate:</b> Redfin contract-cancellation data; earnest money forfeiture on buyer breach (Consumer Financial Protection Bureau)</li>
+    <li><b>AAA rating / statewide debt comparison:</b> KSL / Utah Investigative Journalism Project, April 2026</li>
+    <li><b>Compliance rate:</b> State Auditor legislative testimony, Jan 2026, Utah Rules Review and General Government Oversight Committee</li>
+    <li><b>Wohali city-liability precedent:</b> State Auditor's office directive to Coalville + March 2026 statewide advisory</li>
+    <li><b>Vineyard extension example:</b> Vineyard Redevelopment Agency board resolutions and public hearing notices; State Auditor report on Vineyard RDA oversight</li>
+    <li><b>$20.9M/$17.2M diversion figures:</b> Legislative Auditor General TIF performance audit; Golden Spike UIPA project area records</li>
+    <li><b>100% landowner consent / no public vote:</b> Utah Code Title 17B/17D (PID Act); Utah Code Title 17C (CRA Act)</li>
+    <li><b>More PID case files:</b> <a href="https://weber-county-hive.github.io/PIDS-Utah/" style="color:var(--pid);font-weight:800;">weber-county-hive.github.io/PIDS-Utah</a></li>
+  </ul>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="eyebrow">A step-by-step story</div>
+  <h1>The story of the<br><span>"affordable"</span> house</h1>
+  <p>Let's walk through it slowly &mdash; the way you'd explain it to a five-year-old. Because once you see the trick, it's easy to spot everywhere.</p>
+
+  <svg class="hero-house" width="180" height="140" viewBox="0 0 180 140" fill="none">
+    <polygon points="90,10 20,65 160,65" fill="#FF6F59"/>
+    <rect x="35" y="65" width="110" height="65" rx="6" fill="#FFC857"/>
+    <rect x="75" y="90" width="30" height="40" rx="3" fill="#2B2118"/>
+    <rect x="48" y="80" width="20" height="20" rx="3" fill="#FFF8EC" stroke="#2B2118" stroke-width="3"/>
+    <rect x="112" y="80" width="20" height="20" rx="3" fill="#FFF8EC" stroke="#2B2118" stroke-width="3"/>
+    <circle cx="97" cy="110" r="2.5" fill="#FFC857"/>
+  </svg>
+
+  <div class="scroll-cue">
+    <span>scroll to begin</span>
+    <span>&#8595;</span>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<div class="story">
+
+  <div class="step" data-step>
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <h2>Once upon a time, a rule was made.</h2>
+      <p>The rule said: <b>some new houses have to be "affordable"</b> &mdash; cheap enough for regular families to buy.</p>
+      <div class="illus">
+        <span class="tag sale">🏠 New House</span>
+        <span class="tag ghost">Must be affordable ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" data-step>
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <h2>To check the rule, everyone looks at ONE number.</h2>
+      <p>Just <b>the price on the sale sheet</b>. Nobody checks anything else &mdash; only that one price, on that one day.</p>
+      <div class="illus">
+        <span class="magnify"></span>
+        <span class="tag sale">$ Sale Price</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" data-step>
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <h2>So builders found a clever trick.</h2>
+      <p>Roads, pipes, and sewers cost money to build. Instead of paying for them upfront and adding it to the price&hellip; the builder pays with a <b>special loan called a PID</b> &mdash; and the neighbors pay that loan back later, a little at a time.</p>
+      <div class="illus">
+        <span class="tag ghost">🚧 Roads + Pipes</span>
+        <span class="tag pid">💳 Paid with a PID loan</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" data-step>
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <h2>Now the price tag looks smaller.</h2>
+      <p>Because the road cost isn't in it anymore, the sale price passes the test. The house gets a big green stamp: <b>Affordable!</b></p>
+      <div class="illus">
+        <span class="tag sale">$ Smaller Price</span>
+        <span class="stamp">✔ PASSED</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" data-step>
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <h2>But the roads still have to be paid for.</h2>
+      <p>So right after you move in, a <b>new bill</b> starts showing up in your mailbox &mdash; the PID bill. It wasn't part of the test. It's part of your payment now.</p>
+      <div class="illus">
+        <div class="mailbox">✉</div>
+        <span class="tag pid">New bill: PID assessment</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" data-step>
+    <div class="step-num">6</div>
+    <div class="step-body">
+      <h2>And here's the part nobody tells you: that PID bill can move too.</h2>
+      <p>Many PID bills aren't a flat number &mdash; they're a <b>rate charged against your home's assessed value</b>, just like property tax. So when the <b>county assessor</b> raises what your home is worth, <b>both bills can climb together</b>, the same year, for the same reason.</p>
+      <div class="illus">
+        <span class="tag tax">📈 Assessor raises value</span>
+        <span class="tag pid">PID bill ↑</span>
+        <span class="tag tax">Property tax ↑</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" data-step>
+    <div class="step-num">7</div>
+    <div class="step-body">
+      <h2>And here's the part that's even sneakier: who set that rate in the first place?</h2>
+      <p>Before a single home is sold, the PID's board and its starting rate can be set by <b>the developer</b> &mdash; because the developer is the only landowner there is. One city councilman put it bluntly: <b>"This isn't the fox guarding the hen house. This is locking the fox inside and walking away."</b> By the time you show up to buy, the rate was already decided. You never got a vote.</p>
+      <div class="illus">
+        <span class="tag ghost">🦊 Developer sets the rate</span>
+        <span class="tag pid">You inherit it at closing</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" data-step>
+    <div class="step-num">8</div>
+    <div class="step-body">
+      <h2>And until very recently, you might not even find out until the night before.</h2>
+      <p>For years, Utah had <b>no law requiring PID costs be disclosed before closing at all.</b> A new law now requires disclosure "at or before closing" &mdash; but one buyer described learning about their bill like this: <b>"It was like the 11th hour and 59th minute."</b> Still perfectly legal.</p>
+      <p style="margin-top:12px;">If that number is a dealbreaker at that point, walking away isn't free. <b>The buyer &mdash; not the seller, not the lender &mdash; is the one who forfeits the earnest money deposit</b> already paid, on top of moving costs already committed and exposure to a breach-of-contract claim. Finding out too late to matter isn't a side effect. It's the moment the whole system is built around.</p>
+      <div class="illus">
+        <span class="tag pid">🕚 Disclosed at closing</span>
+        <span class="tag ghost">Too late to walk away</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step grow" data-step>
+    <div class="step-num">9</div>
+    <div class="step-body">
+      <h2>So here's what you're really paying, stacked up.</h2>
+      <p>The <b>sale price</b> is what got checked. The <b>PID bill</b> and the <b>tax bill</b> got added after &mdash; and both of them can grow whenever the assessor updates your home's value.</p>
+      <div class="tower-wrap">
+        <div>
+          <div class="tower">
+            <div class="block tax">Tax ↕</div>
+            <div class="block pid">PID ↕</div>
+            <div class="block sale">Sale Price</div>
+          </div>
+          <div class="tower-label">What you actually pay</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" data-step>
+    <div class="step-num">10</div>
+    <div class="step-body">
+      <h2>Apartments do something similar.</h2>
+      <p>The <b>rent number</b> is what gets checked and advertised. But the PID bill doesn't disappear for renters &mdash; it just shows up as one more line-item fee, right alongside internet, "smart home," pest control, and admin. None of it is part of the number that got checked.</p>
+      <div class="illus">
+        <span class="tag sale">🏢 Advertised Rent</span>
+        <span class="tag pid">+ PID pass-through</span>
+        <span class="tag pid">+ Fee</span>
+        <span class="tag pid">+ Fee</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" data-step>
+    <div class="step-num">11</div>
+    <div class="step-body">
+      <h2>So the PID never really goes away &mdash; it just changes shape.</h2>
+      <p>For a <b>buyer</b>, it's a yearly assessment tied to the deed. For a <b>renter</b>, it's a monthly fee tied to the lease. Either way, it's the same road and pipe money, and either way, it was never part of what got checked.</p>
+      <div class="illus">
+        <span class="tag pid">🏠 Buyer: PID assessment</span>
+        <span class="tag pid">🏢 Renter: PID fee</span>
+        <span class="tag ghost">Same cost, different name</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ FUNDING FAMILY ============ -->
+<section class="family">
+  <h2>PID is just one cousin in a big family.</h2>
+  <p class="lead">Different names, different agencies &mdash; but almost all of them do the same basic trick: <b>freeze the tax base, and let new growth flow somewhere other than the normal pot.</b></p>
+
+  <div class="family-grid">
+    <details class="fam-card fam-1">
+      <summary><span class="fam-head"><span class="fam-badge">PID</span><span class="fam-full">Public Infrastructure District</span></span><span class="expand-icon">+</span></summary>
+      <div class="fam-body"><p>A special little government just for one development. It borrows money for roads and pipes, then bills the homes inside it &mdash; separately from your normal property tax &mdash; until the loan is paid off.</p></div>
+    </details>
+
+    <details class="fam-card fam-2">
+      <summary><span class="fam-head"><span class="fam-badge">TIF</span><span class="fam-full">Tax Increment Financing</span></span><span class="expand-icon">+</span></summary>
+      <div class="fam-body"><p>The umbrella idea behind most of these tools. A "base year" value gets frozen. As the property becomes worth more, that <b>extra</b> value's tax money doesn't go to schools and county services like normal &mdash; it gets redirected to pay for the project instead.</p></div>
+    </details>
+
+    <details class="fam-card fam-3">
+      <summary><span class="fam-head"><span class="fam-badge">RDA</span><span class="fam-full">Redevelopment Agency</span></span><span class="expand-icon">+</span></summary>
+      <div class="fam-body"><p>A city's own TIF tool, usually aimed at "blighted" or run-down areas. Same freeze-and-redirect trick, run by the city itself.</p></div>
+    </details>
+
+    <details class="fam-card fam-4">
+      <summary><span class="fam-head"><span class="fam-badge">CRA</span><span class="fam-full">Community Reinvestment Area</span></span><span class="expand-icon">+</span></summary>
+      <div class="fam-body"><p>Utah's newer name for basically the same tool as an RDA &mdash; a designated area where future growth in tax value gets captured for a project instead of flowing to the usual taxing entities.</p></div>
+    </details>
+
+    <details class="fam-card fam-5">
+      <summary><span class="fam-head"><span class="fam-badge">MIDA</span><span class="fam-full">Military Installation Development Authority</span></span><span class="expand-icon">+</span></summary>
+      <div class="fam-body"><p>A special state authority that can act like its own city &mdash; zoning, land use, and its own version of tax-increment capture &mdash; originally meant to support land near military bases, since expanded well beyond that.</p></div>
+    </details>
+
+    <details class="fam-card fam-6">
+      <summary><span class="fam-head"><span class="fam-badge">UIPA</span><span class="fam-full">Utah Inland Port Authority</span></span><span class="expand-icon">+</span></summary>
+      <div class="fam-body"><p>Another special state authority with its own land-use and increment-capture powers, for designated "port" project areas &mdash; not just in Salt Lake City, but anywhere the state creates one.</p></div>
+    </details>
+  </div>
+
+  <div class="family-note">
+    <p>They're not all identical, and not every use of every tool is a problem. But they share the same core move: <b>let a property's value grow, and send that new money somewhere other than where it would normally go.</b> A PID does it through a bill you pay directly. TIF/RDA/CRA/MIDA/UIPA do it by quietly rerouting the tax money before it ever reaches the county, school district, or city general fund.</p>
+    <p style="margin-top:14px;">And here's the part that makes it worse: <b>these tools can stack on the very same property.</b> One real Utah development sits inside a PID <i>and</i> a separate RDA/tax-increment area at the same time &mdash; two mechanisms, two layers of diverted or added cost, on one piece of land. It's not one trick. It can be several, running at once.</p>
+  </div>
+</section>
+
+<!-- ============ DOESN'T LIVE NEAR A PID? ============ -->
+<section class="reach">
+  <h2>"I don't live in a PID area. Why should I care?"</h2>
+  <p class="lead">Because the numbers don't stay inside the district boundary. Here's what's actually documented.</p>
+
+  <div class="reach-grid">
+    <details class="reach-card">
+      <summary><span class="r-head"><span class="r-num">$5.267B</span><span class="r-title">Statewide PID debt, growing fast</span></span><span class="expand-icon">+</span></summary>
+      <div class="r-body"><p>Utah's total PID debt as of August 2026, up from about <b>$4B</b> just ten months earlier (October 2025) &mdash; a run-rate the State Auditor's own office is tracking with concern.</p></div>
+    </details>
+
+    <details class="reach-card">
+      <summary><span class="r-head"><span class="r-num">3.4&times;</span><span class="r-title">Bigger than the state's own debt</span></span><span class="expand-icon">+</span></summary>
+      <div class="r-body"><p>At the end of 2025, Utah's <b>entire state debt obligation was $1.1 billion</b> &mdash; while PIDs alone carried <b>$3.8 billion</b>. PID debt outweighs the whole state's own borrowing more than three to one (KSL / Utah Investigative Journalism Project).</p></div>
+    </details>
+
+    <details class="reach-card">
+      <summary><span class="r-head"><span class="r-num">1 of 15</span><span class="r-title">Utah's AAA credit rating is on the line</span></span><span class="expand-icon">+</span></summary>
+      <div class="r-body"><p>Utah is one of only 15 states with a AAA credit rating. That rating has never been tested against this much PID debt sitting <b>entirely outside</b> the state's own official debt figures. If it slips, borrowing gets more expensive for every future school bond, road bond, or public project &mdash; statewide, not just near a PID.</p></div>
+    </details>
+
+    <details class="reach-card">
+      <summary><span class="r-head"><span class="r-num">62.5%</span><span class="r-title">Compliance rate for required reporting</span></span><span class="expand-icon">+</span></summary>
+      <div class="r-body"><p>Only <b>62.5% of PIDs</b> actually filed the annual reports Utah law requires (Utah Code &sect;17D-4-205), per the State Auditor's own legislative testimony &mdash; up from ~54%, but still meaning <b>over a third</b> of districts statewide are non-compliant with an existing transparency rule.</p></div>
+    </details>
+
+    <details class="reach-card">
+      <summary><span class="r-head"><span class="r-num">$0 &rarr; owed</span><span class="r-title">When a PID fails, the city can inherit the debt</span></span><span class="expand-icon">+</span></summary>
+      <div class="r-body"><p>After Wohali Public Infrastructure District's 2025 bankruptcy, the State Auditor's office directed the City of Coalville to include the PID's debt on the <b>city's own</b> financial statements &mdash; and finalized a statewide advisory (March 2026) warning that local governments could be held "financially accountable" for PIDs they create, despite marketing that says PID debt carries "no recourse to the city."</p></div>
+    </details>
+
+    <details class="reach-card">
+      <summary><span class="r-head"><span class="r-num">County-wide</span><span class="r-title">The rate hike doesn't stop at the district line</span></span><span class="expand-icon">+</span></summary>
+      <div class="r-body"><p>When a PID or TIF freezes the tax base inside its boundary, the county still has to serve the new development &mdash; more students, more roads, more calls for service &mdash; without the growth in tax revenue to pay for it. Utah's Truth in Taxation law leaves only one lever to close that gap: <b>raising the certified tax rate on the entire county</b>, PID resident or not.</p></div>
+    </details>
+
+    <details class="reach-card">
+      <summary><span class="r-head"><span class="r-num">2012 &rarr; 2099</span><span class="r-title">"Temporary" districts can keep getting extended</span></span><span class="expand-icon">+</span></summary>
+      <div class="r-body"><p>One real Utah tax-increment district (Vineyard's Geneva Steel redevelopment) was originally set to run <b>35 years, 2012 through 2046</b>. Part of it has already been extended to <b>2099</b> &mdash; and the board has kept voting itself further extensions on individual sub-areas, one piece at a time, while the taxing-entity oversight committee meant to check those extensions stopped meeting in 2010. A "temporary" tool can end up outliving the people who approved it.</p></div>
+    </details>
+
+    <details class="reach-card">
+      <summary><span class="r-head"><span class="r-num">🚒 🚓 🛣️ 🏫</span><span class="r-title">Fire, police, roads, and schools &mdash; by name</span></span><span class="expand-icon">+</span></summary>
+      <div class="r-body"><p>These aren't abstract "services." They're the specific budget lines that don't grow when a development's tax increment is captured instead of flowing to the county and school district: <b>sheriff and fire coverage</b> for the new homes, <b>road maintenance</b> for the new traffic, and <b>school-district funding</b> for the new students &mdash; all of it demanded by the growth, none of it paid for by the growth. In one documented Utah case, a single development diverted <b>$20.9 million</b> away from county services over 25 years. Separately, a legislative audit found <b>$17.2 million</b> in unexpended tax-increment funds sitting idle with no accountability for what they were supposed to fund.</p></div>
+    </details>
+
+    <details class="reach-card">
+      <summary><span class="r-head"><span class="r-num">0 votes</span><span class="r-title">The public never gets a ballot on this</span></span><span class="expand-icon">+</span></summary>
+      <div class="r-body"><p>Forming a PID requires consent from <b>100% of landowners</b> in the boundary. That sounds like a safeguard &mdash; it isn't one. A developer simply <b>buys or options the land first</b>, becomes the sole owner, and only then files to create the district. There's no other owner left to object because the developer made sure of that before applying. The creating city or county then approves it by <b>council resolution</b>, not a public vote. CRA/RDA project areas work the same way: a board (often the same city council) approves the plan at a public hearing, not a ballot measure. No countywide or citywide vote is required for any of it.</p></div>
+    </details>
+
+    <details class="reach-card">
+      <summary><span class="r-head"><span class="r-num">5 ways</span><span class="r-title">Why skipping the vote actually helps the developer</span></span><span class="expand-icon">+</span></summary>
+      <div class="r-body">
+        <p>Skipping the public vote isn't incidental &mdash; it's a precondition for the financing benefit itself:</p>
+        <p style="margin-top:10px;"><b>1. No risk of the project getting voted down or delayed.</b> A real referendum brings organized opposition and petition drives that can stall or kill a project. Council-resolution approval skips all of that.</p>
+        <p style="margin-top:8px;"><b>2. The terms get set before anyone exists to object.</b> The board and the initial rate are locked in while the developer is still the sole landowner &mdash; there's no resident yet to vote on the rate, the board, or the scope.</p>
+        <p style="margin-top:8px;"><b>3. Access to cheap, tax-exempt bond financing.</b> A PID is legally a government entity, so it can borrow through tax-exempt municipal bonds at rates a private developer could never get on their own.</p>
+        <p style="margin-top:8px;"><b>4. The infrastructure cost moves off the developer's balance sheet.</b> Instead of fronting the capital, the developer gets it financed through future buyers' assessments &mdash; while still pricing the lot at whatever the market will bear.</p>
+        <p style="margin-top:8px;"><b>5. "No recourse to the city" also means no recourse to the developer.</b> If the project underperforms, bondholders and future homeowners absorb the risk &mdash; not the developer's own capital.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ FINALE ============ -->
+<section class="finale">
+  <h2>So&hellip; is it actually affordable?</h2>
+  <p class="lead">Or did the <b>first number</b> just get small enough to pass a test &mdash; while everything else was left free to grow? Try it yourself.</p>
+
+  <div class="calc">
+    <h3>Build your own house</h3>
+    <p class="calc-sub">Drag the sliders. Watch what happens to the bills nobody checks.</p>
+
+    <div class="slider-row">
+      <label>Home sale price <span class="val" id="v-price">$500,000</span></label>
+      <input type="range" id="s-price" min="150000" max="1000000" step="5000" value="500000">
+    </div>
+
+    <div class="slider-row">
+      <label>How is the PID bill set? </label>
+      <div class="mode-toggle">
+        <button type="button" class="mode-btn active" id="mode-adval" data-mode="adval">Ad valorem (moves with value)</button>
+        <button type="button" class="mode-btn" id="mode-fixed" data-mode="fixed">Fixed $/year</button>
+      </div>
+    </div>
+
+    <div class="slider-row" id="row-pid-mills">
+      <label>PID mill rate <span class="val" id="v-pidmills">6.0 mills</span></label>
+      <input type="range" id="s-pidmills" min="0" max="15" step="0.5" value="6">
+    </div>
+
+    <div class="slider-row" id="row-pid-fixed" style="display:none;">
+      <label>PID fixed bill <span class="val" id="v-pidfixed">$1,650 / yr</span></label>
+      <input type="range" id="s-pidfixed" min="300" max="6000" step="50" value="1650">
+    </div>
+
+    <div class="slider-row">
+      <label>Property tax mill rate <span class="val" id="v-taxmills">6.0 mills</span></label>
+      <input type="range" id="s-taxmills" min="0" max="15" step="0.5" value="6">
+    </div>
+
+    <div class="slider-row">
+      <label style="margin-bottom:2px;">
+        <span style="display:flex;align-items:center;gap:8px;">
+          <input type="checkbox" id="s-hoa-toggle" style="width:18px;height:18px;accent-color:var(--pid);">
+          Add a possible HOA fee
+        </span>
+      </label>
+    </div>
+
+    <div class="slider-row" id="row-hoa" style="display:none;">
+      <label>HOA fee <span class="val" id="v-hoa">$85 / mo</span></label>
+      <input type="range" id="s-hoa" min="0" max="600" step="5" value="85">
+    </div>
+
+    <div class="calc-results">
+      <div class="result-card rc-sale">
+        <div class="r-label">Checked at sale</div>
+        <div class="r-val" id="r-price">$500,000</div>
+      </div>
+      <div class="result-card rc-pid">
+        <div class="r-label">PID bill / yr</div>
+        <div class="r-val" id="r-pid">$1,650</div>
+      </div>
+      <div class="result-card rc-tax">
+        <div class="r-label">Property tax / yr</div>
+        <div class="r-val" id="r-tax">$1,650</div>
+      </div>
+      <div class="result-card rc-hoa" id="card-hoa" style="display:none;">
+        <div class="r-label">HOA / yr</div>
+        <div class="r-val" id="r-hoa">$1,020</div>
+      </div>
+      <div class="result-card rc-total">
+        <div class="r-label">Not checked, per year</div>
+        <div class="r-val" id="r-total">$3,300</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div>
+      <div class="tower">
+        <div class="block compare-block checked" id="bar-checked" style="height:64px;">What Got Checked</div>
+      </div>
+      <div class="tower-label">The Test</div>
+      <div class="tower-caption">Sale price only</div>
+    </div>
+    <div>
+      <div class="tower">
+        <div class="block compare-block hoa" id="bar-hoa" style="height:0;display:none;">HOA<br>$1,020/yr</div>
+        <div class="block compare-block p3" id="bar-tax" style="height:110px;">Property Tax<br>(moves with assessed value)</div>
+        <div class="block compare-block p2" id="bar-pid" style="height:80px;">PID Bill<br>(often also moves with assessed value)</div>
+        <div class="block compare-block p1" id="bar-sale" style="height:76px;">Sale Price</div>
+      </div>
+      <div class="tower-label">What You Actually Pay</div>
+      <div class="tower-caption" id="tower-caption">Three bills, only one was checked &mdash; and two of them can rise on the same trigger</div>
+      <div class="tower-caption" id="hoa-footnote" style="display:none;font-size:.8rem;margin-top:6px;">*plus a possible HOA fee, also never checked</div>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <div class="q">The real trick isn't lowering the cost of a home.</div>
+    <p>It's <b>moving part of the cost outside the box that gets measured</b> &mdash; so the number on paper passes, even when the total a family actually pays never got any smaller.</p>
+  </div>
+
+  <div class="takeaway" style="margin-top:24px;">
+    <div class="q">So at closing &mdash; did you really understand what you just signed up for?</div>
+    <p>Nationally, about <b>14&ndash;16% of home purchase contracts cancel</b> before closing &mdash; but almost all of that happens earlier, during inspection or financing. Nobody tracks how many buyers actually get up and refuse to sign once they're physically sitting at the closing table &mdash; it's rare enough that it isn't a standard industry statistic at all.</p>
+    <p style="margin-top:12px;">That absence is the point. By the time someone reaches the table, <b>walking away means the buyer &mdash; not the seller, not the lender &mdash; forfeits the earnest money deposit already paid</b>, on top of moving costs already committed and exposure to a breach-of-contract claim. That's exactly the moment a PID bill is often first disclosed. <b>The disclosure isn't landing at a neutral moment</b> &mdash; it's landing at the one point in the whole process where turning back costs the buyer the most and happens the least.</p>
+    <p style="margin-top:12px;">Nothing about this has to be illegal to be wrong. After months of searching, after finally finding the one that felt like home, a buyer is handed a choice at the exact moment they have the least power to make it: <b>sign, or walk away from thousands of dollars and start the search over from nothing.</b> The system doesn't have to lie to you. It just has to wait until saying no is the most expensive thing you could possibly do.</p>
+  </div>
+
+  <details class="grownups">
+    <summary>The sources and the actual terms</summary>
+    <div class="gtext">
+      <p><b>PID</b> = Public Infrastructure District. A special district that borrows money to build roads, water, and sewer lines for a new development, then repays that debt through a separate assessment charged to the homes built there &mdash; billed alongside, but apart from, the mortgage.</p>
+      <p><b>PID assessments aren't always flat.</b> Some PIDs charge a fixed dollar amount per lot. Others charge an <b>ad valorem rate</b> &mdash; a mill levy applied to the county assessor's valuation of the property, the same mechanism that drives ordinary property tax. In that structure, a reassessment that raises a home's valuation raises both the PID bill and the property tax bill in the same year, from the same underlying number.</p>
+      <p><b>Calculator note:</b> the tool above applies Utah's 45% residential property-tax exemption (homes are taxed on 55% of market value) before applying mill rates, and uses a 6-mill PID rate as a sourced real-world default (from a documented Utah PID board's adopted rate). Both mill-rate sliders are adjustable because actual rates vary district to district &mdash; these are illustrative, not a specific project's real numbers unless you set them to match one.</p>
+      <p><b>Statewide scale:</b> as of early 2026, Utah's PIDs carried roughly $3.8 billion in outstanding debt &mdash; more than three times the state's own total debt obligation of $1.1 billion (KSL.com / Utah Investigative Journalism Project, April 2026).</p>
+      <p><b>Disclosure timeline:</b> Utah had no law requiring PID costs be disclosed to a buyer before closing until HB507 (2026 session), which now requires disclosure "at or before closing" &mdash; still late enough to allow eleventh-hour surprises.</p>
+      <p><b>AMI test</b> = "affordable" units in many Utah housing programs are qualified against a sale price or rent set relative to Area Median Income. The test is applied to that one figure at the point of sale or lease.</p>
+      <p><b>What isn't in the test:</b> PID assessments (fixed or ad valorem), future property tax increases (including truth-in-taxation votes, reassessments, and CRA/TIF-related shifts), and non-rent-capped mandatory fees on rentals.</p>
+      <p>This page illustrates a general financing pattern documented across multiple Utah PID and PID-adjacent developments &mdash; it is not a claim that every PID or every "affordable" unit works this exact way, and specific projects should be checked individually against their own assessment schedules and fee disclosures.</p>
+    </div>
+  </details>
+</section>
+
+<footer>Built to explain a pattern, one step at a time.<br><a href="https://weber-county-hive.github.io/PIDS-Utah/" style="color:var(--pid);font-weight:800;text-decoration:none;">See more PID case files &rarr;</a></footer>
+
+<script>
+  const steps = document.querySelectorAll('[data-step]');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.35 });
+
+  steps.forEach(s => io.observe(s));
+
+  // ---------- calculator ----------
+  const sPrice = document.getElementById('s-price');
+  const sPidMills = document.getElementById('s-pidmills');
+  const sPidFixed = document.getElementById('s-pidfixed');
+  const sTaxMills = document.getElementById('s-taxmills');
+  const sHoaToggle = document.getElementById('s-hoa-toggle');
+  const sHoa = document.getElementById('s-hoa');
+  const rowHoa = document.getElementById('row-hoa');
+  const cardHoa = document.getElementById('card-hoa');
+  const rowPidMills = document.getElementById('row-pid-mills');
+  const rowPidFixed = document.getElementById('row-pid-fixed');
+  const modeAdval = document.getElementById('mode-adval');
+  const modeFixed = document.getElementById('mode-fixed');
+
+  let pidMode = 'adval';
+
+  function fmt(n){
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  function setMode(mode){
+    pidMode = mode;
+    modeAdval.classList.toggle('active', mode === 'adval');
+    modeFixed.classList.toggle('active', mode === 'fixed');
+    rowPidMills.style.display = mode === 'adval' ? '' : 'none';
+    rowPidFixed.style.display = mode === 'fixed' ? '' : 'none';
+    recalc();
+  }
+  modeAdval.addEventListener('click', () => setMode('adval'));
+  modeFixed.addEventListener('click', () => setMode('fixed'));
+
+  sHoaToggle.addEventListener('change', () => {
+    const on = sHoaToggle.checked;
+    rowHoa.style.display = on ? '' : 'none';
+    cardHoa.style.display = on ? '' : 'none';
+    document.getElementById('bar-hoa').style.display = on ? '' : 'none';
+    document.getElementById('hoa-footnote').style.display = on ? '' : 'none';
+    document.getElementById('tower-caption').innerHTML = on
+      ? 'Four bills, only one was checked &mdash; and two of them can rise on the same trigger*'
+      : 'Three bills, only one was checked &mdash; and two of them can rise on the same trigger';
+    recalc();
+  });
+
+  function recalc(){
+    const price = Number(sPrice.value);
+    const taxable = price * 0.55; // Utah 45% residential exemption
+
+    const pidMills = Number(sPidMills.value);
+    const taxMills = Number(sTaxMills.value);
+    const pidFixed = Number(sPidFixed.value);
+    const hoaOn = sHoaToggle.checked;
+    const hoaMonthly = Number(sHoa.value);
+    const hoaBill = hoaOn ? hoaMonthly * 12 : 0;
+
+    const pidBill = pidMode === 'adval' ? (taxable * pidMills / 1000) : pidFixed;
+    const taxBill = taxable * taxMills / 1000;
+    const totalHidden = pidBill + taxBill + hoaBill;
+
+    document.getElementById('v-price').textContent = fmt(price);
+    document.getElementById('v-pidmills').textContent = pidMills.toFixed(1) + ' mills';
+    document.getElementById('v-pidfixed').textContent = fmt(pidFixed) + ' / yr';
+    document.getElementById('v-taxmills').textContent = taxMills.toFixed(1) + ' mills';
+    document.getElementById('v-hoa').textContent = fmt(hoaMonthly) + ' / mo';
+
+    document.getElementById('r-price').textContent = fmt(price);
+    document.getElementById('r-pid').textContent = fmt(pidBill) + '/yr';
+    document.getElementById('r-tax').textContent = fmt(taxBill) + '/yr';
+    document.getElementById('r-hoa').textContent = fmt(hoaBill) + '/yr';
+    document.getElementById('r-total').textContent = fmt(totalHidden) + '/yr';
+
+    // bars: sale price bar is a fixed visual anchor (it's "the test", not scaled to dollars
+    // the same way as the annual bills, since price and annual-bill are different units)
+    // each bar gets a generous base height so its two-line label always fits, plus a
+    // proportional amount on top so relative size still reads correctly
+    const maxAnnual = 12000; // scale reference for the "hidden" bars
+    const baseH = 62;   // minimum height that comfortably fits a two-line label
+    const rangeH = 130; // additional height available for scaling
+    const pidH = baseH + Math.min(rangeH, (pidBill / maxAnnual) * rangeH);
+    const taxH = baseH + Math.min(rangeH, (taxBill / maxAnnual) * rangeH);
+    const hoaH = baseH + Math.min(rangeH, (hoaBill / maxAnnual) * rangeH);
+
+    document.getElementById('bar-pid').style.height = pidH + 'px';
+    document.getElementById('bar-tax').style.height = taxH + 'px';
+    document.getElementById('bar-pid').innerHTML = 'PID Bill<br>' + fmt(pidBill) + '/yr';
+    document.getElementById('bar-tax').innerHTML = 'Property Tax<br>' + fmt(taxBill) + '/yr';
+    document.getElementById('bar-sale').innerHTML = 'Sale Price<br>' + fmt(price);
+    if (hoaOn) {
+      document.getElementById('bar-hoa').style.height = hoaH + 'px';
+      document.getElementById('bar-hoa').innerHTML = 'HOA<br>' + fmt(hoaBill) + '/yr';
+    }
+  }
+
+  [sPrice, sPidMills, sPidFixed, sTaxMills, sHoa].forEach(el => {
+    el.addEventListener('input', recalc);
+  });
+
+  setMode('adval');
+  recalc();
+</script>
+
+</body>
+</html>

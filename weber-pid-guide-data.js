@@ -38,6 +38,14 @@ const PID_PAGES = [
     link: "stratos-ruby-pipeline-mida.html"
   },
   {
+    kind: "Case Study · Weber County",
+    title: "The Nordic Village Case File",
+    description: "A full case file on one Weber County PID — interactive cost calculators, a 40-year cost trajectory, and the county's own tax-diversion numbers going back to 2021, all built from primary-source budgets and disclosures.",
+    tags: ["Case Study", "Weber County", "Calculator"],
+    linkLabel: "Open case file →",
+    link: "nordic-village-case-file.html"
+  },
+  {
     kind: "Case Study · Schools & Bonding",
     title: "PIDs, Schools & Bonding",
     description: "How PIDs and tax increment financing interact with local school district funding, plus school bonding including the 2025 no-vote bonding change.",

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PID Research — The Weber County Hive</title>
+<style>
+  :root{
+    --cream:#f6f1e6; --paper:#fbf8f1; --navy:#10233f; --navy-deep:#0a1626;
+    --gold:#b8863b; --gold-bright:#d6a752; --flag:#9c3b2e; --flag-bright:#c14e3a;
+    --ink:#1c1c1c; --ink-soft:#4a4a48; --rule:#d8cfba; --green-ok:#3f6b4a;
+    --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+    --font-body: 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'Courier New', ui-monospace, monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--cream); color:var(--ink); font-family:var(--font-body); line-height:1.55; }
+  a{color:var(--navy); text-decoration:none;}
+
+  header.masthead{
+    background:linear-gradient(180deg,var(--navy) 0%, var(--navy-deep) 100%);
+    color:var(--cream); padding:56px 24px 44px; text-align:center; border-bottom:6px solid var(--gold);
+  }
+  header.masthead .eyebrow{ font-family:var(--font-mono); letter-spacing:.28em; font-size:11px; text-transform:uppercase; color:var(--gold-bright); margin-bottom:12px; }
+  header.masthead h1{ font-family:var(--font-display); font-weight:400; font-size:clamp(30px,5.5vw,50px); margin:0 0 16px; letter-spacing:.01em; }
+  header.masthead p.sub{ max-width:640px; margin:0 auto; color:#cdd6e4; font-size:15.5px; }
+
+  .stat-strip{
+    max-width:920px; margin:32px auto 0; padding:0 20px;
+    display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .stat-box{ flex:1 1 180px; background:rgba(255,255,255,0.06); border:1px solid rgba(214,167,82,0.3); border-radius:6px; padding:14px 16px; }
+  .stat-box .n{ font-family:var(--font-mono); font-size:22px; color:var(--gold-bright); }
+  .stat-box .l{ font-size:11px; color:#b9c3d6; margin-top:3px; }
+
+  main{max-width:920px;margin:0 auto;padding:52px 20px 80px;}
+
+  .num-eyebrow{ font-family:var(--font-mono); color:var(--gold); font-size:13px; letter-spacing:.15em; margin-bottom:10px; }
+  h2.section-title{ font-family:var(--font-display); font-weight:400; font-size:clamp(22px,3.6vw,28px); margin:0 0 10px; color:var(--navy); }
+  p.section-sub{ color:var(--ink-soft); font-size:15px; max-width:640px; margin:0 0 32px; }
+
+  .page-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
+  .page-card{
+    display:flex; flex-direction:column;
+    background:var(--paper); border:1px solid var(--rule); border-radius:6px;
+    padding:22px 22px 20px; transition:border-color .15s ease, transform .15s ease;
+  }
+  .page-card:hover{ border-color:var(--gold); transform:translateY(-2px); }
+  .page-card .pc-eyebrow{ font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--flag); margin-bottom:8px; }
+  .page-card h3{ font-family:var(--font-display); font-weight:400; font-size:20px; color:var(--navy); margin:0 0 10px; }
+  .page-card p{ font-size:14px; color:var(--ink-soft); margin:0 0 16px; flex-grow:1; }
+  .page-card .pc-cta{ font-family:var(--font-mono); font-size:12px; font-weight:700; color:var(--navy); letter-spacing:.03em; }
+  .page-card:hover .pc-cta{ color:var(--flag); }
+  .page-card .pc-cta::after{ content:" →"; }
+
+  footer{ text-align:center; padding:34px 20px 50px; font-family:var(--font-mono); font-size:11px; color:#8c8471; border-top:1px solid var(--rule); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="eyebrow">THE WEBER COUNTY HIVE</div>
+  <h1>Public Infrastructure District Research</h1>
+  <p class="sub">A running set of explainers on how PIDs, tax increment financing, and related tools move growth's tax revenue away from cities, counties, and schools — and onto whoever buys or rents there.</p>
+  <div class="stat-strip">
+    <div class="stat-box"><div class="n">7</div><div class="l">explainers published so far</div></div>
+    <div class="stat-box"><div class="n">$5.267B</div><div class="l">total statewide PID debt confirmed</div></div>
+    <div class="stat-box"><div class="n">3</div><div class="l">counties covered in depth (Utah, Box Elder, Weber)</div></div>
+  </div>
+</header>
+
+<main>
+  <div class="num-eyebrow">START HERE</div>
+  <h2 class="section-title">Every page in this project</h2>
+  <p class="section-sub">Each page stands on its own — read whichever answers your question first.</p>
+
+  <div class="page-grid">
+    <div class="page-card">
+      <div class="pc-eyebrow">For Homebuyers</div>
+      <h3>The Story of the "Affordable" House</h3>
+      <p>A plain-language, step-by-step walkthrough of how a PID bill gets left out of an affordability test — with an interactive cost calculator and an optional HOA fee.</p>
+      <a class="pc-cta" href="affordable-house-story.html">Read it</a>
+    </div>
+
+    <div class="page-card">
+      <div class="pc-eyebrow">Weber County</div>
+      <h3>The Nordic Village Case File</h3>
+      <p>A full case file on one Weber County PID — interactive cost calculators, a 40-year cost trajectory, and the county's own tax-diversion numbers going back to 2021, all built from primary-source budgets and disclosures.</p>
+      <a class="pc-cta" href="nordic-village-case-file.html">Read it</a>
+    </div>
+
+    <div class="page-card">
+      <div class="pc-eyebrow">Utah County</div>
+      <h3>Where the Growth Money Goes</h3>
+      <p>Interactive calculator comparing a PID home to a non-PID home at the same price, a real Utah County renter case study, and the Utah City / Sweetwater case files.</p>
+      <a class="pc-cta" href="utah-county-explainer.html">Read it</a>
+    </div>
+
+    <div class="page-card">
+      <div class="pc-eyebrow">General Overview</div>
+      <h3>PID Mechanism Map</h3>
+      <p>A statewide, county-agnostic explainer of how Public Infrastructure Districts work — the mechanism behind every other page in this project.</p>
+      <a class="pc-cta" href="pid_mechanism_map.html">Read it</a>
+    </div>
+
+    <div class="page-card">
+      <div class="pc-eyebrow">Box Elder County</div>
+      <h3>Stratos &amp; Ruby Pipeline</h3>
+      <p>A case study on the Stratos data center project and the Ruby Pipeline, and how MIDA's authority reaches into Box Elder County development.</p>
+      <a class="pc-cta" href="stratos-ruby-pipeline-mida.html">Read it</a>
+    </div>
+
+    <div class="page-card">
+      <div class="pc-eyebrow">Directory</div>
+      <h3>Full PID Guide</h3>
+      <p>An earlier directory-style page listing every explainer in this project. Being superseded by this page as the primary index.</p>
+      <a class="pc-cta" href="weber-pid-guide.html">Read it</a>
+    </div>
+
+    <div class="page-card">
+      <div class="pc-eyebrow">Schools &amp; Bonding</div>
+      <h3>PIDs, Schools &amp; Bonding</h3>
+      <p>How PIDs and tax increment financing interact with local school district funding, plus school bonding including the 2025 no-vote bonding change.</p>
+      <a class="pc-cta" href="weber-pid-school-funds.html">Read it</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  THE WEBER COUNTY HIVE &middot; PID RESEARCH &middot; Built from source documents on file
+</footer>
+
+</body>
+</html>

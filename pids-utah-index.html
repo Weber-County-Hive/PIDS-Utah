@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Utah County Explanation — How a PID Diverts Growth</title>
+<title>PID Research — The Weber County Hive</title>
 <style>
   :root{
     --cream:#f6f1e6; --paper:#fbf8f1; --navy:#10233f; --navy-deep:#0a1626;
@@ -17,616 +17,110 @@
   html{scroll-behavior:smooth;}
   body{ margin:0; background:var(--cream); color:var(--ink); font-family:var(--font-body); line-height:1.55; }
   a{color:var(--navy);}
-  header.masthead{ background:linear-gradient(180deg,var(--navy) 0%, var(--navy-deep) 100%); color:var(--cream); padding:44px 24px 36px; text-align:center; border-bottom:6px solid var(--gold); }
+  header.masthead{ background:linear-gradient(180deg,var(--navy) 0%, var(--navy-deep) 100%); color:var(--cream); padding:52px 24px 40px; text-align:center; border-bottom:6px solid var(--gold); }
   header.masthead .eyebrow{ font-family:var(--font-mono); letter-spacing:.28em; font-size:11px; text-transform:uppercase; color:var(--gold-bright); margin-bottom:10px; }
-  header.masthead h1{ font-family:var(--font-display); font-weight:400; font-size:clamp(28px,5vw,46px); margin:0 0 12px; letter-spacing:.01em; }
+  header.masthead h1{ font-family:var(--font-display); font-weight:400; font-size:clamp(28px,5vw,48px); margin:0 0 14px; letter-spacing:.01em; }
   header.masthead p.sub{ max-width:640px; margin:0 auto; color:#cdd6e4; font-size:15px; }
 
-  nav.site-nav{ background:var(--paper); border-bottom:1px solid var(--rule); padding:22px 20px 26px; }
-  nav.site-nav .nav-inner{ max-width:920px; margin:0 auto; }
-  nav.site-nav .nav-label{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
-  .nav-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; }
-  .nav-card{ display:block; background:#fff; border:1.5px solid var(--rule); border-radius:5px; padding:12px 14px; text-decoration:none; transition:border-color .12s ease, transform .12s ease; }
-  .nav-card:hover{border-color:var(--gold);transform:translateY(-1px);}
-  .nav-card.current{ background:var(--navy); border-color:var(--navy); cursor:default; pointer-events:none; }
-  .nav-card .nc-title{ font-family:var(--font-display); font-size:14.5px; color:var(--navy); display:block; margin-bottom:3px; }
-  .nav-card.current .nc-title{color:var(--cream);}
-  .nav-card .nc-desc{ font-family:var(--font-mono); font-size:10.5px; color:var(--ink-soft); display:block; }
-  .nav-card.current .nc-desc{color:#b9c3d6;}
-  .nav-card .nc-tag{ display:inline-block; font-family:var(--font-mono); font-size:9px; text-transform:uppercase; letter-spacing:.06em; color:#fff; background:var(--gold); padding:2px 7px; border-radius:3px; margin-top:6px; }
-  .nav-card.current .nc-tag{background:var(--gold-bright);color:var(--navy-deep);}
+  main{max-width:960px;margin:0 auto;padding:0 20px 80px;}
 
-  main{max-width:920px;margin:0 auto;padding:0 20px 80px;}
-  section.block{margin-top:64px;}
+  .stat-strip{display:flex;gap:14px;flex-wrap:wrap;margin:40px 0 8px;}
+  .stat-box{ flex:1 1 190px; background:var(--navy); color:var(--cream); border-radius:4px; padding:18px 20px; }
+  .stat-box .n{font-family:var(--font-mono);font-size:26px;color:var(--gold-bright);}
+  .stat-box .l{font-size:12px;color:#b9c3d6;margin-top:5px;}
+
+  section.block{margin-top:52px;}
   .num-eyebrow{ font-family:var(--font-mono); color:var(--gold); font-size:13px; letter-spacing:.15em; margin-bottom:6px; }
   h2.block-title{ font-family:var(--font-display); font-weight:400; font-size:clamp(22px,3.6vw,30px); margin:0 0 8px; color:var(--navy); }
-  p.block-lede{ color:var(--ink-soft); font-size:15.5px; max-width:620px; margin:0 0 26px; }
-  .hypothesis-card{ background:var(--paper); border:1px solid var(--rule); border-left:5px solid var(--flag); border-radius:2px; padding:22px 24px; margin-top:24px; }
-  .hypothesis-card .tag{ font-family:var(--font-mono); font-size:11px; letter-spacing:.15em; color:var(--flag); text-transform:uppercase; margin-bottom:8px; }
-  .hypothesis-card p{margin:0 0 10px;font-size:15.5px;}
-  .hypothesis-card p:last-child{margin-bottom:0;}
-  .hypothesis-card .confirmed{ display:inline-block; margin-top:4px; font-family:var(--font-mono); font-size:12px; color:var(--green-ok); background:#e7efe8; padding:3px 9px; border-radius:3px; }
-  .mech-wrap{ background:var(--paper); border:1px solid var(--rule); border-radius:4px; padding:28px 22px 22px; }
-  .mech-row{ display:flex; gap:10px; align-items:stretch; flex-wrap:wrap; justify-content:center; }
-  .mech-node{ flex:1 1 150px; min-width:140px; max-width:190px; background:#fff; border:1.5px solid var(--rule); border-radius:6px; padding:14px 12px; text-align:center; cursor:pointer; transition:all .15s ease; position:relative; }
-  .mech-node:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,.06);}
-  .mech-node.active{border-color:var(--gold);background:#fdf7ea;box-shadow:0 4px 10px rgba(0,0,0,.08);}
-  .mech-node .icon{font-size:20px;margin-bottom:6px;display:block;}
-  .mech-node .label{font-weight:600;font-size:13px;color:var(--navy);}
-  .mech-node.split{border-color:var(--flag);}
-  .mech-arrow{ display:flex;align-items:center;justify-content:center; font-size:20px;color:var(--gold); padding:0 2px; flex:0 0 auto; }
-  .mech-detail{ margin-top:20px; background:#fff; border:1px solid var(--rule); border-left:4px solid var(--gold); border-radius:3px; padding:16px 18px; font-size:14.5px; color:var(--ink-soft); min-height:64px; }
-  .mech-detail b{color:var(--navy);}
-  .split-legend{ display:flex;gap:18px;justify-content:center;margin-top:18px;flex-wrap:wrap; font-family:var(--font-mono);font-size:11.5px;color:var(--ink-soft); }
-  .split-legend span{display:flex;align-items:center;gap:6px;}
-  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
-  .dot.gold{background:var(--gold);}
-  .dot.flag{background:var(--flag);}
-  .gap-toggle-wrap{ margin-top:30px; padding-top:24px; border-top:1px dashed var(--rule); text-align:center; }
-  .gap-toggle-wrap p.q{font-size:14.5px;color:var(--ink-soft);margin-bottom:14px;}
-  .toggle-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-  .toggle-btn{ font-family:var(--font-mono); font-size:12.5px; letter-spacing:.04em; padding:9px 16px; border:1.5px solid var(--navy); background:#fff; color:var(--navy); border-radius:20px; cursor:pointer; transition:all .15s ease; }
-  .toggle-btn:hover{background:var(--navy);color:#fff;}
-  .toggle-btn.active{background:var(--navy);color:#fff;}
-  .gap-result{ margin-top:18px; font-size:14.5px; color:var(--ink-soft); max-width:520px; margin-left:auto;margin-right:auto; min-height:44px; }
-  .map-wrap{ background:var(--paper); border:1px solid var(--rule); border-radius:4px; padding:20px; display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; }
-  .map-svg-holder{flex:1 1 300px;min-width:260px;text-align:center;}
-  .map-svg-holder svg{width:100%;max-width:380px;height:auto;}
-  .map-note{ font-family:var(--font-mono); font-size:10.5px; color:#8c8471; margin-top:8px; letter-spacing:.02em; }
-  .pid-pin{cursor:pointer;}
-  .pid-pin circle{transition:r .12s ease;}
-  .pid-pin:hover circle, .pid-pin.active circle{r:9;}
-  .map-cards{flex:1 1 300px;min-width:260px;}
-  .pid-card{ background:#fff; border:1px solid var(--rule); border-radius:4px; padding:14px 16px; margin-bottom:12px; cursor:pointer; transition:border-color .12s ease; }
-  .pid-card:hover, .pid-card.active{border-color:var(--gold);}
-  .pid-card .pname{font-weight:700;color:var(--navy);font-size:14.5px;}
-  .pid-card .ploc{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);margin-bottom:6px;}
-  .pid-card .pstat{font-size:13.5px;color:var(--ink-soft);}
-  .pid-card .flag-badge{ display:inline-block; font-family:var(--font-mono); font-size:10px; color:#fff; background:var(--flag); padding:2px 7px; border-radius:3px; margin-top:6px; }
-  .stat-strip{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px;}
-  .stat-box{ flex:1 1 190px; background:var(--navy); color:var(--cream); border-radius:4px; padding:16px 18px; }
-  .stat-box .n{font-family:var(--font-mono);font-size:24px;color:var(--gold-bright);}
-  .stat-box .l{font-size:11.5px;color:#b9c3d6;margin-top:4px;}
-  .growth-chart{ background:var(--paper); border:1px solid var(--rule); border-radius:4px; padding:24px 22px; }
-  .bar-row{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
-  .bar-row:last-child{margin-bottom:0;}
-  .bar-label{width:150px;flex-shrink:0;font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);}
-  .bar-track{flex:1;background:#e9e2cf;border-radius:3px;height:22px;position:relative;overflow:hidden;}
-  .bar-fill{ height:100%; background:linear-gradient(90deg,var(--gold) 0%, var(--flag) 100%); border-radius:3px 0 0 3px; width:0%; transition:width 1s ease; }
-  .bar-val{width:100px;text-align:right;flex-shrink:0;font-family:var(--font-mono);font-size:13px;color:var(--navy);font-weight:700;}
-  .nvv-mini{ margin-top:22px; display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
-  .nvv-mini div{ background:#fff;border:1px solid var(--rule);border-radius:4px;padding:10px 12px; }
-  .nvv-mini .k{font-family:var(--font-mono);font-size:10.5px;color:#8c8471;text-transform:uppercase;letter-spacing:.05em;}
-  .nvv-mini .v{font-family:var(--font-mono);font-size:15px;color:var(--flag);font-weight:700;margin-top:2px;}
-  .source-block{ background:var(--paper); border:1px solid var(--rule); border-radius:4px; padding:22px 24px; font-size:14px; color:var(--ink-soft); }
-  .source-block h3{ font-family:var(--font-mono); font-size:12px; letter-spacing:.1em; color:var(--navy); text-transform:uppercase; margin:18px 0 8px; }
-  .source-block h3:first-child{margin-top:0;}
-  .source-block ul{margin:0 0 4px;padding-left:20px;}
-  .source-block li{margin-bottom:6px;}
-  blockquote.cannon{ border-left:3px solid var(--gold); margin:12px 0; padding:6px 0 6px 14px; font-style:italic; color:var(--navy); font-size:14px; }
+  p.block-lede{ color:var(--ink-soft); font-size:15.5px; max-width:640px; margin:0 0 30px; }
+
+  .doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+  .doc-card{ display:block; background:var(--paper); border:1px solid var(--rule); border-radius:5px; padding:22px 24px; text-decoration:none; transition:border-color .12s ease, transform .12s ease, box-shadow .12s ease; }
+  .doc-card:hover{ border-color:var(--gold); transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.08); }
+  .doc-card .dc-tag{ display:inline-block; font-family:var(--font-mono); font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:#fff; background:var(--gold); padding:3px 9px; border-radius:3px; margin-bottom:12px; }
+  .doc-card .dc-title{ font-family:var(--font-display); font-size:20px; color:var(--navy); display:block; margin-bottom:8px; }
+  .doc-card .dc-desc{ font-size:13.5px; color:var(--ink-soft); display:block; margin-bottom:14px; line-height:1.5; }
+  .doc-card .dc-link{ font-family:var(--font-mono); font-size:11.5px; letter-spacing:.04em; color:var(--flag); font-weight:700; }
+
   footer{ text-align:center; padding:34px 20px 50px; font-family:var(--font-mono); font-size:11px; color:#8c8471; }
-  @media (max-width:600px){ .mech-row{flex-direction:column;} .mech-arrow{transform:rotate(90deg);padding:4px 0;} .bar-label{width:110px;font-size:10.5px;} }
-  .calc-controls{display:flex;flex-direction:column;gap:16px;}
-  .calc-row{display:flex;justify-content:space-between;margin-bottom:4px;font-size:14px;color:var(--ink-soft);}
-  .calc-row span{font-weight:700;color:var(--navy);}
-  input[type=range]{width:100%;accent-color:var(--flag);height:4px;}
-  .calc-card{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:16px;}
-  .calc-metric{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:12px 14px;}
-  .calc-metric .k{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;}
-  .calc-metric .v{font-size:20px;font-weight:700;color:var(--navy);margin-top:2px;}
 </style>
 </head>
 <body>
 
 <header class="masthead">
-  <div class="eyebrow">UTAH COUNTY — FIELD NOTES</div>
-  <h1>Utah County Explanation: Where the Growth Money Goes</h1>
-  <p class="sub">A working explainer, specific to Utah County, on Public Infrastructure Districts (PIDs), tax increment financing, and what happens when the frozen base can't keep up with what growth actually costs.</p>
+  <div class="eyebrow">THE WEBER COUNTY HIVE</div>
+  <h1>Public Infrastructure District Research</h1>
+  <p class="sub">A running set of explainers on how PIDs, tax increment financing, and related tools move growth's tax revenue away from cities, counties, and schools — and onto whoever buys or rents there.</p>
 </header>
 
-<nav class="site-nav">
-  <div class="nav-inner">
-    <div class="nav-label">More PID Explainers in This Series</div>
-    <div class="nav-grid">
-      <a class="nav-card current" href="index.html">
-        <span class="nc-title">Utah County Explainer</span>
-        <span class="nc-desc">Calculator, renter panel, Utah City &amp; Sweetwater case files</span>
-        <span class="nc-tag">You are here</span>
-      </a>
-      <a class="nav-card" href="pid_mechanism_map.html">
-        <span class="nc-title">PID Mechanism Map</span>
-        <span class="nc-desc">General, statewide overview of how PIDs work</span>
-      </a>
-      <a class="nav-card" href="stratos-ruby-pipeline-mida.html">
-        <span class="nc-title">Stratos &amp; Ruby Pipeline</span>
-        <span class="nc-desc">Box Elder County / MIDA case study</span>
-      </a>
-      <a class="nav-card" href="weber-pid-guide.html">
-        <span class="nc-title">Full PID Guide</span>
-        <span class="nc-desc">Directory of every explainer page in this project</span>
-      </a>
-      <a class="nav-card" href="weber-pid-school-funds.html">
-        <span class="nc-title">PIDs, Schools &amp; Bonding</span>
-        <span class="nc-desc">How PIDs/TIF interact with school funding and bonds</span>
-      </a>
-    </div>
-  </div>
-</nav>
-
 <main>
-  <section class="block" id="hypothesis">
-    <div class="num-eyebrow">00 / THE HYPOTHESIS</div>
-    <h2 class="block-title">The claim this page tests</h2>
-    <p class="block-lede">Before the mechanism and the map — the actual thing being argued, stated plainly, so it can be checked rather than assumed.</p>
-    <div class="hypothesis-card">
-      <div class="tag">Working hypothesis — not yet entity-by-entity verified</div>
-      <p>When a PID or TIF district diverts the tax increment from new growth into a restricted debt service fund, the county, school district, fire district, and water district never get credit for that growth on their books — even though they still have to serve it: more rooftops, more students, more calls, more water and road demand.</p>
-      <p>If the increment can't cover both the debt payments <em>and</em> the real cost of that added service burden, the gap has only two places to come from: a higher certified tax rate on everyone outside the district, or cuts to services / reserves.</p>
-      <span class="confirmed">✓ Mechanism confirmed by Utah State Auditor's office (Aug 2026) — disclosure of that link to the public is not yet confirmed anywhere</span>
+  <div class="stat-strip">
+    <div class="stat-box"><div class="n">7</div><div class="l">explainers published so far</div></div>
+    <div class="stat-box"><div class="n">$5.267B</div><div class="l">total statewide PID debt confirmed</div></div>
+    <div class="stat-box"><div class="n">3</div><div class="l">counties covered in depth (Utah, Box Elder, Weber)</div></div>
+  </div>
+
+  <section class="block">
+    <div class="num-eyebrow">START HERE</div>
+    <h2 class="block-title">Every page in this project</h2>
+    <p class="block-lede">Each page stands on its own — read whichever answers your question first.</p>
+
+    <div class="doc-grid">
+      <a class="doc-card" href="affordable-house-story.html">
+        <span class="dc-tag">For Homebuyers</span>
+        <span class="dc-title">The Story of the "Affordable" House</span>
+        <span class="dc-desc">A plain-language, step-by-step walkthrough of how a PID bill gets left out of an affordability test — with an interactive cost calculator and an optional HOA fee.</span>
+        <span class="dc-link">Read it →</span>
+      </a>
+
+      <a class="doc-card" href="nordic-village-case-file.html">
+        <span class="dc-tag">Weber County</span>
+        <span class="dc-title">The Nordic Village Case File</span>
+        <span class="dc-desc">A full case file on one Weber County PID — interactive cost calculators, a 40-year cost trajectory, and the county's own tax-diversion numbers going back to 2021, all built from primary-source budgets and disclosures.</span>
+        <span class="dc-link">Read it →</span>
+      </a>
+
+      <a class="doc-card" href="utah-county-explainer.html">
+        <span class="dc-tag">Utah County</span>
+        <span class="dc-title">Where the Growth Money Goes</span>
+        <span class="dc-desc">Interactive calculator comparing a PID home to a non-PID home at the same price, a real Utah County renter case study, and the Utah City / Sweetwater case files.</span>
+        <span class="dc-link">Read it →</span>
+      </a>
+
+      <a class="doc-card" href="pid_mechanism_map.html">
+        <span class="dc-tag">General Overview</span>
+        <span class="dc-title">PID Mechanism Map</span>
+        <span class="dc-desc">A statewide, county-agnostic explainer of how Public Infrastructure Districts work — the mechanism behind every other page in this project.</span>
+        <span class="dc-link">Read it →</span>
+      </a>
+
+      <a class="doc-card" href="stratos-ruby-pipeline-mida.html">
+        <span class="dc-tag">Box Elder County</span>
+        <span class="dc-title">Stratos &amp; Ruby Pipeline</span>
+        <span class="dc-desc">A case study on the Stratos data center project and the Ruby Pipeline, and how MIDA's authority reaches into Box Elder County development.</span>
+        <span class="dc-link">Read it →</span>
+      </a>
+
+      <a class="doc-card" href="weber-pid-guide.html">
+        <span class="dc-tag">Directory</span>
+        <span class="dc-title">Full PID Guide</span>
+        <span class="dc-desc">A directory of every explainer page in this project, for readers who want the whole picture in one place.</span>
+        <span class="dc-link">Read it →</span>
+      </a>
+
+      <a class="doc-card" href="weber-pid-school-funds.html">
+        <span class="dc-tag">Schools &amp; Bonding</span>
+        <span class="dc-title">PIDs, Schools &amp; Bonding</span>
+        <span class="dc-desc">How PIDs and tax increment financing interact with local school district funding, plus school bonding including the 2025 no-vote bonding change.</span>
+        <span class="dc-link">Read it →</span>
+      </a>
     </div>
   </section>
-
-  <section class="block" id="calculator">
-    <div class="num-eyebrow">00B / THE CALCULATOR</div>
-    <h2 class="block-title">Run the numbers on a specific home</h2>
-    <p class="block-lede">Same list price on both sides on purpose — Utah State Auditor Tina Cannon has said PID homes can carry closing costs similar to a comparable home with infrastructure baked into its price, so a buyer discount isn't something to assume without a specific comp.</p>
-    <div class="mech-wrap">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px;">
-        <div class="calc-card">
-          <p style="font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);margin:0 0 4px;">Non-PID home, listed price</p>
-          <p style="font-size:22px;font-weight:700;color:var(--navy);margin:0;" id="calc-nonpid-price">$500,000</p>
-        </div>
-        <div class="calc-card">
-          <p style="font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);margin:0 0 4px;">PID home, listed price</p>
-          <p style="font-size:22px;font-weight:700;color:var(--navy);margin:0;" id="calc-pid-price">$500,000</p>
-        </div>
-      </div>
-      <div class="calc-controls">
-        <div><div class="calc-row"><label>Home price (same for both)</label><span id="calc-price-out">$500,000</span></div><input type="range" id="calc-price" min="300000" max="900000" step="5000" value="500000"/></div>
-        <div><div class="calc-row"><label>Starting effective property tax rate</label><span id="calc-taxrate-out">0.55%</span></div><input type="range" id="calc-taxrate" min="0.3" max="0.9" step="0.01" value="0.55"/></div>
-        <div><div class="calc-row"><label>Assumed annual tax growth (Truth-in-Taxation hikes)</label><span id="calc-taxgrowth-out">3.0% / yr</span></div><input type="range" id="calc-taxgrowth" min="0" max="8" step="0.5" value="3"/></div>
-        <div><div class="calc-row"><label>Annual PID assessment</label><span id="calc-assess-out">$2,500 / yr</span></div><input type="range" id="calc-assess" min="500" max="6000" step="100" value="2500"/></div>
-        <div><div class="calc-row"><label>Years left on the PID bond</label><span id="calc-bondyears-out">20 yrs</span></div><input type="range" id="calc-bondyears" min="5" max="30" step="1" value="20"/></div>
-        <div><div class="calc-row"><label>How long you plan to own the home</label><span id="calc-hold-out">10 yrs</span></div><input type="range" id="calc-hold" min="1" max="30" step="1" value="10"/></div>
-      </div>
-      <div class="calc-card" style="margin-top:22px;">
-        <label style="display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer;margin-bottom:4px;">
-          <input type="checkbox" id="calc-stackToggle" style="width:16px;height:16px;accent-color:var(--flag);"/>
-          Also inside a UIPA / MIDA / RSDZ zone
-        </label>
-        <p style="font-size:12px;color:var(--ink-soft);margin:6px 0 0;">UIPA and MIDA can each create their own subsidiary PID inside a project area, layering a second real assessment on top of a base PID. RSDZ (HB 507) adds a further state revenue skim on top of that. Each is a separate legal entity with its own bond schedule — no single body tracks the combined total, and there is no required disclosure of the stack until closing.</p>
-        <div id="calc-stackControls" style="display:none;margin-top:14px;">
-          <div class="calc-row"><label>Additional annual assessment from the second layer</label><span id="calc-stackassess-out">$1,500 / yr</span></div>
-          <input type="range" id="calc-stackassess" min="200" max="5000" step="100" value="1500"/>
-        </div>
-      </div>
-      <div style="position:relative;height:280px;margin:26px 0 20px;">
-        <canvas id="calcChart" role="img" aria-label="Cumulative cost over the holding period, non-PID home versus PID home">Cumulative cost comparison chart</canvas>
-      </div>
-      <div class="calc-card" style="display:flex;justify-content:space-between;align-items:baseline;">
-        <span style="font-size:14px;color:var(--ink-soft);">At your holding period, the PID home costs</span>
-        <span style="font-size:20px;font-weight:700;color:var(--flag);" id="calc-verdict">$8,000 more</span>
-      </div>
-      <div class="split-legend" style="margin-top:16px;">
-        <span><span class="dot" style="background:#2a78d6;"></span> Non-PID home</span>
-        <span><span class="dot flag"></span> PID home</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="renter">
-    <div class="num-eyebrow">00C / RENTERS IN A PID</div>
-    <h2 class="block-title">A real Utah County example</h2>
-    <p class="block-lede">Renters don't buy a home, so the PID cost doesn't show up as a line item on a tax bill the way it does for an owner. It shows up as extra charges tacked onto the rent instead — and there's a legal loophole that lets a landlord do that even when the base rent itself is capped by law. Here's exactly how, using real numbers from an actual Utah County building.</p>
-    <div class="hypothesis-card" style="margin-bottom:24px;">
-      <div class="tag">The three-step trick, in plain terms</div>
-      <p><b>Step 1.</b> A federal affordability program (LIHTC) caps the base rent a landlord can legally charge — in this example, $1,290/month.</p>
-      <p><b>Step 2.</b> The building sits inside a PID, so the landlord passes the property's PID assessment straight through to tenants as a separate charge — $225/month here. That charge isn't "rent," so the cap doesn't touch it.</p>
-      <p><b>Step 3.</b> The landlord adds more separate, mandatory fees on top — things labeled "smart home services," "utility technology package," or similar — $300/month here. Also not "rent," also outside the cap.</p>
-      <p style="margin-bottom:0;"><b>The result:</b> a unit legally marketed and reported as "affordable" that actually costs the tenant far more than the cap was ever supposed to allow — and every individual piece of it is legal on its own.</p>
-    </div>
-    <div class="mech-wrap">
-      <p style="font-size:13px; color:var(--ink-soft); margin:0 0 18px;">Drag the sliders to see how the total changes. The defaults below are the real, documented figures from 120 &amp; 220 Bend in Utah City (Vineyard, Utah County).</p>
-      <div class="calc-controls">
-        <div><div class="calc-row"><label>Step 1 — LIHTC-capped base rent (the legal max, 60% AMI)</label><span id="calc-rentcap-out">$1,289 / mo</span></div><input type="range" id="calc-rentcap" min="800" max="2000" step="10" value="1289"/></div>
-        <div><div class="calc-row"><label>Step 2 — PID property tax pass-through</label><span id="calc-renterpid-out">$225 / mo</span></div><input type="range" id="calc-renterpid" min="0" max="500" step="5" value="225"/></div>
-        <div><div class="calc-row"><label>Step 3 — unbundled mandatory fees (not counted as rent, not capped)</label><span id="calc-renterfees-out">$300 / mo</span></div><input type="range" id="calc-renterfees" min="0" max="600" step="10" value="300"/></div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;">
-        <div class="calc-metric"><div class="k">What the tenant actually pays every month</div><div class="v" id="calc-renter-total">$1,814</div></div>
-        <div class="calc-metric"><div class="k">How far over the legal "affordable" cap that is</div><div class="v" style="color:var(--flag);" id="calc-renter-over">41%</div></div>
-      </div>
-      <div class="source-block">
-        <h3>Why this is legal</h3>
-        <p style="margin:0 0 10px;">The affordability law only regulates the word "rent." It says nothing about property tax pass-throughs or fees the landlord chooses to bill under a different name. Split the cost into three separate line items, and each one is individually compliant — even though added together they defeat the entire point of the cap.</p>
-        <h3>Why a renter has less protection than a homeowner here</h3>
-        <p style="margin:0;">A homeowner at least gets a public Truth-in-Taxation hearing before their county's tax rate can rise. A renter gets none of that. Utah has no rent control of any kind, and a landlord can raise rent by any amount with as little as 15 days' notice on a month-to-month lease, or whenever a lease renews — no hearing, no disclosure requirement, no public process at all. If the PID assessment goes up, or a second UIPA/MIDA layer gets added to the property later, that cost simply shows up in the next rent increase.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="benefit">
-    <div class="num-eyebrow">00D / WHO BENEFITS</div>
-    <h2 class="block-title">Who actually benefits from the "economic development" pitch</h2>
-    <div class="source-block">
-      <p style="margin:0 0 10px;">The state's own official summary of the law creating PIDs describes them as "an exciting new economic development tool for Cities and Counties along with property owners." What that tool actually provides the developer is access to low-interest, tax-exempt municipal bond financing — normally reserved for governments — to build infrastructure they would otherwise have to fund out of pocket or through costlier private loans. PID debt is not a liability of the city or county that creates it.</p>
-      <p style="margin:0;">Since buyers typically pay the same list price whether or not a home sits inside a PID, the savings from that cheaper financing stay with the developer as profit margin. The repayment obligation — the PID assessment itself — gets transferred forward onto whoever buys or rents there, for the life of the bond.</p>
-    </div>
-  </section>
-
-  <section class="block" id="mechanism">
-    <div class="num-eyebrow">01 / THE MECHANISM</div>
-    <h2 class="block-title">Follow the increment</h2>
-    <p class="block-lede">Click each stage. This is the actual path a tax dollar takes once a PID or TIF freezes the base year.</p>
-    <div class="mech-wrap">
-      <div class="mech-row" id="mechRow">
-        <div class="mech-node" data-key="growth"><span class="icon">🏗️</span><span class="label">New development happens</span></div>
-        <div class="mech-arrow">→</div>
-        <div class="mech-node" data-key="value"><span class="icon">📈</span><span class="label">Assessed value rises above the frozen base</span></div>
-        <div class="mech-arrow">→</div>
-        <div class="mech-node split" data-key="split"><span class="icon">🔀</span><span class="label">The increment splits</span></div>
-      </div>
-      <div class="mech-row" style="margin-top:14px;">
-        <div class="mech-node" data-key="fund"><span class="icon">🔒</span><span class="label">Increment → restricted PID/TIF debt service fund</span></div>
-        <div class="mech-arrow">→</div>
-        <div class="mech-node" data-key="bonds"><span class="icon">🏦</span><span class="label">Pays bondholders on the district's debt</span></div>
-      </div>
-      <div class="mech-row" style="margin-top:14px;">
-        <div class="mech-node" data-key="entities"><span class="icon">🏛️</span><span class="label">County / school / fire / water get $0 credit for that growth</span></div>
-        <div class="mech-arrow">→</div>
-        <div class="mech-node" data-key="burden"><span class="icon">🚒</span><span class="label">...but still serve the students, calls, water, roads it creates</span></div>
-        <div class="mech-arrow">→</div>
-        <div class="mech-node" data-key="gap"><span class="icon">⚠️</span><span class="label">Shortfall</span></div>
-      </div>
-      <div class="mech-detail" id="mechDetail">Click a stage above to see what happens at that step.</div>
-      <div class="split-legend">
-        <span><span class="dot gold"></span> Increment (frozen-base growth)</span>
-        <span><span class="dot flag"></span> Stays with taxing entities (base value only)</span>
-      </div>
-      <div class="gap-toggle-wrap">
-        <p class="q">The shortfall in the diagram above has to be covered somehow. Pick one:</p>
-        <div class="toggle-btns">
-          <button class="toggle-btn" data-gap="rate">Raise the rate on everyone else</button>
-          <button class="toggle-btn" data-gap="cut">Cut services / draw reserves</button>
-          <button class="toggle-btn" data-gap="neither">Is there a third option?</button>
-        </div>
-        <div class="gap-result" id="gapResult"></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="map">
-    <div class="num-eyebrow">02 / ON THE MAP</div>
-    <h2 class="block-title">Two Utah County projects already showing the strain</h2>
-    <p class="block-lede">Schematic, not to scale — for orientation only. Click a pin or a card. This is not a complete county inventory; it's what's confirmed so far.</p>
-    <div class="map-wrap">
-      <div class="map-svg-holder">
-        <svg viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg">
-          <rect x="40" y="20" width="220" height="280" rx="4" fill="#eee6d3" stroke="#b8a888" stroke-width="1.5"/>
-          <text x="150" y="290" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#8c8471">UTAH COUNTY (schematic)</text>
-          <g class="pid-pin" data-key="utahcity" transform="translate(110,90)"><circle r="7" fill="#9c3b2e"/><text x="12" y="4" font-family="Courier New, monospace" font-size="10" fill="#10233f">Utah City PID / RDA</text></g>
-          <g class="pid-pin" data-key="sweetwater" transform="translate(90,190)"><circle r="7" fill="#9c3b2e"/><text x="12" y="4" font-family="Courier New, monospace" font-size="10" fill="#10233f">Sweetwater CRA</text></g>
-        </svg>
-        <div class="map-note">Approximate placement · Vineyard &amp; Eagle Mountain, Utah County</div>
-      </div>
-      <div class="map-cards">
-        <div class="pid-card" data-key="utahcity">
-          <div class="pname">Utah City East PID Nos. 1-5 &amp; RDA</div>
-          <div class="ploc">Vineyard, Utah County — former Geneva Steel site</div>
-          <div class="pstat">700-acre master-planned redevelopment (developer Flagborough LLC, a joint venture of Flagship Companies and Woodbury Corp). Sits inside both a Public Infrastructure District (created Dec 2023) and a separate RDA tax-increment area — PID and TIF stacked on the same property. 120 & 220 Bend, the first residential building, carries roughly $140+/month in mandatory unbundled fees on top of base rent.</div>
-          <span class="flag-badge">PID + RDA stacked</span>
-        </div>
-        <div class="pid-card" data-key="sweetwater">
-          <div class="pname">Sweetwater Industrial Park CRA #3</div>
-          <div class="ploc">Eagle Mountain, Utah County</div>
-          <div class="pstat">$20.42M in total property tax increment projected, with Alpine School District's share alone at $13.52M — the single largest source, dwarfing Utah County's and Eagle Mountain City's shares combined. Falls inside the new West District after the 2027 Alpine School District split.</div>
-          <span class="flag-badge">Largest single TIF source: schools</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="math">
-    <div class="num-eyebrow">03 / THE MATH</div>
-    <h2 class="block-title">The statewide number behind Utah County's share</h2>
-    <p class="block-lede">Municipal bonds issued for all PIDs statewide — the debt Utahns will ultimately be paying, confirmed directly by the State Auditor's office — set against what's confirmed in Utah County specifically.</p>
-    <div class="stat-strip">
-      <div class="stat-box"><div class="n">$5.267B</div><div class="l">total statewide PID debt, as of 8/7/2026</div></div>
-      <div class="stat-box"><div class="n">$20.42M</div><div class="l">Sweetwater CRA total TIF, Eagle Mountain</div></div>
-      <div class="stat-box"><div class="n">$13.52M</div><div class="l">Alpine School District's share of that alone</div></div>
-    </div>
-    <div class="growth-chart">
-      <div class="bar-row"><div class="bar-label">End of 2025</div><div class="bar-track"><div class="bar-fill" data-target="72"></div></div><div class="bar-val">~$3.8–4B</div></div>
-      <div class="bar-row"><div class="bar-label">Aug 7, 2026</div><div class="bar-track"><div class="bar-fill" data-target="100"></div></div><div class="bar-val">$5.267B</div></div>
-    </div>
-    <div class="nvv-mini">
-      <div><div class="k">Utah County TIF share</div><div class="v">$1.56M</div></div>
-      <div><div class="k">Eagle Mtn City share</div><div class="v">$1.28M</div></div>
-      <div><div class="k">Water Cons. Dist. share</div><div class="v">$0.94M</div></div>
-      <div><div class="k">School District share</div><div class="v">$13.52M</div></div>
-    </div>
-  </section>
-
-  <section class="block" id="tools">
-    <div class="num-eyebrow">04A / OTHER TOOLS</div>
-    <h2 class="block-title">Not every mechanism shows up on your bill</h2>
-    <p class="block-lede">PID and IFD add a real charge to your own bill. RDA, HTRZ, and the first-home/homeownership zone tools redirect existing tax revenue growth instead — they don't show up on your bill at all. The cost lands on the city, county, and school district, not on you directly.</p>
-    <div class="source-block">
-      <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
-        <thead><tr style="text-align:left; border-bottom:1px solid var(--rule);"><th style="padding:8px 10px 8px 0; color:var(--navy);">Tool</th><th style="padding:8px 10px; color:var(--navy);">How it works</th><th style="padding:8px 0 8px 10px; color:var(--navy);">Adds to your bill?</th></tr></thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--rule);"><td style="padding:10px 10px 10px 0; font-weight:600;">PID / IFD</td><td style="padding:10px; color:var(--ink-soft);">New assessment or mill levy, bonds repaid by owners directly.</td><td style="padding:10px 0 10px 10px; color:var(--flag); font-weight:600;">Yes</td></tr>
-          <tr style="border-bottom:1px solid var(--rule);"><td style="padding:10px 10px 10px 0; font-weight:600;">UIPA / MIDA subsidiary PID</td><td style="padding:10px; color:var(--ink-soft);">UIPA or MIDA creates its own PID inside a project area, stacking a second assessment on the same property.</td><td style="padding:10px 0 10px 10px; color:var(--flag); font-weight:600;">Yes</td></tr>
-          <tr style="border-bottom:1px solid var(--rule);"><td style="padding:10px 10px 10px 0; font-weight:600;">RDA</td><td style="padding:10px; color:var(--ink-soft);">Growth in tax revenue above a frozen base year redirected to a redevelopment fund.</td><td style="padding:10px 0 10px 10px; color:var(--green-ok); font-weight:600;">Not directly</td></tr>
-          <tr style="border-bottom:1px solid var(--rule);"><td style="padding:10px 10px 10px 0; font-weight:600;">HTRZ</td><td style="padding:10px; color:var(--ink-soft);">Same tax increment mechanism as RDA, targeted near transit.</td><td style="padding:10px 0 10px 10px; color:var(--green-ok); font-weight:600;">Not directly</td></tr>
-          <tr><td style="padding:10px 10px 10px 0; font-weight:600;">First Home / Home Ownership zones</td><td style="padding:10px; color:var(--ink-soft);">Same tax increment mechanism, aimed at starter-home affordability.</td><td style="padding:10px 0 10px 10px; color:var(--green-ok); font-weight:600;">Not directly</td></tr>
-        </tbody>
-      </table>
-      <p style="margin:16px 0 0; color:var(--ink-soft); font-size:13.5px; line-height:1.6;">PID, IFD, and UIPA/MIDA subsidiary PIDs create a genuinely new charge that lands on your tax bill. RDA, HTRZ, and the two zone tools instead redirect the growth in existing tax revenue away from the city, county, and school district for the life of the district, usually 10-20 years. Your own bill looks the same as any neighbor's — but the diverted revenue can still raise the base rate that everyone outside the zone pays.</p>
-    </div>
-  </section>
-
-  <section class="block" id="mobility">
-    <div class="num-eyebrow">04 / THE STAKES</div>
-    <h2 class="block-title">What the diverted growth was supposed to sustain</h2>
-    <p class="block-lede">Utah's upward-mobility advantage rests on the same tax base that TIF and PID diversion carve into.</p>
-    <div class="mech-wrap">
-      <svg width="100%" viewBox="0 0 680 450" role="img" xmlns="http://www.w3.org/2000/svg">
-        <title>How TIF erodes Utah's upward mobility advantage</title>
-        <desc>A visual showing Utah's mobility ladder being weakened by school fragmentation, housing cost inflation, and tax diversion.</desc>
-        <defs>
-          <marker id="arrowUp" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M5 9L1 1L9 1Z" fill="#3f6b4a"/></marker>
-          <marker id="arrowDown" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M5 1L9 9L1 9Z" fill="#9c3b2e"/></marker>
-        </defs>
-        <text x="20" y="30" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:600;fill:#10233f;">Utah's upward mobility advantage under pressure</text>
-        <rect x="20" y="55" width="290" height="320" rx="8" fill="#fbf8f1" stroke="#d8cfba" stroke-width="1"/>
-        <text x="40" y="80" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:600;fill:#10233f;">What research found</text>
-        <text x="40" y="98" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#4a4a48;">Salt Lake City ranked #1 among large U.S.</text>
-        <text x="40" y="112" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#4a4a48;">metros for upward mobility (Chetty, 2015)</text>
-        <line x1="60" y1="150" x2="290" y2="150" stroke="#b8863b" stroke-width="1"/><text x="40" y="145" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#1c1c1c;">Strong schools</text>
-        <line x1="60" y1="190" x2="290" y2="190" stroke="#b8863b" stroke-width="1"/><text x="40" y="185" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#1c1c1c;">Affordable housing</text>
-        <line x1="60" y1="230" x2="290" y2="230" stroke="#b8863b" stroke-width="1"/><text x="40" y="225" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#1c1c1c;">Cohesive families</text>
-        <line x1="60" y1="270" x2="290" y2="270" stroke="#b8863b" stroke-width="1"/><text x="40" y="265" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#1c1c1c;">Social capital</text>
-        <line x1="60" y1="310" x2="290" y2="310" stroke="#b8863b" stroke-width="1"/><text x="40" y="305" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#1c1c1c;">Stable communities</text>
-        <path d="M170 340 L170 360" stroke="#3f6b4a" stroke-width="2" fill="none" marker-end="url(#arrowUp)"/><text x="180" y="355" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#3f6b4a;">Upward mobility</text>
-        <rect x="340" y="55" width="290" height="320" rx="8" fill="#fbf8f1" stroke="#d8cfba" stroke-width="1"/>
-        <text x="360" y="80" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:600;fill:#9c3b2e;">What's breaking it now</text>
-        <text x="360" y="98" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#4a4a48;">TIF and PID diversion hollow the</text>
-        <text x="360" y="112" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#4a4a48;">conditions the ladder depends on</text>
-        <line x1="380" y1="150" x2="610" y2="150" stroke="#9c3b2e" stroke-width="2" stroke-dasharray="4,4"/><text x="360" y="145" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#9c3b2e;">Schools split, funding diverted</text>
-        <line x1="380" y1="190" x2="610" y2="190" stroke="#9c3b2e" stroke-width="2" stroke-dasharray="4,4"/><text x="360" y="185" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#9c3b2e;">Housing costs inflate with growth</text>
-        <line x1="380" y1="230" x2="610" y2="230" stroke="#b8b09a" stroke-width="1"/><text x="360" y="225" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#1c1c1c;">Families stretched thin</text>
-        <line x1="380" y1="270" x2="610" y2="270" stroke="#b8b09a" stroke-width="1"/><text x="360" y="265" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#1c1c1c;">Networks weakened</text>
-        <line x1="380" y1="310" x2="610" y2="310" stroke="#9c3b2e" stroke-width="2" stroke-dasharray="4,4"/><text x="360" y="305" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#9c3b2e;">Enrollment without funds</text>
-        <path d="M470 340 L470 360" stroke="#9c3b2e" stroke-width="2" fill="none" marker-end="url(#arrowDown)"/><text x="480" y="355" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#9c3b2e;">Decline in opportunity</text>
-        <rect x="20" y="395" width="610" height="45" rx="6" fill="#fdf1ee" stroke="#9c3b2e" stroke-width="0.5"/>
-        <text x="40" y="415" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;fill:#1c1c1c;">TIF and PID diversion capture the tax growth needed to sustain the rungs above. Without</text>
-        <text x="40" y="431" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;fill:#1c1c1c;">intervention, Utah County's mobility advantage erodes — and it becomes another unequal metro.</text>
-      </svg>
-    </div>
-  </section>
-
-  <section class="block" id="lockin">
-    <div class="num-eyebrow">04B / THE LOCK-IN</div>
-    <h2 class="block-title">Once bonds are issued, there's no backing out</h2>
-    <p class="block-lede">What a PID or HTRZ locks in for the public versus what it locks in for the developer, once construction starts.</p>
-    <div class="source-block">
-      <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
-        <thead><tr style="text-align:left; border-bottom:1px solid var(--rule);"><th style="padding:8px 10px 8px 0; color:var(--navy);">Dynamic</th><th style="padding:8px 10px; color:var(--flag);">The public downside</th><th style="padding:8px 0 8px 10px; color:var(--green-ok);">The developer upside</th></tr></thead>
-        <tbody>
-          <tr style="background:#fdf7ea;"><td colspan="3" style="padding:8px 10px; font-weight:600; color:var(--navy); font-size:12.5px;">Trigger point: once bonds are issued and construction starts, the entire framework locks in.</td></tr>
-          <tr style="border-bottom:1px solid var(--rule);"><td style="padding:10px 10px 10px 0; font-weight:600;">Commitment</td><td style="padding:10px; color:var(--ink-soft);">Taxing entities are fully committed and cannot easily back out without facing catastrophic default.</td><td style="padding:10px 0 10px 10px; color:var(--ink-soft);">Secures guaranteed, long-term public funding for infrastructure upfront.</td></tr>
-          <tr><td style="padding:10px 10px 10px 0; font-weight:600;">Market stalls</td><td style="padding:10px; color:var(--ink-soft);">The public must continue paying off the issued bonds even if the project completely stalls.</td><td style="padding:10px 0 10px 10px; color:var(--ink-soft);">Insulated from initial infrastructure debts; retains ownership of the underlying assets.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="source-block" style="margin-top:18px;">
-      <h3>Who oversees the stacking mechanism</h3>
-      <p style="margin:0;">MIDA — the authority that can create a subsidiary PID inside a Utah County project area, stacking a second assessment on top of a base PID — has board seats tied to other appointments rather than standing for independent re-approval. One documented example: a board member's MIDA term is tied to his separate Governor's Office of Economic Opportunity Executive Director term, which "expires in March 2027, and automatically renews for four-year intervals thereafter." Oversight of a board with reach into Utah County developments isn't on a fixed public review cycle of its own.</p>
-    </div>
-  </section>
-
-  <section class="block" id="sourcing">
-    <div class="num-eyebrow">05 / SOURCING &amp; STATUS</div>
-    <h2 class="block-title">What's confirmed, what isn't yet</h2>
-    <div class="source-block">
-      <h3>Confirmed, on the record</h3>
-      <ul>
-        <li>State Auditor Tina Cannon's office confirmed the statewide PID debt figures directly (meeting Aug 10, 2026; written follow-up Aug 7, 2026 total).</li>
-        <li>Cannon's office confirmed the increment-diversion mechanism in writing — that diverted revenue funds a restricted debt service fund the taxing entities never receive, and that the only levers to cover a resulting shortfall are a higher certified rate under Truth in Taxation, or cuts to services/reserves.</li>
-        <li>Sweetwater Industrial Park CRA #3 figures pulled from Eagle Mountain Redevelopment Agency's April 2023 public hearing notice.</li>
-        <li>Utah City PID and RDA status confirmed via Vineyard City creation resolutions and the city's own redevelopment agency plan-progress page.</li>
-      </ul>
-      <h3>Not yet confirmed</h3>
-      <ul>
-        <li>Whether individual taxing entities disclose PID/TIF diversion as a specific cause when presenting rate increases to the public under Truth in Taxation — this is the open question currently out to the Auditor's office.</li>
-        <li>A statewide, entity-by-entity accounting of which counties/districts have raised rates specifically because of increment diversion.</li>
-      </ul>
-      <h3>In Cannon's own words (from correspondence)</h3>
-      <blockquote class="cannon">"...the taxing entities are stuck paying for the added service burden without getting the added revenue to cover it. That gap has to be filled from somewhere, and the only place they can pull it from is the tax rate on everyone else..."</blockquote>
-      <blockquote class="cannon">"It gets made up by everyone else paying a higher rate, or by everyone else getting less service — there's no third funding source that appears to cover the gap."</blockquote>
-    </div>
-  </section>
-
-  <section class="block" id="split">
-    <div class="num-eyebrow">06 / THE SPLIT</div>
-    <h2 class="block-title">Smaller pie, same slice taken out</h2>
-    <p class="block-lede">A separate compounding effect, this one in Utah County — what happens to TIF diversion when the district absorbing it gets cut into pieces.</p>
-    <div class="hypothesis-card">
-      <div class="tag">The mechanism</div>
-      <p>Alpine School District — 84,000+ students, the largest in the state — is splitting into three new districts starting July 2027: Central (Lehi, American Fork, Highland, Cedar Hills, Alpine, part of Draper), West (Eagle Mountain, Saratoga Springs, Cedar Fort, Fairfield), and South (Orem, Pleasant Grove, Lindon, Vineyard).</p>
-      <p>Right now, any TIF/PID diversion inside Alpine's boundaries is absorbed by an 84,000-student district's full budget — the dollar loss is real, but diluted across a huge base. Once the split happens, that same diverted dollar amount lands entirely on whichever new, much smaller district contains that project. The tax base shrinks dramatically; the diversion doesn't.</p>
-    </div>
-    <div class="mech-wrap" style="margin-top:24px;">
-      <div class="nvv-mini" style="margin-top:0;">
-        <div><div class="k">Project area</div><div class="v" style="font-size:13px;">Sweetwater Industrial Park CRA #3, Eagle Mountain</div></div>
-        <div><div class="k">Total TIF projected</div><div class="v">$20.42M</div></div>
-        <div><div class="k">Alpine SD's share</div><div class="v">$13.52M</div></div>
-        <div><div class="k">Lands in</div><div class="v" style="font-size:13px;">New West District (2027)</div></div>
-      </div>
-      <div class="mech-detail" style="margin-top:18px;">
-        Alpine School District's projected share of the Sweetwater TIF alone — <b>$13,518,614</b> — dwarfs Utah County's ($1.56M) and Eagle Mountain City's ($1.28M) shares combined. Right now that loss sits inside Alpine's full combined budget. Eagle Mountain and Saratoga Springs — the cities carrying this project — fall into the new West District, built from just four cities instead of the whole county. The same $13.5M diversion becomes a dramatically larger share of a much smaller budget overnight, with no change to the underlying TIF agreement itself.
-      </div>
-    </div>
-    <div class="source-block" style="margin-top:24px;">
-      <h3>The gap between the official line and the mechanism</h3>
-      <p style="margin:0;">Utah County's own messaging states the district division "isn't expected to significantly impact tax collection or school funding," pointing to the state's per-pupil WPU funding as the stabilizer. That's true for state funding — but WPU is not the local property tax base, which is exactly where TIF/PID diversion operates. The county's reassurance doesn't address the mechanism this section documents.</p>
-    </div>
-  </section>
-
 </main>
 
 <footer>
-  UTAH COUNTY PID RESEARCH · Built from source documents on file · Regenerate as new PIDs or confirmations come in
+  THE WEBER COUNTY HIVE · PID RESEARCH · Built from source documents on file
 </footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script>
-  const mechDetails = {
-    growth: "A developer builds inside a PID or TIF district's boundary. This is the trigger — nothing diverts until new value is created.",
-    value: "The county assessor's office values the new development. The base year was frozen when the district was created, so this new value sits above that frozen line.",
-    split: "Everything above the frozen base line is the 'increment.' Everything at or below it stays taxed and distributed normally.",
-    fund: "The increment is walled off by statute into a restricted debt service fund — it never touches the taxing entities' general funds, even temporarily.",
-    bonds: "That fund exists to pay bondholders who financed the district's infrastructure. This is the district's whole reason for existing.",
-    entities: "The county, school district, fire district, and water district don't get to count that new value as part of their revenue base — as far as their books are concerned, for funding purposes, it doesn't exist yet.",
-    burden: "But real people moved in. More students enrolled, more 911 calls come in, more water gets used, more roads get driven on — those costs are real and immediate, regardless of what the books say.",
-    gap: "The taxing entities have to cover real, current costs with a revenue base that didn't grow to match. That's the shortfall this whole page is about."
-  };
-  const nodes = document.querySelectorAll('.mech-node');
-  const detailBox = document.getElementById('mechDetail');
-  nodes.forEach(n => {
-    n.addEventListener('click', () => {
-      nodes.forEach(x => x.classList.remove('active'));
-      n.classList.add('active');
-      const key = n.getAttribute('data-key');
-      detailBox.innerHTML = mechDetails[key] || "";
-    });
-  });
-  const gapResults = {
-    rate: "This is what Truth in Taxation actually allows: a public hearing, then a higher certified rate applied to the existing tax base — meaning current homeowners and businesses outside the diverted increment pay more to cover a shortfall created by growth they got no revenue credit for.",
-    cut: "The slower-motion version of the same cost: trimming services, delaying capital projects, or drawing down reserve/fund balance instead of raising the rate. Felt as reduced service rather than a visible tax hike — but it's the same underlying gap.",
-    neither: "According to the State Auditor's office directly: no. There's no third funding source that appears to cover the gap. It's one of the two above — or some mix of both."
-  };
-  const gapBtns = document.querySelectorAll('.toggle-btn');
-  const gapResult = document.getElementById('gapResult');
-  gapBtns.forEach(b => {
-    b.addEventListener('click', () => {
-      gapBtns.forEach(x => x.classList.remove('active'));
-      b.classList.add('active');
-      gapResult.textContent = gapResults[b.getAttribute('data-gap')];
-    });
-  });
-  const pins = document.querySelectorAll('.pid-pin');
-  const cards = document.querySelectorAll('.pid-card');
-  function selectPid(key){
-    pins.forEach(p => p.classList.toggle('active', p.getAttribute('data-key') === key));
-    cards.forEach(c => c.classList.toggle('active', c.getAttribute('data-key') === key));
-  }
-  pins.forEach(p => p.addEventListener('click', () => selectPid(p.getAttribute('data-key'))));
-  cards.forEach(c => c.addEventListener('click', () => selectPid(c.getAttribute('data-key'))));
-  const bars = document.querySelectorAll('.bar-fill');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if(e.isIntersecting){
-        const target = e.target.getAttribute('data-target');
-        e.target.style.width = target + '%';
-        io.unobserve(e.target);
-      }
-    });
-  }, {threshold:0.4});
-  bars.forEach(b => io.observe(b));
-  function calcFmt(n){ return '$' + Math.round(n).toLocaleString(); }
-  const cPrice = document.getElementById('calc-price');
-  const cTaxrate = document.getElementById('calc-taxrate');
-  const cTaxgrowth = document.getElementById('calc-taxgrowth');
-  const cAssess = document.getElementById('calc-assess');
-  const cBondyears = document.getElementById('calc-bondyears');
-  const cHold = document.getElementById('calc-hold');
-  const cStackToggle = document.getElementById('calc-stackToggle');
-  const cStackassess = document.getElementById('calc-stackassess');
-  const cStackControls = document.getElementById('calc-stackControls');
-  let calcChart;
-  function computeCalc(){
-    const price = Number(cPrice.value);
-    const taxRate = Number(cTaxrate.value) / 100;
-    const taxGrowth = Number(cTaxgrowth.value) / 100;
-    const assess = Number(cAssess.value);
-    const bondYears = Number(cBondyears.value);
-    const hold = Number(cHold.value);
-    const stacked = cStackToggle.checked;
-    const stackAssess = stacked ? Number(cStackassess.value) : 0;
-    cStackControls.style.display = stacked ? 'block' : 'none';
-    document.getElementById('calc-price-out').textContent = calcFmt(price);
-    document.getElementById('calc-taxrate-out').textContent = (taxRate*100).toFixed(2) + '%';
-    document.getElementById('calc-taxgrowth-out').textContent = (taxGrowth*100).toFixed(1) + '% / yr';
-    document.getElementById('calc-assess-out').textContent = calcFmt(assess) + ' / yr';
-    document.getElementById('calc-bondyears-out').textContent = bondYears + ' yrs';
-    document.getElementById('calc-hold-out').textContent = hold + ' yrs';
-    document.getElementById('calc-stackassess-out').textContent = calcFmt(stackAssess) + ' / yr';
-    document.getElementById('calc-nonpid-price').textContent = calcFmt(price);
-    document.getElementById('calc-pid-price').textContent = calcFmt(price);
-    const years = [];
-    const nonpidCum = [];
-    const pidCum = [];
-    let nonpidRunning = price;
-    let pidRunning = price;
-    for(let y=0; y<=hold; y++){
-      years.push('Yr ' + y);
-      if(y > 0){
-        const yearTax = price * taxRate * Math.pow(1 + taxGrowth, y - 1);
-        nonpidRunning += yearTax;
-        pidRunning += yearTax;
-        if(y <= bondYears) pidRunning += assess + stackAssess;
-      }
-      nonpidCum.push(nonpidRunning);
-      pidCum.push(pidRunning);
-    }
-    const diff = pidCum[hold] - nonpidCum[hold];
-    const verdictEl = document.getElementById('calc-verdict');
-    if(diff > 0){
-      verdictEl.textContent = calcFmt(diff) + ' more';
-      verdictEl.style.color = '#9c3b2e';
-    } else {
-      verdictEl.textContent = 'about the same';
-      verdictEl.style.color = '#10233f';
-    }
-    if(calcChart){
-      calcChart.data.labels = years;
-      calcChart.data.datasets[0].data = nonpidCum;
-      calcChart.data.datasets[1].data = pidCum;
-      calcChart.update();
-    } else {
-      calcChart = new Chart(document.getElementById('calcChart'), {
-        type: 'line',
-        data: { labels: years, datasets: [
-            { label:'Non-PID home', data: nonpidCum, borderColor:'#2a78d6', backgroundColor:'rgba(42,120,214,0.08)', borderWidth:2, pointRadius:0, fill:true, tension:0 },
-            { label:'PID home', data: pidCum, borderColor:'#9c3b2e', backgroundColor:'rgba(156,59,46,0.08)', borderWidth:2, pointRadius:0, fill:true, tension:0 }
-        ] },
-        options: { responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false}, plugins:{ legend:{display:false} }, scales:{ y:{ ticks:{ callback:(v)=>'$'+(v/1000).toFixed(0)+'k' } } } }
-      });
-    }
-  }
-  [cPrice, cTaxrate, cTaxgrowth, cAssess, cBondyears, cHold, cStackassess].forEach(el => el.addEventListener('input', computeCalc));
-  cStackToggle.addEventListener('change', computeCalc);
-  computeCalc();
-  const rCap = document.getElementById('calc-rentcap');
-  const rPid = document.getElementById('calc-renterpid');
-  const rFees = document.getElementById('calc-renterfees');
-  function computeRenter(){
-    const cap = Number(rCap.value);
-    const pid = Number(rPid.value);
-    const fees = Number(rFees.value);
-    const total = cap + pid + fees;
-    const overPct = ((total - cap) / cap) * 100;
-    document.getElementById('calc-rentcap-out').textContent = calcFmt(cap) + ' / mo';
-    document.getElementById('calc-renterpid-out').textContent = calcFmt(pid) + ' / mo';
-    document.getElementById('calc-renterfees-out').textContent = calcFmt(fees) + ' / mo';
-    document.getElementById('calc-renter-total').textContent = calcFmt(total);
-    document.getElementById('calc-renter-over').textContent = Math.round(overPct) + '%';
-  }
-  [rCap, rPid, rFees].forEach(el => el.addEventListener('input', computeRenter));
-  computeRenter();
-</script>
 
 </body>
 </html>

@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case File: Nordic Village — The Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE7D9;
+    --ink:#181511;
+    --ink-soft:#4a4237;
+    --panel:#1C1913;
+    --panel-2:#242019;
+    --brass:#B8912F;
+    --brass-bright:#D9AE45;
+    --rule:#3a352b;
+    --rule-light:#c9bfa2;
+    --flag-red:#9C4326;
+    --flag-red-soft:#e7cdbf;
+    --confirm-green:#5b7052;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --serif: 'Spectral', Georgia, serif;
+    --maxw: 880px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--flag-red);}
+  a:focus-visible, button:focus-visible{outline:3px solid var(--brass-bright); outline-offset:2px;}
+
+  /* ---------- masthead / case header ---------- */
+  .masthead{
+    background:var(--panel);
+    color:var(--paper);
+    padding:2.6rem 1.5rem 2.2rem;
+    border-bottom:6px double var(--brass);
+  }
+  .masthead-inner{max-width:var(--maxw); margin:0 auto;}
+  .eyebrow-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--brass-bright); margin-bottom:1.4rem;
+    flex-wrap:wrap; gap:.4rem;
+  }
+  .case-num{color:var(--rule-light); opacity:.85;}
+  h1.title{
+    font-family:var(--serif); font-weight:700; font-size:clamp(2.1rem,5.5vw,3.4rem);
+    line-height:1.05; margin:0 0 0.9rem; letter-spacing:-0.01em;
+  }
+  h1.title em{font-style:italic; color:var(--brass-bright); font-weight:500;}
+  .dek{
+    font-family:var(--serif); font-style:italic; font-size:1.2rem;
+    color:var(--rule-light); max-width:640px; margin:0 0 1.6rem;
+  }
+  .meta-strip{
+    display:flex; flex-wrap:wrap; gap:1.6rem; font-family:var(--mono);
+    font-size:0.75rem; color:var(--rule-light); border-top:1px solid var(--rule);
+    padding-top:1rem;
+  }
+  .meta-strip strong{color:var(--paper); display:block; font-size:0.68rem; text-transform:uppercase; letter-spacing:.08em; opacity:.7; margin-bottom:.15rem;}
+
+  /* ---------- body layout ---------- */
+  main{max-width:var(--maxw); margin:0 auto; padding:0 1.5rem;}
+  .intro{padding:2.6rem 0 1rem; max-width:680px;}
+  .intro p{font-size:1.08rem;}
+
+  section.exhibit{padding:2.4rem 0; border-top:1px solid #cfc6ab;}
+
+  /* ---------- beginners primer ---------- */
+  .primer{
+    background:var(--panel-2); color:var(--paper); padding:2rem 1.5rem 2.2rem;
+    border-top:1px solid var(--rule); border-bottom:6px double var(--brass);
+  }
+  .primer-inner{max-width:var(--maxw); margin:0 auto;}
+  .primer-eyebrow{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--brass-bright); margin-bottom:.6rem;
+  }
+  .primer h2{
+    font-family:var(--serif); font-weight:600; font-size:clamp(1.4rem,3vw,1.8rem);
+    margin:0 0 0.6rem;
+  }
+  .primer > p{color:var(--rule-light); max-width:640px; margin:0 0 1.4rem; font-size:1rem;}
+  .term-grid{
+    display:flex; flex-wrap:wrap; gap:1rem; padding:0.3rem 0 1rem;
+  }
+  .flip-card{flex:1 1 240px;}
+  .flip-card{
+    background:none; perspective:1000px; height:195px; cursor:pointer;
+    border:none; padding:0; text-align:left; font-family:inherit; color:inherit;
+  }
+  .flip-card-inner{
+    position:relative; width:100%; height:100%; text-align:left;
+    transition:transform 0.5s; transform-style:preserve-3d;
+  }
+  .flip-card.flipped .flip-card-inner{transform:rotateY(180deg);}
+  .flip-card-front, .flip-card-back{
+    position:absolute; inset:0; backface-visibility:hidden;
+    border-left:3px solid var(--brass); padding:1rem 1.1rem;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .flip-card-front{background:rgba(217,174,69,0.06);}
+  .flip-card-front .term-label{
+    font-family:var(--mono); font-weight:600; font-size:1.12rem; color:var(--brass-bright);
+    text-transform:uppercase; letter-spacing:.02em; line-height:1.35;
+  }
+  .flip-card-front .tap-hint{
+    font-family:var(--mono); font-size:0.65rem; color:var(--rule-light); opacity:.7;
+    margin-top:.8rem; letter-spacing:.06em; text-transform:uppercase;
+  }
+  .flip-card-back{
+    background:var(--panel-2); transform:rotateY(180deg); justify-content:flex-start;
+  }
+  .flip-card-back p{margin:0; font-size:0.95rem; line-height:1.48; color:var(--paper);}
+  .flip-card:focus-visible .flip-card-inner{outline:3px solid var(--brass-bright); outline-offset:3px;}
+  @media (max-width:760px){ .flip-card{flex-basis:45%; height:215px;} }
+  @media (max-width:480px){ .flip-card{flex-basis:100%; height:180px;} }
+
+  /* ---------- state comparison cards ---------- */
+  .state-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.2rem; margin:1.2rem 0;}
+  .state-card{background:none; perspective:1200px; height:340px; cursor:pointer; border:none; padding:0; text-align:left; font-family:inherit; color:inherit;}
+  .state-card.tall{height:460px;}
+  .state-card-inner{position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d;}
+  .state-card.flipped .state-card-inner{transform:rotateY(180deg);}
+  .state-card-front, .state-card-back{position:absolute; inset:0; backface-visibility:hidden; padding:1.2rem; display:flex; flex-direction:column;}
+  .state-card-front{background:var(--panel); color:var(--paper); border-top:4px solid var(--brass); justify-content:space-between;}
+  .state-card-front .state-name{font-family:var(--serif); font-weight:700; font-size:1.4rem; color:var(--brass-bright);}
+  .state-card-front .state-mech{font-family:var(--mono); font-size:0.78rem; color:var(--rule-light); margin-top:.35rem;}
+  .state-card-front .state-verdict{font-family:var(--serif); font-style:italic; font-size:1.15rem; margin-top:1.1rem; line-height:1.4;}
+  .state-card-front .tap-hint{font-family:var(--mono); font-size:0.68rem; color:var(--rule-light); opacity:.7; letter-spacing:.06em; text-transform:uppercase; margin-top:auto;}
+  .state-card-back{background:#f6f2e6; border-top:4px solid var(--flag-red); transform:rotateY(180deg);}
+  .state-card-back .state-name-sm{font-family:var(--mono); font-weight:600; font-size:0.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--flag-red); margin-bottom:.6rem;}
+  .state-card-back p{margin:0 0 0.65rem; font-size:0.92rem; line-height:1.46; color:var(--ink);}
+  .state-card-back p:last-child{margin-bottom:0;}
+  .state-card:focus-visible .state-card-inner{outline:3px solid var(--brass-bright); outline-offset:3px;}
+  @media (max-width:820px){ .state-grid{grid-template-columns:1fr;} .state-card{height:290px;} .state-card.tall{height:400px;} }
+
+  /* ---------- closing synthesis ---------- */
+  .closing{
+    background:var(--panel); color:var(--paper); padding:2.4rem 1.8rem 2.6rem;
+    margin:2.4rem 0 0; border-top:6px double var(--brass);
+  }
+  .closing-inner{max-width:var(--maxw); margin:0 auto;}
+  .closing-eyebrow{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--brass-bright); margin-bottom:.6rem;
+  }
+  .closing h2{
+    font-family:var(--serif); font-weight:600; font-size:clamp(1.5rem,3.2vw,2rem);
+    margin:0 0 1rem;
+  }
+  .closing p{color:var(--rule-light); max-width:700px; font-size:1rem; margin:0 0 1rem;}
+  .closing p:last-of-type{margin-bottom:0;}
+  .closing strong{color:var(--paper);}
+  .closing-open{
+    border-left:3px solid var(--brass); padding-left:1rem; margin-top:1.6rem;
+  }
+  .closing-open p{font-size:0.92rem; font-style:italic;}
+  .exhibit-tag{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--flag-red); display:flex; align-items:center; gap:.6rem; margin-bottom:.5rem;
+  }
+  .exhibit-tag::before{content:""; width:22px; height:1px; background:var(--flag-red); display:inline-block;}
+  h2.exhibit-title{
+    font-family:var(--serif); font-size:clamp(1.5rem,3.4vw,2rem); margin:0 0 0.9rem; font-weight:600;
+  }
+  .exhibit p{max-width:680px;}
+  .exhibit p.lede{font-size:1.05rem;}
+
+  /* ---------- data callout numbers ---------- */
+  .bignum-row{display:flex; flex-wrap:wrap; gap:1.4rem; margin:1.4rem 0 1.6rem;}
+  .bignum{
+    background:var(--panel); color:var(--paper); padding:1.1rem 1.3rem;
+    border-left:4px solid var(--brass); min-width:180px; flex:1 1 200px;
+  }
+  .bignum .num{font-family:var(--mono); font-size:1.7rem; font-weight:600; color:var(--brass-bright); display:block;}
+  .bignum .lab{font-size:0.78rem; color:var(--rule-light); margin-top:.2rem; display:block;}
+
+  /* ---------- ledger tables ---------- */
+  table.ledger{
+    width:100%; border-collapse:collapse; font-family:var(--mono); font-size:0.86rem;
+    margin:1rem 0 1.2rem; background:#f6f2e6;
+  }
+  table.ledger caption{
+    text-align:left; font-family:var(--sans); font-size:0.78rem; color:var(--ink-soft);
+    padding-bottom:.5rem; font-style:italic;
+  }
+  table.ledger th, table.ledger td{
+    padding:0.55rem 0.7rem; text-align:right; border-bottom:1px solid #d8cfb2;
+  }
+  table.ledger th{
+    text-align:right; font-family:var(--sans); font-weight:600; font-size:0.72rem;
+    text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft);
+    border-bottom:2px solid var(--brass);
+  }
+  table.ledger th:first-child, table.ledger td:first-child{text-align:left;}
+  table.ledger tbody tr:hover{background:#efe8d4;}
+  table.ledger tfoot td{font-weight:600; border-top:2px solid var(--brass); border-bottom:none;}
+
+  /* ---------- chart (hand-built, no deps) ---------- */
+  .chart-wrap{margin:1.4rem 0 0.6rem;}
+  .bars{
+    display:flex; align-items:flex-end; gap:1.1rem; height:220px;
+    padding:0 0 0.4rem; border-bottom:2px solid var(--ink);
+  }
+  .bar-col{flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;}
+  .bar{
+    width:100%; background:linear-gradient(180deg, var(--brass-bright), var(--brass));
+    position:relative; border-radius:2px 2px 0 0;
+    transition:opacity .2s;
+  }
+  .bar:hover{opacity:.85;}
+  .bar .val{
+    position:absolute; top:-1.55rem; left:50%; transform:translateX(-50%);
+    font-family:var(--mono); font-size:0.72rem; font-weight:600; white-space:nowrap;
+  }
+  .bar-labels{display:flex; gap:1.1rem; margin-top:0.5rem;}
+  .bar-labels span{flex:1; text-align:center; font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);}
+  .chart-note{font-size:0.8rem; color:var(--ink-soft); font-style:italic; margin-top:0.6rem;}
+
+  /* ---------- flag / caution boxes ---------- */
+  .flag-box{
+    border:1px solid var(--flag-red); background:var(--flag-red-soft);
+    padding:1rem 1.2rem; margin:1.2rem 0; position:relative;
+  }
+  .flag-box::before{
+    content:"UNVERIFIED — WORKING THEORY"; font-family:var(--mono); font-size:0.66rem;
+    letter-spacing:.08em; color:var(--flag-red); display:block; margin-bottom:.5rem; font-weight:600;
+  }
+  .flag-box p{margin:0; font-size:0.95rem;}
+
+  .confirm-box{
+    border-left:4px solid var(--confirm-green); background:#eef1e9;
+    padding:0.9rem 1.2rem; margin:1.2rem 0;
+  }
+  .confirm-box::before{
+    content:"CONFIRMED — PRIMARY SOURCE"; font-family:var(--mono); font-size:0.66rem;
+    letter-spacing:.08em; color:var(--confirm-green); display:block; margin-bottom:.4rem; font-weight:600;
+  }
+  .confirm-box p{margin:0; font-size:0.95rem;}
+
+  .scale-box{
+    border-left:4px solid var(--brass); background:#f3ecd8;
+    padding:0.9rem 1.2rem; margin:1.2rem 0;
+  }
+  .scale-box::before{
+    content:"FOR SCALE ONLY — NOT OGDEN VALLEY"; font-family:var(--mono); font-size:0.66rem;
+    letter-spacing:.08em; color:var(--brass); display:block; margin-bottom:.4rem; font-weight:600;
+  }
+  .scale-box p{margin:0; font-size:0.95rem;}
+
+  .context-box{
+    border-left:4px solid var(--brass); background:#f3ecd8;
+    padding:0.9rem 1.2rem; margin:1.2rem 0;
+  }
+  .context-box::before{
+    content:"RELATED, NOT THE SAME MECHANISM"; font-family:var(--mono); font-size:0.66rem;
+    letter-spacing:.08em; color:var(--brass); display:block; margin-bottom:.4rem; font-weight:600;
+  }
+  .context-box p{margin:0; font-size:0.95rem;}
+
+  /* ---------- stamp ---------- */
+  .stamp{
+    display:inline-block; border:3px solid var(--flag-red); color:var(--flag-red);
+    font-family:var(--mono); font-weight:700; font-size:0.85rem; letter-spacing:.1em;
+    padding:0.4rem 0.9rem; transform:rotate(-4deg); text-transform:uppercase;
+    margin:0.4rem 0 1rem;
+  }
+
+  /* ---------- scenario tabs ---------- */
+  .scenario-tabs{display:flex; gap:0; margin:1.2rem 0 0; border-bottom:2px solid var(--ink);}
+  .scenario-tab{
+    font-family:var(--mono); font-size:0.78rem; padding:0.55rem 1rem; cursor:pointer;
+    background:#e2d9bd; border:1px solid var(--ink); border-bottom:none;
+    color:var(--ink-soft); margin-right:4px;
+  }
+  .scenario-tab[aria-selected="true"]{background:var(--ink); color:var(--paper); font-weight:600;}
+  .scenario-panel{display:none;}
+  .scenario-panel.active{display:block;}
+
+  /* ---------- 40-yr line chart ---------- */
+  .linechart-wrap{margin:1.4rem 0 0.4rem; background:#f6f2e6; border:1px solid #d8cfb2; padding:1.2rem 1rem 0.8rem;}
+  .linechart-wrap svg{width:100%; height:auto; display:block; overflow:visible;}
+  .lc-axis-label{font-family:var(--mono); font-size:9px; fill:var(--ink-soft);}
+  .lc-gridline{stroke:#d8cfb2; stroke-width:1;}
+  .lc-line-primary{fill:none; stroke:var(--flag-red); stroke-width:2.5;}
+  .lc-line-second{fill:none; stroke:var(--brass); stroke-width:2.5; stroke-dasharray:5,3;}
+  .lc-dot{fill:var(--flag-red);}
+  .lc-legend{display:flex; gap:1.5rem; margin-top:0.6rem; font-family:var(--mono); font-size:0.75rem;}
+  .lc-legend span{display:flex; align-items:center; gap:.4rem;}
+  .lc-swatch{width:18px; height:3px; display:inline-block;}
+
+  /* ---------- grouped comparison bars ---------- */
+  .compare-wrap{margin:1.4rem 0 0.6rem; background:#f6f2e6; border:1px solid #d8cfb2; padding:1.2rem 1rem 0.8rem;}
+  .compare-wrap svg{width:100%; height:auto; display:block; overflow:visible;}
+
+  /* ---------- pie charts ---------- */
+  .pie-row{display:flex; gap:1.5rem; flex-wrap:wrap; margin:1.4rem 0 0.6rem;}
+  .pie-card{
+    flex:1 1 220px; background:#f6f2e6; border:1px solid #d8cfb2; padding:1.1rem;
+    text-align:center;
+  }
+  .pie-card h3{
+    font-family:var(--sans); font-size:0.85rem; font-weight:600; margin:0 0 0.8rem;
+    color:var(--ink);
+  }
+  .pie-card svg{width:180px; height:180px; margin:0 auto; display:block;}
+  .pie-total{font-family:var(--mono); font-weight:600; font-size:1.05rem; margin-top:0.6rem; color:var(--ink);}
+  .pie-total span{display:block; font-family:var(--sans); font-weight:400; font-size:0.72rem; color:var(--ink-soft); margin-top:.1rem;}
+
+  /* ---------- magnitude comparison circles ---------- */
+  .mag-row{display:flex; gap:1.5rem; flex-wrap:wrap; align-items:flex-end; margin:1.4rem 0 0.6rem;}
+  .mag-card{
+    flex:1 1 220px; background:#f6f2e6; border:1px solid #d8cfb2; padding:1.1rem;
+    text-align:center;
+  }
+  .mag-card h3{font-family:var(--sans); font-size:0.85rem; font-weight:600; margin:0 0 0.6rem; color:var(--ink);}
+  .mag-card svg{display:block; margin:0 auto;}
+  .mag-total{font-family:var(--mono); font-weight:700; font-size:1.25rem; margin-top:0.6rem; color:var(--ink);}
+  .mag-total span{display:block; font-family:var(--sans); font-weight:400; font-size:0.72rem; color:var(--ink-soft); margin-top:.1rem;}
+
+  /* ---------- Exhibit K interactive cards (horizontal, full detail on back) ---------- */
+  .k-grid{display:flex; flex-wrap:wrap; gap:1rem; margin:1.3rem 0;}
+  .k-card{flex:1 1 300px; height:300px; background:none; perspective:1200px; cursor:pointer; border:none; padding:0; text-align:left; font-family:inherit; color:inherit;}
+  .k-card-inner{position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d;}
+  .k-card.flipped .k-card-inner{transform:rotateY(180deg);}
+  .k-card-front, .k-card-back{position:absolute; inset:0; backface-visibility:hidden; padding:1.25rem 1.4rem; display:flex; flex-direction:column;}
+  .k-card-front{background:var(--panel); color:var(--paper); border-top:4px solid var(--brass); justify-content:space-between;}
+  .k-card-front .k-num{font-family:var(--mono); font-size:0.78rem; color:var(--brass-bright); letter-spacing:.08em; text-transform:uppercase;}
+  .k-card-front .k-title{font-family:var(--serif); font-weight:700; font-size:1.55rem; margin-top:.7rem; line-height:1.28; color:var(--paper);}
+  .k-card-front .k-hook{font-family:var(--serif); font-style:italic; font-size:1.12rem; margin-top:1rem; color:var(--rule-light); line-height:1.42;}
+  .k-card-front .tap-hint{font-family:var(--mono); font-size:0.7rem; color:var(--rule-light); opacity:.7; letter-spacing:.06em; text-transform:uppercase; margin-top:auto;}
+  .k-card-back{background:#f6f2e6; border-top:4px solid var(--flag-red); transform:rotateY(180deg); overflow-y:auto;}
+  .k-card-back .k-num-sm{font-family:var(--mono); font-weight:600; font-size:0.68rem; text-transform:uppercase; letter-spacing:.08em; color:var(--flag-red); margin-bottom:.5rem;}
+  .k-card-back p{margin:0; font-size:0.88rem; line-height:1.48; color:var(--ink);}
+  .k-card.confirmed .k-card-front{border-top-color:var(--confirm-green);}
+  .k-card.confirmed .k-card-back{border-top-color:var(--confirm-green);}
+  .k-card.confirmed .k-num-sm{color:var(--confirm-green);}
+  .k-card:focus-visible .k-card-inner{outline:3px solid var(--brass-bright); outline-offset:3px;}
+  @media (max-width:600px){ .k-card{height:340px;} }
+
+  /* ---------- collapsible sources ---------- */
+  .sources details summary{
+    cursor:pointer; list-style:none; display:flex; align-items:center; gap:.6rem;
+    font-family:var(--sans); text-transform:uppercase; letter-spacing:.08em;
+    color:var(--brass-bright); font-size:0.78rem; margin-bottom:0; user-select:none;
+  }
+  .sources details summary::-webkit-details-marker{display:none;}
+  .sources details summary::before{
+    content:"▸"; display:inline-block; transition:transform 0.2s; font-size:0.9rem;
+  }
+  .sources details[open] summary::before{transform:rotate(90deg);}
+  .sources details[open] summary{margin-bottom:1rem;}
+  .sources details summary .src-count{
+    font-family:var(--mono); color:var(--rule-light); text-transform:none; letter-spacing:0;
+  }
+
+  /* ---------- inline footnote toggle ---------- */
+  .footnote-toggle{margin:0.6rem 0;}
+  .footnote-toggle summary{
+    cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:.4rem;
+    font-family:var(--mono); font-size:0.76rem; color:var(--flag-red); user-select:none;
+  }
+  .footnote-toggle summary::-webkit-details-marker{display:none;}
+  .footnote-toggle summary::before{content:"▸"; display:inline-block; transition:transform 0.2s; font-size:0.8rem;}
+  .footnote-toggle[open] summary::before{transform:rotate(90deg);}
+  .footnote-toggle[open] summary{margin-bottom:.5rem;}
+  .footnote-toggle .chart-note{margin:0;}
+
+  /* ---------- closing summary cards ---------- */
+  .close-grid{display:flex; flex-wrap:wrap; gap:1rem; margin:1.4rem 0;}
+  .close-card{flex:1 1 300px; height:460px; background:none; perspective:1200px; cursor:pointer; border:none; padding:0; text-align:left; font-family:inherit; color:inherit;}
+  .close-card-inner{position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d;}
+  .close-card.flipped .close-card-inner{transform:rotateY(180deg);}
+  .close-card-front, .close-card-back{position:absolute; inset:0; backface-visibility:hidden; padding:1.25rem 1.4rem; display:flex; flex-direction:column;}
+  .close-card-front{background:var(--panel-2); border-top:4px solid var(--brass-bright); justify-content:space-between;}
+  .close-card-front .cc-num{font-family:var(--mono); font-size:0.78rem; color:var(--brass-bright); letter-spacing:.08em; text-transform:uppercase;}
+  .close-card-front .cc-title{font-family:var(--serif); font-weight:700; font-size:1.55rem; margin-top:.7rem; line-height:1.28; color:var(--paper);}
+  .close-card-front .cc-hook{font-family:var(--serif); font-style:italic; font-size:1.12rem; margin-top:1rem; color:var(--rule-light); line-height:1.42;}
+  .close-card-front .tap-hint{font-family:var(--mono); font-size:0.7rem; color:var(--rule-light); opacity:.7; letter-spacing:.06em; text-transform:uppercase; margin-top:auto;}
+  .close-card-back{background:#f6f2e6; border-top:4px solid var(--brass); transform:rotateY(180deg);}
+  .close-card-back p{margin:0; font-size:1.02rem; line-height:1.52; color:var(--ink);}
+  .close-card:focus-visible .close-card-inner{outline:3px solid var(--brass-bright); outline-offset:3px;}
+  @media (max-width:600px){ .close-card{height:520px;} }
+
+  /* ---------- headline answer ---------- */
+  .headline{
+    background:var(--panel); color:var(--paper); padding:1.8rem 1.6rem;
+    margin:1.4rem 0 2rem; border:2px solid var(--brass); text-align:center;
+  }
+  .headline-label{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--rule-light); margin-bottom:1.1rem;
+  }
+  .headline-row{display:flex; flex-wrap:wrap; justify-content:center; gap:2rem;}
+  .headline-stat{flex:0 1 260px;}
+  .headline-stat .hs-num{
+    font-family:var(--serif); font-weight:700; font-size:clamp(2.4rem,7vw,3.2rem);
+    color:var(--brass-bright); line-height:1;
+  }
+  .headline-stat .hs-lab{font-family:var(--sans); font-size:0.9rem; color:var(--paper); margin-top:.5rem; line-height:1.4;}
+  .headline-stat .hs-sub{font-family:var(--mono); font-size:0.7rem; color:var(--rule-light); margin-top:.4rem;}
+  .headline-divider{width:1px; background:var(--rule); align-self:stretch; display:none;}
+  @media (min-width:560px){ .headline-divider{display:block;} }
+
+  /* ---------- county-wide diversion trend bars ---------- */
+  .trend-wrap{margin:1.4rem 0 0.6rem; background:#f6f2e6; border:1px solid #d8cfb2; padding:1.2rem 1rem 0.8rem;}
+  .trend-wrap svg{width:100%; height:auto; display:block; overflow:visible;}
+
+  /* ---------- big data-gap warning ---------- */
+  .data-gap{
+    background:var(--panel); color:var(--paper); border:3px solid var(--flag-red);
+    padding:1.6rem 1.5rem; margin:1.8rem 0 1rem; text-align:center;
+  }
+  .data-gap .dg-label{
+    font-family:var(--mono); font-size:0.85rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--flag-red); font-weight:700; margin-bottom:0.9rem;
+  }
+  .data-gap .dg-body{
+    font-family:var(--serif); font-size:1.35rem; font-weight:700; line-height:1.4; color:var(--paper);
+  }
+  .data-gap .dg-sub{
+    font-family:var(--sans); font-size:1rem; line-height:1.5; color:var(--rule-light);
+    margin-top:1rem; max-width:640px; margin-left:auto; margin-right:auto;
+  }
+
+  /* ---------- uncertainty band chart ---------- */
+  .band-wrap{margin:1.4rem 0 0.6rem; background:#f6f2e6; border:1px solid #d8cfb2; padding:1.2rem 1rem 0.8rem;}
+  .band-wrap svg{width:100%; height:auto; display:block; overflow:visible;}
+  .band-legend{display:flex; flex-wrap:wrap; gap:1.4rem; margin-top:0.7rem; font-family:var(--mono); font-size:0.75rem;}
+  .band-legend span{display:flex; align-items:center; gap:.5rem;}
+  .band-swatch{width:18px; height:12px; display:inline-block; border-radius:2px;}
+
+  /* ---------- money-flow diagram ---------- */
+  .flow-row{display:flex; align-items:stretch; gap:0; margin:1.4rem 0 1.6rem; flex-wrap:wrap;}
+  .flow-node{
+    flex:1 1 180px; background:var(--panel); color:var(--paper); padding:1rem 1.1rem;
+    border-top:4px solid var(--brass); display:flex; flex-direction:column; justify-content:center;
+    min-height:110px;
+  }
+  .flow-node .flow-label{font-family:var(--mono); font-size:0.65rem; letter-spacing:.08em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:.4rem;}
+  .flow-node .flow-text{font-family:var(--sans); font-size:0.88rem; line-height:1.4;}
+  .flow-arrow{
+    flex:0 0 44px; display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem; color:var(--brass); font-family:var(--mono);
+  }
+  .flow-loop{
+    text-align:center; font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);
+    letter-spacing:.04em; margin-top:-0.6rem; margin-bottom:1.4rem;
+  }
+  @media (max-width:680px){
+    .flow-row{flex-direction:column;}
+    .flow-arrow{transform:rotate(90deg); flex-basis:30px;}
+  }
+
+  /* ---------- benefit / pays flip pair ---------- */
+  .bp-row{display:flex; gap:1rem; flex-wrap:wrap; margin:0 0 1.4rem;}
+  .bp-card{flex:1 1 260px; height:170px; background:none; perspective:1000px; cursor:pointer; border:none; padding:0; text-align:left; font-family:inherit; color:inherit;}
+  .bp-card-inner{position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d;}
+  .bp-card.flipped .bp-card-inner{transform:rotateY(180deg);}
+  .bp-card-front, .bp-card-back{position:absolute; inset:0; backface-visibility:hidden; padding:1rem 1.1rem; display:flex; flex-direction:column; justify-content:center;}
+  .bp-card-front{border-left:4px solid var(--brass); background:rgba(217,174,69,0.06);}
+  .bp-card-front.pays{border-left-color:var(--flag-red); background:rgba(156,67,38,0.06);}
+  .bp-card-front .bp-label{font-family:var(--mono); font-weight:700; font-size:1rem; text-transform:uppercase; letter-spacing:.03em; color:var(--brass-bright);}
+  .bp-card-front.pays .bp-label{color:var(--flag-red);}
+  .bp-card-front .bp-sub{font-family:var(--serif); font-style:italic; font-size:0.92rem; margin-top:.5rem; color:var(--ink);}
+  .bp-card-front .tap-hint{font-family:var(--mono); font-size:0.63rem; color:var(--ink-soft); opacity:.7; margin-top:.8rem; letter-spacing:.06em; text-transform:uppercase;}
+  .bp-card-back{background:var(--panel-2); border-left:4px solid var(--brass); transform:rotateY(180deg);}
+  .bp-card-back.pays{border-left-color:var(--flag-red);}
+  .bp-card-back p{margin:0; font-size:0.88rem; line-height:1.46; color:var(--paper);}
+  .bp-card:focus-visible .bp-card-inner{outline:3px solid var(--brass-bright); outline-offset:3px;}
+
+  /* ---------- chopping-block grid ---------- */
+  .block-grid{display:flex; flex-wrap:wrap; gap:1rem; margin:1.2rem 0;}
+  .block-card{flex:1 1 200px; height:170px; background:none; perspective:1000px; cursor:pointer; border:none; padding:0; text-align:left; font-family:inherit; color:inherit;}
+  .block-card.protected{flex-basis:100%;}
+  .block-card-inner{position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d;}
+  .block-card.flipped .block-card-inner{transform:rotateY(180deg);}
+  .block-card-front, .block-card-back{position:absolute; inset:0; backface-visibility:hidden; padding:1rem 1.1rem; display:flex; flex-direction:column; justify-content:center;}
+  .block-card-front{border-top:4px solid var(--flag-red); background:rgba(156,67,38,0.05);}
+  .block-card.protected .block-card-front{border-top-color:var(--confirm-green); background:rgba(91,112,82,0.08);}
+  .block-card-front .block-label{font-family:var(--mono); font-size:0.66rem; text-transform:uppercase; letter-spacing:.08em; color:var(--flag-red);}
+  .block-card.protected .block-card-front .block-label{color:var(--confirm-green);}
+  .block-card-front .block-name{font-family:var(--serif); font-weight:700; font-size:1.15rem; margin-top:.3rem; color:var(--ink);}
+  .block-card-front .block-amt{font-family:var(--mono); font-weight:600; font-size:1.3rem; margin-top:.5rem; color:var(--ink);}
+  .block-card-front .tap-hint{font-family:var(--mono); font-size:0.62rem; color:var(--ink-soft); opacity:.7; margin-top:.6rem; letter-spacing:.06em; text-transform:uppercase;}
+  .block-card-back{background:var(--panel); border-top:4px solid var(--flag-red); transform:rotateY(180deg);}
+  .block-card.protected .block-card-back{border-top-color:var(--confirm-green);}
+  .block-card-back p{margin:0; font-size:0.88rem; line-height:1.45; color:var(--paper);}
+  .block-card:focus-visible .block-card-inner{outline:3px solid var(--brass-bright); outline-offset:3px;}
+  .cb-axis-label{font-family:var(--mono); font-size:9px; fill:var(--ink-soft);}
+  .cb-year-label{font-family:var(--mono); font-size:10px; fill:var(--ink); font-weight:600;}
+  .cb-gridline{stroke:#d8cfb2; stroke-width:1;}
+  .cb-base{fill:var(--ink-soft);}
+  .cb-pid{fill:var(--flag-red);}
+  .cb-val{font-family:var(--mono); font-size:9px; fill:var(--ink);}
+
+  /* ---------- source list ---------- */
+  .sources{
+    background:var(--panel); color:var(--rule-light); padding:2.2rem 1.5rem;
+    margin-top:2rem; font-family:var(--mono); font-size:0.78rem;
+  }
+  .sources-inner{max-width:var(--maxw); margin:0 auto;}
+  .sources h3{
+    font-family:var(--sans); color:var(--brass-bright); text-transform:uppercase;
+    letter-spacing:.08em; font-size:0.78rem; margin:0 0 1rem;
+  }
+  .sources ol{padding-left:1.2rem; margin:0;}
+  .sources li{margin-bottom:0.6rem;}
+
+  footer.pagefoot{
+    text-align:center; padding:2rem 1.5rem 3rem; font-family:var(--mono);
+    font-size:0.72rem; color:var(--ink-soft);
+  }
+
+  @media (max-width:560px){
+    .bars{height:170px;}
+    .bignum{min-width:140px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="eyebrow-row">
+      <span>The Weber County Hive &nbsp;/&nbsp; PIDs-Utah</span>
+      <span class="case-num">Case File · Nordic Village PID Nos. 1–3</span>
+    </div>
+    <h1 class="title">One PID. <em>One real bill.</em></h1>
+    <p class="dek">Nordic Village, Ogden Valley — what a public infrastructure district actually adds to a homeowner's cost, traced against the home price trend, the tax hikes layered on top, and where the money is legally required to go instead of the county's general fund.</p>
+    <div class="meta-strip">
+      <div><strong>District</strong>Nordic Village PID 1–3, created Nov 20, 2024</div>
+      <div><strong>Enabling law</strong>S.B. 228 (2019)</div>
+      <div><strong>Location</strong>Unincorporated Weber County, Ogden Valley</div>
+      <div><strong>Status</strong>Bonded, pre-revenue as of 3/31/26</div>
+    </div>
+  </div>
+</header>
+
+<div class="primer">
+  <div class="primer-inner">
+    <div class="primer-eyebrow">New to this — start here</div>
+    <h2>The eight terms this whole case file rests on</h2>
+    <p>Everything below uses these words a specific, legal way. Tap a card to flip it.</p>
+    <div class="term-grid" id="term-grid">
+      <button class="flip-card" type="button" aria-label="PID — tap to reveal definition">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><span class="term-label">PID<br>(Public Infrastructure District)</span><span class="tap-hint">Tap to flip</span></div>
+          <div class="flip-card-back"><p>A local government entity created to pay for infrastructure — roads, water, sewer — by charging the property owners inside its boundary an extra tax. Utah's PID law passed in 2019. A PID is legally separate from the city or county that creates it.</p></div>
+        </div>
+      </button>
+      <button class="flip-card" type="button" aria-label="Mill levy — tap to reveal definition">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><span class="term-label">Mill levy</span><span class="tap-hint">Tap to flip</span></div>
+          <div class="flip-card-back"><p>The rate a PID charges, expressed per $1,000 of taxable value. Nordic Village's rate is capped at 0.0050 (0.5%) in its own governing document — a district-specific ceiling, separate from the statewide cap.</p></div>
+        </div>
+      </button>
+      <button class="flip-card" type="button" aria-label="Taxable value versus market value — tap to reveal definition">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><span class="term-label">Taxable value vs. market value</span><span class="tap-hint">Tap to flip</span></div>
+          <div class="flip-card-back"><p>Utah taxes a home at 55% of its market value if it's a primary residence — the "45% residential exemption." A second home or investment property is taxed on 100% of market value. Same house, different bill.</p></div>
+        </div>
+      </button>
+      <button class="flip-card" type="button" aria-label="Bond — tap to reveal definition">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><span class="term-label">Bond</span><span class="tap-hint">Tap to flip</span></div>
+          <div class="flip-card-back"><p>Borrowed money a PID uses to pay for infrastructure up front. The mill levy is how the PID collects the money to pay that debt back over time — typically decades.</p></div>
+        </div>
+      </button>
+      <button class="flip-card" type="button" aria-label="Tax increment, TIF — tap to reveal definition">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><span class="term-label">Tax increment (TIF)</span><span class="tap-hint">Tap to flip</span></div>
+          <div class="flip-card-back"><p>The growth in property tax revenue a taxing entity (county, school district, etc.) would normally collect as an area's values rise. A TIF agreement redirects some of that growth — for a set number of years — into a restricted account instead of the entity's normal budget.</p></div>
+        </div>
+      </button>
+      <button class="flip-card" type="button" aria-label="CRA, Community Reinvestment Agency — tap to reveal definition">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><span class="term-label">CRA<br>(Community Reinvestment Agency)</span><span class="tap-hint">Tap to flip</span></div>
+          <div class="flip-card-back"><p>The government body that administers a TIF agreement — the mechanism that formally captures and redirects the tax increment described above.</p></div>
+        </div>
+      </button>
+      <button class="flip-card" type="button" aria-label="Assessment — tap to reveal definition">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><span class="term-label">Assessment</span><span class="tap-hint">Tap to flip</span></div>
+          <div class="flip-card-back"><p>The general word for any charge a PID or HOA bills a property owner — whether it's the mill levy, a flat fee, or a special one-time charge.</p></div>
+        </div>
+      </button>
+      <button class="flip-card" type="button" aria-label="Appreciation scenario — tap to reveal definition">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><span class="term-label">Appreciation scenario</span><span class="tap-hint">Tap to flip</span></div>
+          <div class="flip-card-back"><p>Several exhibits below run the same math three ways, based on how fast a home's value might grow: "home never appreciates" (0%/yr, the floor case), a historical average pace (2.5%/yr), and a recent Utah pace (4%/yr). Since the PID assessment is a percentage of home value, a home that never gains value produces the smallest possible bill — the other two scenarios assume real growth, which pushes the assessment up with it.</p></div>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <div class="intro">
+    <p>Nordic Village is one project among hundreds of Utah PIDs, but it's the one with the paper trail — a signed tax-increment agreement, a filed county budget, a max mill levy on the books. This case file walks through what the district actually costs a homeowner, what's layered on top of it since 2019, and what the county's own budget says about where that money is and isn't allowed to go.</p>
+  </div>
+
+  <div class="headline">
+    <div class="headline-label">The short answer — same $500,000 home, PID vs. no PID</div>
+    <div class="headline-row">
+      <div class="headline-stat">
+        <div class="hs-num">+46%</div>
+        <div class="hs-lab">more on the property-tax line alone, every single year, for as long as the district exists</div>
+        <div class="hs-sub">Exhibit A4</div>
+      </div>
+      <div class="headline-divider"></div>
+      <div class="headline-stat">
+        <div class="hs-num">+141%</div>
+        <div class="hs-lab">more in total housing cost (property tax + HOA) over a realistic 20-year hold — 2.4x the non-PID total</div>
+        <div class="hs-sub">Exhibit A5 / Exhibit H</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="exhibit" id="exhibit-a">
+    <div class="exhibit-tag">Exhibit A</div>
+    <h2 class="exhibit-title">What the district can charge</h2>
+    <p class="lede">Nordic Village's maximum debt mill levy is 0.0050 per dollar of taxable value — 0.5%. Utah's 45% residential exemption applies to a primary home's <em>taxable</em> value, not its market price, so the same district costs a primary residence roughly half of what it costs a second home or investment property.</p>
+
+    <div class="bignum-row">
+      <div class="bignum"><span class="num">$500</span><span class="lab">per $100K of taxable value, per year — the flat rate</span></div>
+      <div class="bignum"><span class="num">$275</span><span class="lab">per $100K market value — primary residence (55% taxable)</span></div>
+      <div class="bignum"><span class="num">$500</span><span class="lab">per $100K market value — second home / investment (no exemption)</span></div>
+    </div>
+
+    <table class="ledger">
+      <caption>PID assessment at 0.5% mill levy, applied to Ogden Valley's own median home price</caption>
+      <thead>
+        <tr><th>Year</th><th>Median SFH price</th><th>Assessment — primary res.</th><th>Assessment — second home</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2019</td><td>$577,000</td><td>$1,587</td><td>$2,885</td></tr>
+        <tr><td>2024</td><td>$1,140,000</td><td>$3,135</td><td>$5,700</td></tr>
+        <tr><td>2025 (Q2)</td><td>$1,099,000</td><td>$3,022</td><td>$5,495</td></tr>
+      </tbody>
+    </table>
+    <p class="chart-note">Because the assessment is a percentage of value, it rises and falls with the home price — it does not sunset the way many HOA fee schedules eventually do, and it was set by the developer and initial board before any resident existed to vote on it.</p>
+  </section>
+
+  <section class="exhibit" id="exhibit-a2">
+    <div class="exhibit-tag">Exhibit A2</div>
+    <h2 class="exhibit-title">A $500K home, 40 years out</h2>
+    <p class="lede">Nordic Village's bonds are authorized for up to 31 years — the statutory maximum for a Utah PID. Run the same 0.5% mill levy forward against a $500,000 home at closing, under three appreciation assumptions, and this is what the PID line alone adds up to.</p>
+
+    <div class="scenario-tabs" role="tablist" aria-label="Appreciation scenario">
+      <div class="scenario-tab" role="tab" aria-selected="false" data-scenario="flat" tabindex="0">Home never appreciates (0%/yr)</div>
+      <div class="scenario-tab" role="tab" aria-selected="false" data-scenario="hist" tabindex="0">Historical avg. (2.5%/yr)</div>
+      <div class="scenario-tab" role="tab" aria-selected="true" data-scenario="utah" tabindex="0">Recent Utah pace (4%/yr)</div>
+    </div>
+    <p class="chart-note" style="margin-top:0.5rem;">These three tabs model three appreciation scenarios — see the glossary above if you skipped it.</p>
+
+    <div class="linechart-wrap">
+      <svg id="trajectory-svg" viewBox="0 0 700 280" role="img" aria-label="Cumulative PID assessment over 40 years"></svg>
+      <div class="lc-legend">
+        <span><i class="lc-swatch" style="background:var(--flag-red)"></i> Primary residence (55% taxable)</span>
+        <span><i class="lc-swatch" style="background:var(--brass); background-image:repeating-linear-gradient(90deg,var(--brass) 0 6px,transparent 6px 10px)"></i> Second home / investment</span>
+      </div>
+    </div>
+
+    <table class="ledger" id="trajectory-table">
+      <caption>Home value and cumulative cost by year — PID alone vs. PID + lowest-found comparable HOA ($368/mo × 12 = $4,416/yr, Moose Hollow, held flat)</caption>
+      <thead>
+        <tr><th>Year</th><th>Home value</th><th>PID/yr — primary</th><th>PID-only cumulative</th><th>PID + HOA cumulative</th><th>2nd home PID/yr</th></tr>
+      </thead>
+      <tbody id="trajectory-tbody"></tbody>
+    </table>
+    <details class="footnote-toggle">
+      <summary>Footnote: what "Year 31" and the HOA column actually mean</summary>
+      <p class="chart-note">* Year 31 is Nordic Village's own reported bond maturity ceiling (Standard-Examiner, citing county officials) — the point these specific bonds would be scheduled to be fully repaid. A separate, broader pattern seen in other Utah PIDs' governing documents allows up to 40 years per bond series before a fresh series would be needed; the two numbers aren't a contradiction, they're different limits (this district's actual bond term vs. the general statutory ceiling a renewed series could use). See the note below the flag box for what renewal means for either figure. The HOA column holds $368/month × 12 = <strong>$4,416/year</strong> flat for all 40 years — the lowest amenity-comparable HOA found (Exhibit A3), used here as a floor; real HOA dues are also typically raised periodically to fund reserves, so this understates the combined total on two fronts at once.</p>
+    </details>
+
+    <details class="footnote-toggle">
+      <summary>Footnote: does a buyer really owe a full year 1?</summary>
+      <p class="chart-note">"Year 1" here is a full calendar year of PID assessment, used as a clean modeling baseline — not a claim that every buyer owes that exact amount the moment they close. In practice, property taxes and special-assessment-district payments are normally prorated at closing between buyer and seller, based on the closing date, the same way ordinary property tax is. Nordic Village adds a wrinkle: as new construction with no prior assessed tax history, a unit's first bill would typically be a supplemental assessment prorated from its completion date, not a full prior year — so a real buyer's actual first partial year is likely to be smaller than this table's Year 1 figure, regardless of which month they close. From Year 2 onward, the cumulative totals track a normal calendar-year basis.</p>
+    </details>
+
+    <div class="flag-box">
+      <p>This holds the mill levy fixed at its statutory cap and assumes nothing else changes — no new PID, no refinancing, no boundary expansion. None of that is guaranteed. Nordic Village is already three separate districts, not one, and statewide PID bond issuance grew from roughly $4 billion to $5.267 billion in about ten months (fall 2025 to Aug 2026) as more districts were approved elsewhere. A district's bonds hit their maximum statutory term, but nothing requires the district to dissolve at that point rather than refinance or issue new bonds — so treat this table as a floor on the PID line, not a ceiling.</p>
+    </div>
+
+    <div class="confirm-box">
+      <p>Worth stating plainly: none of this was ever put to a real vote. Utah Code §17D-4-301(3)(a) lets a district issue its bonds — original or renewed — with "100% consent of surface property owners," and at formation that consent is trivial to obtain when a single developer entity owns all the land, as Nordic Village Venture did. No registered voters existed inside the boundary to vote against it, because no one lived there yet. The people who eventually buy homes and start paying the assessment were never the ones who approved it — and a later bond series, renewing the same assessment, doesn't require their vote either (see the Utah card below for the full statute breakdown).</p>
+    </div>
+
+    <p class="lede" style="margin-top:1.6rem;">How does Utah's version of this compare to its closest peers? Texas and Florida are the two other large states with a mature, similar-scale development-financing tool built on the same idea — bond infrastructure now, repay it through a charge on the property. Utah's own legislative approach to growth and financing tracks closely with both. Tap each card for what's actually different.</p>
+
+    <div class="state-grid" id="state-grid">
+      <button class="state-card tall" type="button" aria-label="Utah PID — tap to reveal detail">
+        <div class="state-card-inner">
+          <div class="state-card-front">
+            <div><div class="state-name">Utah</div><div class="state-mech">Public Infrastructure District — Title 17D-4, 2019</div></div>
+            <div class="state-verdict">Rate capped. Timeline is not.</div>
+            <div class="tap-hint">Tap to flip</div>
+          </div>
+          <div class="state-card-back">
+            <div class="state-name-sm">Utah — PID</div>
+            <p><strong>Never a real vote:</strong> Utah Code §17D-4-301(3)(a) lets a district skip an election entirely with "100% consent of surface property owners" — trivial to satisfy when, as with Nordic Village, a single developer entity owns 100% of the land before any resident exists. No registered voters, no ballot, no public hearing at formation.</p>
+            <p><strong>Disclosure:</strong> HB507 (2026) requires only the current year's cost at conveyance — nothing about total term or renewal.</p>
+            <p><strong>Renewal:</strong> §17D-4-301 lets a district issue a new bond series with only a passive public "class A" posting — no individual homeowner notice, no Truth-in-Taxation hearing if the rate doesn't rise, and no vote here either.</p>
+            <p><strong>Live signal:</strong> the SEC is examining Utah's PID tool nationally; the State Auditor hosts an SEC policy briefing on it in Oct. 2026.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="state-card" type="button" aria-label="Texas MUD and PID — tap to reveal detail">
+        <div class="state-card-inner">
+          <div class="state-card-front">
+            <div><div class="state-name">Texas</div><div class="state-mech">MUD / PID — Local Gov't Code Ch. 372 &amp; 54</div></div>
+            <div class="state-verdict">Term disclosed. Buyer pool narrows anyway.</div>
+            <div class="tap-hint">Tap to flip</div>
+          </div>
+          <div class="state-card-back">
+            <div class="state-name-sm">Texas — MUD / PID</div>
+            <p><strong>Disclosure:</strong> Property Code §5.014 requires written notice before a contract binds, strengthened by HB1543 (2021) after builder non-disclosure complaints.</p>
+            <p><strong>Term:</strong> typically 20–30 years, tied to the specific bond; ends when that bond is retired.</p>
+            <p><strong>Sharpest documented risk found anywhere in this research:</strong> Fannie Mae's own underwriting rule (B4-1.4-09) can make a property in a financially distressed district ineligible for Fannie Mae financing entirely — "until such time that an active market develops" (Exhibit J).</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="state-card" type="button" aria-label="Florida CDD — tap to reveal detail">
+        <div class="state-card-inner">
+          <div class="state-card-front">
+            <div><div class="state-name">Florida</div><div class="state-mech">Community Development District — Ch. 190, 1980</div></div>
+            <div class="state-verdict">The bond ends when it ends.</div>
+            <div class="tap-hint">Tap to flip</div>
+          </div>
+          <div class="state-card-back">
+            <div class="state-name-sm">Florida — CDD</div>
+            <p><strong>Disclosure:</strong> §190.048 requires a boldfaced, conspicuous notice of the district's taxing authority at initial sale — more specific than Utah's HB507.</p>
+            <p><strong>Term:</strong> the capital assessment is "generally fixed for the term of the bonds" — paid off means over, not renewed.</p>
+            <p><strong>Caveats:</strong> multi-phase communities can add new, separately disclosed bonds for later phases. And "fixed" isn't litigation-proof — Clearwater Cay CDD's own maturity date is currently contested in court between bondholders and its board.</p>
+          </div>
+        </div>
+      </button>
+    </div>
+
+    <div class="context-box">
+      <p><strong>Vineyard/Utah City shows what real public notice looks like when it applies, even in Utah.</strong> In April 2026, Vineyard's City Council voted 4-1 to authorize up to $35M in sales tax revenue bonds for a city center inside Utah City — the same PID-financed master plan referenced elsewhere in this case file. That bond falls under the Local Government Bonding Act, which requires a conspicuous public hearing notice, and a city councilman is now leading a referendum against it. That's what happens when the heavier process applies and residents see it. A PID renewing its own bond at an already-set rate doesn't trigger that same process.</p>
+    </div>
+  </section>
+
+  <section class="exhibit" id="exhibit-a3">
+    <div class="exhibit-tag">Exhibit A3</div>
+    <h2 class="exhibit-title">What HOA fees add — and why they vary so much</h2>
+    <p class="lede">A PID assessment isn't the only recurring charge a homeowner in a development like this carries. Actual Ogden Valley listings show HOA dues ranging from $25/month to over $750/month — a roughly 20x spread. The difference isn't random: it tracks what's actually being maintained.</p>
+
+    <table class="ledger">
+      <caption>Sourced HOA fees from active Ogden Valley (Eden / Huntsville) listings, 2026</caption>
+      <thead>
+        <tr><th>Property type</th><th>Monthly HOA</th><th>What it typically covers</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Bare land lot</td><td>$25–$75</td><td>Shared road/easement upkeep only — no building, no amenities</td></tr>
+        <tr><td>Acreage lot, new construction</td><td>$170</td><td>Larger private lots, minimal shared infrastructure</td></tr>
+        <tr><td>Eden condo (standard, amenities unspecified)</td><td>$300</td><td>Building exterior, common grounds</td></tr>
+        <tr><td><strong>Moose Hollow condo, Eden — this page's floor</strong></td><td><strong>$368</strong></td><td>Clubhouse, pool, hot tubs, fitness room, building maintenance</td></tr>
+        <tr><td>Eden condo, community pool</td><td>$504</td><td>Pool plus building maintenance</td></tr>
+        <tr><td>Huntsville condo, community pool</td><td>$513</td><td>Pool plus building maintenance</td></tr>
+        <tr><td>Huntsville condo, larger unit + garage</td><td>$752</td><td>Larger footprint, garage upkeep, fuller amenity package</td></tr>
+      </tbody>
+    </table>
+
+    <div class="stamp">Lowest figure found — treated as a floor, not an estimate</div>
+
+    <p>Among developments that actually match what's shared at Nordic Village — a clubhouse, pool, and building maintenance, not just a private lot — <strong>$368/month at Moose Hollow is the lowest monthly HOA fee found in this search.</strong> Every other amenity-comparable development priced higher, up to $752/month. Annualized, that's <strong>$368 × 12 = $4,416/year</strong> — the figure carried forward into every HOA calculation elsewhere on this page (Exhibit A2, Exhibit A5). This page uses $368 anyway, on purpose, as a deliberately conservative floor: real costs at a brand-new Nordic Village unit are more likely to land above this number than below it, for two reasons this figure does not capture:</p>
+    <ul style="margin:0 0 1rem; padding-left:1.4rem;">
+      <li>Moose Hollow was built in <strong>1999</strong>. Every sourced comparable on this page is from a pre-2006 development — none reflect current construction, insurance, or reserve-fund costs, which have all risen sharply since these HOAs first set their dues.</li>
+      <li>Nordic Village's own master plan (428 condos, 159 chalets, 230 hotel units) is a larger, newer, more amenity-dense project than any comparable found here — the kind of development that typically sets initial dues higher, not lower, to fund reserves from day one.</li>
+    </ul>
+    <p class="chart-note">No HOA figure exists yet for Nordic Village itself — units aren't built or marketed. When one is published, it should replace this floor rather than average against it.</p>
+
+    <div class="scale-box">
+      <p><strong>Pioche Village, Deer Valley East Village (Park City) — built 2023–2024.</strong> A genuinely new resort condo development, not a decades-old one. Published dues run $10–$11 per square foot per year plus a flat $50/month master-association fee. <strong>These are studio units — not full homes or multi-bedroom condos.</strong> For the smallest ones in the building (~410 sq ft) that works out to roughly <strong>$392–$426/month</strong> — already higher than Moose Hollow's $368 for a 2-to-4-bedroom condo several times the size. A larger studio-plus (~750 sq ft, still not a separate bedroom) runs <strong>$675–$738/month</strong>. One realtor covering Deer Valley's new construction put the wider range at new resort buildings generally as "the difference between a $500/month HOA and a $5,000/month HOA." This isn't Ogden Valley, and a studio isn't Nordic Village's planned condos and chalets — it's shown only to demonstrate that recently-built resort HOAs, even for the smallest unit type available, tend to start above where this page's $368 floor sits. A unit actually comparable in size to a Moose Hollow condo would be expected to cost more per month than these studio figures, not less.</p>
+    </div>
+  </section>
+
+  <section class="exhibit" id="exhibit-a4">
+    <div class="exhibit-tag">Exhibit A4</div>
+    <h2 class="exhibit-title">Same home, PID vs. no PID</h2>
+    <p class="lede">Isolating just the property-tax side of the bill: a $500,000 home outside any PID pays Weber County's countywide effective property tax rate (0.60%, blending county, school, fire, and water levies — U.S. Census / propertytaxbystate.com). The identical home inside Nordic Village pays that same base rate <em>plus</em> the PID assessment — and the PID doesn't get folded into that base number. It shows up as its own separate line on the annual property tax statement, distinct from the county/school/fire/water lines, the same way it's tracked separately in Utah PID practice elsewhere in the state. Everything else — HOA, insurance, the mortgage itself — is deliberately left out of this one so the PID's own contribution is visible on its own.</p>
+
+    <div class="compare-wrap">
+      <svg id="compare-svg" viewBox="0 0 700 300" role="img" aria-label="Base property tax vs. base tax plus PID assessment, by year"></svg>
+      <div class="lc-legend">
+        <span><i class="lc-swatch" style="background:var(--ink-soft); height:10px; border-radius:2px;"></i> Base property tax (same for both properties)</span>
+        <span><i class="lc-swatch" style="background:var(--flag-red); height:10px; border-radius:2px;"></i> + PID assessment (Nordic Village property only)</span>
+      </div>
+    </div>
+
+    <p class="lede" style="margin-top:1.6rem;">Same numbers, shown as a share of the total tax bill instead of a dollar amount. These are two genuinely separate line items on the annual statement — not one blended tax number — so this pie is really showing what fraction of the whole bill each printed line accounts for. Because both lines are fixed percentages of the same home value, this split holds at every year on the chart above — the PID isn't a bigger or smaller slice as the home appreciates, it's the same slice, every year.</p>
+
+    <div class="pie-row">
+      <div class="pie-card">
+        <h3>Non-PID property</h3>
+        <svg viewBox="0 0 220 220" role="img" aria-label="Non-PID property: 100% base property tax">
+          <circle cx="110" cy="110" r="95" fill="var(--ink-soft)"/>
+        </svg>
+        <div class="pie-total">100% base tax<span>no other line on the bill</span></div>
+      </div>
+      <div class="pie-card">
+        <h3>Nordic Village (PID) property</h3>
+        <svg viewBox="0 0 220 220" role="img" aria-label="PID property: 69% base property tax, 31% PID assessment">
+          <path d="M 110,110 L 110.0,15.0 A 95 95 0 1 1 22.64,147.34 Z" fill="var(--ink-soft)"/>
+          <path d="M 110,110 L 22.64,147.34 A 95 95 0 0 1 110.0,15.0 Z" fill="var(--flag-red)"/>
+        </svg>
+        <div class="pie-total">69% base tax / 31% PID<span>PID is nearly a third of the tax-line bill, every year</span></div>
+      </div>
+    </div>
+
+    <table class="ledger">
+      <caption>Same $500,000 home at closing, growing at the 4%/yr Utah-pace scenario — non-PID vs. PID property</caption>
+      <thead>
+        <tr><th>Year</th><th>Home value</th><th>Non-PID total tax</th><th>PID property total</th><th>PID's added share</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>$520,000</td><td>$3,120</td><td>$4,550</td><td>+46%</td></tr>
+        <tr><td>10</td><td>$740,122</td><td>$4,441</td><td>$6,476</td><td>+46%</td></tr>
+        <tr><td>20</td><td>$1,095,562</td><td>$6,573</td><td>$9,586</td><td>+46%</td></tr>
+        <tr><td>30</td><td>$1,621,699</td><td>$9,730</td><td>$14,190</td><td>+46%</td></tr>
+        <tr><td>40</td><td>$2,400,510</td><td>$14,403</td><td>$21,004</td><td>+46%</td></tr>
+      </tbody>
+    </table>
+    <p class="chart-note">The percentage add stays constant at 46% every year because both lines are fixed percentages of the same home value — the PID doesn't get proportionally more or less expensive as the home appreciates, it stays a constant premium on top of the ordinary tax bill. Neither line here includes HOA (Exhibit A3) or insurance, and neither is discounted for inflation.</p>
+  </section>
+
+  <section class="exhibit" id="exhibit-a5">
+    <div class="exhibit-tag">Exhibit A5</div>
+    <h2 class="exhibit-title">40 years out, honestly: a range, not a number</h2>
+    <p class="lede">Everything on this page so far picks one appreciation rate at a time. Real life doesn't hold still for 40 years — so instead of one line, here's the full range this same $500,000 home could land in, non-PID vs. PID, combining base property tax, the PID assessment, and the $368/mo HOA floor from Exhibit A3.</p>
+
+    <table class="ledger">
+      <caption>What drives every number below: the same $500,000 starting home, under the three scenarios used throughout this case file</caption>
+      <thead>
+        <tr><th>Scenario</th><th>Home value, year 20</th><th>Home value, year 40</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Low (flat, 0%/yr)</td><td>$500,000</td><td>$500,000</td></tr>
+        <tr><td>Middle (2.5%/yr historical avg.)</td><td>$819,308</td><td>$1,342,532</td></tr>
+        <tr><td>High (4%/yr, recent Utah pace)</td><td>$1,095,562</td><td>$2,400,510</td></tr>
+      </tbody>
+    </table>
+    <p class="chart-note">This is the piece that actually drives the band chart below: since both the base property tax (0.60% of value) and the PID assessment (0.275% of taxable value, primary residence) are percentages of the home's value, a bigger home value produces bigger costs in both bands — that's the whole mechanism, not a separate assumption layered on top. The "low" scenario holds the home at $500,000 for all 40 years on purpose, as the floor case; the "high" scenario is the same 4%/yr pace already used in Exhibits A2 and A4.</p>
+
+    <div class="band-wrap">
+      <svg id="band-svg" viewBox="0 0 700 320" role="img" aria-label="Cumulative cost range over 40 years, non-PID vs PID property"></svg>
+      <div class="band-legend">
+        <span><i class="band-swatch" style="background:var(--ink-soft); opacity:.35;"></i> Non-PID range (flat value to 4%/yr appreciation)</span>
+        <span><i class="band-swatch" style="background:var(--flag-red); opacity:.35;"></i> PID property range (same, + PID assessment + HOA)</span>
+        <span><i class="band-swatch" style="background:none; border-top:2px dashed var(--ink);"></i> Historical-average path (2.5%/yr) within each band</span>
+      </div>
+    </div>
+
+    <table class="ledger">
+      <caption>40-year cumulative total, low (flat value) to high (4%/yr) — non-PID vs. PID property, base tax + PID + HOA</caption>
+      <thead>
+        <tr><th>Scenario</th><th>Non-PID, 40-yr total</th><th>PID property, 40-yr total</th><th>Gap</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Low (flat home value)</td><td>$120,000</td><td>$351,640</td><td>$231,640</td></tr>
+        <tr><td>Middle (2.5%/yr historical avg.)</td><td>$207,263</td><td>$478,898</td><td>$271,635</td></tr>
+        <tr><td>High (4%/yr, recent Utah pace)</td><td>$296,480</td><td>$609,006</td><td>$312,526</td></tr>
+      </tbody>
+    </table>
+    <p class="chart-note">Whichever path the next 40 years actually takes, the gap between the two properties grows with it — from roughly $232K at the low end to over $312K at the high end, on top of whatever the home itself is worth. This combines figures already shown individually in Exhibits A2, A3, and A4; nothing new is assumed here except showing the three scenarios together instead of one at a time. HOA is held flat at today's floor rate for all 40 years in every scenario, which understates the PID band further (Exhibit A3).</p>
+  </section>
+
+  <section class="exhibit" id="exhibit-b">
+    <div class="exhibit-tag">Exhibit B</div>
+    <h2 class="exhibit-title">The home price trend since 2019</h2>
+    <p class="lede">Ogden Valley (Eden / Huntsville / Liberty) median single-family sold price, per Mountain Luxury Real Estate's own annual and quarterly reports.</p>
+
+    <div class="chart-wrap">
+      <div class="bars" id="pricebars">
+        <div class="bar-col"><div class="bar" style="height:50.6%"><span class="val">$577K</span></div></div>
+        <div class="bar-col"><div class="bar" style="height:85.1%"><span class="val">$970K</span></div></div>
+        <div class="bar-col"><div class="bar" style="height:82.9%"><span class="val">$945K</span></div></div>
+        <div class="bar-col"><div class="bar" style="height:100%"><span class="val">$1.14M</span></div></div>
+        <div class="bar-col"><div class="bar" style="height:96.4%"><span class="val">$1.10M</span></div></div>
+      </div>
+      <div class="bar-labels">
+        <span>2019</span><span>2022</span><span>2023</span><span>2024</span><span>2025 Q2</span>
+      </div>
+      <p class="chart-note">+90.5% cumulative since 2019. 2020–2021 figures are not published in the available Mountain Luxury reporting and are omitted rather than estimated. 2025 shows the market's first cooling: values down 4.74% year-over-year, inventory and days-on-market both up.</p>
+    </div>
+  </section>
+
+  <section class="exhibit" id="exhibit-c">
+    <div class="exhibit-tag">Exhibit C</div>
+    <h2 class="exhibit-title">What else got layered on, by entity</h2>
+    <p class="lede">The PID assessment is one line on top of several others that have moved independently since 2019 — some up, one flat, one still pending a court decision.</p>
+
+    <table class="ledger">
+      <caption>Rate changes by taxing entity covering Ogden Valley / Weber County, 2019–2026</caption>
+      <thead>
+        <tr><th>Entity</th><th>Change</th><th>Detail</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Weber County (county gov't)</td><td>Flat</td><td>No rate increase for 2025 or 2026</td></tr>
+        <tr><td>Weber School District</td><td>+5.68% (2023)<br>+20.94% (proposed 2025)</td><td>~$142/yr → ~$175/yr on a ~$520K home</td></tr>
+        <tr><td>Central Weber Sewer Imp. District</td><td>Flat 2012–2023,<br>then +2023, +2024, +2025</td><td>2025: +9.14%, ~$13/yr on a $483K home</td></tr>
+        <tr><td>Ogden Valley City <em>(new, inc. Nov 2024)</em></td><td>Proposed +512.6%</td><td>Council voted 3-2 (Aug 18, 2026); pending Utah Supreme Court — see Exhibit E</td></tr>
+        <tr><td>Nordic Village PID 1–3</td><td>New in 2024</td><td>Authority up to $240M combined; developer's own plan projects ~$47M levied over 30–40 yrs</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="exhibit" id="exhibit-d">
+    <div class="exhibit-tag">Exhibit D</div>
+    <h2 class="exhibit-title">Where the tax-increment money is required to go</h2>
+    <p class="lede">The April 2, 2026 interlocal agreement redirects a share of future property tax growth on Nordic Valley land, for 15 years: 75% of Weber County's increment, 50% each from the School District, Fire District, and Water District.</p>
+
+    <div class="confirm-box">
+      <p>Weber County's own 2025 Tentative Budget shows the Redevelopment Agency Fund — the account that holds this tax-increment money — taking in $3,929,820 in FY2025 and paying out exactly $3,929,820, a net change of <strong>$0</strong>. It is a pass-through to debt service, not a fund that can build a surplus or be redirected to county operations. <em>(Source: webercountyutah.gov, 2025 Tentative Budget, Fund Summaries.)</em></p>
+    </div>
+
+    <p>The same document shows Weber County's Transportation Development Fund — a separate, ¼%-sales-tax-funded account — declining by roughly $16 million in a single year (from a $75.7M starting balance), driven by a jump in WACOG project and Corridor Preservation spending.</p>
+
+    <div class="flag-box">
+      <p>A prior working session connected that spending jump to Nordic Village construction timing. That connection is a hypothesis based on the calendar, not a confirmed line-item match — the public budget summary does not break spending out project-by-project at this level of detail. Treat the fund's decline as documented; treat its cause as open.</p>
+    </div>
+  </section>
+
+  <section class="exhibit" id="exhibit-e">
+    <div class="exhibit-tag">Exhibit E</div>
+    <h2 class="exhibit-title">A second, separate "transportation" charge</h2>
+    <p class="lede">Ogden Valley City's proposed 512.6% property tax hike is tied up in a State Tax Commission dispute — a district court ruling found the city missed an incorporation-era filing deadline, and the matter is now before the Utah Supreme Court. If the city loses, its own stated backup plan is a new <strong>transportation utility fee</strong> charged to every household, restricted to road projects.</p>
+
+    <table class="ledger">
+      <caption>Comparing Ogden Valley City's proposed fee to an already-enacted one nearby</caption>
+      <thead>
+        <tr><th>City</th><th>Monthly fee</th><th>Annual</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ogden Valley City</td><td>$20–25 (discussed)</td><td>~$240–300</td><td>Backup plan ("skinny budget"), pending Supreme Court ruling</td></tr>
+        <tr><td>North Ogden City</td><td>$15 per ERU</td><td>$180</td><td>Enacted — public hearing Jan 13, 2026</td></tr>
+      </tbody>
+    </table>
+    <p class="chart-note">This is a separate mechanism from the county's Transportation Development Fund in Exhibit D — a new city-only flat household fee, not the county's ¼% sales tax fund. Same word, different entity, different money.</p>
+  </section>
+
+  <section class="exhibit" id="exhibit-f">
+    <div class="exhibit-tag">Exhibit F</div>
+    <h2 class="exhibit-title">Already behind its own schedule</h2>
+    <p class="lede">The PID is servicing debt on a project that is running later than the developer's own original target.</p>
+
+    <div class="bignum-row">
+      <div class="bignum"><span class="num">2025</span><span class="lab">Original hoped-for start for infrastructure work (Rob Behunin, Clyde Capital Group, Dec 2024)</span></div>
+      <div class="bignum"><span class="num">10–15 yrs</span><span class="lab">Developer's own stated total build-out timeline, phased</span></div>
+    </div>
+
+    <p>By April 2026, regional reporting confirmed the original 2025 infrastructure start had slipped: <em>"developers had hoped some infrastructure work could start in 2025, but court challenges and additional local approvals will ultimately dictate the timing"</em> (Hoodline, citing county documents). The court challenge in question is a real, filed case — Weber County resident David Carver and the nonprofit Ogden Valley Smart Growth filed suit in 2nd District Court on Jan. 28, 2025, seeking judicial review of the county's Nordic Village ordinances and the community reinvestment area, arguing the county should have paused major approvals once the incorporation vote passed. As of the most recent reporting found, that suit remains part of what's holding up timing.</p>
+
+    <p>Meanwhile, the financing side is already running: $39.38M in Series 2025 bonds issued, a further $25M in Series 2026A/B authorized April 15, 2026, and $1.89M in bond interest already paid — from capitalized interest reserves, not project revenue, since the Property Taxes line on the PID's own 2026 budget still reads $0. The debt clock started before the construction clock did.</p>
+    <p class="chart-note">One detail worth keeping separate from the delay: the county's own TIF plan allocates increment 85%/10%/5%, and the 10% "housing" share is directed to employee-housing units on the developer's own property rather than a general county housing fund (Stephanie Russell, Weber County economic development director, per public meeting reporting) — not a timeline fact, but relevant to what the diverted revenue in Exhibit D is actually funding.</p>
+  </section>
+
+  <section class="exhibit" id="exhibit-f1">
+    <div class="exhibit-tag">Exhibit G</div>
+    <h2 class="exhibit-title">Where the trend points</h2>
+    <p class="lede">Home price appreciation alone, projected forward on the pre- and post-cooling growth rates already in the record:</p>
+    <div class="bignum-row">
+      <div class="bignum"><span class="num">14.6%/yr</span><span class="lab">CAGR, 2019 → 2024 (pre-cooling)</span></div>
+      <div class="bignum"><span class="num">11.3%/yr</span><span class="lab">CAGR, 2019 → 2025 Q2 (post-cooling)</span></div>
+      <div class="bignum"><span class="num">$1.61M–$1.94M</span><span class="lab">Projected 2030 median SFH price</span></div>
+    </div>
+    <p>That range covers home value only. It does not include Ogden Valley City's pending tax fight, the three Nordic Village PIDs' rising assessment as values climb, or any new development's TIF layered on top — those move on separate, non-market timelines and shouldn't be folded into one compounded number.</p>
+  </section>
+
+  <section class="exhibit" id="exhibit-h">
+    <div class="exhibit-tag">Exhibit H</div>
+    <h2 class="exhibit-title">"Affordable" — by which legal definition?</h2>
+    <p class="lede">Nordic Village has been described in press coverage as becoming "an affordable, thriving ski community." Utah law actually has a precise answer for what makes a development "affordable," and it isn't the tool Nordic Village uses.</p>
+
+    <p>The Utah Legislature has created several financing tools specifically conditioned on affordability, each with binding requirements attached:</p>
+    <table class="ledger">
+      <caption>Utah tax-increment/bond tools that carry real affordability strings, vs. the plain PID</caption>
+      <thead>
+        <tr><th>Tool</th><th>Affordability requirement</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>HB13 Infrastructure Financing District</td><td>Debt must be retired as each home sells; a share of units must be owner-occupied "attainable" homes at a capped price</td></tr>
+        <tr><td>SB268 First Home Investment Zone</td><td>At least 25% of units owner-occupied for 25+ years, with a filed affordable housing plan</td></tr>
+        <tr><td>SB168 Home Ownership Promotion Zone</td><td>At least 60% of units affordable, all owner-occupied for 5+ years</td></tr>
+        <tr><td><strong>Standard PID (Title 17D / SB228, 2019) — Nordic Village's tool</strong></td><td><strong>No affordability, price-cap, or owner-occupancy requirement of any kind</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="confirm-box">
+      <p>Nordic Village's own Village Plan states plainly, in the developer's own words: <strong>"It is expected that the vast majority will be secondary homes with no permanent residents."</strong> That's not a critic's characterization — it's the project's own planning document, describing its own expected occupancy.</p>
+    </div>
+
+    <p>Put together: the state has already built financing tools that require a project to commit to owner-occupancy and price caps in exchange for tax-increment or bond financing. Nordic Village doesn't use any of them, and its own plan doesn't anticipate the outcome those tools are designed to produce. Whatever the PID mechanism does for the developer's up-front financing costs, nothing in the governing documents obligates any part of it to lower a buyer's price, and the project's own paperwork doesn't expect the units to house local, permanent residents in the first place.</p>
+
+    <div class="flag-box">
+      <p>So who is actually saving money here? Across every document reviewed for this case file, there is no confirmed instance — Nordic Village or otherwise — of a PID-financed home selling for less than a comparable non-PID home. The theory (Exhibit H, top) is that a PID lets a developer skip fronting 100% of infrastructure cost up front; that's a real reduction in the <em>developer's</em> upfront capital risk. Nothing found here shows that reduction passed through to a lower price at closing. What is confirmed is the other side: the buyer inherits a permanent, renewable assessment (Exhibit A2, Exhibit H) that a comparable non-PID home never carries. If the up-front savings stay with the developer and the long-term cost lands on the buyer, "affordable housing" describes what the tool was named, not what's been shown to happen to anyone's price.</p>
+    </div>
+
+    <p class="lede" style="margin-top:1.6rem;">What "bonding again" actually buys, and who pays for it:</p>
+
+    <div class="flow-row">
+      <div class="flow-node">
+        <div class="flow-label">Step 1</div>
+        <div class="flow-text">PID board issues a <strong>new bond series</strong> — same 0.5% rate, no resident vote required (Exhibit A2)</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-label">Step 2</div>
+        <div class="flow-text">Proceeds fund the <strong>developer's next construction phase</strong> — not paid from the developer's own capital</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-label">Step 3</div>
+        <div class="flow-text">Debt service is billed to the <strong>property tax base inside the district</strong> — current owners, plus whoever buys into the new phase</div>
+      </div>
+    </div>
+    <div class="flow-loop">↻ repeats with each later phase, for as long as the district keeps issuing new bonds</div>
+
+    <div class="bp-row">
+      <button class="bp-card" type="button" aria-label="Who benefits — tap to reveal detail">
+        <div class="bp-card-inner">
+          <div class="bp-card-front">
+            <div class="bp-label">Who benefits</div>
+            <div class="bp-sub">The developer</div>
+            <div class="tap-hint">Tap to flip</div>
+          </div>
+          <div class="bp-card-back">
+            <p>Gets to keep building later phases financed through the PID's bonding authority instead of fronting the infrastructure cost with its own capital. Nordic Village's 10–15 year, multi-phase build-out makes at least one later bond issuance realistic — nothing in the record requires each phase to be self-funded first.</p>
+          </div>
+        </div>
+      </button>
+      <button class="bp-card pays" type="button" aria-label="Who pays — tap to reveal detail">
+        <div class="bp-card-inner">
+          <div class="bp-card-front pays">
+            <div class="bp-label">Who pays</div>
+            <div class="bp-sub">The property tax base</div>
+            <div class="tap-hint">Tap to flip</div>
+          </div>
+          <div class="bp-card-back pays">
+            <p>Debt service on every bond series is collected from whoever owns property inside the district — residents who already bought in, plus buyers of the new phase the bonds just funded. This is the mechanism itself, not a claim about anyone's intent: it's what the PID tool is built to do.</p>
+          </div>
+        </div>
+      </button>
+    </div>
+
+    <p>The 0.5% mill rate is capped in the governing document and doesn't increase on its own. But as established in Exhibit A2, that cap governs the <em>rate</em>, not how long it can be charged — a new bond series restarts the clock. A later-phase bond issuance partway through that stated 10–15 year build-out — realistically, sometime in roughly the year-10-to-year-20 range, though no specific year is confirmed — is plausible, not exotic. If a second series began around year 20 and ran its own term, the same rate would simply keep applying on a rolling basis rather than ending:</p>
+
+    <div class="confirm-box">
+      <p>Before the extended numbers below: most homeowners won't be there in 80 years, so it's worth anchoring this to how long people actually stay. The typical U.S. homeowner now holds a home for <strong>12 years</strong> before selling — the longest median tenure since 2022, per Redfin's 2025 data. Even long-tenure owners skew shorter than 80: Census data shows only about a fifth of homeowners 65 and older have owned the same home 23+ years. <strong>Twenty years is a realistic long-hold scenario</strong> — generous, but not an outlier — while 40, 60, and 80 years show what the same rate produces if the district's life keeps extending regardless of who owns the home at the time.</p>
+    </div>
+
+    <div class="context-box">
+      <p><strong>One reason the longer figures aren't purely academic in a destination market like this one:</strong> that 12-year median describes the typical American home, bought and sold through the ordinary market. Second homes in resort and destination locations don't always follow that pattern — they're frequently held in family trusts, LLCs, or gifted across generations specifically to keep the property rather than sell it, a strategy wealth managers actively advise for vacation properties (RBC Wealth Management). A home structured that way doesn't reset the PID's clock at a sale the way a typical primary residence would; the same family, or the same entity, can simply keep holding it while ownership passes internally. That doesn't make the 40-, 60-, or 80-year figures the expected case — but in a project where the developer's own plan expects "the vast majority" of units to be secondary homes (Exhibit H, top), it's a real reason the extended scenarios deserve more than a footnote.</p>
+    </div>
+
+    <table class="ledger">
+      <caption>Same $500,000 home, 4%/yr scenario — cumulative PID cost by realistic holding period, then extended</caption>
+      <thead>
+        <tr><th>Year</th><th>Home value</th><th>Cumulative PID paid (primary residence)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>20 (realistic hold — Redfin median x ~1.7)</strong></td><td>$1,095,562</td><td>$42,583</td></tr>
+        <tr><td>40 (original term ends)</td><td>$2,400,510</td><td>$135,886</td></tr>
+        <tr><td>60 (one renewal cycle in)</td><td>$5,259,814</td><td>$340,327</td></tr>
+        <tr><td>80 (two full 40-yr terms)</td><td>$11,524,900</td><td>$788,280</td></tr>
+      </tbody>
+    </table>
+
+    <p class="lede" style="margin-top:1.4rem;">Sized to scale, realistic hold vs. worst case: total cost, non-PID home vs. the same home in Nordic Village — base property tax plus the PID line, combined (methodology from Exhibit A4).</p>
+    <div class="mag-row">
+      <div class="mag-card">
+        <h3>Non-PID property, 20 years</h3>
+        <svg viewBox="0 0 200 180" width="200" height="180" role="img" aria-label="Non-PID property: $92,908 total base tax over 20 years">
+          <circle cx="100" cy="112" r="55" fill="var(--ink-soft)"/>
+        </svg>
+        <div class="mag-total">$92,908<span>base property tax only</span></div>
+      </div>
+      <div class="mag-card">
+        <h3>Nordic Village (PID), 20 years — realistic hold</h3>
+        <svg viewBox="0 0 200 180" width="200" height="180" role="img" aria-label="PID property: $223,810 total over 20 years, base tax plus PID assessment">
+          <circle cx="100" cy="96" r="85" fill="var(--flag-red)" opacity="0.85"/>
+        </svg>
+        <div class="mag-total">$223,810<span>base tax + PID, no renewal needed yet</span></div>
+      </div>
+    </div>
+    <p class="chart-note">This is the number that actually matters for most buyers: over a realistic 20-year hold, the PID property costs roughly <strong>$130,902 more</strong> than the same home without one — without needing a single renewal to happen. The 80-year figures below show what the same mechanism produces for the household — or the district — that's still there decades later, or for whoever owns the home by then.</p>
+
+    <p class="lede" style="margin-top:1.6rem;">And here's what the same math produces if the district's life does extend past a typical hold — 40, 60, and 80 years out, sized the same way:</p>
+    <div class="mag-row">
+      <div class="mag-card">
+        <h3>Non-PID property, 80 years</h3>
+        <svg viewBox="0 0 200 180" width="200" height="180" role="img" aria-label="Non-PID property: $1,719,884 total base tax over 80 years">
+          <circle cx="100" cy="95" r="68" fill="var(--ink-soft)"/>
+        </svg>
+        <div class="mag-total">$1,719,884<span>base property tax only</span></div>
+      </div>
+      <div class="mag-card">
+        <h3>Nordic Village (PID), 80 years, renewed once</h3>
+        <svg viewBox="0 0 200 180" width="200" height="180" role="img" aria-label="PID property: $2,508,164 total, base tax plus renewed PID assessment">
+          <circle cx="100" cy="87" r="82" fill="var(--flag-red)" opacity="0.85"/>
+        </svg>
+        <div class="mag-total">$2,508,164<span>base tax + PID, one renewal cycle</span></div>
+      </div>
+    </div>
+    <p class="chart-note">The circles are sized by area to the actual dollar totals, not the percentage split — that split (Exhibit A4) stays a constant 69/31 no matter which year you look at, so a same-ratio pie would look identical at year 20 and year 80. What actually changes with time is the size of the whole bill, and — for the 40/60/80 figures — whether the district's life has been extended past what a typical owner would ever personally experience.</p>
+
+    <p class="chart-note" style="margin-top:0.6rem;">This isn't a prediction — it's what the same, already-established rate produces if the district's life is extended the way its own documents allow. Nothing here requires bad faith: refinancing existing debt or borrowing for a later construction phase are ordinary, expected events for a project explicitly planned to take 10–15 years to build. The point is that "the assessment ends at year 31 (or 40)" is not a guarantee anywhere in the record — only the rate is fixed.</p>
+  </section>
+
+  <section class="exhibit" id="exhibit-i">
+    <div class="exhibit-tag">Exhibit I</div>
+    <h2 class="exhibit-title">What a buyer is actually told at closing</h2>
+    <p class="lede">A homeowner who buys in their 30s and stays in the home could carry this assessment for the rest of their life. What Utah law requires a buyer to be told at closing falls well short of that fact.</p>
+
+    <div class="confirm-box">
+      <p>HB507 (2026, Rep. Calvin Roberts) — the first Utah law requiring PID cost disclosure at all — requires only <strong>"the disclosure of the expected annual cost of a public infrastructure district's final tax rate, as shown on the last equalized assessment rolls, in the conveyance of residential real property."</strong> One year's dollar figure, based on the most recent assessment. That is the entire statutory requirement.</p>
+    </div>
+
+    <p>What that disclosure does <em>not</em> require telling a buyer:</p>
+    <ul style="margin:0 0 1rem; padding-left:1.4rem;">
+      <li>The total amount the assessment could add up to over the bond's full term</li>
+      <li>That the district's mill levy can outlast the original bond term if a new series is issued (Exhibit A2, Exhibit H)</li>
+      <li>That nothing in the record guarantees the assessment ends at any specific year</li>
+    </ul>
+
+    <p><strong>The precise gap: a stated term, not a stated possibility of renewal.</strong> Where PID disclosure is more developed — Texas's market, decades older than Utah's — buyers are typically given a specific number of years remaining, pulled from the district's service and assessment plan. What standard disclosure doesn't cover is whether the district can extend past that number. One Texas buyer's guide advises purchasers to separately "check developer rights" and "determine whether the developer can expand the PID or levy additional assessments under the service plan" — advice that exists specifically because the standard disclosure package doesn't already answer it. A remaining-years figure reads like a countdown to zero. Nothing requires anyone to say that the countdown can restart.</p>
+
+    <p>A 32-year-old buyer today would be 72 by the time Nordic Village's own reported 40-year bond ceiling arrives — and older still if the district issues a later series. The one figure Utah law requires at closing is this year's number, not even a term. Whether the term itself still applies in year 40, or year 60, or for the rest of that buyer's life, is not something either state's disclosure framework asks anyone to say out loud.</p>
+    <p class="chart-note">Separately, Utah's standard seller disclosure form does require flagging whether a property carries HOA, special improvement district, or PID assessments that are unpaid, pending, or not yet billed — but that's a yes/no flag on the general disclosure form, not the dollar-amount-and-duration disclosure HB507 specifically created for PIDs.</p>
+  </section>
+
+  <section class="exhibit" id="exhibit-j">
+    <div class="exhibit-tag">Exhibit J</div>
+    <h2 class="exhibit-title">A shrinking pool of buyers, and a mortgage rule with teeth</h2>
+    <p class="lede">If the assessment keeps growing with home value while local income grows more slowly, the pool of people who can both afford and qualify to buy the home narrows over time — for the current owner, not just a future one. The clearest documented source on this isn't a real estate blog. It's Fannie Mae's own underwriting policy.</p>
+
+    <div class="confirm-box">
+      <p>Fannie Mae's Selling Guide (B4-1.4-09, Special Assessment or Community Facilities Districts Appraisal Requirements) states plainly: <strong>"Fannie Mae expects the lender to know if a property is located in one of these districts and to be aware of the effect that assessments levied by the district could have on property values and the marketability of the subject property."</strong> Appraisers are required to flag the assessment and analyze comparable sales "because properties subject to an assessment by one of these districts often compete against properties that are either subject to a significantly different assessment or no assessment at all."</p>
+    </div>
+
+    <p>It goes further than a disclosure requirement. If a special assessment district runs into financial difficulty severe enough that its effect on a property's value "is not measurable because there is no comparable market data available," Fannie Mae's own rule is explicit: <strong>"a mortgage secured by a property in that district will not be eligible for delivery to Fannie Mae until such time that an active market develops that will enable the appraiser to demonstrate the value and marketability of the subject property."</strong> That's not a soft buyer preference — it's a hard eligibility rule that can freeze conventional financing for an entire district until enough resale history exists to prove the market will still bear it.</p>
+
+    <p>Put that next to what's already documented on this page: the assessment grows every year the home appreciates (Exhibit A), it has no guaranteed end date (Exhibit A2, Exhibit H), and area income has grown at less than a third the rate of home prices since 2019. A rising, open-ended assessment is exactly the kind of fact pattern this Fannie Mae rule was written for — and it means the buyer pool for a PID home isn't just a matter of taste. It's bounded by what a specific federal underwriting policy will and won't finance.</p>
+
+    <div class="flag-box">
+      <p>Fannie Mae's guide is the clearest, most explicit documented policy found on how a special assessment district affects financeability — a search for equivalent public policy language from other major sources (Freddie Mac, FHA, VA) didn't turn up comparably specific language, though that may reflect what's publicly searchable rather than confirming those agencies treat it differently. No Nordic Village-specific appraisal, financing difficulty, or Fannie Mae eligibility determination exists yet — nothing is built or sold, so this rule hasn't been tested against this project. The policy itself, and the conditions that trigger it, are confirmed; whether Nordic Village ever meets those conditions is not.</p>
+    </div>
+  </section>
+
+  <section class="exhibit" id="exhibit-k">
+    <div class="exhibit-tag">Exhibit K</div>
+    <h2 class="exhibit-title">Paying twice: the PID assessment, and a base tax rate pushed up by the same district's own diversion</h2>
+    <p class="lede">A Nordic Village homeowner doesn't pay the PID assessment instead of a normal property tax bill — they pay both. And under Utah's own Truth in Taxation mechanics, the ordinary bill isn't insulated from the PID's existence; the same diversion that funds the PID can be part of what pushes that ordinary bill up too. Six pieces make up this argument — tap each one for the full case, not just the headline.</p>
+
+    <div class="k-grid">
+      <button class="k-card" type="button" aria-label="1. The mechanic — tap for full detail">
+        <div class="k-card-inner">
+          <div class="k-card-front">
+            <div><div class="k-num">1 / 6 — The mechanic</div><div class="k-title">Two options, once growth is walled off</div></div>
+            <div class="k-hook">Cut services, or raise the rate on everyone left.</div>
+            <div class="tap-hint">Tap for full detail</div>
+          </div>
+          <div class="k-card-back">
+            <div class="k-num-sm">The mechanic</div>
+            <p>Established in Exhibit D: Utah's certified-tax-rate system is built to give a taxing entity the same revenue each year from its <em>existing</em> tax base, adjusting the rate as values change. When a CRA/TIF agreement walls off a project area's growth — as Nordic Village's does, 75% of the county's and 50% each of the school, fire, and water districts', for 15 years — that growth stops counting toward those entities' revenue base. If the entity's costs keep rising anyway (inflation, population, service demand), Truth in Taxation gives it exactly two options: cut services, or raise the certified rate on everyone still in its base — which includes every Nordic Village homeowner's own ordinary property tax bill, not just their PID assessment.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="k-card confirmed" type="button" aria-label="2. Not hypothetical — tap for full detail">
+        <div class="k-card-inner">
+          <div class="k-card-front">
+            <div><div class="k-num">2 / 6 — Confirmed, not hypothetical</div><div class="k-title">Weber Basin: 6.95% increase</div></div>
+            <div class="k-hook">Same board, both sides of the ledger.</div>
+            <div class="tap-hint">Tap for full detail</div>
+          </div>
+          <div class="k-card-back">
+            <div class="k-num-sm">Confirmed — primary source</div>
+            <p>This isn't hypothetical for this specific project. Weber Basin Water Conservancy District — one of the four entities that gave up 50% of its Nordic Village growth revenue for 15 years — is simultaneously proposing a <strong>6.95% rate increase</strong> across its entire five-county base (Exhibit C), citing aging infrastructure and conservation programs. The same board sits on both sides: it walked away from growth revenue in this project area, and it's raising the rate on the remaining base to cover costs — a base that includes every Nordic Village property owner's water-district tax line.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="k-card" type="button" aria-label="3. Two bills, one project — tap for full detail">
+        <div class="k-card-inner">
+          <div class="k-card-front">
+            <div><div class="k-num">3 / 6 — Two bills, one project</div><div class="k-title">Layered on the same household</div></div>
+            <div class="k-hook">Same source, two different-looking charges.</div>
+            <div class="tap-hint">Tap for full detail</div>
+          </div>
+          <div class="k-card-back">
+            <div class="k-num-sm">Two bills, one project</div>
+            <p>Layer the two charges on the same household and the shape becomes clear: the PID assessment is a cost that exists <em>because</em> of the district. The rate increase on the ordinary tax bill is a cost that can exist <em>partly because of</em> the same district's diversion agreement — money the homeowner never sees as a single line item, but pays through two different bills issued by two different reasons that trace back to the same project. Weber School District's proposed +20.94% (2025) and Central Weber Sewer's +9.14% (2025) sit in the same taxing landscape, though the specific share attributable to Nordic Village's diversion specifically, versus general inflation and growth pressure the district would have faced regardless, isn't separable from the public budget documents alone.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="k-card" type="button" aria-label="4. Not one project — tap for full detail">
+        <div class="k-card-inner">
+          <div class="k-card-front">
+            <div><div class="k-num">4 / 6 — Scale</div><div class="k-title">Not just one project</div></div>
+            <div class="k-hook">$4B → $5.267B statewide in ten months.</div>
+            <div class="tap-hint">Tap for full detail</div>
+          </div>
+          <div class="k-card-back">
+            <div class="k-num-sm">It compounds statewide</div>
+            <p>This also isn't a one-project effect. Nordic Village is one of several CRA/TIF project areas already active in Weber County, and statewide PID bond issuance grew from roughly $4 billion to $5.267 billion in about ten months (fall 2025–Aug 2026, Exhibit D) as more districts were created elsewhere. Each new project area walls off more growth from the same handful of taxing entities — county, school district, fire, water — meaning the pressure pushing ordinary rates upward compounds with every additional district, not just this one. A Nordic Village homeowner's base tax bill is exposed to that broader pattern the same way every other resident in the taxing jurisdiction is — they just also carry the PID assessment on top of it.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="k-card confirmed" type="button" aria-label="5. The disclosure gap — tap for full detail">
+        <div class="k-card-inner">
+          <div class="k-card-front">
+            <div><div class="k-num">5 / 6 — The disclosure gap</div><div class="k-title">The tax-increase notice is silent on this</div></div>
+            <div class="k-hook">Two stated reasons. Diversion isn't one of them.</div>
+            <div class="tap-hint">Tap for full detail</div>
+          </div>
+          <div class="k-card-back">
+            <div class="k-num-sm">Confirmed — primary source</div>
+            <p>And here's the disclosure gap on this side of the ledger: Weber Basin's own published Truth in Taxation notice gives exactly two stated reasons for the 6.95% increase — <strong>$1M for conservation rebate programs and $738,000 toward repaying the 1955 Bureau of Reclamation aqueduct</strong>. Nowhere in that notice, or in the School District's or Central Weber Sewer's, is foregone CRA/TIF growth listed as a contributing factor — even though the mechanism above shows it can be one. Utah's Truth in Taxation law requires a taxing entity to explain <em>that</em> costs are rising and by how much; it does not require the entity to say whether walking away from a project area's growth revenue is part of why.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="k-card" type="button" aria-label="6. The honest limit — tap for full detail">
+        <div class="k-card-inner">
+          <div class="k-card-front">
+            <div><div class="k-num">6 / 6 — The honest limit</div><div class="k-title">What can't be claimed precisely</div></div>
+            <div class="k-hook">The mechanism is confirmed. The exact split isn't.</div>
+            <div class="tap-hint">Tap for full detail</div>
+          </div>
+          <div class="k-card-back">
+            <div class="k-num-sm">Where the evidence stops</div>
+            <p>How much of any specific rate increase is attributable to Nordic Village's diversion versus ordinary cost growth the entity would have faced anyway. That dollar split doesn't exist in any document reviewed for this page — and the reason it doesn't exist isn't just that no one has calculated it. It's that nothing in Utah's Truth in Taxation notice requirements asks an entity to disclose foregone TIF growth as a possible cause at all, the same way HB507 asks a PID to disclose a dollar figure but not a duration (Exhibit I). The mechanism — diverted growth plus rising costs equals pressure on the remaining base — is confirmed by Utah's own tax code and Cannon's on-record analysis (Exhibit D's PID debt tracker); whether it's ever named as a reason to the people voting on the increase is not.</p>
+          </div>
+        </div>
+      </button>
+    </div>
+  </section>
+
+  <section class="exhibit" id="exhibit-l">
+    <div class="exhibit-tag">Exhibit L</div>
+    <h2 class="exhibit-title">What's actually exposed to the cut — and what isn't</h2>
+    <p class="lede">Exhibit K established the choice Truth in Taxation forces on a taxing entity once its growth revenue is walled off: cut services, or raise rates on everyone else. Here's what "cut services" means in real dollars, from Weber County's own 2025 budget — and, for comparison, what happens to the PID's own debt service under the same financial pressure. Tap each card.</p>
+
+    <div class="block-grid">
+      <button class="block-card" type="button" aria-label="Sheriff — tap to reveal detail">
+        <div class="block-card-inner">
+          <div class="block-card-front">
+            <div class="block-label">General fund — public safety</div>
+            <div class="block-name">Sheriff</div>
+            <div class="block-amt">$14.2M</div>
+            <div class="tap-hint">Tap to flip</div>
+          </div>
+          <div class="block-card-back"><p>Weber County Sheriff's Office 2025 budgeted expense, funded from the county's general fund — the same fund whose growth Nordic Village's TIF agreement diverts 75% of, for 15 years.</p></div>
+        </div>
+      </button>
+      <button class="block-card" type="button" aria-label="Jail — tap to reveal detail">
+        <div class="block-card-inner">
+          <div class="block-card-front">
+            <div class="block-label">General fund — public safety</div>
+            <div class="block-name">Jail</div>
+            <div class="block-amt">$39.1M</div>
+            <div class="tap-hint">Tap to flip</div>
+          </div>
+          <div class="block-card-back"><p>Weber County Correctional Facility 2025 budgeted expense — the single largest general fund line item in the county's entire budget, larger than the Sheriff's own operating budget.</p></div>
+        </div>
+      </button>
+      <button class="block-card" type="button" aria-label="General government — tap to reveal detail">
+        <div class="block-card-inner">
+          <div class="block-card-front">
+            <div class="block-label">General fund</div>
+            <div class="block-name">General government</div>
+            <div class="block-amt">$37.4M</div>
+            <div class="tap-hint">Tap to flip</div>
+          </div>
+          <div class="block-card-back"><p>Assessor, Attorney, Clerk/Auditor, Elections, GIS, HR, IT, Recorder, Treasurer, Surveyor combined — the county's core administrative functions, 2025 budgeted expense.</p></div>
+        </div>
+      </button>
+      <button class="block-card" type="button" aria-label="Library — tap to reveal detail">
+        <div class="block-card-inner">
+          <div class="block-card-front">
+            <div class="block-label">Special revenue fund</div>
+            <div class="block-name">Library</div>
+            <div class="block-amt">$16.3M</div>
+            <div class="tap-hint">Tap to flip</div>
+          </div>
+          <div class="block-card-back"><p>Weber County's main library and four branches, 2025 budgeted expense — principally funded by property taxes, the same tax base exposed to the diversion pressure described in Exhibit K.</p></div>
+        </div>
+      </button>
+      <button class="block-card" type="button" aria-label="Parks, culture, and recreation — tap to reveal detail">
+        <div class="block-card-inner">
+          <div class="block-card-front">
+            <div class="block-label">Special revenue fund</div>
+            <div class="block-name">Parks, culture &amp; rec</div>
+            <div class="block-amt">$15.8M</div>
+            <div class="tap-hint">Tap to flip</div>
+          </div>
+          <div class="block-card-back"><p>Golden Spike Event Center, Ice Sheet, Ogden Eccles Conference Center, county parks, and recreation programs combined, 2025 budgeted expense.</p></div>
+        </div>
+      </button>
+      <button class="block-card protected" type="button" aria-label="PID debt service — protected — tap to reveal detail">
+        <div class="block-card-inner">
+          <div class="block-card-front">
+            <div class="block-label">Not exposed to this choice</div>
+            <div class="block-name">Nordic Village PID debt service</div>
+            <div class="block-amt">$1.89M/yr</div>
+            <div class="tap-hint">Tap to flip</div>
+          </div>
+          <div class="block-card-back"><p>Bond interest already being paid from capitalized interest reserves — set aside at bond issuance specifically so payments continue whether or not property tax revenue ever materializes (Exhibit D, Exhibit F). Sheriff, Jail, Library, and Parks funding all depend on the county's ordinary revenue holding up. The PID's own debt service was structured not to.</p></div>
+        </div>
+      </button>
+    </div>
+    <p class="chart-note">Six figures, one pattern: the services actually on the table when a taxing entity's growth revenue is diverted are the ones ordinary residents use every day — jail, sheriff, library, parks, the county's basic administrative functions. The PID's own debt service isn't part of that conversation at all; it was built with its own reserve funding precisely so it wouldn't be. Dollar figures: Weber County 2025 Tentative Budget; Nordic Village PID debt service: Nordic Village PID No. 1, 2026 Final Budget.</p>
+  </section>
+
+  <section class="exhibit" id="exhibit-m">
+    <div class="exhibit-tag">Exhibit M</div>
+    <h2 class="exhibit-title">Nordic Village isn't the only one — here's what the county's own numbers show</h2>
+    <p class="lede">Every exhibit above is about one project. Utah Code §17C-1-606 requires Weber County's own Auditor to publish an annual accounting of every dollar diverted to every CRA project area, countywide — the "CRA 700 Report." Four years of it (2021–2024) are now on file. Nordic Village doesn't even appear in these reports yet — its own diversion (Exhibit K: $5.05M county share, $16.57M combined, over its own 15-year window) hasn't started. Everything below is <em>already happening</em>, from other projects, before Nordic Village adds a single dollar.</p>
+
+    <div class="confirm-box">
+      <p><strong>Weber County's own General Fund</strong> — the same fund covering the Sheriff, Jail, and general government (Exhibit L) — had property tax growth diverted to existing CRA project areas of <strong>$1,485,273 (2021) → $1,738,001 (2022) → $1,835,607 (2023) → $1,785,054 (2024)</strong>. Four-year total: <strong>$6,843,935</strong> diverted from the county's general fund alone, from projects that existed before Nordic Village was ever created.</p>
+    </div>
+
+    <div class="trend-wrap">
+      <svg id="county-trend-svg" viewBox="0 0 700 280" role="img" aria-label="Weber County General Fund diversion, 2021-2024, and all-entity total"></svg>
+      <div class="lc-legend">
+        <span><i class="lc-swatch" style="background:var(--flag-red)"></i> Weber County General Fund only</span>
+        <span><i class="lc-swatch" style="background:var(--ink-soft)"></i> All entities combined (county, schools, cities, fire, water, sewer)</span>
+      </div>
+    </div>
+
+    <table class="ledger">
+      <caption>Weber County CRA 700 Report — total property tax increment diverted, by year (all figures from the county's own filed report)</caption>
+      <thead>
+        <tr><th>Tax year</th><th>Weber County General Fund only</th><th>All entities combined</th><th>Active project areas</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2021</td><td>$1,485,273</td><td>$10,712,652</td><td>~21</td></tr>
+        <tr><td>2022</td><td>$1,738,001</td><td>$13,041,281</td><td>~21</td></tr>
+        <tr><td>2023</td><td>$1,835,607</td><td>$14,387,615</td><td>~21</td></tr>
+        <tr><td>2024</td><td>$1,785,054</td><td>$14,246,488</td><td>~21</td></tr>
+        <tr><td><strong>4-year total</strong></td><td><strong>$6,843,935</strong></td><td><strong>$52,388,037</strong></td><td>—</td></tr>
+      </tbody>
+    </table>
+    <p class="chart-note">Project-area counts vary slightly by year in the underlying report format (22–28 rows depending on how each year's workbook lists zero-value and inactive entries) — "~21" reflects the consistently active core, not a precise headcount claimed to the digit. None of these 21+ project areas is Nordic Village.</p>
+
+    <p class="lede" style="margin-top:1.6rem;">What this means for "how much, over 20 years":</p>
+    <p>Two honest ways to answer it. Holding the county general fund's 2024 rate flat for 20 years: <strong>~$35.7M</strong> diverted from the county's general fund alone, from existing projects, before Nordic Village adds anything. Using the 4-year average rate instead: roughly <strong>$34.2M</strong> over 20 years, or <strong>~$262M</strong> across all entities combined. Neither of these is a prediction — they're the same already-observed rate held constant, the same honest-extrapolation method used in Exhibit A5. The real number could run higher: this list doesn't yet include Nordic Village's own $16.57M (Exhibit K), doesn't include Snowbasin, Promontory Commerce Center, or Mount Ogden's PIDs (Exhibit C), and doesn't include whatever the county approves next.</p>
+
+    <div class="context-box">
+      <p><strong>Even if your own city has no PID or CRA of its own, this still reaches you.</strong> Look at the entity list in the county's own report: alongside Weber County's general fund, the diverted increment also comes out of Weber School District, Ogden City School District, Weber Basin Water, Central Weber Sewer, Weber Fire District, Weber Area 911, and — separately — North Ogden, Ogden, Pleasant View, Riverdale, Roy, South Ogden, and Washington Terrace <em>as cities</em>, each losing growth revenue on projects located inside other jurisdictions. These are countywide and multi-city taxing entities. A resident of a city with zero PIDs of its own still pays into Weber School District and often into overlapping county-level funds — meaning the same Truth in Taxation mechanism from Exhibit K (foregone growth, pressure to cut services or raise rates on the remaining base) reaches every taxpayer these entities serve, not just residents of the specific project areas.</p>
+    </div>
+
+    <p class="chart-note">And the open question that started this exhibit: how many more will be approved? Nothing in Utah Code requires a county to disclose a running total or a cap before creating the next one — each new CRA or PID is evaluated on its own, not against the cumulative diversion already committed. The county's own CRA 700 Report is the only place this adds up in one document, and it only exists because state law requires it to be filed after the fact, once a year — not before a new one is approved.</p>
+
+    <div class="data-gap">
+      <div class="dg-label">⚠ Data gap — read before citing any total on this page</div>
+      <div class="dg-body">Every dollar figure in this exhibit stops at tax year 2024.</div>
+      <div class="dg-sub">Weber County has not yet published its CRA 700 Report for 2025 or 2026 — those numbers don't exist publicly yet. Everything above is already out of date the moment it's read: it doesn't include Nordic Village's own diversion (which hadn't started as of 2024), and it doesn't include newer projects already in motion, like Ogden's "Wildcat Square" Community Reinvestment Area survey (Ogden City Council, 4-2 vote, May 2026) for a 513-bed student housing project at Weber State. The real, current total is higher than anything shown here — by how much isn't knowable until the county files its next report.</div>
+    </div>
+  </section>
+
+</main>
+
+<div class="closing">
+  <div class="closing-inner">
+    <div class="closing-eyebrow">Case file summary</div>
+    <h2>What the record shows</h2>
+    <p>Six findings, the whole case in miniature. Tap each for the full paragraph.</p>
+
+    <div class="close-grid">
+      <button class="close-card" type="button" aria-label="The core cost — tap for full detail">
+        <div class="close-card-inner">
+          <div class="close-card-front">
+            <div><div class="cc-num">1 — The core cost</div><div class="cc-title">+46% to the tax line, no fixed end date</div></div>
+            <div class="cc-hook">A rate cap isn't a duration cap.</div>
+            <div class="tap-hint">Tap for full detail</div>
+          </div>
+          <div class="close-card-back">
+            <p>Nordic Village carries a documented, ongoing cost to a homeowner inside its boundary: a 0.5% mill levy that scales with home value for as long as the district's bonds are outstanding, layered on top of the ordinary property tax bill every home in the area already pays. On a $500,000 home appreciating at recent Utah rates, that line alone adds roughly <strong>46% to the property-tax portion of the bill every year</strong> for as long as the district exists — and existing doesn't have a fixed end date, since a new series of bonds can restart the mill-levy clock even after the current bonds are repaid.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="close-card" type="button" aria-label="Not happening alone — tap for full detail">
+        <div class="close-card-inner">
+          <div class="close-card-front">
+            <div><div class="cc-num">2 — Not happening alone</div><div class="cc-title">Layered on top of everything else moving</div></div>
+            <div class="cc-hook">512.6%. $16M. 6.95%. All real, all filed.</div>
+            <div class="tap-hint">Tap for full detail</div>
+          </div>
+          <div class="close-card-back">
+            <p>That cost sits alongside, not instead of, several other things moving at the same time: home prices that grew more than three times faster than county income from 2019–2024, a newly incorporated city (Ogden Valley) fighting in court for the authority to raise its own property tax by up to 512.6%, a county transportation fund that lost roughly $16 million in a single year, and a water district raising rates 6.95% while simultaneously giving up half its own growth revenue in this same project area for 15 years. None of these are hypothetical — each is a filed budget, a signed agreement, or a scheduled hearing, cited in the exhibits above.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="close-card" type="button" aria-label="What's not shown — tap for full detail">
+        <div class="close-card-inner">
+          <div class="close-card-front">
+            <div><div class="cc-num">3 — What's not shown</div><div class="cc-title">No single dollar figure exists</div></div>
+            <div class="cc-hook">Rate capped, duration isn't, HOA doesn't exist yet.</div>
+            <div class="tap-hint">Tap for full detail</div>
+          </div>
+          <div class="close-card-back">
+            <p>What the record does <em>not</em> show is a single dollar figure that will land on any one homeowner's future tax bill. The PID's own mill rate is capped by its governing document, but its duration is not; a Nordic Village-specific HOA figure doesn't exist yet because no units are built or sold; and the project's own construction timeline has already slipped past its original target, which changes when — not whether — most of these costs actually begin landing on real bills.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="close-card" type="button" aria-label="What a buyer is told — tap for full detail">
+        <div class="close-card-inner">
+          <div class="close-card-front">
+            <div><div class="cc-num">4 — What a buyer is told</div><div class="cc-title">One year's number, not a lifetime one</div></div>
+            <div class="cc-hook">HB507 stops well short of the full picture.</div>
+            <div class="tap-hint">Tap for full detail</div>
+          </div>
+          <div class="close-card-back">
+            <p>Utah's own new disclosure law, HB507, requires telling a buyer the assessment's expected cost for the current year — not its total cost over the bond term, and not that the mill levy can outlast the bond term entirely if the district issues new debt. A buyer in their 30s today could still be paying this assessment at retirement age, and nothing in the record says otherwise at closing.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="close-card" type="button" aria-label="The financing risk — tap for full detail">
+        <div class="close-card-inner">
+          <div class="close-card-front">
+            <div><div class="cc-num">5 — The financing risk</div><div class="cc-title">Fannie Mae's own rule has teeth</div></div>
+            <div class="cc-hook">A distressed district can freeze financing entirely.</div>
+            <div class="tap-hint">Tap for full detail</div>
+          </div>
+          <div class="close-card-back">
+            <p>None of this happens in a vacuum. Fannie Mae's own underwriting policy — the clearest documented source found on this specific question — states that assessment districts can affect a property's "value and marketability," and that a district in severe enough financial difficulty can make a property ineligible for Fannie Mae financing entirely until an active resale market proves itself. Whether Nordic Village ever meets that threshold isn't yet knowable — nothing is built or sold — but the policy exists, and a rising, open-ended assessment is exactly what it was written to address.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="close-card" type="button" aria-label="Paying twice, and building again — tap for full detail">
+        <div class="close-card-inner">
+          <div class="close-card-front">
+            <div><div class="cc-num">6 — The two mechanisms together</div><div class="cc-title">Paying twice, and building again</div></div>
+            <div class="cc-hook">Same board, both sides — and the clock resets.</div>
+            <div class="tap-hint">Tap for full detail</div>
+          </div>
+          <div class="close-card-back">
+            <p>The PID assessment isn't the only bill the diversion touches — the same growth revenue that funds it is revenue the county, school, fire, and water districts no longer collect, and under Truth in Taxation that gap is one of the pressures pushing their ordinary rates up for everyone, Nordic Village homeowners included (Exhibit K). And put plainly: this tool lets a developer keep building later phases on financing secured against future residents' tax bills, not the developer's own capital. Nordic Village's stated 10–15 year, multi-phase build-out makes a mid-build bond issuance realistic — and each new series can restart the assessment's clock without ever raising the rate or requiring a resident's vote (Exhibit H).</p>
+          </div>
+        </div>
+      </button>
+    </div>
+
+    <div class="closing-open">
+      <p>Still open: Nordic Village's own governing document language on bond renewal (only a comparable district's document has been reviewed); a confirmed line-item link between the county's Transportation Development Fund decline and Nordic Village construction specifically; the outcome of the Carver / Ogden Valley Smart Growth lawsuit still working through 2nd District Court; and whether any actual sale price at Nordic Village comes in lower than a comparable non-PID unit elsewhere in the valley — the theoretical basis for the "affordability" claim, not yet tested against a real closing.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sources">
+  <div class="sources-inner">
+    <details>
+      <summary><h3 style="display:inline; margin:0;">Sources on file</h3><span class="src-count">(38 — tap to expand)</span></summary>
+      <ol>
+      <li>Weber County — 2025 Tentative Budget, Fund Summaries (webercountyutah.gov/documents/2025-tentative-budget.pdf)</li>
+      <li>Nordic Village Financing Plan Review, prepared for Weber Fire District by Lewis Young Robertson &amp; Burningham (utah.gov/pmn)</li>
+      <li>Nordic Village PID No. 1, 2026 Final Budget (utah.gov/pmn)</li>
+      <li>Weber County — Notice of Interlocal Agreement, Nordic Village CRA, filed 3/25/2025</li>
+      <li>Mountain Luxury Real Estate — Ogden Valley annual &amp; quarterly market updates, 2019–2026</li>
+      <li>Redfin — active Eden &amp; Huntsville, UT listings with published HOA fees, Aug 2026 (Exhibit A3)</li>
+      <li>propertytaxbystate.com / U.S. Census Bureau ACS — Weber County effective property tax rate, 0.60% (Exhibit A4)</li>
+      <li>Snow Jensen &amp; Reece, P.C., "Public Infrastructure Districts: What Property Owners Should Know" (snowjensen.com) — PID assessment shown as a separate line item on Utah property tax statements (Exhibit A4)</li>
+      <li>Exhibit A5 combines figures already sourced in Exhibits A2, A3, and A4 — no new external source; scenario methodology as described in Exhibit A2</li>
+      <li>Weber Basin Water Conservancy District Truth in Taxation notice, weberbasin.gov / utah.gov/pmn, filed July 2026 — stated reasons for 6.95% increase (Exhibit K)</li>
+      <li>Weber County 2025 Tentative Budget, General Fund detail (webercountyutah.gov/documents/2025-tentative-budget.pdf) — Sheriff, Jail, General Government, Library, Parks/Culture/Rec figures (Exhibit L)</li>
+      <li>80-year magnitude comparison in Exhibit H combines the renewal-scenario figures from that exhibit with the base-tax methodology of Exhibit A4 — no new external source</li>
+      <li>Redfin, "The Typical U.S. Homeowner Hangs Onto Their House for 12 Years," 2025 report (businesswire.com) — median homeowner tenure; Redfin/U.S. Census Bureau ACS analysis, "The Typical U.S. Home Changes Hands Every 12 Years" — tenure-by-age breakdown (Exhibit H, 20-year realistic hold)</li>
+      <li>Standard real estate closing-adjustment contract language (lawinsider.com, "Closing Costs and Adjustments") — proration of special assessment district payments at closing (Exhibit A2, Year 1 clarification)</li>
+      <li>RBC Wealth Management, "How to keep your beloved vacation home in the family" (rbcwealthmanagement.com) — trusts, LLCs, and generational gifting strategies for vacation properties (Exhibit H, 20-year hold caveat)</li>
+      <li>Weber County Clerk/Auditor, CRA 700 Reports (Annual Report on Community Reinvestment Project Areas, per Utah Code §17C-1-606), tax years 2021–2024 (webercountyutah.gov/Clerk_Auditor/rda) — countywide diversion by entity, by project area, and by year (Exhibit M)</li>
+      <li>City Weekly, "Ogden City Council preparing severe water shortage declaration, advances study of Wildcat Square development," May 2026 (cityweekly.net) — Wildcat Square CRA survey area, 4-2 Council vote (Exhibit M data-gap note)</li>
+      <li>realestateinparkcity.com — Pioche Village, Deer Valley East Village HOA dues, Aug 2026 (Exhibit A3 sidebar, for scale only)</li>
+      <li>Silver Cliffs Commons PID governing document, Washington County (utah.gov/pmn) — 40-year Maximum Debt Mill Levy Imposition Term language; ROAM PID FAQ (roampid.com) — refinancing mechanism (Exhibit A2 renewal note)</li>
+      <li>Central Florida Master CDD (cfmcdd.org), "Questions about Community Development Districts" — fixed-term bond assessment language; Momentum Realty CDD glossary (movewithmomentum.com); Clearwater Cay CDD assessments FAQ (clearwatercaycdd.com) — Exhibit A2 Florida comparison</li>
+      <li>Utah Code § 17D-4-301, Public Infrastructure District Act (law.justia.com) — bond notice, contest, and reporting requirements; 100% property-owner consent provision (Exhibit A2)</li>
+      <li>KPCW, "Popular Utah development financing tool draws SEC attention," Aug 25, 2026 — Auditor Tina Cannon, SEC policy briefing Oct. 2026 (Exhibit A2 state comparison)</li>
+      <li>Texas Real Estate Research Center, "Don't Piddle Around with PID Notices" (trerc.tamu.edu) — Texas Property Code §5.014, HB1543 (Exhibit A2 state comparison)</li>
+      <li>Yahoo News / local wire, "Vineyard councilman leading referendum effort against $35M bond vote to fund city center," 2026 — Utah City sales tax revenue bond (Exhibit A2)</li>
+      <li>Utah.gov Public Notice Website, Eagle Mountain City "Notice of Public Hearing and Bonds to Be Issued," Series 2026 — comparable Local Government Bonding Act notice format (Exhibit A2)</li>
+      <li>Hoodline, "Ski Showdown In Ogden Valley," Apr 2026 — confirmed 2025 infrastructure-start delay; KSL.com, Dec 2024 — original 2025 target date, Rob Behunin quote (Exhibit F)</li>
+      <li>KSL.com, "Ogden Valley incorporation boosters sue Weber County," Feb 2025 — David Carver / Ogden Valley Smart Growth lawsuit, filed 2nd District Court Jan. 28, 2025 (Exhibit F)</li>
+      <li>CitizenPortal.ai, Nordic Village CRA presentation coverage — 85/10/5 TIF allocation, developer-property housing increment (Exhibit F)</li>
+      <li>Utah Business, "Nordic Valley Ski Resort... could get a huge upgrade," 2024 — "affordable, thriving ski community" quote (Exhibit H)</li>
+      <li>Utah Stories, "Ogden Valley Votes to Become Utah's Newest City," May 2025 — Nordic Village Village Plan quote on secondary-home occupancy expectation (Exhibit H)</li>
+      <li>Standard-Examiner / Utah News Dispatch, "Will Utah's new housing experiment actually make a difference?", Mar 2024 — HB13, SB268, SB168 affordability-tool requirements (Exhibit H)</li>
+      <li>Utah League of Cities and Towns, "Comparison of Affordable Housing Funding Tools," June 2024 (Exhibit H)</li>
+      <li>H.B. 507, 2026 General Session, Utah Legislature (Rep. Calvin Roberts) — bill text, le.utah.gov (Exhibit I)</li>
+      <li>Montgomery County PID buyer guide (jamiebechtold.com) — "check developer rights... expand the PID" advice (Exhibit I)</li>
+      <li>HomeLight, "What Must Be Disclosed When Selling a House in Utah?" — general seller disclosure form requirements (Exhibit I)</li>
+      <li>Redfin, "What Is a PID? Texas Public Improvement Districts" — buyer pool effect (Exhibit J)</li>
+      <li>Williamson County MUD/PID buyer guide (chappellrealtygroup.com) — resale discount pattern (Exhibit J)</li>
+      <li>The Woodlands MUD/PID buyer guide (risingrdreamproperties.com) — loan-qualification effect (Exhibit J)</li>
+      <li>Fannie Mae Selling Guide, B4-1.4-09, "Special Assessment or Community Facilities Districts Appraisal Requirements" (06/04/2025), selling-guide.fanniemae.com (Exhibit J)</li>
+      <li>Utah State Tax Commission / Weber School District / Central Weber Sewer Improvement District — Truth in Taxation notices, utah.gov/pmn</li>
+      <li>KSL.com, Deseret News — Ogden Valley City property tax hike coverage, Aug 2026</li>
+      <li>North Ogden City — Notice of Intent to Enact a Transportation Utility Fee, filed utah.gov/pmn</li>
+      <li>S.B. 228 (2019 General Session), Utah Legislature — PID enabling statute</li>
+      </ol>
+    </details>
+  </div>
+</div>
+
+<footer class="pagefoot">
+  Draft case file — The Weber County Hive · PIDs-Utah repository · not yet published
+</footer>
+
+<script>
+(function(){
+  var SCENARIOS = {
+    flat: {label:"0%/yr (value held flat)", primary:[1375,2750,4125,5500,6875,8250,9625,11000,12375,13750,15125,16500,17875,19250,20625,22000,23375,24750,26125,27500,28875,30250,31625,33000,34375,35750,37125,38500,39875,41250,42625,44000,45375,46750,48125,49500,50875,52250,53625,55000], second:[2500,5000,7500,10000,12500,15000,17500,20000,22500,25000,27500,30000,32500,35000,37500,40000,42500,45000,47500,50000,52500,55000,57500,60000,62500,65000,67500,70000,72500,75000,77500,80000,82500,85000,87500,90000,92500,95000,97500,100000], combined:[5791,11582,17373,23164,28955,34746,40537,46328,52119,57910,63701,69492,75283,81074,86865,92656,98447,104238,110029,115820,121611,127402,133193,138984,144775,150566,156357,162148,167939,173730,179521,185312,191103,196894,202685,208476,214267,220058,225849,231640]},
+    hist: {label:"2.5%/yr (long-run historical avg.)", primary:[1409,2854,4335,5852,7408,9003,10637,12312,14030,15790,17594,19443,21339,23281,25273,27314,29406,31551,33749,36002,38311,40679,43105,45592,48141,50754,53432,56177,58991,61875,64832,67862,70968,74151,77414,80759,84188,87702,91304,94995], second:[2562,5189,7881,10641,13469,16369,19340,22386,25508,28709,31989,35351,38797,42330,45951,49662,53466,57365,61362,65458,69657,73961,78373,82894,87529,92280,97150,102141,107257,112501,117876,123385,129032,134821,140754,146835,153068,159457,166006,172719], combined:[5825,11686,17583,23516,29488,35499,41549,47640,53774,59950,66170,72435,78747,85105,91513,97970,104478,111039,117653,124322,131047,137831,144673,151576,158541,165570,172664,179825,187055,194355,201728,209174,216696,224295,231974,239735,247580,255510,263528,271635]},
+    utah: {label:"4%/yr (recent Utah/Ogden Valley pace)", primary:[1430,2917,4464,6072,7745,9485,11295,13176,15133,17169,19285,21487,23776,26157,28634,31209,33887,36673,39570,42583,45716,48975,52364,55888,59554,63366,67330,71454,75742,80201,84840,89663,94680,99897,105323,110966,116834,122938,129285,135886], second:[2600,5304,8116,11041,14082,17246,20536,23957,27515,31216,35065,39067,43230,47559,52061,56744,61614,66678,71945,77423,83120,89045,95207,101615,108279,115211,122419,129916,137712,145821,154254,163024,172145,181631,191496,201756,212426,223523,235064,247066], combined:[5846,11749,17712,23736,29825,35981,42207,48504,54877,61329,67861,74479,81184,87981,94874,101865,108959,116161,123474,130903,138452,146127,153932,161872,169954,178182,186562,195102,203806,212681,221736,230975,240408,250041,259883,269942,280226,290746,301509,312526]}
+  };
+  var HOA_ANNUAL = 4416;
+  var homeVal = function(year, rate){ return Math.round(500000*Math.pow(1+rate,year)); };
+  var RATES = {flat:0, hist:0.025, utah:0.04};
+  var SAMPLE_YEARS = [1,5,10,15,20,25,30,31,35,40];
+
+  function fmt(n){ return "$" + n.toLocaleString("en-US"); }
+
+  function drawChart(key){
+    var s = SCENARIOS[key];
+    var maxV = Math.max(s.primary[39], s.second[39]);
+    var niceMax = Math.ceil(maxV/25000)*25000;
+    var W=700,H=280,padL=58,padR=16,padT=14,padB=28;
+    var plotW = W-padL-padR, plotH = H-padT-padB;
+
+    function x(year){ return padL + (year-1)/39*plotW; }
+    function y(val){ return padT + plotH - (val/niceMax)*plotH; }
+
+    var svg = '';
+    // gridlines + y labels
+    for(var g=0; g<=4; g++){
+      var gv = niceMax*g/4;
+      var gy = y(gv);
+      svg += '<line class="lc-gridline" x1="'+padL+'" y1="'+gy+'" x2="'+(W-padR)+'" y2="'+gy+'"/>';
+      svg += '<text class="lc-axis-label" x="'+(padL-6)+'" y="'+(gy+3)+'" text-anchor="end">'+fmt(gv)+'</text>';
+    }
+    // x labels
+    [1,10,20,30,40].forEach(function(yr){
+      svg += '<text class="lc-axis-label" x="'+x(yr)+'" y="'+(H-8)+'" text-anchor="middle">Yr '+yr+'</text>';
+    });
+    // lines
+    function pathFor(series){
+      var pts = series.map(function(v,i){ return x(i+1)+','+y(v); });
+      return pts.join(' ');
+    }
+    svg += '<polyline class="lc-line-second" points="'+pathFor(s.second)+'"/>';
+    svg += '<polyline class="lc-line-primary" points="'+pathFor(s.primary)+'"/>';
+    svg += '<circle class="lc-dot" cx="'+x(40)+'" cy="'+y(s.primary[39])+'" r="3.5"/>';
+
+    document.getElementById('trajectory-svg').innerHTML = svg;
+
+    // table
+    var tbody = document.getElementById('trajectory-tbody');
+    tbody.innerHTML = '';
+    SAMPLE_YEARS.forEach(function(yr){
+      var v = homeVal(yr, RATES[key]);
+      var p = s.primary[yr-1], sc = s.second[yr-1], comb = s.combined[yr-1];
+      var pAnnual = Math.round(v*0.005*0.55);
+      var tr = document.createElement('tr');
+      var label = (yr===31) ? yr+' *' : yr;
+      tr.innerHTML = '<td>'+label+'</td><td>'+fmt(v)+'</td><td>'+fmt(pAnnual)+'</td><td>'+fmt(p)+'</td><td>'+fmt(comb)+'</td><td>'+fmt(Math.round(v*0.005))+'</td>';
+      tbody.appendChild(tr);
+    });
+  }
+
+  var tabs = document.querySelectorAll('.scenario-tab');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.setAttribute('aria-selected','false'); });
+      tab.setAttribute('aria-selected','true');
+      drawChart(tab.getAttribute('data-scenario'));
+    });
+    tab.addEventListener('keydown', function(e){
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); tab.click(); }
+    });
+  });
+
+  drawChart('utah');
+
+  // ---------- flip cards ----------
+  document.querySelectorAll('.flip-card, .state-card, .bp-card, .block-card, .k-card, .close-card').forEach(function(card){
+    card.setAttribute('aria-pressed', 'false');
+    card.addEventListener('click', function(){
+      var flipped = card.classList.toggle('flipped');
+      card.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+    });
+  });
+
+  // ---------- Exhibit A4: grouped comparison bars ----------
+  (function(){
+    var DATA = [
+      {year:1, base:3120, pid:1430},
+      {year:10, base:4441, pid:2035},
+      {year:20, base:6573, pid:3013},
+      {year:30, base:9730, pid:4460},
+      {year:40, base:14403, pid:6601}
+    ];
+    var W=700,H=300,padL=50,padR=16,padT=20,padB=40;
+    var plotW=W-padL-padR, plotH=H-padT-padB;
+    var groupW = plotW/DATA.length;
+    var barW = groupW*0.16;
+    var maxV = 22000; // headroom above 21,004 combined max
+    function y(v){ return padT+plotH-(v/maxV)*plotH; }
+    function h(v){ return (v/maxV)*plotH; }
+
+    var svg='';
+    for(var g=0; g<=4; g++){
+      var gv = maxV*g/4;
+      var gy = y(gv);
+      svg += '<line class="cb-gridline" x1="'+padL+'" y1="'+gy+'" x2="'+(W-padR)+'" y2="'+gy+'"/>';
+      svg += '<text class="cb-axis-label" x="'+(padL-6)+'" y="'+(gy+3)+'" text-anchor="end">$'+gv.toLocaleString('en-US')+'</text>';
+    }
+
+    DATA.forEach(function(d,i){
+      var cx = padL + groupW*i + groupW/2;
+      var xNonPid = cx - barW*1.3;
+      var xPid = cx + barW*0.3;
+
+      // non-PID bar (base tax only)
+      svg += '<rect class="cb-base" x="'+xNonPid+'" y="'+y(d.base)+'" width="'+barW+'" height="'+h(d.base)+'" rx="2"/>';
+      svg += '<text class="cb-val" x="'+(xNonPid+barW/2)+'" y="'+(y(d.base)-5)+'" text-anchor="middle">$'+d.base.toLocaleString('en-US')+'</text>';
+
+      // PID bar (base tax, stacked with pid on top)
+      svg += '<rect class="cb-base" x="'+xPid+'" y="'+y(d.base)+'" width="'+barW+'" height="'+h(d.base)+'" rx="2"/>';
+      svg += '<rect class="cb-pid" x="'+xPid+'" y="'+y(d.base+d.pid)+'" width="'+barW+'" height="'+h(d.pid)+'" rx="2"/>';
+      svg += '<text class="cb-val" x="'+(xPid+barW/2)+'" y="'+(y(d.base+d.pid)-5)+'" text-anchor="middle">$'+(d.base+d.pid).toLocaleString('en-US')+'</text>';
+
+      svg += '<text class="cb-year-label" x="'+cx+'" y="'+(H-16)+'" text-anchor="middle">Year '+d.year+'</text>';
+    });
+
+    document.getElementById('compare-svg').innerHTML = svg;
+  })();
+
+  // ---------- Exhibit A5: uncertainty band chart ----------
+  (function(){
+    var flatNonPid=[3000,6000,9000,12000,15000,18000,21000,24000,27000,30000,33000,36000,39000,42000,45000,48000,51000,54000,57000,60000,63000,66000,69000,72000,75000,78000,81000,84000,87000,90000,93000,96000,99000,102000,105000,108000,111000,114000,117000,120000];
+    var flatPid=[8791,17582,26373,35164,43955,52746,61537,70328,79119,87910,96701,105492,114283,123074,131865,140656,149447,158238,167029,175820,184611,193402,202193,210984,219775,228566,237357,246148,254939,263730,272521,281312,290103,298894,307685,316476,325267,334058,342849,351640];
+    var histNonPid=[3075,6227,9458,12769,16163,19642,23208,26864,30610,34450,38387,42421,46557,50796,55141,59594,64159,68838,73634,78550,83589,88753,94047,99473,105035,110736,116579,122569,128708,135001,141451,148062,154839,161785,168904,176202,183682,191349,199208,207263];
+    var histPid=[8900,17913,27040,36285,45651,55141,64758,74504,84384,94400,104557,114856,125303,135901,146653,157564,168637,179877,191287,202872,214636,226584,238720,251049,263576,276306,289244,302394,315763,329356,343178,357236,371534,386080,400879,415937,431261,446859,462735,478898];
+    var utahNonPid=[3120,6365,9739,13249,16899,20695,24643,28748,33018,37459,42077,46881,51876,57071,62474,68093,73936,80014,86334,92908,99744,106854,114248,121938,129935,138253,146903,155899,165255,174985,185104,195629,206574,217957,229795,242107,254911,268227,282077,296480];
+    var utahPid=[8966,18114,27451,36985,46724,56676,66849,77253,87896,98788,109939,121359,133060,145052,157347,169958,182896,196175,209808,223810,238196,252980,268179,283810,299889,316434,333465,351001,369061,387666,406840,426604,446981,467997,489678,512048,535137,558973,583586,609006];
+
+    var W=700,H=320,padL=58,padR=16,padT=16,padB=32;
+    var plotW=W-padL-padR, plotH=H-padT-padB;
+    var maxV = 650000;
+    function x(year){ return padL + (year-1)/39*plotW; }
+    function y(v){ return padT + plotH - (v/maxV)*plotH; }
+
+    function areaPath(lowArr, highArr){
+      var top = highArr.map(function(v,i){ return x(i+1)+','+y(v); }).join(' L ');
+      var bottomRev = lowArr.slice().reverse().map(function(v,i){ return x(40-i)+','+y(v); }).join(' L ');
+      return 'M '+top+' L '+bottomRev+' Z';
+    }
+    function linePath(arr){
+      return arr.map(function(v,i){ return (i===0?'M ':'L ')+x(i+1)+','+y(v); }).join(' ');
+    }
+
+    var svg = '';
+    for(var g=0; g<=5; g++){
+      var gv = maxV*g/5;
+      var gy = y(gv);
+      svg += '<line class="lc-gridline" x1="'+padL+'" y1="'+gy+'" x2="'+(W-padR)+'" y2="'+gy+'"/>';
+      svg += '<text class="lc-axis-label" x="'+(padL-6)+'" y="'+(gy+3)+'" text-anchor="end">$'+Math.round(gv/1000)+'K</text>';
+    }
+    [1,10,20,30,40].forEach(function(yr){
+      svg += '<text class="lc-axis-label" x="'+x(yr)+'" y="'+(H-8)+'" text-anchor="middle">Yr '+yr+'</text>';
+    });
+
+    // non-PID band + historical-avg dashed line
+    svg += '<path d="'+areaPath(flatNonPid, utahNonPid)+'" fill="var(--ink-soft)" opacity="0.28" stroke="none"/>';
+    svg += '<path d="'+linePath(histNonPid)+'" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="5,3"/>';
+
+    // PID band + historical-avg dashed line
+    svg += '<path d="'+areaPath(flatPid, utahPid)+'" fill="var(--flag-red)" opacity="0.28" stroke="none"/>';
+    svg += '<path d="'+linePath(histPid)+'" fill="none" stroke="var(--flag-red)" stroke-width="1.5" stroke-dasharray="5,3"/>';
+
+    document.getElementById('band-svg').innerHTML = svg;
+  })();
+
+  // ---------- Exhibit M: county-wide diversion trend ----------
+  (function(){
+    var YEARS = ['2021','2022','2023','2024'];
+    var GF = [1485273, 1738001, 1835607, 1785054];
+    var ALL = [10712652, 13041281, 14387615, 14246488];
+
+    var W=700,H=280,padL=60,padR=16,padT=20,padB=36;
+    var plotW=W-padL-padR, plotH=H-padT-padB;
+    var groupW = plotW/YEARS.length;
+    var barW = groupW*0.22;
+    var maxV = 16000000;
+    function y(v){ return padT+plotH-(v/maxV)*plotH; }
+    function h(v){ return (v/maxV)*plotH; }
+
+    var svg='';
+    for(var g=0; g<=4; g++){
+      var gv = maxV*g/4;
+      var gy = y(gv);
+      svg += '<line class="cb-gridline" x1="'+padL+'" y1="'+gy+'" x2="'+(W-padR)+'" y2="'+gy+'"/>';
+      svg += '<text class="cb-axis-label" x="'+(padL-6)+'" y="'+(gy+3)+'" text-anchor="end">$'+(gv/1000000)+'M</text>';
+    }
+
+    YEARS.forEach(function(yr,i){
+      var cx = padL + groupW*i + groupW/2;
+      var xGF = cx - barW*1.1;
+      var xAll = cx + barW*0.1;
+
+      svg += '<rect class="cb-pid" x="'+xGF+'" y="'+y(GF[i])+'" width="'+barW+'" height="'+h(GF[i])+'" rx="2"/>';
+      svg += '<text class="cb-val" x="'+(xGF+barW/2)+'" y="'+(y(GF[i])-6)+'" text-anchor="middle" style="font-size:9px;">$'+(Math.round(GF[i]/1000))+'K</text>';
+
+      svg += '<rect class="cb-base" x="'+xAll+'" y="'+y(ALL[i])+'" width="'+barW+'" height="'+h(ALL[i])+'" rx="2"/>';
+      svg += '<text class="cb-val" x="'+(xAll+barW/2)+'" y="'+(y(ALL[i])-6)+'" text-anchor="middle" style="font-size:9px;">$'+(ALL[i]/1000000).toFixed(1)+'M</text>';
+
+      svg += '<text class="cb-year-label" x="'+cx+'" y="'+(H-14)+'" text-anchor="middle">'+yr+'</text>';
+    });
+
+    document.getElementById('county-trend-svg').innerHTML = svg;
+  })();
+})();
+</script>
+
+</body>
+</html>

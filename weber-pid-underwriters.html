@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Middlemen: Who Profits From Utah's PID Boom | The Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0F1A26;
+    --navy:#14202E;
+    --navy-mid:#1B2A3D;
+    --ivory:#F3ECDD;
+    --ivory-dim:#E7DFCC;
+    --gold:#C7A15E;
+    --gold-dim:#A8863C;
+    --rust:#8B3A2B;
+    --slate:#93A0AE;
+    --slate-dim:#6E7A88;
+    --line:rgba(199,161,94,0.28);
+    --serif:'Source Serif 4', Georgia, serif;
+    --sans:'IBM Plex Sans', Helvetica, Arial, sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--navy);
+    color:var(--ivory-dim);
+    font-family:var(--sans);
+    line-height:1.6;
+    font-size:17px;
+  }
+  ::selection{background:var(--gold-dim);color:var(--navy-deep);}
+
+  /* ---------- texture ---------- */
+  .texture{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(199,161,94,0.035) 0px, rgba(199,161,94,0.035) 1px, transparent 1px, transparent 30px),
+      repeating-linear-gradient(25deg, rgba(199,161,94,0.03) 0px, rgba(199,161,94,0.03) 1px, transparent 1px, transparent 30px);
+  }
+
+  a{color:var(--gold);}
+
+  /* ---------- header ---------- */
+  header{
+    position:relative; z-index:1;
+    padding:70px 24px 56px;
+    text-align:center;
+    border-bottom:1px solid var(--line);
+    background:radial-gradient(ellipse at 50% 0%, rgba(199,161,94,0.08), transparent 60%);
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    letter-spacing:3px;
+    font-size:12.5px;
+    color:var(--gold);
+    text-transform:uppercase;
+    font-weight:600;
+  }
+  .eyebrow .rule{display:inline-block;width:30px;height:1px;background:var(--gold);vertical-align:middle;margin:0 12px 3px 0;}
+  header h1{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:clamp(32px,5.5vw,58px);
+    color:var(--ivory);
+    line-height:1.08;
+    max-width:900px;
+    margin:22px auto 0;
+    letter-spacing:-0.5px;
+  }
+  header h1 em{font-style:normal;color:var(--gold);}
+  header .dek{
+    max-width:640px;
+    margin:22px auto 0;
+    font-size:18px;
+    color:var(--slate);
+  }
+  .pub-mark{
+    display:flex;align-items:center;justify-content:center;gap:14px;margin-top:34px;
+  }
+  .pub-mark .circ{width:34px;height:34px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);color:var(--gold);font-weight:700;}
+  .pub-mark .label{font-family:var(--mono);font-size:11.5px;letter-spacing:1.5px;color:var(--slate-dim);text-transform:uppercase;}
+
+  /* ---------- nav ---------- */
+  nav.jump{
+    position:sticky; top:0; z-index:10;
+    background:rgba(15,26,38,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    padding:12px 20px;
+    display:flex; gap:6px; flex-wrap:wrap; justify-content:center;
+  }
+  nav.jump button{
+    background:transparent;
+    border:1px solid transparent;
+    color:var(--slate);
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.4px;
+    padding:7px 13px;
+    border-radius:3px;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  nav.jump button:hover, nav.jump button:focus-visible{
+    color:var(--gold);
+    border-color:var(--line);
+    outline:none;
+  }
+
+  /* ---------- layout ---------- */
+  main{position:relative; z-index:1; max-width:840px; margin:0 auto; padding:0 24px;}
+  section{padding:64px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .sec-label{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:2.5px;
+    color:var(--gold-dim);
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  h2{
+    font-family:var(--serif);
+    font-size:clamp(24px,3.4vw,34px);
+    color:var(--ivory);
+    font-weight:600;
+    line-height:1.2;
+    margin-bottom:20px;
+  }
+  h3{
+    font-family:var(--serif);
+    font-size:20px;
+    color:var(--ivory);
+    font-weight:600;
+    margin:28px 0 12px;
+  }
+  p{margin-bottom:16px; color:var(--ivory-dim);}
+  p.lead{font-size:19px; color:var(--ivory); font-weight:400;}
+  strong{color:var(--ivory); font-weight:600;}
+  .cite{font-family:var(--mono); font-size:13px; color:var(--slate-dim);}
+
+  /* ---------- primer box ---------- */
+  .primer{
+    background:var(--navy-mid);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:32px;
+    margin-top:8px;
+  }
+  .primer .tag{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--navy-deep);
+    background:var(--gold);
+    padding:4px 10px;
+    border-radius:3px;
+    margin-bottom:16px;
+    font-weight:700;
+  }
+
+  /* ---------- glossary ---------- */
+  .glossary{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px 28px;
+    margin-top:24px;
+  }
+  @media(max-width:600px){.glossary{grid-template-columns:1fr;}}
+  .gterm{border-left:2px solid var(--gold-dim); padding-left:14px;}
+  .gterm dt{font-family:var(--serif); font-weight:600; color:var(--ivory); font-size:16px; margin-bottom:4px;}
+  .gterm dd{font-size:14.5px; color:var(--slate);}
+
+  /* ---------- timeline ---------- */
+  .timeline{margin-top:28px; position:relative; padding-left:28px;}
+  .timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line);}
+  .tl-item{position:relative; margin-bottom:30px;}
+  .tl-item::before{
+    content:"";position:absolute;left:-28px;top:5px;width:11px;height:11px;border-radius:50%;
+    background:var(--navy); border:2px solid var(--gold);
+  }
+  .tl-date{font-family:var(--mono); font-size:13px; color:var(--gold); letter-spacing:0.5px; margin-bottom:4px;}
+  .tl-body{color:var(--ivory-dim); font-size:15.5px;}
+  .tl-body strong{color:var(--ivory);}
+
+  /* ---------- ranking ticket ---------- */
+  .ticket-wrap{display:flex; justify-content:center; margin:36px 0;}
+  .ticket{
+    width:100%; max-width:420px;
+    background:var(--ivory);
+    color:var(--navy-deep);
+    box-shadow:0 20px 45px rgba(0,0,0,0.4);
+    border-radius:2px;
+  }
+  .ticket-top{padding:18px 24px 14px; border-bottom:1.5px dashed #B7ADA0;}
+  .ticket-top .label{font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--rust); font-weight:700; text-transform:uppercase;}
+  .ticket-top .title{font-family:var(--serif); font-size:19px; font-weight:700; margin-top:4px;}
+  .ticket-rows{padding:14px 24px 8px;}
+  .trow{display:flex; align-items:baseline; justify-content:space-between; padding:9px 0;}
+  .trow + .trow{border-top:1px solid rgba(20,32,46,0.12);}
+  .trow .rank{font-family:var(--mono); font-size:13px; color:var(--rust); font-weight:700; width:20px;}
+  .trow .firm{font-size:15.5px; font-weight:600; flex:1; padding-left:6px;}
+  .trow .vol{font-family:var(--mono); font-size:15.5px; font-weight:700;}
+  .trow.hl .firm, .trow.hl .vol{color:var(--rust);}
+  .ticket-foot{border-top:1.5px dashed #B7ADA0; padding:10px 24px 16px; font-family:var(--mono); font-size:10.5px; letter-spacing:0.6px; color:#6B6255; text-transform:uppercase;}
+
+  /* ---------- stat bar ---------- */
+  .stat-bar{
+    display:grid; grid-template-columns:1fr 1fr; gap:20px;
+    margin:30px 0;
+  }
+  @media(max-width:560px){.stat-bar{grid-template-columns:1fr;}}
+  .stat{
+    background:var(--navy-mid); border:1px solid var(--line); border-radius:6px; padding:24px;
+  }
+  .stat .num{font-family:var(--serif); font-size:36px; font-weight:700; color:var(--gold); line-height:1;}
+  .stat .cap{font-family:var(--mono); font-size:11.5px; letter-spacing:0.8px; color:var(--slate); text-transform:uppercase; margin-top:8px;}
+
+  /* ---------- quote block ---------- */
+  blockquote{
+    border-left:3px solid var(--gold-dim);
+    padding:4px 0 4px 22px;
+    margin:24px 0;
+    font-family:var(--serif);
+    font-size:19px;
+    color:var(--ivory);
+    font-style:normal;
+  }
+  blockquote cite{display:block; margin-top:10px; font-family:var(--mono); font-size:12.5px; color:var(--slate-dim); font-style:normal;}
+
+  /* ---------- role diagram ---------- */
+  .roles{margin:30px 0; display:flex; flex-direction:column; gap:10px;}
+  .role-row{
+    display:grid; grid-template-columns:150px 1fr; gap:16px; align-items:center;
+    background:var(--navy-mid); border:1px solid var(--line); border-radius:5px; padding:14px 18px;
+  }
+  @media(max-width:560px){.role-row{grid-template-columns:1fr;}}
+  .role-name{font-family:var(--mono); font-size:12.5px; letter-spacing:1px; color:var(--gold); text-transform:uppercase; font-weight:700;}
+  .role-desc{font-size:14.5px; color:var(--slate);}
+
+  /* ---------- details/expand ---------- */
+  details{
+    background:var(--navy-mid);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:18px 22px;
+    margin:16px 0;
+  }
+  summary{
+    cursor:pointer; font-family:var(--serif); font-weight:600; color:var(--ivory); font-size:16px;
+    list-style:none;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::before{content:"+ "; color:var(--gold); font-family:var(--mono);}
+  details[open] summary::before{content:"– ";}
+  details .inner{margin-top:14px; font-size:14.5px; color:var(--slate);}
+  details .inner p{color:var(--slate); font-size:14.5px;}
+  details .inner strong{color:var(--ivory-dim);}
+
+  /* ---------- footer ---------- */
+  footer{
+    position:relative; z-index:1;
+    padding:50px 24px 70px;
+    text-align:center;
+    border-top:1px solid var(--line);
+  }
+  footer .pub-mark{margin-top:0; margin-bottom:18px;}
+  footer .links{font-family:var(--mono); font-size:12.5px; color:var(--slate-dim);}
+  footer .links a{color:var(--gold); text-decoration:none; margin:0 8px;}
+  footer .links a:hover{text-decoration:underline;}
+  footer .note{margin-top:22px; font-size:12.5px; color:var(--slate-dim); max-width:520px; margin-left:auto; margin-right:auto;}
+
+  .sources-list{font-size:13.5px; color:var(--slate); margin-top:14px;}
+  .sources-list li{margin-bottom:8px;}
+</style>
+</head>
+<body>
+<div class="texture"></div>
+
+<header>
+  <div class="eyebrow"><span class="rule"></span>ACCOUNTABILITY JOURNALISM · WEBER COUNTY, UTAH</div>
+  <h1>The Middlemen: Who Profits From Utah's <em>PID</em> Boom</h1>
+  <p class="dek">Utah's Public Infrastructure Districts are marketed as a way to build roads and sewers without raising anyone's taxes. Behind nearly every district sits a small circle of banks and advisors doing the underwriting, the trustee work, and — sometimes — the paperwork that got the districts created in the first place.</p>
+  <div class="pub-mark">
+    <div class="circ">H</div>
+    <div class="label">The Weber County Hive</div>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Section navigation">
+  <button data-scroll-to="primer">Start Here</button>
+  <button data-scroll-to="law">The Law</button>
+  <button data-scroll-to="team">The Team</button>
+  <button data-scroll-to="rankings">The Rankings</button>
+  <button data-scroll-to="zions">Zions' Many Hats</button>
+  <button data-scroll-to="scale">The Scale</button>
+  <button data-scroll-to="glossary">Glossary</button>
+</nav>
+
+<main>
+
+  <section id="primer">
+    <div class="sec-label">01 — New to This?</div>
+    <div class="primer">
+      <span class="tag">Start Here</span>
+      <p class="lead">A Public Infrastructure District, or PID, is a way for a developer to borrow money to build roads, sewers, and other infrastructure for a new neighborhood or resort — and then pay that money back using property taxes charged only to the people who eventually buy homes there.</p>
+      <p>Utah didn't have this tool until 2019. Since then, PIDs have issued more than <strong>$5.2 billion</strong> in bonds statewide. Somebody has to sell those bonds to investors, advise the local government on how to structure them, and hold the money in trust once they're issued. That's investment banking work, and in Utah it's dominated by a small handful of firms — some of whom also helped write the law that created this market, and some of whom show up on multiple sides of the same deal.</p>
+      <p>This page traces who those firms are, what roles they play, and what that means for the homeowners who end up paying the bill.</p>
+    </div>
+  </section>
+
+  <section id="law">
+    <div class="sec-label">02 — Where PIDs Came From</div>
+    <h2>A law with no market to serve it — until a team built one</h2>
+    <p>Public Infrastructure Districts didn't exist in Utah before 2019. They were created by <strong>S.B. 228</strong>, the Public Infrastructure District Act, sponsored by then-Sen. Dan McCay with Rep. James Dunnigan as House sponsor. The bill passed the 2019 General Session and took effect May 14, 2019.</p>
+    <p>At the time, there was no PID financing market in Utah for the simple reason that PIDs didn't exist yet. That market had to be built — and it was built by a specific pair of bankers, working for a specific firm, in the specific years right after the law passed.</p>
+  </section>
+
+  <section id="team">
+    <div class="sec-label">03 — The Bankers</div>
+    <h2>The team moved firms. The business came with it.</h2>
+    <p>In 2019, when SB 228 passed, bankers <strong>Sam Sharp</strong> and <strong>Zach Bishop</strong> worked at <strong>D.A. Davidson &amp; Co.</strong>, not Piper Sandler. Piper Sandler's own later hiring announcement credits the pair with building "a market-leading presence in the Colorado metro district space" and introducing "a new market for special districts in Utah" — work done while they were still D.A. Davidson employees.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">MAY 2019</div>
+        <div class="tl-body">S.B. 228 takes effect. Sharp and Bishop, at <strong>D.A. Davidson</strong>, begin building Utah's first PID deals.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">NOV. 30, 2020</div>
+        <div class="tl-body">Piper Sandler announces it has hired Sharp, Bishop, and four D.A. Davidson colleagues (Cory Johnson, Mike Ryan, Mike Sullivan, Shelby Turner) to build its own special district group. The team — and its Utah track record — moves firms together.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">NOV. 30, 2021</div>
+        <div class="tl-body">Piper Sandler announces the team secured <strong>$331 million</strong> in Utah PID financing over the prior 12 months. VP Benj Becker says: "our team championed the Public Infrastructure District Act in 2019." Sam Sharp says he's proud of "helping to get the legislation passed in Utah."</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">AUG. 2026</div>
+        <div class="tl-body">The Bond Buyer's H1 2026 Utah rankings show D.A. Davidson and Piper Sandler as the two largest senior managers of Utah municipal bonds — the two firms that employed the same team, five years apart.</div>
+      </div>
+    </div>
+
+    <details>
+      <summary>A necessary caveat</summary>
+      <div class="inner">
+        <p>Piper Sandler's 2021 quotes describe what "our team" did — and that team didn't join Piper until more than a year after SB 228 passed. What the record supports is that <strong>the individuals</strong> now running Piper's Utah PID business say they helped pass the law, while working for a different firm at the time. It does not establish that Piper Sandler, as a company, had any role in the 2019 legislation.</p>
+      </div>
+    </details>
+  </section>
+
+  <section id="rankings">
+    <div class="sec-label">04 — Who's Winning the Business Now</div>
+    <h2>Two firms, one team's legacy, and half the Utah market</h2>
+    <p>The Bond Buyer's "Southwest Midyear Review" (Aug. 18, 2026), sourced to LSEG data, ranks the largest senior managers of <em>all</em> Utah municipal bonds — not PIDs alone — for the first half of 2026:</p>
+
+    <div class="ticket-wrap">
+      <div class="ticket">
+        <div class="ticket-top">
+          <div class="label">Bond Buyer · H1 2026</div>
+          <div class="title">Utah Senior Managers</div>
+        </div>
+        <div class="ticket-rows">
+          <div class="trow hl"><span class="rank">1</span><span class="firm">D.A. Davidson</span><span class="vol">$706.0M</span></div>
+          <div class="trow hl"><span class="rank">2</span><span class="firm">Piper Sandler</span><span class="vol">$621.0M</span></div>
+          <div class="trow"><span class="rank">3</span><span class="firm">BofA Securities</span><span class="vol">$486.8M</span></div>
+          <div class="trow"><span class="rank">4</span><span class="firm">Morgan Stanley</span><span class="vol">$256.4M</span></div>
+          <div class="trow"><span class="rank">5</span><span class="firm">RBC Capital Markets</span><span class="vol">$224.5M</span></div>
+        </div>
+        <div class="ticket-foot">Source: LSEG · The Bond Buyer</div>
+      </div>
+    </div>
+
+    <p><span class="cite">Note:</span> This figure is the <strong>par value of bonds</strong> for which each firm served as senior manager — not revenue, fees, or profit. D.A. Davidson and Piper Sandler together account for more than half of all Utah municipal bond volume tracked in this ranking.</p>
+  </section>
+
+  <section id="zions">
+    <div class="sec-label">05 — The Firm Wearing Every Hat</div>
+    <h2>Zions isn't the underwriter. It's often everything else.</h2>
+    <p>In that same Bond Buyer table, one firm outranks both underwriters combined in its own category: <strong>Zions Bank ranks #1 Financial Advisor statewide, at $734.1 million</strong> — larger than either D.A. Davidson's or Piper Sandler's underwriting volume.</p>
+    <p>Zions Bank Public Finance is registered with the SEC and MSRB as <em>both</em> a municipal advisor and a municipal securities dealer. Across a single PID's life, Zions and its affiliates can plausibly touch:</p>
+
+    <div class="roles">
+      <div class="role-row"><div class="role-name">Feasibility Study</div><div class="role-desc">Writes the studies that justify creating a PID in the first place — Zions' own client agreements describe this scope of work explicitly.</div></div>
+      <div class="role-row"><div class="role-name">Municipal Advisor</div><div class="role-desc">Advises the city or county creating the district on how to structure it.</div></div>
+      <div class="role-row"><div class="role-name">Underwriter</div><div class="role-desc">Sells the resulting bonds to investors (on some, not all, Utah PID deals).</div></div>
+      <div class="role-row"><div class="role-name">Trustee</div><div class="role-desc">Zions' "Corporate Trust" affiliate holds and administers the bond funds after issuance.</div></div>
+    </div>
+
+    <blockquote>
+      "Corporate Trust's desire to do business with CLIENT could create an incentive for Zions to recommend a course of action that increases the level of CLIENT's business activity with this affiliate."
+      <cite>— Zions Public Finance's own municipal advisory agreement (Springdale, Utah, May 2023)</cite>
+    </blockquote>
+
+    <p>That's not an outside allegation — it's Zions' own written disclosure of the structural conflict built into offering both advisory and trust services to the same government client.</p>
+
+    <details>
+      <summary>How this played out on one real Utah PID</summary>
+      <div class="inner">
+        <p>Before the Nordic Village PID (Weber County) existed, a political action committee connected to the development paid Zions Bank to review a resort feasibility study. Zions was later installed as trustee on the PID's $25 million bond issuance — replacing the original trustee in November 2025. The advisory relationship was established before the district was ever created.</p>
+        <p>Zions is not the only trustee active on Utah PIDs — U.S. Bank and UMB Bank both serve as trustee on other 2025 Utah districts. But Zions' financial-advisor role recurs across projects regardless of who ultimately underwrites the bonds, including on the Black Desert PID (Washington County), where D.A. Davidson underwrote the bonds but Zions Public Finance was separately designated in the district's own governing document.</p>
+      </div>
+    </details>
+  </section>
+
+  <section id="scale">
+    <div class="sec-label">06 — What This Adds Up To</div>
+    <h2>The scale, statewide</h2>
+    <div class="stat-bar">
+      <div class="stat">
+        <div class="num">$5.267B</div>
+        <div class="cap">Total PID bonds issued statewide, as of Aug. 7, 2026 — up from ~$4B the previous fall (Utah State Auditor Tina Cannon, public statement)</div>
+      </div>
+      <div class="stat">
+        <div class="num">$1.36B</div>
+        <div class="cap">Combined H1 2026 senior-manager volume for just the top two Utah underwriters — D.A. Davidson + Piper Sandler</div>
+      </div>
+    </div>
+    <p>PIDs are marketed as a way to fund growth without raising anyone's existing taxes. In practice, the debt is repaid by the property owners inside the district — often future homebuyers who had no vote in creating it and no seat on the board that governs it. Closing documents may disclose the existence or maximum rate of a PID assessment, but they don't necessarily present a buyer with one fixed lifetime cost; that number depends on future assessed values, annual levies, bond terms, and any refinancing down the road.</p>
+    <p>None of this proves wrongdoing on its own. It documents something worth seeing clearly: the same small circle of firms shows up again and again — writing the studies, advising the government, underwriting the bonds, and holding the money — on the debt that Utah homeowners in PID districts are the ones repaying.</p>
+  </section>
+
+  <section id="glossary">
+    <div class="sec-label">07 — Glossary</div>
+    <h2>Plain-language terms</h2>
+    <dl class="glossary">
+      <div class="gterm"><dt>PID</dt><dd>Public Infrastructure District — a special government entity created to finance infrastructure through bonds repaid by property taxes inside its boundary.</dd></div>
+      <div class="gterm"><dt>Senior Manager / Underwriter</dt><dd>The investment bank that structures and sells a bond issue to investors.</dd></div>
+      <div class="gterm"><dt>Municipal Advisor</dt><dd>Advises the government entity creating the district on financing strategy — legally required to act in the client's best interest.</dd></div>
+      <div class="gterm"><dt>Trustee</dt><dd>The bank that holds and administers bond funds after issuance, making sure payments go where they're supposed to.</dd></div>
+      <div class="gterm"><dt>Par Value</dt><dd>The face amount of a bond — not the fee or profit the bank makes from selling it.</dd></div>
+      <div class="gterm"><dt>Feasibility Study</dt><dd>An analysis, often commissioned by the developer, used to justify creating a PID in the first place.</dd></div>
+    </dl>
+  </section>
+
+</main>
+
+<footer>
+  <div class="pub-mark">
+    <div class="circ">H</div>
+    <div class="label">The Weber County Hive</div>
+  </div>
+  <div class="links">
+    <a href="index.html">PID Guide Home</a>
+    <a href="pid_mechanism_map.html">How PIDs Work</a>
+    <a href="weber-pid-school-funds.html">PIDs &amp; School Funding</a>
+  </div>
+  <p class="note">Sourced from S.B. 228 (2019 General Session), Piper Sandler and D.A. Davidson press releases, The Bond Buyer's Aug. 18, 2026 Southwest Midyear Review (LSEG data), Zions Public Finance's own public client agreements, and a public statement by Utah State Auditor Tina Cannon on Aug. 10, 2026.</p>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-scroll-to]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const target = document.getElementById(btn.getAttribute('data-scroll-to'));
+      if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+</script>
+
+</body>
+</html>

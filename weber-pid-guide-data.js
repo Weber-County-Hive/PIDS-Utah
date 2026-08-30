@@ -52,5 +52,13 @@ const PID_PAGES = [
     tags: ["Schools", "Bonding"],
     linkLabel: "Open explainer →",
     link: "weber-pid-school-funds.html"
+  },
+  {
+    kind: "Investigation · Statewide",
+    title: "The Middlemen: Who Profits From Utah's PID Boom",
+    description: "The bankers who built Utah's PID market moved from D.A. Davidson to Piper Sandler in 2020 — and by 2026 the two firms lead Utah's entire municipal bond rankings. Plus: how Zions Bank shows up as advisor, feasibility-study author, underwriter, and trustee on the same deals, including its own written admission of the conflict that creates.",
+    tags: ["Investigation", "Statewide", "Follow the Money"],
+    linkLabel: "Read the investigation →",
+    link: "weber-pid-underwriters.html"
   }
 ];

@@ -46,6 +46,22 @@ const PID_PAGES = [
     link: "nordic-village-case-file.html"
   },
   {
+    kind: "Case Study · Weber County",
+    title: "Three Boards, One Man, No Disclosure",
+    description: "Snowbasin's General Manager sits as a trustee on three overlapping Weber County special districts governing his own employer's water, roads, and up to $300 million in infrastructure bonds — all appointed the same way as a cemetery board, with no bonds issued and the districts sitting dormant since a 2022 hotel deal collapsed.",
+    tags: ["Case Study", "Weber County", "Conflict of Interest"],
+    linkLabel: "Open case file →",
+    link: "mount-ogden-pid-ratchford.html"
+  },
+  {
+    kind: "Case Study · Weber County",
+    title: "The Boundary That Left Them Out",
+    description: "Ogden Valley City's own incorporation study warned, in writing, that leaving the valley's biggest resorts out of the tax base would strain the budget. Three years later, that's exactly what happened — while a separate $300 million infrastructure authorization tied to the same resort sits unused, overseen by the resort's own top executive.",
+    tags: ["Case Study", "Weber County", "Incorporation"],
+    linkLabel: "Open case file →",
+    link: "ogden-valley-boundary-exclusion.html"
+  },
+  {
     kind: "Case Study · Schools & Bonding",
     title: "PIDs, Schools & Bonding",
     description: "How PIDs and tax increment financing interact with local school district funding, plus school bonding including the 2025 no-vote bonding change.",

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Boundary That Left Them Out — The Weber County Hive</title>
+<style>
+  :root{
+    --navy:#1c2430;
+    --navy2:#232d3d;
+    --gold:#d6b869;
+    --gold-dim:#a98f4f;
+    --paper:#f4f0e6;
+    --ink:#1c2430;
+    --muted:#5b6472;
+    --line:#d8d2c2;
+    --red:#8a2d2d;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family: Georgia, 'Source Serif 4', serif;
+    line-height:1.65;
+  }
+  header.masthead{
+    background:linear-gradient(180deg,var(--navy) 0%, var(--navy2) 100%);
+    color:var(--paper); padding:56px 24px 44px; text-align:center;
+    border-bottom:4px solid var(--gold);
+  }
+  header.masthead .eyebrow{
+    font-family:'IBM Plex Mono', monospace; letter-spacing:2px; font-size:12px;
+    color:var(--gold); text-transform:uppercase; margin-bottom:14px;
+  }
+  header.masthead h1{
+    font-family:'Playfair Display', Georgia, serif; font-size:2.6em; margin:0 0 14px;
+    max-width:820px; margin-left:auto; margin-right:auto; line-height:1.15;
+  }
+  header.masthead p.dek{
+    max-width:680px; margin:0 auto; font-size:1.15em; color:#cfd3da; font-style:italic;
+  }
+  main{max-width:840px; margin:0 auto; padding:48px 24px 100px;}
+  h2.section{
+    font-family:'Playfair Display', Georgia, serif; color:var(--navy);
+    font-size:1.6em; margin-top:56px; border-bottom:2px solid var(--gold);
+    padding-bottom:10px;
+  }
+  h3{font-family:'Playfair Display', Georgia, serif; color:var(--navy); font-size:1.2em;}
+  p{margin:16px 0;}
+  .lede{font-size:1.15em;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:16px; margin:28px 0;}
+  .stat-box{flex:1 1 200px; background:var(--navy); color:var(--paper); padding:20px; border-left:4px solid var(--gold);}
+  .stat-box .num{font-family:'IBM Plex Mono',monospace; font-size:1.7em; color:var(--gold); display:block;}
+  .stat-box .label{font-size:0.85em; color:#c7cbd2; text-transform:uppercase; letter-spacing:0.5px;}
+  .quote-block{
+    background:#fff; border-left:4px solid var(--red); padding:18px 22px;
+    margin:24px 0; font-style:italic; font-size:1.05em;
+  }
+  .quote-block cite{display:block; margin-top:10px; font-style:normal; font-size:0.85em; color:var(--muted); font-family:'IBM Plex Mono', monospace;}
+  .callout{background:var(--navy); color:var(--paper); padding:22px 24px; margin:28px 0; border-left:5px solid var(--gold);}
+  .callout h4{color:var(--gold); margin-top:0; font-family:'IBM Plex Mono',monospace; font-size:0.85em; text-transform:uppercase; letter-spacing:1px;}
+  .warning-box{
+    background:#fbf3df; border:2px solid var(--red); padding:20px 24px; margin:28px 0;
+  }
+  .warning-box h4{color:var(--red); margin-top:0; font-family:'IBM Plex Mono',monospace; font-size:0.85em; text-transform:uppercase; letter-spacing:1px;}
+  .people-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:28px 0;}
+  .person-card{background:#fff; border:1px solid var(--line); border-top:4px solid var(--gold); padding:18px;}
+  .person-card h4{margin:0 0 8px; font-family:'Playfair Display',serif; color:var(--navy);}
+  table.data{width:100%; border-collapse:collapse; margin:24px 0; font-size:0.95em;}
+  table.data th{background:var(--navy); color:var(--gold); text-align:left; padding:10px 12px; font-family:'IBM Plex Mono', monospace; font-size:0.8em; letter-spacing:0.5px; text-transform:uppercase;}
+  table.data td{padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+  details.source-note{background:#fff; border:1px solid var(--line); border-radius:4px; padding:12px 16px; margin:18px 0;}
+  details.source-note summary{cursor:pointer; font-weight:bold; color:var(--navy); font-family:'IBM Plex Mono',monospace; font-size:0.85em;}
+  ul.clean{padding-left:20px;} ul.clean li{margin-bottom:10px;}
+  footer{background:var(--navy); color:#c7cbd2; padding:36px 24px; text-align:center; font-family:'IBM Plex Mono', monospace; font-size:0.85em;}
+  footer a{color:var(--gold);}
+  .sources-list{font-size:0.9em; color:var(--muted);}
+  .sources-list li{margin-bottom:8px;}
+  .back-link{display:inline-block; margin-bottom:20px; color:var(--gold-dim); font-family:'IBM Plex Mono',monospace; font-size:0.85em; text-decoration:none;}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="eyebrow">The Weber County Hive · Ogden Valley City</div>
+  <h1>The Boundary That Left Them Out</h1>
+  <p class="dek">Ogden Valley City's own incorporation study warned, in writing, that leaving the valley's biggest resorts out of the tax base would eventually strain the budget. Three years later, that's exactly what happened — while a separate $300 million infrastructure authorization tied to the same resort sits unused, overseen by the resort's own top executive.</p>
+  <p style="margin-top:18px;"><a href="https://webercountyhive.substack.com" style="font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:1px; color:var(--gold); text-decoration:none; border:1px solid var(--gold); padding:8px 16px; border-radius:2px; text-transform:uppercase;">Read on Substack &rarr;</a></p>
+</header>
+
+<main>
+
+<a href="index.html" class="back-link">&larr; Back to PIDS-Utah</a>
+
+<p class="lede">When Ogden Valley City incorporated, its founders drew a boundary that left out two of the valley's largest commercial properties: Snowbasin Resort and Powder Mountain. Both sit entirely within Weber County — this was never a county-line issue. It was a choice, made by the incorporation's own sponsors, about where to put the line. The state's own hired financial consultants flagged the risk of that choice in writing before a single vote was cast. Less than three years after incorporation, the city passed a 512.6% emergency property tax increase.</p>
+
+<div class="stat-row">
+  <div class="stat-box"><span class="num">90%</span><span class="label">Of the city's commercial acreage is Wolf Creek &amp; Nordic Valley — not Snowbasin or Powder Mountain</span></div>
+  <div class="stat-box"><span class="num">$474K</span><span class="label">Total projected year-one city property tax revenue</span></div>
+  <div class="stat-box"><span class="num">512.6%</span><span class="label">Emergency property tax increase, Aug. 2026</span></div>
+</div>
+
+<h2 class="section">1. A boundary drawn by the people who benefit from it</h2>
+
+<p>Three of the six named Ogden Valley City incorporation sponsors — Brandi Hammon, Shanna Francis, and Jeanie Wendell — sat on the committee that drew the city's boundary. That boundary excluded both Snowbasin and Powder Mountain from the new city's tax rolls. Nordic Valley, whose land sits inside the boundary, was included.</p>
+
+<p>No public record supports any version of events where the resorts asked to be left out. The boundary was the committee's own decision — and it dates back to the original incorporation petition itself, not a later adjustment.</p>
+
+<div class="people-grid">
+  <div class="person-card">
+    <h4>Brandi Hammon</h4>
+    <p>Incorporation sponsor and boundary-committee member. Founder of Mountain Luxury Real Estate — she personally owns Mountain Luxury Lodge, adjacent to a separate rezone application she publicly weighed in on in 2022. Now President of Powder Mountain — one of the two resorts her own committee kept outside the new city's tax base.</p>
+  </div>
+  <div class="person-card">
+    <h4>Shanna Francis</h4>
+    <p>Incorporation sponsor and boundary-committee member. At the time, founder and co-owner of Ogden Valley News, the local paper. Ran for the new city's first mayor in Nov. 2025 — lost to Janet Wampler, 73.45% to 26.23%.</p>
+  </div>
+  <div class="person-card">
+    <h4>Jeanie Wendell</h4>
+    <p>Incorporation sponsor and boundary-committee member. Now sole owner of Ogden Valley News, per the paper's own Utah corporate filings — Francis no longer appears on the company's officer list.</p>
+  </div>
+</div>
+
+<h2 class="section">2. The people who drew the line also ran the coverage</h2>
+
+<p>Shanna Francis wasn't just a boundary-committee member. At the time of incorporation, she was also the founder and co-owner of Ogden Valley News, the local paper covering the incorporation drive she was helping lead — a fact news outlets covering her later mayoral run flagged directly. KSL's own election coverage noted that "critics of Francis point to her leadership of the Ogden Valley News... and maintain that she's used it to promote her candidacy." Francis ran for the new city's first mayor in the Nov. 2025 general election after leading the August primary, then lost the general to Janet Wampler by a wide margin, 73.45% to 26.23%.</p>
+
+<p>Utah's own corporate filings show what happened to the paper afterward. Ogden Valley News operates as a DBA of S R Communications, Corp. As of the company's most current officer filing, Francis does not appear anywhere on the list. The paper is now run by fellow incorporation sponsor and boundary-committee member Jeanie Wendell — President, Director, and Treasurer — alongside Christopher Wendell as Director and Secretary.</p>
+
+<h2 class="section">3. Brandi Hammon: a closer look</h2>
+
+<p>Of the three boundary-committee members, Hammon's footprint touches the most parts of this story — a boundary-committee sponsor, an adjacent property owner, a resort executive, and, through her own company's reporting, a documented observer of Snowbasin's internal development plans.</p>
+
+<div style="background:#fff; border:1px solid var(--line); padding:24px; margin:28px 0; overflow-x:auto;">
+<svg viewBox="0 0 800 480" style="width:100%; max-width:800px; height:auto; display:block; margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+  <!-- connecting lines -->
+  <line x1="400" y1="240" x2="140" y2="95" stroke="#a98f4f" stroke-width="1.5"/>
+  <line x1="400" y1="240" x2="660" y2="95" stroke="#a98f4f" stroke-width="1.5"/>
+  <line x1="400" y1="240" x2="140" y2="385" stroke="#a98f4f" stroke-width="1.5"/>
+  <line x1="400" y1="240" x2="660" y2="385" stroke="#a98f4f" stroke-width="1.5"/>
+  <line x1="400" y1="240" x2="400" y2="65" stroke="#a98f4f" stroke-width="1.5"/>
+
+  <!-- center node -->
+  <circle cx="400" cy="240" r="58" fill="#1c2430"/>
+  <text x="400" y="234" text-anchor="middle" fill="#d6b869" font-family="Playfair Display, Georgia, serif" font-size="16" font-weight="bold">Brandi</text>
+  <text x="400" y="254" text-anchor="middle" fill="#d6b869" font-family="Playfair Display, Georgia, serif" font-size="16" font-weight="bold">Hammon</text>
+
+  <!-- top node: incorporation -->
+  <rect x="290" y="18" width="220" height="58" rx="4" fill="#fff" stroke="#1c2430" stroke-width="1.5"/>
+  <text x="400" y="38" text-anchor="middle" fill="#1c2430" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="bold">Ogden Valley City</text>
+  <text x="400" y="53" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">Incorporation sponsor &amp;</text>
+  <text x="400" y="66" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">boundary committee</text>
+
+  <!-- top-left: Mountain Luxury -->
+  <rect x="20" y="50" width="220" height="70" rx="4" fill="#fff" stroke="#1c2430" stroke-width="1.5"/>
+  <text x="130" y="72" text-anchor="middle" fill="#1c2430" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="bold">Mountain Luxury</text>
+  <text x="130" y="88" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">Founder; owner of</text>
+  <text x="130" y="101" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">Mountain Luxury Lodge</text>
+  <text x="130" y="114" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">(adjacent parcel)</text>
+
+  <!-- top-right: Powder Mountain -->
+  <rect x="560" y="50" width="220" height="70" rx="4" fill="#fff" stroke="#1c2430" stroke-width="1.5"/>
+  <text x="670" y="72" text-anchor="middle" fill="#1c2430" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="bold">Powder Mountain</text>
+  <text x="670" y="88" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">CRO 2023 &#8594; President</text>
+  <text x="670" y="101" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">Nov. 2025 — one of the</text>
+  <text x="670" y="114" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">two excluded resorts</text>
+
+  <!-- bottom-left: Snowbasin -->
+  <rect x="20" y="345" width="220" height="70" rx="4" fill="#fff" stroke="#1c2430" stroke-width="1.5"/>
+  <text x="130" y="367" text-anchor="middle" fill="#1c2430" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="bold">Snowbasin / Club Med</text>
+  <text x="130" y="383" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">Her company published</text>
+  <text x="130" y="396" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">detailed reporting on</text>
+  <text x="130" y="409" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">the project's collapse</text>
+
+  <!-- bottom-right: Jennifer Stickler -->
+  <rect x="560" y="345" width="220" height="70" rx="4" fill="#fff" stroke="#1c2430" stroke-width="1.5"/>
+  <text x="670" y="367" text-anchor="middle" fill="#1c2430" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="bold">Jennifer Stickler</text>
+  <text x="670" y="383" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">Successor at Mountain</text>
+  <text x="670" y="396" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">Luxury after Hammon</text>
+  <text x="670" y="409" text-anchor="middle" fill="#5b6472" font-family="IBM Plex Mono, monospace" font-size="9.5">moved to Powder</text>
+</svg>
+</div>
+</div>
+
+<h3>Timeline</h3>
+<table class="data">
+<tr><th>Date</th><th>Event</th></tr>
+<tr><td>2002</td><td>Returns to Ogden Valley after a biotech sales career on the East Coast and in California, following a Biology degree from the University of Utah</td></tr>
+<tr><td>~2005</td><td>Founds Mountain Luxury Real Estate and Lodging in Eden — over $1 billion in sales over her tenure</td></tr>
+<tr><td>Aug. 23, 2022</td><td>Speaks at the Ogden Valley Planning Commission on a rezone application adjacent to her own Mountain Luxury Lodge property, asking about a shared driveway and the status of the county's TDR ordinance</td></tr>
+<tr><td>2022–2024</td><td>Serves as one of six named Ogden Valley City incorporation sponsors and sits on the committee that drew the city's boundary — excluding Snowbasin and Powder Mountain</td></tr>
+<tr><td>Nov. 5, 2024</td><td>Voters approve Ogden Valley City incorporation on the boundary the committee drew</td></tr>
+<tr><td>2023</td><td>Joins Powder Mountain as Chief Revenue Officer, "involved with Powder Mountain's growth and development since its transition under new ownership"</td></tr>
+<tr><td>Nov. 2025</td><td>Promoted to President of Powder Mountain, working directly with owner/CEO Reed Hastings</td></tr>
+<tr><td>2025–present</td><td>Jennifer Stickler takes over day-to-day leadership at Mountain Luxury, which Hammon still owns</td></tr>
+</table>
+
+<h2 class="section">4. A $300 million authorization, created for a project that died five months later</h2>
+
+<p>Snowbasin's exclusion from the city isn't the only unresolved question hanging over its finances. In November 2022, Weber County created three Public Infrastructure Districts covering Snowbasin's land — authority to bond for up to $300 million over 40 years, according to Christopher Crockett, a deputy Weber County attorney, at the time. The stated purpose was to fund infrastructure for Snowbasin's planned base village.</p>
+
+<p>That village had a named anchor tenant: Club Med. The all-inclusive hotel brand had partnered with Snowbasin in 2021 to build its first U.S. Exclusive Collection resort — 300 rooms, ski-in/ski-out, the centerpiece of a multi-phase plan that also called for residential and employee housing, more hotels, and an entirely new beginner-terrain base area. In August 2022, Weber County's Planning Commission approved a development-agreement amendment specifically to let Snowbasin subdivide and build infrastructure for the project simultaneously. Grand America's own VP of Development told the Commission that night he was "working very closely with Club Med" on subdividing the land to sell to them. The resort's Old Day Lodge and nine surrounding acres were demolished to make way for it.</p>
+
+<p>The PID authorizing up to $300 million in bonds was created that November — one county meeting after the subdivision amendment, and while demolition was already underway.</p>
+
+<div class="warning-box">
+  <h4>Five months later, the project collapsed</h4>
+  <p>In April 2023, Snowbasin and Club Med "mutually agreed" to shelve the entire hotel, citing delays. The PID was never dissolved or rescoped. Its own budget records show why that matters: as of its most recent filings, District No. 1 has no debt of any kind and is funded entirely by a $36,000-a-year developer advance covering administrative overhead. District No. 2 shows zero revenue and zero expenditures across every year on record. Both describe themselves, in their own budgets, as still "in the development stage" — over two years after the project they were created to serve fell apart.</p>
+</div>
+
+<p>The district didn't stay entirely dormant, though. In August 2025, Weber County appointed a new trustee to the Mount Ogden PID board: Davy Ratchford, Snowbasin's own General Manager and, since a December 2024 promotion, Chief Operating Officer of Grand America Hotels &amp; Resorts, the company that owns Snowbasin. He also holds trustee seats on two other special districts tied to the resort's water and road access — all three appointments moved through the Commission as routine consent-agenda items, with no conflict-of-interest disclosure entered into any of the three appointment records.</p>
+
+<p>Nothing about this is illegal. Boards routinely draw on industry expertise, and a $300 million authorization with no debt against it isn't the same as $300 million spent. But the underlying question is straightforward: what is this authorization actually for now, three years after the specific project it was created to fund collapsed — and why is the resort's own top executive the one sitting on the board that would decide?</p>
+
+<h2 class="section">5. What the exclusion actually cost, in the state's own numbers</h2>
+
+<p>LRB Public Finance Advisors — the Salt Lake City firm the Office of the Lieutenant Governor hired to determine whether Ogden Valley City could support itself — completed its feasibility study in December 2023. Its own methodology shows exactly how much revenue the boundary choice took off the table.</p>
+
+<table class="data">
+<tr><th>What the study excluded</th><th>Documented in the study's own words</th></tr>
+<tr><td>Snowbasin's share of local sales tax</td><td>"Snowbasin Ski Resort comprised 60 percent" of its zip code's taxable sales — subtracted from the city's projected sales tax base because Snowbasin sits outside the boundary</td></tr>
+<tr><td>Powder Mountain's share of local sales tax</td><td>Sales in Powder Mountain's zip code "were reduced by 20 percent to account for sales generated by Powder Mountain" — same reason</td></tr>
+<tr><td>Commercial acreage inside the city</td><td>"Nearly 90 percent of commercial development's total acreage derives from the Wolf Creek and Nordic Valley resorts" — meaning Snowbasin and Powder Mountain together contribute roughly none</td></tr>
+</table>
+
+<p>The study's overall commercial tax base was thin to begin with: just 36 commercial parcels, about 1% of the Study Area's market value. Total projected city property tax revenue for the first year was $474,347 — against a total taxable value of nearly $2.6 billion, almost all of it residential.</p>
+
+<div class="warning-box">
+  <h4>The state's own consultants warned about this</h4>
+  <p>Buried in the December 2023 study's "Risks" section is a sentence that reads, in hindsight, like a forecast: <em>"the lack of commercial or industrial land, with the associated tax revenues, can create pressure on the general fund over time as entities balance limited resources with increasing expenses."</em> The consultants added that this wasn't unique to Ogden Valley — but it was, in fact, exactly what happened here.</p>
+</div>
+
+<div class="callout" style="margin-top:56px;">
+  <h4>Questions worth asking</h4>
+  <ul class="clean" style="color:var(--paper); margin:0;">
+    <li>Snowbasin and Powder Mountain are, by the state's own numbers, two of the largest revenue-generating properties anywhere in the incorporation area — yet the boundary drawn by the committee left both out while including a much smaller population and a thin base of small local businesses to carry the entire cost of a new city. Why draw the line that way?</li>
+    <li>If the goal of incorporation was local control and a sustainable tax base, why exclude the two properties most likely to have provided one?</li>
+    <li>Three of the six named sponsors who drew that boundary have direct professional ties to the excluded resorts — one now leads Powder Mountain, one owns property adjacent to Snowbasin and has publicly reported on its plans. Did those ties ever come up in the committee's own deliberations, and is there any record of that discussion?</li>
+    <li>The state's hired consultants warned in writing that a thin commercial tax base would eventually strain the budget. Was that warning discussed by the committee or the sponsors before the boundary was finalized?</li>
+  </ul>
+</div>
+
+<h2 class="section">6. The bill comes due</h2>
+
+<p>The feasibility study's headline finding — a projected 5% budget surplus — was calculated on that thin, almost entirely residential tax base. It was enough to clear the legal bar for incorporation to proceed. It was not enough to absorb the ordinary cost growth of running a new city.</p>
+
+<p>On Aug. 18, 2026, the Ogden Valley City Council voted 3-2 to conditionally adopt a budget with a 512.6% property tax increase, contingent on the city winning its own separate truth-in-taxation legal fight. Residents — not Snowbasin, not Powder Mountain — are the ones being asked to close the gap.</p>
+
+<details class="source-note">
+  <summary>What this piece doesn't claim</summary>
+  <p>This is not a claim that including Snowbasin and Powder Mountain in the boundary would have eliminated the need for any tax increase, or that the sponsors intended the current shortfall. It is a documented record of a boundary decision, its measurable effect on the city's own projected tax base, and a contemporaneous written warning about that effect from the state's own hired consultants — compared against what has actually happened since.</p>
+</details>
+
+<details class="source-note" open style="margin-top:56px;">
+  <summary style="font-size:1em; font-family:'Playfair Display',serif; color:var(--navy); font-weight:normal; margin-bottom:8px;">Sources (click to collapse)</summary>
+  <ul class="sources-list" style="margin-top:12px;">
+    <li>LRB Public Finance Advisors, "Feasibility Study for the Proposed Incorporation of Ogden Valley," December 2023 — published by the Utah Office of the Lieutenant Governor</li>
+    <li>Ogden Valley City Council Resolution 2026-38 (Aug. 18, 2026 vote, 3-2)</li>
+    <li>Standard-Examiner, Aug. 30, 2024 and Dec. 1, 2022 — Ogden Valley incorporation and Mount Ogden PID coverage</li>
+    <li>KSL.com, Nov. 1, 2025 — Ogden Valley mayoral race coverage</li>
+    <li>Weber County official election results, Nov. 4, 2025 general election</li>
+    <li>Utah Division of Corporations and Commercial Code — Ogden Valley News Assumed Name (DBA) filings and S R Communications, Corp. entity record</li>
+    <li>Ogden Valley City incorporation sponsor and boundary-committee records</li>
+    <li>Weber County Commission meeting minutes, Nov. 22, 2022, Aug. 26, 2025, and Dec. 2, 2025 (Mount Ogden PID creation and trustee appointments)</li>
+    <li>Ogden Valley Planning Commission minutes, Aug. 2, 2022 and Aug. 23, 2022 (Snowbasin Development Agreement 2nd Amendment ZDA 2022-03; Eagle Crest/Cobabe Ranch rezone ZMA 2022-01)</li>
+    <li>Mount Ogden Public Infrastructure District Nos. 1 and 2, official annual budgets</li>
+    <li>Mountain Luxury Real Estate, "Why Club Med and Snowbasin are Calling It Quits On All-Inclusive Hotel," April 2023</li>
+    <li>SKI Magazine / Utah Business / Ski Area Management — Brandi Hammon career coverage, 2025-2026</li>
+  </ul>
+</details>
+
+</main>
+
+<footer>
+  We report public records. You decide.<br>
+  <a href="index.html">The Weber County Hive — PIDS-Utah</a>
+</footer>
+
+</body>
+</html>

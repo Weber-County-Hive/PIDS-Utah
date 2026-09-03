@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Boards, One Man, No Disclosure — The Weber County Hive</title>
+<style>
+  :root{
+    --navy:#1c2430;
+    --navy2:#232d3d;
+    --gold:#d6b869;
+    --gold-dim:#a98f4f;
+    --paper:#f4f0e6;
+    --ink:#1c2430;
+    --muted:#5b6472;
+    --line:#d8d2c2;
+    --red:#8a2d2d;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family: Georgia, 'Source Serif 4', serif;
+    line-height:1.65;
+  }
+  header.masthead{
+    background:linear-gradient(180deg,var(--navy) 0%, var(--navy2) 100%);
+    color:var(--paper); padding:56px 24px 44px; text-align:center;
+    border-bottom:4px solid var(--gold);
+  }
+  header.masthead .eyebrow{
+    font-family:'IBM Plex Mono', monospace; letter-spacing:2px; font-size:12px;
+    color:var(--gold); text-transform:uppercase; margin-bottom:14px;
+  }
+  header.masthead h1{
+    font-family:'Playfair Display', Georgia, serif; font-size:2.6em; margin:0 0 14px;
+    max-width:820px; margin-left:auto; margin-right:auto; line-height:1.15;
+  }
+  header.masthead p.dek{
+    max-width:680px; margin:0 auto; font-size:1.15em; color:#cfd3da; font-style:italic;
+  }
+  main{max-width:840px; margin:0 auto; padding:48px 24px 100px;}
+  h2.section{
+    font-family:'Playfair Display', Georgia, serif; color:var(--navy);
+    font-size:1.6em; margin-top:56px; border-bottom:2px solid var(--gold);
+    padding-bottom:10px;
+  }
+  h3{font-family:'Playfair Display', Georgia, serif; color:var(--navy); font-size:1.2em;}
+  p{margin:16px 0;}
+  .lede{font-size:1.15em;}
+  .stat-row{
+    display:flex; flex-wrap:wrap; gap:16px; margin:28px 0;
+  }
+  .stat-box{
+    flex:1 1 200px; background:var(--navy); color:var(--paper);
+    padding:20px; border-left:4px solid var(--gold);
+  }
+  .stat-box .num{font-family:'IBM Plex Mono',monospace; font-size:1.7em; color:var(--gold); display:block;}
+  .stat-box .label{font-size:0.85em; color:#c7cbd2; text-transform:uppercase; letter-spacing:0.5px;}
+  table.board{
+    width:100%; border-collapse:collapse; margin:24px 0; font-size:0.95em;
+  }
+  table.board th{
+    background:var(--navy); color:var(--gold); text-align:left; padding:10px 12px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.8em; letter-spacing:0.5px; text-transform:uppercase;
+  }
+  table.board td{
+    padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top;
+  }
+  table.board tr.highlight td{ background:#fbf3df; font-weight:bold; }
+  .quote-block{
+    background:#fff; border-left:4px solid var(--red); padding:18px 22px;
+    margin:24px 0; font-style:italic; font-size:1.05em;
+  }
+  .quote-block cite{
+    display:block; margin-top:10px; font-style:normal; font-size:0.85em;
+    color:var(--muted); font-family:'IBM Plex Mono', monospace;
+  }
+  .callout{
+    background:var(--navy); color:var(--paper); padding:22px 24px; margin:28px 0;
+    border-left:5px solid var(--gold);
+  }
+  .callout h4{color:var(--gold); margin-top:0; font-family:'IBM Plex Mono',monospace; font-size:0.85em; text-transform:uppercase; letter-spacing:1px;}
+  .three-boards{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:28px 0;
+  }
+  .board-card{
+    background:#fff; border:1px solid var(--line); border-top:4px solid var(--gold);
+    padding:18px;
+  }
+  .board-card h4{margin:0 0 8px; font-family:'Playfair Display',serif; color:var(--navy);}
+  .board-card .date{font-family:'IBM Plex Mono',monospace; font-size:0.8em; color:var(--gold-dim);}
+  details.source-note{
+    background:#fff; border:1px solid var(--line); border-radius:4px; padding:12px 16px; margin:18px 0;
+  }
+  details.source-note summary{cursor:pointer; font-weight:bold; color:var(--navy); font-family:'IBM Plex Mono',monospace; font-size:0.85em;}
+  .open-q{
+    background:#fbf3df; border:1px dashed var(--gold-dim); padding:16px 20px; margin:10px 0;
+  }
+  ul.clean{padding-left:20px;}
+  ul.clean li{margin-bottom:10px;}
+  footer{
+    background:var(--navy); color:#c7cbd2; padding:36px 24px; text-align:center;
+    font-family:'IBM Plex Mono', monospace; font-size:0.85em;
+  }
+  footer a{color:var(--gold);}
+  .sources-list{font-size:0.9em; color:var(--muted);}
+  .sources-list li{margin-bottom:8px;}
+  .back-link{
+    display:inline-block; margin-bottom:20px; color:var(--gold-dim);
+    font-family:'IBM Plex Mono',monospace; font-size:0.85em; text-decoration:none;
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="eyebrow">The Weber County Hive · Public Infrastructure Districts</div>
+  <h1>Three Boards, One Man, No Disclosure</h1>
+  <p class="dek">Snowbasin's General Manager sits as a trustee on three overlapping Weber County special districts governing his own employer's water, roads, and up to $300 million in infrastructure bonds — all appointed the same way as a cemetery board.</p>
+</header>
+
+<main>
+
+<a href="index.html" class="back-link">&larr; Back to PIDS-Utah</a>
+
+<p class="lede">In November 2022, the Weber County Commission created three Public Infrastructure Districts at Snowbasin Resort's own request, giving the resort's development up to $300 million in bonding capacity over 40 years. The land inside those districts is entirely owned by Snowbasin. And since at least August 2025, one of the people sitting on the board that oversees that money has been Snowbasin's own General Manager.</p>
+
+<div class="stat-row">
+  <div class="stat-box"><span class="num">$300M</span><span class="label">Authorized bonding capacity — no bonds confirmed issued yet</span></div>
+  <div class="stat-box"><span class="num">3</span><span class="label">Special districts, one trustee</span></div>
+  <div class="stat-box"><span class="num">2034</span><span class="label">Olympics — Snowbasin is the Alpine venue</span></div>
+</div>
+
+<h2 class="section">1. What the PID was created to do</h2>
+
+<p>Mount Ogden Public Infrastructure Districts Nos. 1, 2, and 3 were created by the Weber County Commission on November 22, 2022, specifically to fund Snowbasin Resort's expansion. Commissioner Gage Froerer voted in favor and stated on the record that the taxing and revenue authority is limited to the boundaries of the three districts — boundaries that encompass land owned by Snowbasin. Christopher Crockett, a deputy attorney in the Weber County Attorney's Office, told the Standard-Examiner at the time that the maximum the three districts could generate is $300 million over 40 years, through bonds with terms of up to 31 years.</p>
+
+<div class="quote-block">
+  "It's going to bring additional people to Ogden Valley, but that's just the way it is."
+  <cite>— Weber County Commissioner Gage Froerer, Nov. 22, 2022 Commission meeting</cite>
+</div>
+
+<p>A Snowbasin spokesperson framed the arrangement publicly as a way to "stir growth" that would "benefit the local economies, but not burden them with any costs or financial risk." The mechanism works the way every PID does: property taxes collected on land inside the district pay down bonds issued to build the resort's infrastructure. Michael Jensen of CliftonLarsonAllen (CLA) is listed as the district's outside administrative contact.</p>
+
+<p>The original 2022 reporting also notes that infrastructure the PIDs build is ultimately meant to be transferred to existing entities — including the Trappers Loop Water Improvement District. That's not incidental to this story: it's the same district where Ratchford holds a second trustee seat.</p>
+
+<div class="callout">
+  <h4>Authorized, not yet borrowed</h4>
+  <p>$300 million is the ceiling the districts are legally authorized to bond for — it is not money the districts have actually borrowed. Mount Ogden PID No. 1's own official annual budget confirms this directly, in its own words: <strong>"The District has no debt or leases."</strong> Right now District No. 1 is entirely funded by a $36,000-a-year "developer advance" from Snowbasin, covering only administrative overhead — accounting, insurance, legal, and district management. District No. 2 is further behind still: its own budget shows zero dollars of revenue or expenditures in 2024, 2025, and budgeted 2026, and states plainly, <strong>"The District does not anticipate having any activity in 2026."</strong> Neither district has employees; every function is contracted out. Both describe themselves, in their own budget documents, as still "in the development stage."</p>
+</div>
+
+<p>Snowbasin was later selected as the official Alpine Skiing venue for the 2034 Winter Olympics — adding a hard deadline to whatever capital improvements this financing structure is meant to pay for.</p>
+
+<h2 class="section">2. The same person, three boards</h2>
+
+<p>Weber County Commission records show David F. Ratchford appointed or reappointed to three separate special-district boards, all tied to the same Snowbasin/Ogden Valley infrastructure footprint:</p>
+
+<div class="three-boards">
+  <div class="board-card">
+    <h4>Mount Ogden PIDs Nos. 1–3</h4>
+    <div class="date">Appointed Aug. 26, 2025</div>
+    <p>Governs the taxing districts funding Snowbasin's own expansion, on land Snowbasin owns.</p>
+  </div>
+  <div class="board-card">
+    <h4>Trappers Loop Water Improvement District</h4>
+    <div class="date">Appointed same day, Aug. 26, 2025</div>
+    <p>New Trappers Loop Road is the access route to Snowbasin.</p>
+  </div>
+  <div class="board-card">
+    <h4>Wheeler Basin District</h4>
+    <div class="date">Reappointed Dec. 2, 2025</div>
+    <p>Wheeler Creek is the watershed Snowbasin's own history says the resort was originally built to restore.</p>
+  </div>
+</div>
+
+<p>David F. Ratchford is Davy Ratchford — General Manager of Snowbasin Resort and, since a December 2024 promotion, also Chief Operating Officer of Grand America Hotels & Resorts, the parent company that owns both Snowbasin and Sun Valley. Both titles are current. This newsroom confirmed the identity match through direct personal familiarity with him.</p>
+
+<h3>Current Mount Ogden PID board</h3>
+<table class="board">
+<tr><th>Trustee</th><th>Term</th><th>Note</th></tr>
+<tr class="highlight"><td>David F. Ratchford</td><td>to Dec. 31, 2027</td><td>Snowbasin General Manager</td></tr>
+<tr><td>Tim Hendon</td><td>to Dec. 31, 2027</td><td>&nbsp;</td></tr>
+<tr><td>Katherine Klossner</td><td>to Dec. 31, 2025</td><td>Filled a midterm vacancy created by Adam Suess's resignation (appointed Sept. 2025)</td></tr>
+</table>
+<p style="font-size:0.9em; color:var(--muted);">Earlier board members on record: Dave Hirasawa and Bill Fiveash (2023).</p>
+
+<h2 class="section">3. How the appointments happened</h2>
+
+<p>All three of Ratchford's appointments moved through the Weber County Commission as routine consent-agenda items — Commissioners Froerer and Harvey moving and seconding, roll-call ayes recorded, no discussion entered into the minutes. They read exactly like every other routine trustee reappointment on those same agendas: cemetery districts, water districts, and so on.</p>
+
+<div class="callout">
+  <h4>What the record does not show</h4>
+  <p>No conflict-of-interest disclosure statement, recusal, or discussion of Ratchford's Snowbasin employment appears in any of the three appointment minutes reviewed. The county's routine consent-agenda process does not appear to distinguish this appointment from any other.</p>
+</div>
+
+<h2 class="section">4. Where this sits inside a bigger transparency fight</h2>
+
+<p>In 2026, the Legislature passed H.B. 17, "Public Infrastructure District Meeting Amendments," requiring PID boards to physically meet inside their own district boundaries — sponsored by Rep. Doug Welton in the House, with Sen. Brady Brammer as Senate floor sponsor. The bill amends the same statute, Utah Code § 17D-4-205, that already requires PIDs to file annual reports; the State Auditor's office had told a legislative committee in January 2026 that only 62.5% of PIDs statewide were actually filing those required reports.</p>
+
+<p>H.B. 17 grew out of complaints that some PID boards — UFAIR among them — were holding meetings hundreds of miles from the people actually paying the assessments, with a televised feed offered as the substitute for showing up. During House committee testimony, one member admitted not knowing how often PID boards typically meet; another said they had never attended a PID meeting at all.</p>
+
+<details class="source-note">
+  <summary>Where Mount Ogden PID meets</summary>
+  <p>Meeting notices on record place Mount Ogden PID board meetings at 3925 Snowbasin Road, Huntsville — inside Ogden Valley, and very likely inside the district's own boundaries, since Snowbasin owns essentially all the land the districts cover. This newsroom has not obtained the district's formal boundary map, so that can't be stated as fully confirmed. The meeting records reviewed are from 2023; no 2024–2026 meeting notices were located to confirm current practice continues.</p>
+</details>
+
+<p>Notably, H.B. 17's House committee voted to strike a "retreat exception" allowing PID boards to hold an annual retreat outside district boundaries — but that exception reappears in the version that became law on May 6, 2026. Even Rep. Welton acknowledged in Senate testimony that the bill "is not strict enough but a good place to start."</p>
+
+<h2 class="section">5. Open questions</h2>
+
+<div class="open-q">
+  <ul class="clean">
+    <li>Does Weber County require a conflict-of-interest disclosure specifically for special-district trustees, separate from the state's elected-official disclosure forms — and if so, does one exist on file for Ratchford?</li>
+    <li>What are Mount Ogden PID Nos. 1–3's exact legal boundaries, and does the district's meeting address fall inside them?</li>
+    <li>Has the board's meeting location or practice changed at all since H.B. 17 took effect in May 2026?</li>
+  </ul>
+</div>
+
+<h2 class="section">Sources</h2>
+<ul class="sources-list">
+  <li>Weber County Commission resolution, Sept. 2025 (Katherine Klossner appointment to fill vacancy)</li>
+  <li>Weber County Commission consent-agenda records, Aug. 26, 2025 and Dec. 2, 2025 (Ratchford appointments)</li>
+  <li>Weber County Commission meeting minutes, Nov. 22, 2022 (Mount Ogden PID creation)</li>
+  <li>Mount Ogden Public Infrastructure District No. 1, official 2025 Annual Budget (with 2023 actual / 2024 estimated figures)</li>
+  <li>Mount Ogden Public Infrastructure District No. 2, official 2026 Annual Budget (with 2024 actual / 2025 estimated figures)</li>
+  <li>Weber County Commission minutes, Aug. 26, 2025 and Dec. 2, 2025 (trustee appointments and reappointments)</li>
+  <li>H.B. 17 (2026), "Public Infrastructure District Meeting Amendments" — enrolled bill text, le.utah.gov</li>
+  <li>House Political Subdivisions Committee and Senate Transportation Committee minutes and audio, H.B. 17 hearings</li>
+  <li>Utah State Auditor testimony on PID annual-report compliance, Jan. 2026 legislative committee</li>
+  <li>Snowbasin Resort public statements on the 2034 Winter Olympics Alpine Skiing venue designation</li>
+</ul>
+
+</main>
+
+<footer>
+  We report public records. You decide.<br>
+  <a href="index.html">The Weber County Hive — PIDS-Utah</a>
+</footer>
+
+</body>
+</html>

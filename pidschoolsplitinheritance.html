@@ -1,0 +1,690 @@
+<title>What the New Boards Inherit</title>
+<style>
+:root{
+  --paper:#f2ede2; --panel:#fbf8f1;
+  --ink:#20241f; --ink-soft:#4a4f45;
+  --line:#c9c0a8; --rule-strong:#8a8265;
+  --flag:#8a2e1f; --flag-soft:#f4e2dc;
+  --gold:#8a6a1f; --gold-soft:#f4ecdc;
+  --slate:#2a4a6b; --slate-soft:#e4eaf0;
+  --accent:var(--slate); --soft:var(--slate-soft); --muted:var(--ink-soft); --rule:var(--line);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:16px/1.62 Georgia,'Iowan Old Style','Times New Roman',serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 96px}
+h1,h2,h3,.kicker,th,.stat-num{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace}
+header{border-bottom:3px double var(--rule-strong);padding:44px 0 26px;margin-bottom:34px}
+.kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
+h1{font-size:clamp(30px,5.4vw,46px);line-height:1.08;margin:.36em 0 .3em;letter-spacing:-.02em}
+.standfirst{font-size:19px;line-height:1.55;color:var(--ink-soft);margin:0 0 18px}
+.meta{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);border-top:1px solid var(--rule);padding-top:12px}
+section{margin:52px 0}
+h2{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);
+  border-bottom:1px solid var(--rule);padding-bottom:8px;margin:0 0 20px}
+h3{font-size:17px;margin:30px 0 10px;letter-spacing:-.01em}
+p{margin:0 0 16px} a{color:var(--accent)}
+.hero{background:var(--panel);border:1px solid var(--rule);border-left:5px solid var(--accent);padding:26px 26px 22px;margin:30px 0}
+.hero .stat-num{font-size:clamp(28px,5.6vw,44px);font-weight:700;color:var(--accent);line-height:1;
+  letter-spacing:-.02em;display:block;margin-bottom:10px}
+.hero .stat-lab{font-size:16px;color:var(--ink);margin:0}
+.hero .stat-src{font-size:12.5px;color:var(--muted);margin:12px 0 0;font-style:italic}
+.pull{border-left:3px solid var(--rule-strong);padding:4px 0 4px 20px;margin:24px 0;
+  font-size:18px;line-height:1.5;color:var(--ink-soft)}
+blockquote{margin:22px 0;padding:14px 20px;background:var(--panel);border-left:4px solid var(--rule-strong);
+  font-size:15.5px;line-height:1.55}
+blockquote p:last-child{margin-bottom:0}
+blockquote cite{display:block;margin-top:9px;font-family:ui-monospace,Menlo,monospace;font-size:11px;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-style:normal}
+.note{background:var(--panel);border:1px solid var(--rule);padding:18px 20px;margin:24px 0;font-size:15px}
+.note.flagged{border-left:4px solid var(--flag);background:var(--flag-soft)}
+.note.open{border-left:4px solid var(--gold);background:var(--gold-soft)}
+.note .lab{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;font-weight:700;display:block;margin-bottom:8px}
+.note.flagged .lab{color:var(--flag)} .note.open .lab{color:var(--gold)}
+.note p:last-child{margin-bottom:0}
+.tw{overflow-x:auto;margin:24px 0;border:1px solid var(--rule);background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:460px}
+th{background:var(--accent);color:#fff;text-align:left;padding:11px 14px;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+td{padding:10px 14px;border-top:1px solid var(--rule);vertical-align:top}
+td.num{font-family:ui-monospace,Menlo,monospace;text-align:right;white-space:nowrap}
+tr.total td{border-top:2px solid var(--rule-strong);font-weight:700;background:#f5f1e6}
+caption{caption-side:bottom;text-align:left;padding:10px 14px;font-size:12.5px;color:var(--muted);
+  font-style:italic;border-top:1px solid var(--rule)}
+.fig{background:var(--panel);border:1px solid var(--rule);padding:20px 18px 14px;margin:26px 0;overflow-x:auto}
+.fig svg{width:100%;min-width:620px;height:auto;display:block}
+details{border:1px solid var(--rule);background:var(--panel);margin:14px 0}
+details summary{cursor:pointer;padding:13px 16px;font-family:ui-monospace,Menlo,monospace;font-size:12px;
+  letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--accent);list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▸ ";color:var(--rule-strong)}
+details[open] summary::before{content:"▾ "}
+details[open] summary{border-bottom:1px solid var(--rule)}
+.dbody{padding:16px 18px;font-size:14.5px}
+.dbody p:last-child,.dbody ol:last-child{margin-bottom:0}
+ul.q{list-style:none;padding:0;margin:0}
+ul.q li{padding:12px 0 12px 26px;border-bottom:1px solid var(--rule);position:relative;font-size:15.5px}
+ul.q li:last-child{border-bottom:0}
+ul.q li::before{position:absolute;left:0;top:12px;font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700}
+ul.q.can li::before{content:"✓";color:var(--accent)}
+ul.q.ask li::before{content:"?";color:var(--flag)}
+ul.q .ans{display:block;font-size:14px;color:var(--ink-soft);margin-top:5px}
+ol.src{font-size:13.5px;padding-left:22px;margin:0}
+ol.src li{margin-bottom:10px;color:var(--ink-soft)}
+.xref{background:var(--slate-soft);border:1px solid var(--accent);padding:16px 18px;margin:24px 0;font-size:15px}
+.xref .lab{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;font-weight:700;color:var(--accent);display:block;margin-bottom:7px}
+.xref p:last-child{margin-bottom:0}
+footer{border-top:3px double var(--rule-strong);margin-top:64px;padding-top:20px;
+  font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--muted);letter-spacing:.05em}
+@media(max-width:600px){body{font-size:15.5px}.wrap{padding:0 16px 70px}}
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="kicker">The Weber County Hive · Utah County · Schools &amp; Bonding</div>
+  <h1>What the New Boards Inherit</h1>
+  <p class="standfirst">Alpine School District splits in three on July 1, 2027. The boards that take
+  delivery were seated in January 2026, and two things were already waiting for them: revenue
+  committed away for decades, and $201 million of debt issued without an election. Both were made
+  possible by a law passed in 2025. Not one legislator voted against it.</p>
+  <div class="meta">Utah County · Schools &amp; Bonding · Published September 2026</div>
+</header>
+
+<section>
+  <h2>The sequence</h2>
+
+  <p>Everything on this page is drawn from bill files, committee minutes, adopted budgets, and
+  published election results. What follows is the order in which the documents say things happened.
+  It is a sequence, not an explanation &mdash; nothing here establishes that any step caused any
+  other, and this page does not claim that it does.</p>
+
+  <div class="fig">
+  <svg viewBox="0 0 760 430" role="img" aria-labelledby="tlt tld">
+    <title id="tlt">Timeline from the bill to the split</title>
+    <desc id="tld">February 4, 2025: Senate Education hears S.B. 188, three Alpine board members
+    speak. February 27, 2025: House Education adds the lease revenue bond cap exemption by
+    amendment. March 7, 2025: a conference committee rewrites the bill and both chambers pass it
+    within about two and a half hours. March 17, 2025: signed. July 2025: Alpine brings $201
+    million of lease revenue bonds to market. November 2025: new district boards elected. January
+    2026: boards seated. July 1, 2027: the split takes effect.</desc>
+
+    <line x1="26" y1="40" x2="26" y2="392" stroke="#c9c0a8" stroke-width="2"/>
+
+    <circle cx="26" cy="48" r="7" fill="#2a4a6b"/>
+    <text x="48" y="44" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#2a4a6b">FEB 4, 2025 — SENATE EDUCATION</text>
+    <text x="48" y="62" font-family="Georgia,serif" font-size="13" fill="#20241f">Three sitting Alpine School Board members address the committee. Substitute #1 adopted, 5–0–2.</text>
+
+    <circle cx="26" cy="98" r="7" fill="#8a2e1f"/>
+    <text x="48" y="94" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#8a2e1f">FEB 27, 2025 — HOUSE EDUCATION</text>
+    <text x="48" y="112" font-family="Georgia,serif" font-size="13" fill="#20241f">Amendment #2 adds the lease revenue bond cap exemption. Adopted 12–0–4.</text>
+
+    <circle cx="26" cy="148" r="7" fill="#8a6a1f"/>
+    <text x="48" y="144" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#8a6a1f">MAR 7, 2025 — LAST DAY OF SESSION</text>
+    <text x="48" y="162" font-family="Georgia,serif" font-size="13" fill="#20241f">Chambers disagree. A conference committee substitutes the bill at 3:19 p.m.</text>
+    <text x="48" y="180" font-family="Georgia,serif" font-size="13" fill="#20241f">House passes 4:43 p.m. (68–0–7). Senate passes 5:52 p.m. (24–0–5).</text>
+
+    <circle cx="26" cy="216" r="7" fill="#2a4a6b"/>
+    <text x="48" y="212" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#2a4a6b">MAR 17, 2025 — SIGNED</text>
+
+    <circle cx="26" cy="252" r="7" fill="#8a2e1f"/>
+    <text x="48" y="248" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#8a2e1f">JULY 2025 — THE BONDS</text>
+    <text x="48" y="266" font-family="Georgia,serif" font-size="13" fill="#20241f">Alpine brings $201 million to market, of up to $238 million approved. Terms to 31 years.</text>
+
+    <circle cx="26" cy="302" r="7" fill="#2a4a6b"/>
+    <text x="48" y="298" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#2a4a6b">NOV 2025 — ELECTIONS</text>
+    <text x="48" y="316" font-family="Georgia,serif" font-size="13" fill="#20241f">21 seats filled across three new districts. One is uncontested.</text>
+
+    <circle cx="26" cy="348" r="7" fill="#2a4a6b"/>
+    <text x="48" y="344" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#2a4a6b">JAN 2026 — BOARDS SEATED</text>
+
+    <circle cx="26" cy="384" r="8" fill="#8a6a1f"/>
+    <text x="48" y="380" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#8a6a1f">JULY 1, 2027 — THE SPLIT TAKES EFFECT</text>
+    <text x="48" y="398" font-family="Georgia,serif" font-size="13" fill="#20241f">Assets, liabilities and commitments transfer to Aspen Peaks, Lake Mountain and Timpanogos.</text>
+  </svg>
+  </div>
+</section>
+
+<section>
+  <h2>Two inheritances, neither on a ballot</h2>
+
+  <p>Voters approved Propositions 11 and 14 in November 2024. The Utah County Commission set
+  boundaries in March 2025. New boards were elected that November and took office in January 2026.
+  Each new district sets its own property tax rate beginning FY2027&ndash;28.</p>
+
+  <div class="tw">
+  <table>
+    <caption>What transfers with the district, and how each was approved.</caption>
+    <thead><tr><th>Inherited</th><th>What it is</th><th>How it was approved</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Committed revenue</strong></td>
+        <td>Tax increment commitments on project areas inside the new boundaries, running 20 years
+        per phase with a 40-year maximum.</td>
+        <td>By redevelopment agency resolution and interlocal agreement.</td></tr>
+      <tr><td><strong>Assumed debt</strong></td>
+        <td>Lease revenue bonds issued by Alpine before the split, to be assumed by a successor
+        district. Terms up to 31 years.</td>
+        <td>By board resolution following a public hearing.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>The three successor districts: <strong>Aspen Peaks</strong>, <strong>Lake Mountain</strong>
+  (Eagle Mountain, Saratoga Springs, Cedar Fort, Fairfield), and <strong>Timpanogos</strong>
+  (Orem, Pleasant Grove, Lindon, Vineyard).</p>
+</section>
+
+<section>
+  <h2>The debt: what S.B. 188 changed</h2>
+
+  <p>Utah school districts borrow two ways. A general obligation bond goes on the November ballot.
+  A lease revenue bond does not &mdash; it is issued through a local building authority, in
+  practice the same school board sitting as a second body, and approved by resolution after a
+  public hearing.</p>
+
+  <p>Utah law capped lease revenue bonds at a combined $200 million over any three-year period
+  without voter approval. <strong>S.B. 188 of the 2025 General Session removed that cap for
+  reorganized districts.</strong> Its primary sponsor was Sen. Keith Grover.</p>
+
+  <h3>Where the exemption entered the bill</h3>
+
+  <p>It was not in the introduced bill or in either Senate substitute. It was added in the House
+  Education Standing Committee on <strong>February 27, 2025</strong>, as part of Amendment #2,
+  moved by <strong>Rep. Matt MacPherson</strong> and adopted 12&ndash;0&ndash;4. The committee
+  minutes reproduce the language:</p>
+
+  <blockquote>
+    <p>"(ii) A lease revenue bond described in Subsection (5)(c)(i) is not subject to the combined
+    total limitation described in Subsection 11-14-103(6)(b)(i) due to the prior approval of voters
+    within the new or reorganized new school district for the general obligation bond."</p>
+    <cite>House Education Standing Committee minutes, February 27, 2025 — Amendment #2, item 5</cite>
+  </blockquote>
+
+  <p>The provision immediately preceding it sets the trigger: it applies where, within the
+  preceding three years, <strong>"voters within the divided school district rejected a general
+  obligation bond."</strong></p>
+
+  <p>The bill's own stated rationale is written into that text &mdash; that voters within the
+  sub-area had approved the bond even where the district as a whole had not. That is the argument
+  on the record, and readers should weigh it.</p>
+
+  <div class="tw">
+  <table>
+    <caption>Recorded actions on S.B. 188. Every recorded vote was unanimous. Every change to the
+    bill's content was made by voice vote, which produces no record of individual positions.</caption>
+    <thead><tr><th>Date</th><th>Action</th><th>Vote</th></tr></thead>
+    <tbody>
+      <tr><td>Feb 4, 2025</td><td>Senate Education — substitute #1, then favorable</td><td class="num">5–0–2</td></tr>
+      <tr><td>Feb 11, 2025</td><td>Senate floor — substituted #1 to #2</td><td class="num">Voice vote</td></tr>
+      <tr><td>Feb 11, 2025</td><td>Senate — passed 2nd reading</td><td class="num">25–0–4</td></tr>
+      <tr><td>Feb 12, 2025</td><td>Senate floor — amendment #1</td><td class="num">Voice vote</td></tr>
+      <tr><td>Feb 12, 2025</td><td>Senate — passed 3rd reading</td><td class="num">25–0–4</td></tr>
+      <tr><td>Feb 27, 2025</td><td><strong>House Education — Amendment #2 (the cap exemption)</strong></td><td class="num">12–0–4</td></tr>
+      <tr><td>Mar 6, 2025</td><td>House — passed 3rd reading</td><td class="num">70–0–5</td></tr>
+      <tr><td>Mar 7, 2025</td><td>Senate refuses to concur; House refuses to recede</td><td class="num">Voice votes</td></tr>
+      <tr><td>Mar 7, 2025</td><td><strong>Conference committee substitutes the bill, 3:19 p.m.</strong></td><td class="num">—</td></tr>
+      <tr><td>Mar 7, 2025</td><td>House adopts conference report, 4:43 p.m.</td><td class="num">68–0–7</td></tr>
+      <tr><td>Mar 7, 2025</td><td>Senate adopts conference report, 5:52 p.m.</td><td class="num">24–0–5</td></tr>
+      <tr class="total"><td>Mar 17, 2025</td><td>Signed by the Governor</td><td class="num">—</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="pull">Not one legislator in either chamber is recorded voting against this bill at any
+  stage. The moments when its content changed are the moments with no recorded vote at all.</p>
+
+  <div class="note open">
+    <span class="lab">A document we have not obtained</span>
+    <p>The version that became law was written by a conference committee on the final afternoon of
+    the session and passed both chambers within about two and a half hours. We have not obtained
+    the conference substitute text or the conference committee's membership, so we cannot say what
+    that final rewrite changed. Both are public records held by the Legislature.</p>
+  </div>
+</section>
+
+<section>
+  <h2>What Alpine did with it</h2>
+
+  <div class="hero">
+    <span class="stat-num">$201,000,000</span>
+    <p class="stat-lab">brought to market in July 2025, of up to $238 million approved — for a high
+    school in Saratoga Springs and an elementary in Eagle Mountain. Both cities fall in Lake
+    Mountain District. Terms run up to 31 years.</p>
+    <p class="stat-src">No election was held. The debt is to be assumed by the successor district
+    after the 2027 split.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Stated fairly</span>
+    <p>Lease revenue bonds are a lawful, long-established instrument, and districts use them
+    because schools are often needed sooner than an election cycle permits. Saratoga Springs and
+    Eagle Mountain are among the fastest-growing cities in Utah, and the need for those buildings is
+    not in question. What changed in 2025 was the ceiling, and only for districts in Alpine's
+    circumstances.</p>
+  </div>
+
+  <details>
+    <summary>The disclosure Utah law requires on these notices</summary>
+    <div class="dbody">
+      <p>Utah's public notice statute anticipates the use of this instrument after a failed bond
+      election. Lease revenue bond notices carry a required disclosure for when proceeds will fund
+      a project whose general obligation financing voters previously rejected, alongside a
+      statutory acknowledgment that a lease revenue bond generally costs more in interest than a
+      voter-approved general obligation bond.</p>
+      <p>North Summit School District's December 2025 notice for up to $125 million carried that
+      line. We have not established whether any Alpine notice did, and we do not assert either way.</p>
+    </div>
+  </details>
+</section>
+
+<section>
+  <h2>Who was in the room</h2>
+
+  <p>The committee minutes record who presented the bill, who moved the amendments, and who spoke.
+  What follows is that record. It carries no implication about anyone's motives, and the last
+  column exists because absence of a connection is a finding too.</p>
+
+  <div class="tw">
+  <table>
+    <caption>Drawn from Senate Education minutes (Feb 4, 2025), House Education minutes (Feb 27,
+    2025), and published election results. The final column reflects what a review of campaign
+    finance records on file did and did not find.</caption>
+    <thead><tr><th>Name</th><th>Role in the bill, per the minutes</th><th>Since then</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Sen. Keith Grover</strong></td>
+        <td>Primary sponsor. Presented the bill in Senate Education.</td>
+        <td>Senate District 23. Sits on Senate Education.</td></tr>
+      <tr><td><strong>Rep. Stephanie Gricius</strong></td>
+        <td>Presented the bill in House Education, "with the assistance of Julie King, Alpine School
+        District Board of Education."</td>
+        <td>House District 51, Eagle Mountain — inside Lake Mountain District.</td></tr>
+      <tr><td><strong>Rep. Matt MacPherson</strong></td>
+        <td>Moved Amendment #2, containing the cap exemption. Adopted 12–0–4.</td>
+        <td>House District 27.</td></tr>
+      <tr><td><strong>Rep. Candice Pierucci</strong></td>
+        <td>Moved to replace the 2nd Substitute with the 4th, and moved Amendment #1.</td>
+        <td>Listed as an officer on the Utah House Republican Election Committee's registration.</td></tr>
+      <tr><td><strong>Julie King</strong></td>
+        <td>Alpine School Board member. Assisted in presenting the bill to House Education; "spoke
+        to the bill" in Senate Education.</td>
+        <td>Elected unopposed, Lake Mountain Seat 2 — the district that assumes the bonds. Now
+        president of both the Alpine and Lake Mountain boards. <em>No campaign-finance connection
+        to any of the above was found.</em></td></tr>
+      <tr><td><strong>Ada Wilson</strong></td>
+        <td>Alpine School Board member. Recorded "in opposition" in Senate Education; "spoke to the
+        bill" in House Education.</td>
+        <td>Won Timpanogos Seat 4, 51.33%. <em>No campaign-finance connection found.</em></td></tr>
+      <tr><td><strong>Stacy Bateman</strong></td>
+        <td>Alpine School Board member. "Spoke to the bill" in Senate Education.</td>
+        <td>Lost Aspen Peaks Seat 2, 47.98%. <em>No campaign-finance connection found.</em></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note flagged">
+    <span class="lab">Two facts, held apart</span>
+    <p>Rep. MacPherson, who moved the amendment, has received <strong>$107,500</strong> from
+    political action committees controlled by the Speaker of the House &mdash; $70,000 from the
+    Utah House Republican Election Committee and $37,500 from the House Speaker Leadership PAC,
+    figures reconciled from his own campaign disclosure filings. Rep. Gricius and Rep. MacPherson
+    have each also received contributions from the Doers Network in 2026.</p>
+    <p><strong>These are separate documented facts. This page does not assert that either
+    contribution had anything to do with either legislator's action on this bill, and no record we
+    have reviewed supports such a claim.</strong> They are reported because a reader assessing the
+    bill's path is entitled to know who funds the people on it.</p>
+  </div>
+
+  <p>Equally worth stating: <strong>no contribution from any of these sources to Julie King, Ada
+  Wilson or Stacy Bateman appears in any record we reviewed.</strong> The school board members who
+  spoke on this bill do not appear in the campaign-finance material at all.</p>
+</section>
+
+<section>
+  <h2>Serving two boards at once</h2>
+
+  <p>The dual-role question has already been reported locally. The <em>Lehi Free Press</em> and
+  <em>American Fork Citizen</em> examined it on July 13, 2026, identifying officials who
+  simultaneously hold seats on the dissolving Alpine board and on a successor board while assets
+  and liabilities are divided: <strong>Julie King</strong> (Alpine board president and Lake Mountain
+  board president), <strong>Ada Wilson</strong> (Alpine Seat 7 and Timpanogos Seat 4),
+  <strong>Joylin Lincoln</strong> (Alpine and Lake Mountain Seat 7), and <strong>Nicki
+  Brammer</strong> (Aspen Peaks).</p>
+
+  <p>King has addressed it publicly, saying she has not recused herself because she has not
+  participated on both sides of the same decision-making body. Alpine board member Sarah Beeson
+  raised the concern, and a third-party reviewer, Burke Jolley, audited the asset-and-liability
+  framework before approval.</p>
+
+  <div class="note">
+    <span class="lab">What this page adds</span>
+    <p>That reporting did not address bonds, debt, tax increment, or dollar figures. The
+    financial inheritance described here has not previously been connected to it.</p>
+  </div>
+
+  <h3>One of those seats sits inside a political funding organization</h3>
+
+  <p>Nicki Brammer holds Seat 3 on the Aspen Peaks board, won in November 2025 with 55.4% against
+  Mary Thomas. She is also <strong>Board Chair for Utah County of the Doers Network</strong>, a
+  self-described conservative organization that endorses and funds candidates. Its own website
+  publishes both facts together, describing her as having "recently elected to the Aspen Peaks
+  School Board." Readers can see the organization's own materials, including its endorsement list,
+  at <a href="https://www.doersnetwork.org/" rel="noopener">doersnetwork.org</a>.</p>
+
+  <p>In 2026 the Doers Network made roughly $70,300 in documented contributions to Utah candidates
+  and committees. Two recipients appear elsewhere on this page: <strong>Rep. Stephanie Gricius</strong>,
+  who presented S.B. 188 in House Education, and <strong>Rep. Matt MacPherson</strong>, who moved
+  the amendment containing the bond cap exemption. A third is <strong>Sen. Brady Brammer</strong>,
+  who represents Senate District 21 and is Nicki Brammer's husband.</p>
+
+  <p>So one household sits at three points of the same structure at once: a seat on a successor
+  school board, the county chairmanship of an organization that funds legislators, and a seat in
+  the Legislature that receives that organization's money.</p>
+
+  <div class="note flagged">
+    <span class="lab">The timing matters, and it cuts against the obvious reading</span>
+    <p><strong>Every Doers Network contribution identified is from 2026. S.B. 188 was heard and
+    passed in February and March 2025.</strong> The money postdates the bill by roughly a year.
+    Nothing in the record suggests the organization funded the legislation's path, and this page
+    does not suggest it.</p>
+    <p>What the record does show is narrower: an organization that funds legislators in these
+    districts has, as its Utah County board chair, a sitting member of one of the successor school
+    boards that inherits the results.</p>
+  </div>
+
+  <p>Two further points belong here for accuracy. <strong>No Doers Network contribution to Nicki
+  Brammer's own school board campaign appears in her filings.</strong> Her August 2025 report shows
+  $3,550 raised in total — a $1,500 loan from herself, $2,000 from Brady Brammer, and $50 from
+  Rep. Tyler Clancy. And the organization's <strong>own funding sources are not established</strong>
+  in any record we reviewed; contributions out are documented, contributions in are not.</p>
+
+  <div class="note open">
+    <span class="lab">An unresolved figure</span>
+    <p>Records reviewed give conflicting totals for the Doers Network's contributions to Sen. Brady
+    Brammer — $2,000 in one compilation, $7,000 across two payments in another. That discrepancy
+    has not been resolved, and neither figure should be treated as final.</p>
+  </div>
+</section>
+
+<section>
+  <h2>The revenue: what the county said, and what the budgets say</h2>
+
+  <p>Utah County's public materials on the split state that it <em>"isn't expected to significantly
+  impact tax collection or school funding,"</em> citing per-pupil WPU funding as the stabilizer.</p>
+
+  <p>WPU is state money, distributed per student. Tax increment operates on the local property tax
+  base.</p>
+
+  <div class="fig">
+  <svg viewBox="0 0 760 540" role="img" aria-labelledby="wput wpud">
+    <title id="wput">How state and local school funding differ, and where tax increment acts</title>
+    <desc id="wpud">State funding arrives per student through the Weighted Pupil Unit and is not
+    affected by tax increment. Local property tax revenue passes through the project area, where an
+    agreed share of growth above the frozen base value is committed to the project. New homes inside
+    the area add students while their tax growth is captured, and new growth is the one revenue
+    increase a taxing entity receives without a Truth in Taxation hearing.</desc>
+
+    <text x="0" y="14" font-family="ui-monospace,Menlo,monospace" font-size="10.5" letter-spacing="1.4"
+      fill="#2a4a6b" font-weight="700">STREAM ONE — STATE MONEY, FOLLOWS THE STUDENT</text>
+    <rect x="0" y="26" width="230" height="72" fill="#fbf8f1" stroke="#c9c0a8"/>
+    <text x="115" y="54" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="700" fill="#20241f">STATE</text>
+    <text x="115" y="74" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4f45">Uniform School Fund,</text>
+    <text x="115" y="90" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4f45">distributed per student (WPU)</text>
+    <line x1="240" y1="62" x2="470" y2="62" stroke="#2a4a6b" stroke-width="8" opacity="0.5"/>
+    <path d="M470 62 l-12 -7 v14 z" fill="#2a4a6b" opacity="0.5"/>
+    <text x="355" y="46" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4f45">arrives in full</text>
+    <rect x="484" y="26" width="276" height="72" fill="#e4eaf0" stroke="#2a4a6b"/>
+    <text x="622" y="60" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="700" fill="#2a4a6b">SCHOOL DISTRICT BUDGET</text>
+    <text x="622" y="80" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#20241f">teachers · buildings · buses · debt</text>
+
+    <text x="0" y="140" font-family="ui-monospace,Menlo,monospace" font-size="10.5" letter-spacing="1.4"
+      fill="#8a2e1f" font-weight="700">STREAM TWO — LOCAL PROPERTY TAX, FOLLOWS THE LAND</text>
+    <rect x="0" y="152" width="230" height="72" fill="#fbf8f1" stroke="#c9c0a8"/>
+    <text x="115" y="180" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="700" fill="#20241f">LOCAL</text>
+    <text x="115" y="200" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4f45">the district's own levy on</text>
+    <text x="115" y="216" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4f45">property inside its boundaries</text>
+    <line x1="240" y1="188" x2="330" y2="188" stroke="#8a2e1f" stroke-width="8" opacity="0.45"/>
+    <rect x="330" y="160" width="120" height="56" fill="#f4e2dc" stroke="#8a2e1f"/>
+    <text x="390" y="184" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="11" font-weight="700" fill="#8a2e1f">PROJECT AREA</text>
+    <text x="390" y="202" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#8a2e1f">a share captured</text>
+    <line x1="450" y1="188" x2="470" y2="188" stroke="#8a2e1f" stroke-width="4" opacity="0.45"/>
+    <path d="M478 188 l-12 -7 v14 z" fill="#8a2e1f" opacity="0.45"/>
+    <text x="530" y="184" font-family="Georgia,serif" font-size="12" fill="#4a4f45">what is left arrives</text>
+    <line x1="390" y1="216" x2="390" y2="268" stroke="#8a2e1f" stroke-width="8" opacity="0.65"/>
+    <path d="M390 276 l-7 -12 h14 z" fill="#8a2e1f" opacity="0.65"/>
+    <rect x="250" y="280" width="280" height="56" fill="#8a2e1f" opacity="0.10" stroke="#8a2e1f"/>
+    <text x="390" y="304" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="12" font-weight="700" fill="#8a2e1f">COMMITTED TO THE PROJECT</text>
+    <text x="390" y="324" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#20241f">20 years per phase, 40-year maximum</text>
+
+    <line x1="0" y1="374" x2="760" y2="374" stroke="#c9c0a8"/>
+    <text x="0" y="402" font-family="ui-monospace,Menlo,monospace" font-size="10.5" letter-spacing="1.4"
+      fill="#8a6a1f" font-weight="700">WHY IT SQUEEZES — THE PART THE WPU ANSWER DOES NOT REACH</text>
+    <rect x="0" y="414" width="236" height="80" fill="#f4ecdc" stroke="#8a6a1f"/>
+    <text x="118" y="440" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#20241f">New rooftops inside the area</text>
+    <text x="118" y="458" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#20241f">bring students the district</text>
+    <text x="118" y="476" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-weight="700" fill="#20241f">must serve.</text>
+    <text x="252" y="460" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#8a8265">+</text>
+    <rect x="268" y="414" width="236" height="80" fill="#f4ecdc" stroke="#8a6a1f"/>
+    <text x="386" y="440" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#20241f">Their property tax growth</text>
+    <text x="386" y="458" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#20241f">is captured above the</text>
+    <text x="386" y="476" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-weight="700" fill="#20241f">frozen base value.</text>
+    <text x="520" y="460" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#8a8265">=</text>
+    <rect x="536" y="414" width="224" height="80" fill="#8a6a1f" opacity="0.12" stroke="#8a6a1f"/>
+    <text x="648" y="440" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#20241f">Costs rise. Base does not.</text>
+    <text x="648" y="460" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-weight="700" fill="#8a6a1f">The levers left are a rate</text>
+    <text x="648" y="478" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-weight="700" fill="#8a6a1f">increase, or a cut.</text>
+    <text x="0" y="524" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#8a8265">Term and structure from adopted project area budgets and Utah Code.</text>
+  </svg>
+  </div>
+
+  <p><strong>New growth is the one increase that arrives without a public hearing.</strong> Under
+  Utah's Truth in Taxation law, a taxing entity's certified rate is adjusted downward as existing
+  property values rise, so rising valuations do not by themselves produce more revenue. The
+  exception is new construction added to the rolls &mdash; the one source of additional revenue a
+  district receives automatically.</p>
+
+  <p class="pull">Tax increment captures that exception. The one revenue increase a district
+  receives without asking is the one committed to the project.</p>
+
+  <p><strong>The shortfall does not disappear &mdash; it moves.</strong> To recover it, a district's
+  options are a Truth in Taxation rate increase, which falls on every property owner in the
+  district including those nowhere near the project, or reduced spending.</p>
+
+  <p>None of which makes the county's statement inaccurate about WPU. It answers a different
+  question than the one the adopted budgets raise.</p>
+</section>
+
+<section>
+  <h2>What was already committed</h2>
+
+  <div class="xref">
+    <span class="lab">The mechanism, in full, on another page</span>
+    <p>How the freeze works, why the school district is always the largest contributor, and the
+    complete Sweetwater Industrial Park CRA #3 ledger &mdash; base year, rate stack, and the
+    twenty-year split &mdash; are set out in
+    <a href="weber-pid-school-funds.html">Where Does Your School-Tax Dollar Go?</a></p>
+  </div>
+
+  <p>In short: inside Sweetwater CRA #3 in Eagle Mountain, Alpine School District's levy is
+  projected to generate $20,906,417 of increment over twenty years. Of that,
+  <strong>$13,518,614 is committed to the project</strong> and $7,387,803 retained. What returns to
+  the district is <strong>$500,000</strong>, through a School District Pilot Program line.</p>
+
+  <p>Eagle Mountain is in Lake Mountain District &mdash; as is the new high school in Saratoga
+  Springs and the new elementary in Eagle Mountain that the $201 million was issued to build.</p>
+
+  <div class="tw">
+  <table>
+    <caption>Both rows use the 120–150 job range stated in the project area materials. The jobs are
+    a projection; the committed dollars are fixed by agreement.</caption>
+    <thead><tr><th></th><th>Total, 20 years</th><th>Per job</th></tr></thead>
+    <tbody>
+      <tr><td>School revenue committed to the project</td><td class="num">$13,518,614</td><td class="num">$90,124–$112,655</td></tr>
+      <tr><td>Returned to the district</td><td class="num">$500,000</td><td class="num">$3,333–$4,167</td></tr>
+      <tr class="total"><td>Ratio</td><td class="num">27 : 1</td><td class="num">27 : 1</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>It is a ratio, not a payment. Note the asymmetry: if the project creates fewer jobs than
+  projected, the committed dollars do not change. The district's contribution is contractual; the
+  jobs are a forecast.</p>
+
+  <p>The agency's position deserves stating: without the increment there is no development, so the
+  base value would have remained low and there would have been no increment to commit. That is the
+  strongest argument available for these agreements.</p>
+</section>
+
+<section>
+  <h2>The denominator</h2>
+
+  <p>Nothing above changes on July 1, 2027. The agreements are the agreements. What changes is the
+  size of the district absorbing them. Alpine serves roughly 84,000 students; Lake Mountain will be
+  built from four cities.</p>
+
+  <div class="note open">
+    <span class="lab">The budget figures below are invented</span>
+    <p>The successor districts have not published their budgets, so these percentages cannot yet be
+    calculated for real. The round numbers are <strong>illustrative placeholders chosen to be
+    plausible</strong>, not figures from any document. The committed dollars are real.</p>
+  </div>
+
+  <p>Spread evenly, $13,518,614 over 20 years is roughly <strong>$675,900 a year</strong>.</p>
+
+  <div class="tw">
+  <table>
+    <caption>Illustrative only. Budget figures invented; committed figure real.</caption>
+    <thead><tr><th>If a successor district inherits…</th><th>Committed per year</th><th>Share of an illustrative $250M budget</th><th>Illustrative teaching positions</th></tr></thead>
+    <tbody>
+      <tr><td>1 project area of this scale</td><td class="num">$675,900</td><td class="num">0.27%</td><td class="num">~8</td></tr>
+      <tr><td>5 project areas</td><td class="num">$3,379,500</td><td class="num">1.35%</td><td class="num">~40</td></tr>
+      <tr><td>10 project areas</td><td class="num">$6,759,000</td><td class="num">2.70%</td><td class="num">~80</td></tr>
+      <tr><td>20 project areas</td><td class="num">$13,518,000</td><td class="num">5.41%</td><td class="num">~159</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>The last column converts at an illustrative fully-loaded cost of $85,000 per position &mdash;
+  also a placeholder. <strong>One project area alone is under a third of one percent. That is not a
+  crisis, and this page does not describe it as one.</strong></p>
+
+  <p>School districts argue publicly over budget changes well under one percent. At five, the
+  conversation is about closing buildings. And none of this counts the bond payments arriving on
+  the same ledger.</p>
+
+  <div class="note flagged">
+    <span class="lab">The reportable finding is a count, not a claim</span>
+    <p>Nothing here asserts that any successor district inherits five project areas, or ten, or
+    twenty. <strong>No such count has been published.</strong> The individual project area budgets
+    are public, filed city by city on the Utah Public Notice Website. What does not exist is a tally
+    of how many fall inside each new boundary and what they total.</p>
+    <p>That is the most useful work left in this story, and it is arithmetic: list the project areas
+    inside each successor district, add the committed totals, and set the sum against that
+    district's own budget alongside its assumed debt service. Until someone does, the exposure is
+    unknown &mdash; which is itself worth reporting, given that the boards inheriting it took office
+    in January.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Questions we can answer here</h2>
+  <ul class="q can">
+    <li>Did anyone vote on the $201 million?
+      <span class="ans">No election was held. Lease revenue bonds are approved by board resolution
+      after a public hearing. S.B. 188 removed the $200 million three-year cap that had applied.</span></li>
+    <li>Where did the exemption come from?
+      <span class="ans">House Education Standing Committee, February 27, 2025, Amendment #2, moved
+      by Rep. Matt MacPherson, adopted 12–0–4. It was not in the introduced bill.</span></li>
+    <li>Did anyone vote against the bill?
+      <span class="ans">No. Every recorded vote at every stage was unanimous. The changes to its
+      content were made by voice vote.</span></li>
+    <li>Which successor district assumes the debt?
+      <span class="ans">The buildings are in Saratoga Springs and Eagle Mountain, both in Lake
+      Mountain District. Terms run up to 31 years.</span></li>
+    <li>Does the split reduce the amount of revenue committed?
+      <span class="ans">No. The agreements are unchanged by the split. Only the size of the district
+      absorbing them changes.</span></li>
+    <li>Is one project area enough to damage a district's budget?
+      <span class="ans">On its own, no — under a third of one percent on the illustrative figures.
+      The open question is how many there are.</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2>Questions you need to ask</h2>
+  <ul class="q ask">
+    <li>How many project areas fall inside each successor district's boundary, and what do their
+      committed totals come to?</li>
+    <li>What is each successor district's projected annual budget and annual debt service?</li>
+    <li>What did the conference committee change on March 7, and who served on it?</li>
+    <li>Were the new boards briefed on the revenue commitments and the assumed bond debt, and when?</li>
+    <li>Was either inheritance disclosed in the Proposition 11 and 14 ballot materials in 2024?</li>
+    <li>Did Alpine's lease revenue bond notices carry the statutory disclosure regarding previously
+      rejected general obligation financing?</li>
+    <li>What reason was given, on the record, for lifting the cap for reorganized districts?</li>
+    <li>Who funds the Doers Network? Its contributions out are documented; its contributions in
+      are not.</li>
+    <li>Does a successor board member who chairs a political funding organization's county board
+      face any recusal obligation when that organization funds legislators whose decisions affect
+      the district?</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Sources</h2>
+  <details>
+    <summary>Primary documents relied on</summary>
+    <div class="dbody">
+      <ol class="src">
+        <li>S.B. 188, 2025 General Session, "School District Modifications" — bill file, substitute
+        history, and complete action log, le.utah.gov.</li>
+        <li>Senate Education Standing Committee minutes, February 4, 2025.</li>
+        <li>House Education Standing Committee minutes, February 27, 2025 — source of the Amendment
+        #2 text quoted above.</li>
+        <li>Alpine School District — lease revenue bond authorization and issuance records, 2025.</li>
+        <li>Redevelopment Agency of Eagle Mountain City — Sweetwater Industrial Park Community
+        Reinvestment Project Area #3 hearing notice (April 2023) and adopted budget packet
+        (August 1, 2023), Utah Public Notice Website.</li>
+        <li>Utah County Commission — approval of successor district boundaries, March 2025; and
+        Utah County public information materials on the split.</li>
+        <li>Daily Herald, November 7, 2025 — preliminary school board election results.</li>
+        <li>Lehi Free Press and American Fork Citizen, July 13, 2026 — "Does the Alpine School
+        District split leave officials serving two masters?"</li>
+        <li>Campaign disclosure filings, disclosures.utah.gov.</li>
+        <li>Utah Code Title 17C; Title 53G; Section 11-14-103; Truth in Taxation provisions.</li>
+      </ol>
+    </div>
+  </details>
+  <details>
+    <summary>How the calculations were made</summary>
+    <div class="dbody">
+      <p><strong>Per job.</strong> $13,518,614 ÷ 120 = $112,655; ÷ 150 = $90,124. Return: $500,000
+      ÷ 120 = $4,167; ÷ 150 = $3,333. Ratio $13,518,614 ÷ $500,000 = 27.0.</p>
+      <p><strong>Committed share.</strong> $13,518,614 ÷ $20,906,417 = 64.7%; $7,387,803 retained.
+      Return share: $500,000 ÷ $13,518,614 = 3.7%.</p>
+      <p><strong>Annual average.</strong> $13,518,614 ÷ 20 = $675,931, rounded to $675,900. An even
+      division for scale, not a projection of any single year.</p>
+      <p><strong>Illustrative tables.</strong> Budget figures and the $85,000 per-position cost are
+      invented placeholders, labeled as such wherever they appear.</p>
+    </div>
+  </details>
+  <details>
+    <summary>What we could not establish</summary>
+    <div class="dbody">
+      <p>The conference committee substitute text and the committee's membership. Whether Alpine's
+      bond notices carried the statutory disclosure. The number of project areas inside each
+      successor boundary. The successor districts' budgets. Any connection between campaign
+      contributions and any legislator's action on this bill — <strong>no record we reviewed
+      supports such a connection, and none is asserted.</strong></p>
+    </div>
+  </details>
+</section>
+
+<footer>
+  The Weber County Hive &middot; Utah County &middot; Schools &amp; Bonding &middot;
+  Reported from primary documents. Projections are not outcomes.
+</footer>
+
+</div>

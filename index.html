@@ -1,153 +1,242 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PID Research — The Weber County Hive</title>
 <style>
-  :root{
-    --cream:#f6f1e6; --paper:#fbf8f1; --navy:#10233f; --navy-deep:#0a1626;
-    --gold:#b8863b; --gold-bright:#d6a752; --flag:#9c3b2e; --flag-bright:#c14e3a;
-    --ink:#1c1c1c; --ink-soft:#4a4a48; --rule:#d8cfba; --green-ok:#3f6b4a;
-    --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
-    --font-body: 'Helvetica Neue', Arial, sans-serif;
-    --font-mono: 'Courier New', ui-monospace, monospace;
-  }
-  *{box-sizing:border-box;}
-  body{ margin:0; background:var(--cream); color:var(--ink); font-family:var(--font-body); line-height:1.55; }
-  a{color:var(--navy);}
-  header.masthead{ background:linear-gradient(180deg,var(--navy) 0%, var(--navy-deep) 100%); color:var(--cream); padding:52px 24px 40px; text-align:center; border-bottom:6px solid var(--gold); }
-  header.masthead .eyebrow{ font-family:var(--font-mono); letter-spacing:.28em; font-size:11px; text-transform:uppercase; color:var(--gold-bright); margin-bottom:10px; }
-  header.masthead h1{ font-family:var(--font-display); font-weight:400; font-size:clamp(28px,5vw,48px); margin:0 0 14px; letter-spacing:.01em; }
-  header.masthead p.sub{ max-width:640px; margin:0 auto; color:#cdd6e4; font-size:15px; }
+:root{
+  --paper:#f2ede2; --panel:#fbf8f1;
+  --ink:#20241f; --ink-soft:#4a4f45;
+  --line:#c9c0a8; --rule-strong:#8a8265;
+  --flag:#8a2e1f; --flag-soft:#f4e2dc;
+  --gold:#8a6a1f; --gold-soft:#f4ecdc;
+  --slate:#2a4a6b; --slate-soft:#e4eaf0;
+  --accent:var(--slate); --soft:var(--slate-soft);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:16px/1.6 Georgia,'Iowan Old Style','Times New Roman',serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px 90px}
+h1,h2,.mono,.kicker,.chip,.stat-num,.dc-region,.dc-date{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace}
 
-  main{max-width:960px;margin:0 auto;padding:0 20px 80px;}
+header{border-bottom:3px double var(--rule-strong);padding:44px 0 26px;margin-bottom:30px}
+.kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
+h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:.36em 0 .3em;letter-spacing:-.02em}
+.standfirst{font-size:18px;line-height:1.55;color:var(--ink-soft);margin:0 0 22px}
+.stats{display:flex;flex-wrap:wrap;gap:26px;border-top:1px solid var(--rule-strong);padding-top:16px}
+.stat .stat-num{display:block;font-size:22px;font-weight:700;color:var(--accent);letter-spacing:-.01em}
+.stat .stat-lab{font-size:12.5px;color:var(--muted,#4a4f45)}
 
-  .stat-strip{display:flex;gap:14px;flex-wrap:wrap;margin:40px 0 8px;}
-  .stat-box{ flex:1 1 190px; background:var(--navy); color:var(--cream); border-radius:4px; padding:18px 20px; }
-  .stat-box .n{font-family:var(--font-mono);font-size:26px;color:var(--gold-bright);}
-  .stat-box .l{font-size:12px;color:#b9c3d6;margin-top:5px;}
+/* controls */
+.controls{margin:0 0 26px}
+.searchbox{position:relative}
+#q{width:100%;padding:13px 40px 13px 14px;font:15px/1.4 Georgia,serif;color:var(--ink);
+  background:var(--panel);border:1px solid var(--rule-strong);border-radius:2px}
+#q:focus{outline:2px solid var(--accent);outline-offset:1px}
+#clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;
+  cursor:pointer;font-size:20px;line-height:1;color:var(--rule-strong);padding:4px 8px;display:none}
+.chiprow{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.chip{font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;
+  background:var(--panel);border:1px solid var(--line);color:var(--ink-soft);cursor:pointer;
+  border-radius:2px}
+.chip:hover{border-color:var(--rule-strong)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.chiplab{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--rule-strong);margin:16px 0 7px}
+#count{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-soft);margin:18px 0 0;border-top:1px solid var(--line);padding-top:12px}
 
-  section.block{margin-top:52px;}
-  .num-eyebrow{ font-family:var(--font-mono); color:var(--gold); font-size:13px; letter-spacing:.15em; margin-bottom:6px; }
-  h2.block-title{ font-family:var(--font-display); font-weight:400; font-size:clamp(22px,3.6vw,30px); margin:0 0 8px; color:var(--navy); }
-  p.block-lede{ color:var(--ink-soft); font-size:15.5px; max-width:640px; margin:0 0 30px; }
-
-  .doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
-  .doc-card{ display:block; background:var(--paper); border:1px solid var(--rule); border-radius:5px; padding:22px 24px; text-decoration:none; transition:border-color .12s ease, transform .12s ease, box-shadow .12s ease; }
-  .doc-card:hover{ border-color:var(--gold); transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.08); }
-  .doc-card .dc-tag{ display:inline-block; font-family:var(--font-mono); font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:#fff; background:var(--gold); padding:3px 9px; border-radius:3px; margin-bottom:12px; }
-  .doc-card .dc-title{ font-family:var(--font-display); font-size:20px; color:var(--navy); display:block; margin-bottom:8px; }
-  .doc-card .dc-desc{ font-size:13.5px; color:var(--ink-soft); display:block; margin-bottom:14px; line-height:1.5; }
-  .doc-card .dc-link{ font-family:var(--font-mono); font-size:11.5px; letter-spacing:.04em; color:var(--flag); font-weight:700; }
-
-  footer{ text-align:center; padding:34px 20px 50px; font-family:var(--font-mono); font-size:11px; color:#8c8471; }
+/* cards */
+.cards{display:grid;gap:14px;margin-top:22px}
+.doc-card{display:block;text-decoration:none;color:inherit;background:var(--panel);
+  border:1px solid var(--rule);border-left:4px solid var(--accent);padding:18px 20px;border-radius:2px}
+.doc-card:hover{border-left-color:var(--flag);background:#fffdf7}
+.doc-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dc-head{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;margin-bottom:7px}
+.dc-region{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.dc-date{font-size:10.5px;letter-spacing:.08em;color:var(--rule-strong);margin-left:auto}
+.dc-title{display:block;font-family:ui-monospace,Menlo,monospace;font-size:17px;font-weight:700;
+  letter-spacing:-.01em;margin-bottom:7px;line-height:1.25}
+.dc-desc{display:block;font-size:14.8px;line-height:1.55;color:var(--ink-soft)}
+.dc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.dc-tag{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--rule-strong);background:var(--paper);
+  border:1px solid var(--line);padding:2px 7px;border-radius:2px}
+.dc-link{display:inline-block;margin-top:11px;font-family:ui-monospace,Menlo,monospace;
+  font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.soon{opacity:.62;border-left-color:var(--rule-strong);cursor:default}
+mark{background:#f6e7a8;color:inherit;padding:0 1px}
+#empty{display:none;padding:30px 4px;color:var(--ink-soft);font-size:15.5px}
+footer{border-top:3px double var(--rule-strong);margin-top:56px;padding-top:20px;
+  font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-soft);letter-spacing:.05em}
+@media(max-width:600px){.wrap{padding:0 16px 70px}.stats{gap:18px}}
 </style>
-</head>
-<body>
 
-<header class="masthead">
-  <div class="eyebrow">THE WEBER COUNTY HIVE</div>
+<div class="wrap">
+
+<header>
+  <div class="kicker">The Weber County Hive</div>
   <h1>Public Infrastructure District Research</h1>
-  <p class="sub">A running set of explainers on how PIDs, tax increment financing, and related tools move growth's tax revenue away from cities, counties, and schools — and onto whoever buys or rents there.</p>
+  <p class="standfirst">A running set of explainers on how PIDs, tax increment financing, and
+  related tools move growth's tax revenue away from cities, counties, and schools — and onto
+  whoever buys or rents there.</p>
+  <div class="stats">
+    <div class="stat"><span class="stat-num" id="n-pages">12</span>
+      <span class="stat-lab">explainers published</span></div>
+    <div class="stat"><span class="stat-num">$5.267B</span>
+      <span class="stat-lab">statewide PID debt confirmed</span></div>
+    <div class="stat"><span class="stat-num">3</span>
+      <span class="stat-lab">counties covered in depth</span></div>
+  </div>
 </header>
 
-<main>
-  <div class="stat-strip">
-    <div class="stat-box"><div class="n">11</div><div class="l">explainers published so far</div></div>
-    <div class="stat-box"><div class="n">$5.267B</div><div class="l">total statewide PID debt confirmed</div></div>
-    <div class="stat-box"><div class="n">3</div><div class="l">counties covered in depth (Utah, Box Elder, Weber)</div></div>
+<div class="controls">
+  <div class="searchbox">
+    <label for="q" class="visually-hidden" style="position:absolute;left:-9999px">Search pages</label>
+    <input id="q" type="search" placeholder="Search titles, summaries and tags — try “schools”, “bonding”, “Zions”…" autocomplete="off">
+    <button id="clear" type="button" aria-label="Clear search">×</button>
   </div>
+  <p class="chiplab">Filter by place</p>
+  <div class="chiprow" id="regions"></div>
+  <p class="chiplab">Filter by topic</p>
+  <div class="chiprow" id="tags"></div>
+  <p id="count"></p>
+</div>
 
-  <section class="block">
-    <div class="num-eyebrow">START HERE</div>
-    <h2 class="block-title">Every page in this project</h2>
-    <p class="block-lede">Each page stands on its own — read whichever answers your question first.</p>
-
-    <div class="doc-grid">
-      <a class="doc-card" href="mount-ogden-pid-ratchford.html">
-        <span class="dc-tag">Weber County</span>
-        <span class="dc-title">Three Boards, One Man, No Disclosure</span>
-        <span class="dc-desc">Snowbasin's General Manager sits as a trustee on three overlapping Weber County special districts governing his own employer's water, roads, and up to $300 million in infrastructure bonds — all appointed the same way as a cemetery board.</span>
-        <span class="dc-link">Read it →</span>
-      </a>
-
-      <a class="doc-card" href="ogden-valley-boundary-exclusion.html">
-        <span class="dc-tag">Weber County</span>
-        <span class="dc-title">The Boundary That Left Them Out</span>
-        <span class="dc-desc">Ogden Valley City's own incorporation study warned that leaving the valley's biggest resorts out of the tax base would strain the budget. It did — while a separate $300 million infrastructure authorization tied to the same resort sits unused, overseen by the resort's own top executive.</span>
-        <span class="dc-link">Read it →</span>
-      </a>
-
-      <a class="doc-card" href="weber-pid-underwriters.html">
-        <span class="dc-tag">Statewide</span>
-        <span class="dc-title">The Middlemen: Who Profits From Utah's PID Boom</span>
-        <span class="dc-desc">The bankers who built Utah's PID market moved from D.A. Davidson to Piper Sandler in 2020 — and by 2026 the two firms lead Utah's entire municipal bond rankings. Plus how Zions Bank shows up as advisor, feasibility-study author, underwriter, and trustee on the same deals.</span>
-        <span class="dc-link">Read it →</span>
-      </a>
-
-      <a class="doc-card" href="weber-pid-zions.html">
-        <span class="dc-tag">Statewide</span>
-        <span class="dc-title">One Firm, Every Hat: Zions' Grip on Utah's PID Market</span>
-        <span class="dc-desc">Zions Bank shows up on PID after PID as feasibility-study author, advisor, underwriter, direct purchaser, trustee, disclosure agent, and the firm that bills and forecloses on homeowners — sometimes on the very same deal. Includes Zions' own written admission of the conflict that creates, and D.A. Davidson's matching role across the same districts.</span>
-        <span class="dc-link">Read it →</span>
-      </a>
-
-      <a class="doc-card" href="affordable-house-story.html">
-        <span class="dc-tag">For Homebuyers</span>
-        <span class="dc-title">The Story of the "Affordable" House</span>
-        <span class="dc-desc">A plain-language, step-by-step walkthrough of how a PID bill gets left out of an affordability test — with an interactive cost calculator and an optional HOA fee.</span>
-        <span class="dc-link">Read it →</span>
-      </a>
-
-      <a class="doc-card" href="nordic-village-case-file.html">
-        <span class="dc-tag">Weber County</span>
-        <span class="dc-title">The Nordic Village Case File</span>
-        <span class="dc-desc">A full case file on one Weber County PID — interactive cost calculators, a 40-year cost trajectory, and the county's own tax-diversion numbers going back to 2021, all built from primary-source budgets and disclosures.</span>
-        <span class="dc-link">Read it →</span>
-      </a>
-
-      <a class="doc-card" href="utah-county-explainer.html">
-        <span class="dc-tag">Utah County</span>
-        <span class="dc-title">Where the Growth Money Goes</span>
-        <span class="dc-desc">Interactive calculator comparing a PID home to a non-PID home at the same price, a real Utah County renter case study, and the Utah City / Sweetwater case files.</span>
-        <span class="dc-link">Read it →</span>
-      </a>
-
-      <a class="doc-card" href="pid_mechanism_map.html">
-        <span class="dc-tag">General Overview</span>
-        <span class="dc-title">PID Mechanism Map</span>
-        <span class="dc-desc">A statewide, county-agnostic explainer of how Public Infrastructure Districts work — the mechanism behind every other page in this project.</span>
-        <span class="dc-link">Read it →</span>
-      </a>
-
-      <a class="doc-card" href="stratos-ruby-pipeline-mida.html">
-        <span class="dc-tag">Box Elder County</span>
-        <span class="dc-title">Stratos &amp; Ruby Pipeline</span>
-        <span class="dc-desc">A case study on the Stratos data center project and the Ruby Pipeline, and how MIDA's authority reaches into Box Elder County development.</span>
-        <span class="dc-link">Read it →</span>
-      </a>
-
-      <a class="doc-card" href="weber-pid-guide.html">
-        <span class="dc-tag">Directory</span>
-        <span class="dc-title">Full PID Guide</span>
-        <span class="dc-desc">A directory of every explainer page in this project, for readers who want the whole picture in one place.</span>
-        <span class="dc-link">Read it →</span>
-      </a>
-
-      <a class="doc-card" href="weber-pid-school-funds.html">
-        <span class="dc-tag">Schools &amp; Bonding</span>
-        <span class="dc-title">PIDs, Schools &amp; Bonding</span>
-        <span class="dc-desc">How PIDs and tax increment financing interact with local school district funding, plus school bonding including the 2025 no-vote bonding change.</span>
-        <span class="dc-link">Read it →</span>
-      </a>
-    </div>
-  </section>
-</main>
+<main class="cards" id="cards"></main>
+<p id="empty">Nothing matches those filters. Clear one and try again.</p>
 
 <footer>
-  THE WEBER COUNTY HIVE · PID RESEARCH · Built from source documents on file
+  The Weber County Hive &middot; Every page built from primary documents &middot;
+  Each stands on its own — read whichever answers your question first.
 </footer>
 
-</body>
-</html>
+</div>
+
+<script src="piddata.js"></script>
+<script>
+(function(){
+  var DATA = (typeof PID_PAGES !== "undefined") ? PID_PAGES.slice() : [];
+  var q = document.getElementById("q"),
+      clearBtn = document.getElementById("clear"),
+      regionRow = document.getElementById("regions"),
+      tagRow = document.getElementById("tags"),
+      cards = document.getElementById("cards"),
+      countEl = document.getElementById("count"),
+      emptyEl = document.getElementById("empty");
+
+  var activeRegions = [], activeTags = [];
+
+  function esc(s){ return String(s == null ? "" : s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+
+  function hi(text, term){
+    var safe = esc(text);
+    if(!term) return safe;
+    var t = term.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+    try { return safe.replace(new RegExp("("+t+")","ig"), "<mark>$1</mark>"); }
+    catch(e){ return safe; }
+  }
+
+  function fmtDate(d){
+    if(!d) return "";
+    var p = d.split("-"); if(p.length !== 3) return "";
+    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var mi = parseInt(p[1],10) - 1;
+    if(isNaN(mi) || mi < 0 || mi > 11) return "";
+    return months[mi] + " " + parseInt(p[2],10) + ", " + p[0];
+  }
+
+  // newest first; undated last
+  DATA.sort(function(a,b){
+    if(a.date && b.date) return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0);
+    if(a.date) return -1;
+    if(b.date) return 1;
+    return 0;
+  });
+
+  function buildChips(row, values, store){
+    row.innerHTML = "";
+    values.forEach(function(v){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.textContent = v;
+      b.setAttribute("aria-pressed","false");
+      b.addEventListener("click", function(){
+        var i = store.indexOf(v);
+        if(i === -1){ store.push(v); b.setAttribute("aria-pressed","true"); }
+        else { store.splice(i,1); b.setAttribute("aria-pressed","false"); }
+        render();
+      });
+      row.appendChild(b);
+    });
+  }
+
+  var regions = [];
+  DATA.forEach(function(d){ if(d.region && regions.indexOf(d.region) === -1) regions.push(d.region); });
+  regions.sort();
+
+  var freq = {};
+  DATA.forEach(function(d){ (d.tags||[]).forEach(function(t){ freq[t] = (freq[t]||0) + 1; }); });
+  var tags = Object.keys(freq).sort(function(a,b){
+    return freq[b] - freq[a] || (a < b ? -1 : 1);
+  });
+
+  buildChips(regionRow, regions, activeRegions);
+  buildChips(tagRow, tags, activeTags);
+
+  function render(){
+    var term = q.value.trim().toLowerCase();
+    clearBtn.style.display = term ? "block" : "none";
+
+    var rows = DATA.filter(function(d){
+      if(activeRegions.length && activeRegions.indexOf(d.region) === -1) return false;
+      if(activeTags.length){
+        var t = d.tags || [];
+        for(var i=0;i<activeTags.length;i++){ if(t.indexOf(activeTags[i]) === -1) return false; }
+      }
+      if(!term) return true;
+      var hay = [d.title, d.summary, d.region].concat(d.tags||[]).join(" ").toLowerCase();
+      return hay.indexOf(term) !== -1;
+    });
+
+    cards.innerHTML = "";
+    rows.forEach(function(d){
+      var live = d.status === "live";
+      var el = document.createElement(live ? "a" : "div");
+      el.className = "doc-card" + (live ? "" : " soon");
+      if(live) el.href = d.page;
+
+      var dateStr = fmtDate(d.date);
+      var tagHtml = (d.tags||[]).map(function(t){
+        return '<span class="dc-tag">' + hi(t, term) + '</span>';
+      }).join("");
+
+      el.innerHTML =
+        '<div class="dc-head">' +
+          '<span class="dc-region">' + hi(d.region, term) + '</span>' +
+          (dateStr ? '<span class="dc-date">' + esc(dateStr) + '</span>' : '') +
+        '</div>' +
+        '<span class="dc-title">' + hi(d.title, term) + '</span>' +
+        '<span class="dc-desc">' + hi(d.summary, term) + '</span>' +
+        '<div class="dc-tags">' + tagHtml + '</div>' +
+        '<span class="dc-link">' + (live ? "Read it →" : "Coming soon") + '</span>';
+
+      cards.appendChild(el);
+    });
+
+    emptyEl.style.display = rows.length ? "none" : "block";
+    var bits = [];
+    if(term) bits.push('matching “' + term + '”');
+    if(activeRegions.length) bits.push("in " + activeRegions.join(", "));
+    if(activeTags.length) bits.push("tagged " + activeTags.join(" + "));
+    countEl.textContent = rows.length + (rows.length === 1 ? " page " : " pages ") +
+      (bits.length ? bits.join(" · ") : "— showing everything");
+  }
+
+  q.addEventListener("input", render);
+  clearBtn.addEventListener("click", function(){ q.value = ""; render(); q.focus(); });
+
+  var liveCount = DATA.filter(function(d){ return d.status === "live"; }).length;
+  var np = document.getElementById("n-pages");
+  if(np) np.textContent = liveCount;
+
+  render();
+})();
+</script>

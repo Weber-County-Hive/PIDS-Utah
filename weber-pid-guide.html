@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PID Explainers — A Guide | The Weber County Hive</title>
+<title>PID Explainers — A Guide | Utah Hive Politics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="hive-bee.png">
 <style>
   :root{
     --cream:#f6f1e6;
@@ -77,6 +79,11 @@
   }
 
   #pid-card-list{}
+  .pid-basics{background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--gold);border-radius:3px;padding:24px 28px;margin-bottom:34px;}
+  .pid-basics h2{font-family:var(--font-display);font-size:22px;color:var(--navy);margin:0 0 10px;}
+  .pid-basics p{font-size:15.5px;color:var(--ink-soft);margin:0 0 10px;max-width:62ch;}
+  .pid-basics p:last-child{margin-bottom:0;}
+  @media (max-width:600px){.pid-basics{padding:20px 18px;}}
 
   .pid-card{
     display:block;
@@ -124,6 +131,8 @@
     color:var(--flag);
     font-weight:600;
   }
+  .pid-card .foot{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .pid-card .updated{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.04em;color:var(--ink-soft);opacity:.8;}
   .pid-card .tags{
     display:flex;
     gap:8px;
@@ -167,17 +176,37 @@
   @media (max-width:600px){
     .guide-note{flex-direction:column; gap:4px;}
   }
+
+/* Hive brand bar (Utah Hive Politics / Weber County Hive) */
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:10px 20px;}
+.hb-bar a{display:flex;align-items:center;gap:12px;max-width:1100px;margin:0 auto;text-decoration:none;}
+.hb-bar img{width:52px;height:52px;border-radius:4px;display:block;flex:none;}
+.hb-name{font-family:'Cinzel','Trajan Pro',Georgia,serif;color:#d4af37;font-size:16px;letter-spacing:.14em;text-transform:uppercase;line-height:1.2;display:block;}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12.5px;letter-spacing:.02em;display:block;margin-top:2px;}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 20px 30px;margin-top:40px;font-family:Georgia,serif;}
+.hb-foot img{width:52px;height:52px;display:block;margin:0 auto 10px;}
+.hb-foot .hb-name{font-size:14px;}
+.hb-foot .hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block;}
+@media(max-width:600px){.hb-bar{padding:8px 16px}.hb-bar img{width:38px;height:38px}.hb-name{font-size:13px}.hb-sub{font-size:11.5px}}
 </style>
 </head>
 <body>
 
+<div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span></span></a></div>
 <header class="masthead">
-  <p class="eyebrow">The Weber County Hive</p>
+  <p class="eyebrow">Utah Hive Politics</p>
   <h1>Public Infrastructure Districts, Explained</h1>
   <p>A guide to every PID explainer on this site — what the mechanism is, how it moves money, and how it shows up in specific Utah projects. Start wherever fits what you're trying to understand.</p>
 </header>
 
 <main>
+  <div class="pid-basics">
+    <h2>What's a PID, in plain words?</h2>
+    <p>A <strong>Public Infrastructure District (PID)</strong> is a small taxing district a city or county creates around a new development, usually at the developer's request. The district borrows money by selling bonds to pay for things like roads, water and sewer lines.</p>
+    <p>That debt is paid back over many years through an extra tax charged to the properties inside the district's boundary, which usually means the people who later buy homes or businesses there. Those owners also pay all the regular property taxes everyone else pays.</p>
+    <p>The pages below go in reading order: the basics first, then what it costs a buyer, then schools, then real Utah case files and the firms that arrange the bonds.</p>
+  </div>
+
   <div class="guide-note">
     <span>Explainers</span>
     <span id="pid-count">— published</span>
@@ -189,10 +218,12 @@
 </main>
 
 <footer>
-  Compiled by The Weber County Hive. Sourced from public records, bond disclosures, and official filings for each explainer linked above.
+  Compiled by Utah Hive Politics, from the publisher of The Weber County Hive. Sourced from public records, bond disclosures, and official filings for each explainer linked above.
 </footer>
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent · Accountability · Journalism</span></div>
 
-<script src="weber-pid-guide-data.js?v=2"></script>
+
+<script src="weber-pid-guide-data.js?v=3"></script>
 <script>
   const list = document.getElementById('pid-card-list');
   document.getElementById('pid-count').textContent = PID_PAGES.length + ' published';
@@ -202,6 +233,9 @@
     a.className = 'pid-card';
     a.href = p.link;
 
+    const M = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    let upd = '';
+    if (p.updated) { const d = p.updated.split('-'); upd = `Updated ${M[+d[1]-1]} ${+d[2]}, ${d[0]}`; }
     const tagsHtml = (p.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
 
     a.innerHTML = `
@@ -209,7 +243,7 @@
       <h2>${p.title}</h2>
       <p>${p.description}</p>
       <div class="tags">${tagsHtml}</div>
-      <span class="open">${p.linkLabel || 'Open →'}</span>
+      <div class="foot"><span class="open">${p.linkLabel || 'Open →'}</span>${upd ? `<span class="updated">${upd}</span>` : ''}</div>
     `;
     list.appendChild(a);
   });

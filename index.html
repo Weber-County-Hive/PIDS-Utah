@@ -1,4 +1,6 @@
-<title>PID Research — The Weber County Hive</title>
+<title>PID Research — Utah Hive Politics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="hive-bee.png">
 <style>
 :root{
   --paper:#f2ede2; --panel:#fbf8f1;
@@ -66,12 +68,25 @@ mark{background:#f6e7a8;color:inherit;padding:0 1px}
 footer{border-top:3px double var(--rule-strong);margin-top:56px;padding-top:20px;
   font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-soft);letter-spacing:.05em}
 @media(max-width:600px){.wrap{padding:0 16px 70px}.stats{gap:18px}}
+
+/* Hive brand bar (Utah Hive Politics / Weber County Hive) */
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:10px 20px;}
+.hb-bar a{display:flex;align-items:center;gap:12px;max-width:1100px;margin:0 auto;text-decoration:none;}
+.hb-bar img{width:52px;height:52px;border-radius:4px;display:block;flex:none;}
+.hb-name{font-family:'Cinzel','Trajan Pro',Georgia,serif;color:#d4af37;font-size:16px;letter-spacing:.14em;text-transform:uppercase;line-height:1.2;display:block;}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12.5px;letter-spacing:.02em;display:block;margin-top:2px;}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 20px 30px;margin-top:0;font-family:Georgia,serif;}
+.hb-foot img{width:52px;height:52px;display:block;margin:0 auto 10px;}
+.hb-foot .hb-name{font-size:14px;}
+.hb-foot .hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block;}
+@media(max-width:600px){.hb-bar{padding:8px 16px}.hb-bar img{width:38px;height:38px}.hb-name{font-size:13px}.hb-sub{font-size:11.5px}}
 </style>
 
+<div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span></span></a></div>
 <div class="wrap">
 
 <header>
-  <div class="kicker">The Weber County Hive</div>
+  <div class="kicker">Utah Hive Politics · PID Research</div>
   <h1>Public Infrastructure District Research</h1>
   <p class="standfirst">A running set of explainers on how PIDs, tax increment financing, and
   related tools move growth's tax revenue away from cities, counties, and schools — and onto
@@ -103,13 +118,15 @@ footer{border-top:3px double var(--rule-strong);margin-top:56px;padding-top:20px
 <p id="empty">Nothing matches those filters. Clear one and try again.</p>
 
 <footer>
-  The Weber County Hive &middot; Every page built from primary documents &middot;
+  Utah Hive Politics &middot; Every page built from primary documents &middot;
   Each stands on its own — read whichever answers your question first.
 </footer>
 
-</div>
 
-<script src="piddata.js"></script>
+</div>
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent · Accountability · Journalism</span></div>
+
+<script src="piddata.js?v=2"></script>
 <script>
 (function(){
   var DATA = (typeof PID_PAGES !== "undefined") ? PID_PAGES.slice() : [];
@@ -144,11 +161,16 @@ footer{border-top:3px double var(--rule-strong);margin-top:56px;padding-top:20px
     return months[mi] + " " + parseInt(p[2],10) + ", " + p[0];
   }
 
-  // newest first; undated last
+  // pinned first, then reading order, then newest update; undated last
+  function upd(d){ return d.updated || d.date || ""; }
   DATA.sort(function(a,b){
-    if(a.date && b.date) return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0);
-    if(a.date) return -1;
-    if(b.date) return 1;
+    if(!!a.pinned !== !!b.pinned) return a.pinned ? -1 : 1;
+    var oa = a.order || 9999, ob = b.order || 9999;
+    if(oa !== ob) return oa - ob;
+    var A = upd(a), B = upd(b);
+    if(A && B) return A < B ? 1 : (A > B ? -1 : 0);
+    if(A) return -1;
+    if(B) return 1;
     return 0;
   });
 
@@ -203,7 +225,7 @@ footer{border-top:3px double var(--rule-strong);margin-top:56px;padding-top:20px
       el.className = "doc-card" + (live ? "" : " soon");
       if(live) el.href = d.page;
 
-      var dateStr = fmtDate(d.date);
+      var dateStr = fmtDate(upd(d)); if(dateStr) dateStr = "Updated " + dateStr;
       var tagHtml = (d.tags||[]).map(function(t){
         return '<span class="dc-tag">' + hi(t, term) + '</span>';
       }).join("");

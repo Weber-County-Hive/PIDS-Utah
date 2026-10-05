@@ -105,5 +105,14 @@ const PID_PAGES = [
     linkLabel: "Read the investigation →",
     link: "weber-pid-zions.html",
     updated: "2026-08-30"
+  },
+  {
+    kind: "How It Connects · Statewide",
+    title: "Who Holds the Risk?",
+    description: "The whole chain in one page: how PIDs, tax increment areas and data center tax breaks stack on the same land, what happens if someone stops paying, what happens if a data center goes dark, what MIDA and UIPA keep and owe, and the questions to ask.",
+    tags: ["Statewide", "Data Centers", "Homebuyers"],
+    linkLabel: "Open the page →",
+    link: "who-holds-the-risk.html",
+    updated: "2026-10-05"
   }
 ];

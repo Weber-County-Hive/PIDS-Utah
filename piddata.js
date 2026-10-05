@@ -24,6 +24,18 @@
 
 const PID_PAGES = [
   {
+    id: "who-holds-the-risk",
+    order: 13,
+    title: "Who Holds the Risk?",
+    region: "Statewide",
+    summary: "How PIDs, tax increment areas and data center tax breaks stack on the same land, who pays while it works, and who is left holding what if a project stalls or a data center closes. State law keeps PID debt off general taxpayers; the risk falls on bond investors and on homeowners inside the districts, and no Utah law spells out how to wind down a district that fails.",
+    date: "2026-10-05",
+    updated: "2026-10-05",
+    tags: ["explainer", "statewide", "data centers", "bonding", "tax increment", "homebuyers"],
+    page: "who-holds-the-risk.html",
+    status: "live"
+  },
+  {
     id: "school-split-inheritance",
     order: 6,
     title: "What the New Boards Inherit",

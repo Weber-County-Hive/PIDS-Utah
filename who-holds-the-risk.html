@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who Holds the Risk? — The Weber County Hive</title>
+<meta name="description" content="How public infrastructure districts, tax increment areas and tax breaks stack on the same land in Utah, who pays if a project stalls or a data center closes, and the questions to ask. From public records.">
+<link rel="icon" type="image/png" href="hive-bee.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{
+  --paper:#fbfaf7; --panel:#ffffff;
+  --ink:#1d2430; --ink-soft:#4a5260;
+  --line:#d9dde3; --rule-strong:#7d8796;
+  --slate:#2a4a6b; --slate-soft:#e6edf4;
+  --gold:#8a6a1f; --gold-soft:#f6efdd;
+  --warn:#7a3b12; --warn-soft:#fbeee4;
+  --ok:#1f6b4a; --ok-soft:#e5f3ec;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 Georgia,'Iowan Old Style','Times New Roman',serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:0 18px 90px}
+h1,h2,h3,.mono,.kicker,.chip{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace}
+header{border-bottom:3px double var(--rule-strong);padding:44px 0 24px;margin-bottom:24px}
+.kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);font-weight:700}
+h1{font-size:clamp(30px,5.5vw,46px);line-height:1.08;margin:.35em 0 .3em;letter-spacing:-.02em}
+.standfirst{font-size:20px;line-height:1.5;color:var(--ink-soft);margin:0}
+h2{font-size:clamp(22px,3.4vw,28px);line-height:1.2;margin:54px 0 10px;padding-top:14px;border-top:1px solid var(--line)}
+h2 .num{color:var(--slate);margin-right:8px}
+h3{font-size:19px;margin:26px 0 6px}
+a{color:var(--slate)}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px}
+nav.toc a{font:13px ui-monospace,Menlo,monospace;border:1px solid var(--line);background:var(--panel);padding:6px 10px;border-radius:3px;text-decoration:none;color:var(--ink)}
+nav.toc a:hover{border-color:var(--slate)}
+.box{background:var(--slate-soft);border-left:5px solid var(--slate);padding:16px 20px;margin:18px 0}
+.box.gold{background:var(--gold-soft);border-left-color:var(--gold)}
+.box.warn{background:var(--warn-soft);border-left-color:var(--warn)}
+.box.ok{background:var(--ok-soft);border-left-color:var(--ok)}
+.box p:first-child{margin-top:0}.box p:last-child{margin-bottom:0}
+.box ul{margin:6px 0 0;padding-left:22px}
+.small{font-size:15px;color:var(--ink-soft)}
+.label{display:inline-block;font:12px ui-monospace,Menlo,monospace;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-right:6px;vertical-align:2px}
+.label.new{background:var(--slate);color:#fff}
+.label.read{background:var(--panel);border:1px solid var(--line);color:var(--ink-soft)}
+.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0}
+.steps li{counter-increment:s;position:relative;padding:12px 14px 12px 58px;margin:0 0 10px;background:var(--panel);border:1px solid var(--line);border-radius:4px}
+.steps li::before{content:counter(s);position:absolute;left:14px;top:11px;width:32px;height:32px;border-radius:50%;background:var(--slate);color:#fff;font:700 16px/32px ui-monospace,Menlo,monospace;text-align:center}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:16px 0}
+.tile{perspective:1000px;height:300px;cursor:pointer}
+.tile-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.tile.flipped .tile-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:4px;padding:16px;display:flex;flex-direction:column;background:var(--panel)}
+.face.back{transform:rotateY(180deg);background:var(--slate);color:#f3f6fa;font-size:15.5px;line-height:1.5;overflow:auto}
+.face .who{font:700 13px ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+.face .big{font-size:22px;line-height:1.25;margin:10px 0}
+.face .hint{margin-top:auto;font-size:13px;color:var(--ink-soft)}
+.face.back .hint{color:#c9d5e3}
+.calc{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:18px;margin:16px 0}
+.calc label{display:block;font-size:16px;margin:12px 0 4px}
+.calc input[type=range]{width:100%}
+.calc select,.calc input[type=number]{font:inherit;font-size:17px;padding:6px 8px;border:1px solid var(--rule-strong);border-radius:3px;max-width:100%}
+.calc .out{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px}
+.calc .out div{background:var(--slate-soft);padding:12px;border-radius:4px}
+.calc .out b{display:block;font:700 24px ui-monospace,Menlo,monospace;color:var(--slate)}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:16px;background:var(--panel)}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+thead th{font:12.5px ui-monospace,Menlo,monospace;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);border-bottom:2px solid var(--ink)}
+td.n{text-align:right;font-family:ui-monospace,Menlo,monospace;white-space:nowrap}
+.yes{color:var(--ok);font-weight:700}.no{color:var(--warn);font-weight:700}.part{color:var(--gold);font-weight:700}
+.mermaid-box{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:14px;overflow-x:auto;margin:14px 0}
+.mermaid svg{width:100%!important;max-width:900px!important;min-width:600px;height:auto}
+.mermaid .nodeLabel,.mermaid .label{text-transform:none!important}
+#map{height:440px;border:1px solid var(--line);border-radius:4px;margin:12px 0}
+.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0}
+.case{background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--slate);border-radius:4px;padding:14px 16px}
+.case h3{margin:0 0 6px;font-size:17px}
+.case ul{margin:6px 0 0;padding-left:20px;font-size:16px}
+.q-group{margin:14px 0}
+.q-group h3{margin-bottom:4px}
+.q-group ol{margin:4px 0 0;padding-left:26px}
+.q-group li{margin:6px 0}
+.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:12px 0}
+.related a{display:block;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--ink)}
+.related a:hover{border-color:var(--slate)}
+.related .r-t{font-weight:700;color:var(--slate)}
+.related .r-d{font-size:15px;color:var(--ink-soft)}
+details.sources{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 16px;margin:30px 0}
+details.sources summary{cursor:pointer;font:700 15px ui-monospace,Menlo,monospace}
+details.sources li{font-size:15px;margin:6px 0}
+footer{border-top:3px double var(--rule-strong);margin-top:50px;padding-top:18px;font-size:14.5px;color:var(--ink-soft)}
+@media (max-width:600px){body{font-size:17px}.tile{height:330px}#map{height:340px}.steps li{padding-left:52px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">PID Research · Statewide · How it all connects</div>
+  <h1>Who Holds the Risk?</h1>
+  <p class="standfirst">Special tax districts, tax increment areas and tax breaks are stacked on the same land across Utah, including under its data centers. This page follows the chain from start to finish: who pays while it works, and who is left holding what if a project stalls or a data center goes dark.</p>
+  <nav class="toc" aria-label="On this page">
+    <a href="#short">Short version</a><a href="#chain">The chain</a><a href="#who">Who carries it</a><a href="#cost">What a home pays</a><a href="#stops">If someone stops paying</a><a href="#dark">If a data center goes dark</a><a href="#cases">Real cases</a><a href="#authorities">MIDA &amp; UIPA</a><a href="#protected">What's protected</a><a href="#fair">The fair side</a><a href="#map-sec">Map</a><a href="#questions">Questions</a><a href="#doesnt">What this doesn't show</a>
+  </nav>
+</header>
+
+<section id="short">
+  <h2><span class="num">01</span>The short version</h2>
+  <div class="box">
+    <ul>
+      <li><strong>A public infrastructure district (PID)</strong> borrows money for roads, water and sewer. The people who later own property inside it repay that debt through an extra tax, often for 30 to 40 years.</li>
+      <li><strong>On the same land</strong>, a city, county, MIDA or the Inland Port Authority (UIPA) may also keep most of the new property taxes for decades. Schools, the county and fire districts get less of that growth.</li>
+      <li><strong>Data centers add a third layer:</strong> a sales-tax break on their equipment with no jobs requirement, no end date and nothing to pay back.</li>
+      <li><strong>State law says</strong> a PID's debt is not the state's, the county's or the city's. The risk falls on the investors who bought the bonds and on the people who own property inside the district.</li>
+      <li><strong>What's missing:</strong> none of the agreements we reviewed says what happens if a data center closes, and Utah has no law that spells out how to wind down a district that fails.</li>
+    </ul>
+  </div>
+  <p class="small">New material on this page is marked <span class="label new">New</span>. Everything else is a short summary with a link to the full page where we documented it.</p>
+</section>
+
+<section id="chain">
+  <h2><span class="num">02</span>The chain, in one picture</h2>
+  <div class="mermaid-box"><pre class="mermaid">
+flowchart TD
+  A["Developer<br/>owns the land"] --> B["A PID is created<br/>(often the developer<br/>is the only owner)"]
+  B --> C["PID borrows<br/>for roads, water,<br/>sewer"]
+  C --> D["Homebuyers pay<br/>an extra tax<br/>for decades"]
+  A --> E["Same land in a<br/>tax increment area<br/>(CRA, MIDA, UIPA)"]
+  E --> F["New taxes go<br/>to the project,<br/>not schools or county"]
+  F --> G["Cut services or<br/>raise the rate on<br/>everyone else"]
+  A --> H["Data centers:<br/>sales-tax break,<br/>no strings"]
+  </pre></div>
+  <p class="small">Read the mechanism in full: <a href="pid_mechanism_map.html">PID Mechanism Map</a> · <a href="weber-pid-school-funds.html">PIDs, Schools &amp; Bonding</a>.</p>
+</section>
+
+<section id="who">
+  <h2><span class="num">03</span>Who carries the risk</h2>
+  <p>Tap a tile to flip it.</p>
+  <div class="tiles" id="tiles">
+    <div class="tile" tabindex="0" role="button"><div class="tile-inner"><div class="face"><div class="who">Bond investors</div><div class="big">Lose money if the district's taxes don't cover the payments.</div><div class="hint">Tap for details →</div></div><div class="face back"><div>PID bonds can only be repaid from the money pledged to them. A Piper Sandler presentation to Virgin, Utah (Oct. 2023) puts it plainly: "No recourse to the city." That is why these bonds are usually unrated and pay higher interest. MIDA's bond advisor told KPCW in September 2026 that bondholders "in no way" can come back to the state, Wasatch County or MIDA.</div><div class="hint">Tap to flip back</div></div></div></div>
+    <div class="tile" tabindex="0" role="button"><div class="tile-inner"><div class="face"><div class="who">Homeowners in the district</div><div class="big">Pay the extra tax for decades, and it can rise with the home's value.</div><div class="hint">Tap for details →</div></div><div class="face back"><div>The PID tax is charged as a rate on the home's taxable value, so it rises when the assessor raises the value. Unpaid, it is treated like any other property tax and can lead to a county tax sale. Fannie Mae's own rule can stop new conventional mortgages in a district in serious trouble. See <a style="color:#fff" href="nordic-village-case-file.html">Nordic Village</a>.</div><div class="hint">Tap to flip back</div></div></div></div>
+    <div class="tile" tabindex="0" role="button"><div class="tile-inner"><div class="face"><div class="who">Everyone else in the county</div><div class="big">Gets less of the growth, so may pay a higher rate or get fewer services.</div><div class="hint">Tap for details →</div></div><div class="face back"><div>When a tax increment area walls off new growth, the county, schools and fire districts still serve the new homes. State Auditor Tina Cannon, in correspondence on file: "It gets made up by everyone else paying a higher rate, or by everyone else getting less service." Weber County's own reports show $6.84 million diverted from its general fund alone in 2021–2024.</div><div class="hint">Tap to flip back</div></div></div></div>
+    <div class="tile" tabindex="0" role="button"><div class="tile-inner"><div class="face"><div class="who">The city or county that created it</div><div class="big">Not legally on the hook, but the State Auditor warns of fallout.</div><div class="hint">Tap for details →</div></div><div class="face back"><div>Utah Code 17D-4-201 says a PID's "financial burden" is "borne solely" by the district. After the Wohali bankruptcy, the State Auditor's office warned local governments could be "financially accountable" for districts they create, and Cannon has pointed to "reputational" risk. "If things did not go well," she told KPCW, "there will be ripple effects throughout the community at large."</div><div class="hint">Tap to flip back</div></div></div></div>
+  </div>
+</section>
+
+<section id="cost">
+  <h2><span class="num">04</span>What a home pays</h2>
+  <p>A PID can charge up to <strong>0.015 per dollar</strong> of taxable value under state law, though many set a lower limit in their own governing document. A primary home in Utah is taxed on 55% of its value; a second home or rental on 100%.</p>
+  <div class="calc" id="calc">
+    <label for="hv">Home value: <strong id="hvOut">$500,000</strong></label>
+    <input type="range" id="hv" min="200000" max="1500000" step="25000" value="500000">
+    <label for="rate">District rate</label>
+    <select id="rate">
+      <option value="0.005">0.005 — Nordic Village PID's limit (Eden)</option>
+      <option value="0.006">0.006 — Tooele Valley PID's limit (data center site)</option>
+      <option value="0.015">0.015 — the most state law allows</option>
+    </select>
+    <label for="use">How the home is used</label>
+    <select id="use"><option value="0.55">Primary home (taxed on 55%)</option><option value="1">Second home or rental (taxed on 100%)</option></select>
+    <div class="out"><div>Per year<b id="perYear">—</b></div><div>Over 30 years, if value never changes<b id="per30">—</b></div></div>
+    <p class="small" style="margin-bottom:0">This is the PID charge only, at the district's limit, on top of regular property taxes. Real bills can be lower if a district levies less than its limit. If home values rise, the bill rises too. For a 40-year look with appreciation, see <a href="nordic-village-case-file.html">Nordic Village</a> and the <a href="utah-county-explainer.html">Utah County calculator</a>.</p>
+  </div>
+  <div class="box gold"><p>One buyer's real bill: in April 2026 the Utah Investigative Journalism Project reported that Don Brown, buying in an Ivins district, expected about $2,000 a year in property taxes and was billed more than $10,000. "The city of Ivins has essentially put a 30-year mortgage on our property, without our consent," he said.</p></div>
+</section>
+
+<section id="stops">
+  <h2><span class="num">05</span><span class="label new">New</span>If someone stops paying</h2>
+  <p>Here is what the law and the documents we have show, step by step.</p>
+  <ol class="steps">
+    <li><strong>The PID tax is collected with the regular property tax bill.</strong> If it isn't paid, the property becomes delinquent, the same as for any unpaid property tax.</li>
+    <li><strong>About four years later, the home can be sold.</strong> Utah Code 59-2-1343 makes property that is not redeemed by March 15 after four years of delinquency subject to the county tax sale. Utah County's tax-sale page says properties in its sale are "at least five years delinquent." The owner can stop the sale by paying everything owed before it happens. Utah has no buy-back period after the sale.</li>
+    <li><strong>The district charges one rate to every property in it.</strong> It can raise that rate only up to the limit in its governing document. Tooele Valley PID's limit, for example, is 0.006; its governing document puts no dollar cap on how much it can borrow.</li>
+    <li><strong>If the rate is already at the limit and a big owner stops paying, the shortfall falls on reserves and then on the investors.</strong> State law says a PID's "financial burden" is "borne solely by the public infrastructure district" and not by the creating entity, the state or any other government.</li>
+    <li><strong>A district can't simply close.</strong> Tooele Valley PID's governing document says it dissolves only after all its debt is paid or discharged. The State Auditor has said Utah has no law laying out how to wind down a district that fails.</li>
+  </ol>
+  <div class="box warn"><p><strong>What we haven't confirmed yet:</strong> each bond issue's own official statement spells out its reserve fund, whether the district promised to levy at its full limit, and what happens on default. We have not yet read those for Nordic Village, MIDA's Mountain Village district or Wohali. Until we do, steps 3 and 4 describe how these districts are set up in general, not what any one bond promises.</p></div>
+</section>
+
+<section id="dark">
+  <h2><span class="num">06</span><span class="label new">New</span>If a data center goes dark</h2>
+  <p>The servers and chips inside a data center are replaced every few years; the deals around the buildings run for decades. One Fortune opinion piece (Ricardo Semler, Sept. 18, 2026) puts server and networking equipment at 3 to 6 years, cooling and electrical at 7 to 15, and buildings at 30 to 60. Here is what the documents say happens if a campus closes.</p>
+  <h3>Stratos (Box Elder County, MIDA)</h3>
+  <ul>
+    <li><strong>The county's "minimum" depends on power being sold.</strong> In the county agreement (posted by Box Elder County as Agreement 26-15), MIDA promises the county at least $10,000 a year per megawatt of generation "installed," but the way it promises to get there is to "adjust the MET," the 0.5% Municipal Energy Tax on energy sold to the data centers. If little or no power is sold, raising the rate on it raises little or nothing. The agreement doesn't say what happens then.</li>
+    <li><strong>The one sure cash:</strong> three annual payments of $5.4 million from the developer, starting within 30 days of the first building permit.</li>
+    <li><strong>The data center's special property-tax payment does not go to the county.</strong> The agreement lists its uses as public infrastructure, the military and payments to the state.</li>
+    <li><strong>No closing rules.</strong> The agreement runs 50 years and contains no provision for a campus that stops operating, sits empty or shrinks, and no cleanup or removal requirement.</li>
+    <li><strong>The developer agreement (a draft):</strong> if the developer breaches, the only remedy is a lawsuit to enforce it; neither side can end it or collect money damages. MIDA's own document page has said its copies remain "draft and unsigned" during the referendum. The county's posted copy is dated May 4, 2026.</li>
+  </ul>
+  <h3>The statewide sales-tax break (rewritten by S.B. 114 in 2020)</h3>
+  <ul>
+    <li>No jobs, wage or investment requirement, no end date, and no requirement to report what it saves.</li>
+    <li>It covers "replacement parts" that last a year or more, so each new round of equipment is also exempt.</li>
+    <li>Because nothing was promised in return, there is nothing to pay back if a data center leaves. See <a href="https://webercountyhive-coder.github.io/Data-Centers/weber-hive-dc-sb114.html">S.B. 114, Line by Line</a>.</li>
+  </ul>
+  <h3>Tooele Valley (Inland Port Authority)</h3>
+  <ul>
+    <li>A separate PID issued $33 million in bonds for roads, water and sewer serving the site.</li>
+    <li>Its governing document says approving it "shall not be construed as a guarantee by UIPA of payment of the District's obligations."</li>
+    <li>The data center is paused: Tooele County paused new data center applications, and Utah News Dispatch reported (Sept. 3, 2026) that UIPA was not slated to consider financing the project area "any time soon — if at all."</li>
+  </ul>
+  <h3>Power for one customer</h3>
+  <ul>
+    <li>The Williams Companies' Eagle Mountain gas plant will sell 520 megawatts to Meta under a 12.5-year contract, per its Public Service Commission filing. Power plants run for decades. We have not seen what happens to the plant after year 12.5.</li>
+    <li>Stratos's power is planned for the campus itself, not the public grid. Nothing we've read says what happens to it if the campus closes.</li>
+  </ul>
+</section>
+
+<section id="cases">
+  <h2><span class="num">07</span>Real cases, already on the record</h2>
+  <div class="cases">
+    <div class="case"><h3>Wohali, Coalville (Summit County)</h3><ul><li>A PID created by Coalville issued more than $30 million in bonds for sewer and water.</li><li>The developer filed Chapter 11 in August 2025 and building stalled.</li><li>The State Auditor's office questioned whether the PID can meet its bond requirements.</li></ul></div>
+    <div class="case"><h3>Nordic Village, Eden (Weber County)</h3><ul><li>$39.38 million in Series 2025 bonds, with $25 million more authorized in April 2026.</li><li>As of March 31, 2026: $0 property tax revenue, no residents, about $2.5 million in negative fund equity.</li><li>Interest so far has been paid from capitalized interest, money borrowed for that purpose. <a href="nordic-village-case-file.html">Full case file</a></li></ul></div>
+    <div class="case"><h3>Deer Valley East Village (Wasatch County)</h3><ul><li>MIDA and four districts there have borrowed about $1.1 billion since 2020 (KPCW, Sept. 25, 2026).</li><li>The State Auditor called that concentration of debt "a general red flag."</li></ul></div>
+    <div class="case"><h3>Tooele Valley (Tooele County)</h3><ul><li>$33 million in PID bonds, a 500 MW data center, a disputed wastewater permit, and the project paused.</li><li><a href="https://webercountyhive-coder.github.io/UIPA/uipa-tooele-zenith.html">Full case file (UIPA repo)</a></li></ul></div>
+  </div>
+  <p class="small">Statewide: PIDs had issued about $5.27 billion in bonds as of Aug. 7, 2026, per figures the State Auditor's office confirmed to the Hive, up from roughly $3.8–4 billion at the end of 2025. The Legislature's research office counted about 204 PIDs as of Jan. 1, 2026; KPCW reported 221 by late August, 71 of which had issued debt.</p>
+</section>
+
+<section id="authorities">
+  <h2><span class="num">08</span><span class="label new">New</span>What MIDA and UIPA keep, spend and owe</h2>
+  <p>Both run largely on a share of the new taxes inside their project areas instead of a tax rate of their own.</p>
+  <h3>MIDA: proposed budget for the year ending June 30, 2027</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Where the money goes</th><th style="text-align:right">Proposed</th><th style="text-align:right">Share</th></tr></thead>
+    <tbody>
+      <tr><td>Deer Valley East Village / Jordanelle (Military Recreation Facility and two district transfers)</td><td class="n">$56,860,614</td><td class="n">46.8%</td></tr>
+      <tr><td>Falcon Hill, next to Hill Air Force Base</td><td class="n">$29,423,359</td><td class="n">24.2%</td></tr>
+      <tr><td>Sundance (Mountain Veterans Program and district transfer)</td><td class="n">$19,767,121</td><td class="n">16.3%</td></tr>
+      <tr><td>Debt payments</td><td class="n">$11,456,974</td><td class="n">9.4%</td></tr>
+      <tr><td>Running MIDA</td><td class="n">$3,498,776</td><td class="n">2.9%</td></tr>
+      <tr><td>Grants for military assistance</td><td class="n">$400,000</td><td class="n">0.3%</td></tr>
+      <tr><td>Camp Williams (Utah National Guard and Utah Data Center lines)</td><td class="n">$152,688</td><td class="n">0.13%</td></tr>
+      <tr style="font-weight:700"><td>Total</td><td class="n">$121,559,532</td><td class="n">100%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">From MIDA's own budget filing on the state public notice site. Stratos has no budget line yet. Transparent Utah states that the State Auditor does not audit MIDA; a private firm does.</p>
+  <h3>MIDA and district borrowing on record</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Year</th><th>Borrower</th><th style="text-align:right">Amount</th><th>Repaid from</th></tr></thead>
+    <tbody>
+      <tr><td>2021</td><td>MIDA</td><td class="n">$260,000,000</td><td>Tax increment and military hotel revenue</td></tr>
+      <tr><td>2025</td><td>MIDA Mountain Village PID</td><td class="n">$129,460,000</td><td>Pledged tax allocation revenues; 5.00–5.75%, due 2060</td></tr>
+      <tr><td>2021</td><td>MIDA Mountain Village PID</td><td class="n">$99,800,000</td><td>Property assessment</td></tr>
+      <tr><td>2021</td><td>MIDA Golf &amp; Equestrian PID</td><td class="n">$71,010,000</td><td>Tax increment and sales tax</td></tr>
+      <tr><td>2020</td><td>MIDA Mountain Village PID</td><td class="n">$68,500,000</td><td>Property assessment</td></tr>
+      <tr><td>2021</td><td>Military Development Infrastructure Bank</td><td class="n">$14,000,000</td><td>Tax increment and sales tax</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">These are amounts borrowed, not what is still owed. The balance owed is in MIDA's annual audited report on Transparent Utah, which we have not yet reviewed.</p>
+  <h3>UIPA: proposed budget for the year ending June 30, 2027</h3>
+  <ul>
+    <li><strong>Money in:</strong> about $45.5 million, of which $36.3 million is listed as "State of Utah" and about $2.1 million as "Property tax differential."</li>
+    <li><strong>Money out:</strong> about $34.7 million, including $19.2 million in transfers to other funds and $6.1 million in salaries (up from $3.2 million two years earlier).</li>
+    <li><strong>Debt:</strong> a $150 million bond issued in December 2021, backed by tax differential from its Salt Lake City area; about $6.5 million a year goes to it.</li>
+    <li><strong>A labeling question:</strong> UIPA's 2025 budget listed property tax differential at $15–30 million a year; this filing lists about $2 million under that name. The filing doesn't explain the difference. It may be a change in labels; we have not confirmed that.</li>
+  </ul>
+</section>
+
+<section id="protected">
+  <h2><span class="num">09</span>What's protected, and what isn't</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Protection</th><th>On record?</th><th>Where we looked</th></tr></thead>
+    <tbody>
+      <tr><td>State, county and city taxpayers are not liable for PID debt</td><td class="yes">Yes</td><td>Utah Code 17D-4-201; Tooele Valley PID governing document</td></tr>
+      <tr><td>All landowners must agree before a PID is created</td><td class="part">Yes, but</td><td>Utah Code 17D-4-201 requires 100% of surface owners; at creation that is often only the developer</td></tr>
+      <tr><td>Buyers told about the PID tax before they commit</td><td class="part">Partly</td><td>H.B. 507 (2026) requires disclosure "at or before closing"; the State Auditor wants it earlier</td></tr>
+      <tr><td>Data center tax break paid back if the company leaves</td><td class="no">No</td><td>S.B. 114 has no conditions, so nothing to pay back</td></tr>
+      <tr><td>Cleanup or reuse required if a data center closes</td><td class="no">No</td><td>Stratos county agreement and draft developer agreement</td></tr>
+      <tr><td>County's Stratos money keeps coming if the campus closes</td><td class="no">Not stated</td><td>The minimum depends on a tax on energy sold</td></tr>
+      <tr><td>A law for winding down a failed PID</td><td class="no">No</td><td>State Auditor Tina Cannon, KPCW, March 2026</td></tr>
+      <tr><td>State audit of MIDA</td><td class="no">No</td><td>Transparent Utah: a private firm audits MIDA</td></tr>
+      <tr><td>Incentive paid only after jobs exist</td><td class="yes">Yes, rarely</td><td>EDTIF is post-performance; GOED's slides show one data center has received it</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="fair">
+  <h2><span class="num">10</span>The fair side</h2>
+  <div class="box ok">
+    <ul>
+      <li>PIDs are legal under state law, and the people who use the roads, water and sewer inside a district are the ones who pay for them, instead of the whole city.</li>
+      <li>State law and the governing documents we read keep PID debt off general taxpayers.</li>
+      <li>Disclosure got better in 2026: H.B. 507 now requires PID costs to be disclosed at or before closing; before that, no law required disclosure before closing.</li>
+      <li>Some public money has come back: the Inland Port Authority's $4.875 million loan to the Tooele Valley data center's developer was paid off, and its wetlands set-aside in that area went from 1% to 3%.</li>
+      <li>EDTIF, the state's main incentive, only pays after jobs and new taxes exist.</li>
+      <li>MIDA says "there are revenue projections that can pay this debt" in its East Village area, and its CFO says it watches the indicators.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="map-sec">
+  <h2><span class="num">11</span>Map</h2>
+  <p>The districts and data center areas on this page. Pins are approximate.</p>
+  <div id="map" role="region" aria-label="Map of districts and project areas"></div>
+</section>
+
+<section id="questions">
+  <h2><span class="num">12</span>Questions to ask, and whom to ask</h2>
+  <div class="q-group"><h3>Your city council or county commission (they create the district)</h3><ol>
+    <li>If the developer or another big landowner stops paying, can the district raise the tax on the rest of us up to its limit, or do the bond investors take the loss?</li>
+    <li>Where in the bond paperwork does it say which, and can you show us that page?</li>
+    <li>Did you set a lower limit than 0.015 for this district? Where is it written?</li>
+    <li>If the district fails, who takes over the roads, water and sewer it built?</li>
+  </ol></div>
+  <div class="q-group"><h3>The district's own board</h3><ol start="5">
+    <li>What is this year's rate, and what has it been every year since the district started?</li>
+    <li>How much has the district borrowed, how much is still owed, and when will it be paid off?</li>
+    <li>Is any landowner behind on payments right now?</li>
+    <li>Do any board members work for or own part of the developer?</li>
+  </ol></div>
+  <div class="q-group"><h3>Before you buy (seller, builder, agent, title company)</h3><ol start="9">
+    <li>Is this property inside a public infrastructure district?</li>
+    <li>What will the district charge me each year, for how many years, and how high can it go?</li>
+    <li>Can I see the district's information now, before closing?</li>
+  </ol></div>
+  <div class="q-group"><h3>Your county commission, about data centers</h3><ol start="12">
+    <li>If a data center campus closes, does any agreement require the company to remove or reuse the buildings?</li>
+    <li>Does the county's guaranteed payment keep coming if no power is being sold?</li>
+    <li>Does any tax break have to be paid back if the company leaves early?</li>
+  </ol></div>
+  <div class="q-group"><h3>Your state legislators</h3><ol start="15">
+    <li>Should buyers learn about a PID charge when they make an offer, not just at closing?</li>
+    <li>What law says how a failed district is wound down?</li>
+    <li>Should cities list PID debt inside their borders on their own books, as the State Auditor recommends?</li>
+    <li>Should the data center sales-tax break have an end date, a jobs condition or a payback rule?</li>
+  </ol></div>
+  <div class="q-group"><h3>Your county treasurer</h3><ol start="19">
+    <li>How many properties inside PIDs are behind on property taxes right now?</li>
+  </ol></div>
+</section>
+
+<section id="doesnt">
+  <h2><span class="num">13</span>What this doesn't show</h2>
+  <ul>
+    <li>Whether any particular district will fail. This page shows what the documents say would happen, not a prediction.</li>
+    <li>The default terms in each bond's official statement. We have not yet read them for Nordic Village, Mountain Village or Wohali.</li>
+    <li>How much MIDA and UIPA still owe. The amounts above are what they borrowed.</li>
+    <li>Actual PID tax rates for every district this year. The calculator uses limits from governing documents and state law.</li>
+    <li>Whether tax sales have already happened inside any Utah PID.</li>
+    <li>The Stratos signature status. MIDA has described its copies as unsigned drafts; the county posted a copy dated May 4, 2026.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="num">14</span>Read more</h2>
+  <div class="related">
+    <a href="nordic-village-case-file.html"><div class="r-t">Nordic Village case file</div><div class="r-d">One PID, one real bill, 40 years out.</div></a>
+    <a href="affordable-house-story.html"><div class="r-t">The Story of the "Affordable" House</div><div class="r-d">Plain-language walkthrough with a calculator.</div></a>
+    <a href="pid_mechanism_map.html"><div class="r-t">PID Mechanism Map</div><div class="r-d">How a PID diverts growth.</div></a>
+    <a href="weber-pid-school-funds.html"><div class="r-t">PIDs, Schools &amp; Bonding</div><div class="r-d">What happens to school money.</div></a>
+    <a href="weber-pid-zions.html"><div class="r-t">One Firm, Every Hat</div><div class="r-d">Who bills and forecloses.</div></a>
+    <a href="stratos-ruby-pipeline-mida.html"><div class="r-t">Stratos, the Ruby Pipeline and MIDA</div><div class="r-d">The Box Elder data center deal.</div></a>
+    <a href="https://webercountyhive-coder.github.io/Data-Centers/"><div class="r-t">Data Centers hub</div><div class="r-d">Every data center page in one place.</div></a>
+  </div>
+</section>
+
+<details class="sources">
+  <summary>Sources (tap to open)</summary>
+  <ul>
+    <li>Utah Code 17D-4-201 and 17D-4-303, Public Infrastructure District Act (2021 version), <a href="https://le.utah.gov/xcode/Title17D/Chapter4/C17D-4_2021050520210505.pdf">le.utah.gov</a> — "borne solely by the public infrastructure district"; 100% landowner petition; 0.015 levy limit.</li>
+    <li>Utah Code 59-2-1343 (effective Jan. 1, 2026), <a href="https://le.utah.gov/xcode/Title59/Chapter2/C59-2-S1343_2026010120250507.pdf">le.utah.gov</a> — redemption period before tax sale.</li>
+    <li>Utah County Auditor, <a href="https://auditor.utahcounty.gov/may-tax-sale">May Tax Sale</a>; Nolo, <a href="https://www.nolo.com/legal-encyclopedia/what-happens-if-i-don-t-pay-property-taxes-in-utah.html">What Happens If I Don't Pay Property Taxes in Utah?</a></li>
+    <li>Governing Document for TV Public Infrastructure District, Tooele County (March 26, 2024), <a href="https://inlandportauthority.utah.gov/wp-content/uploads/Governing-Document-TV-PID.pdf">inlandportauthority.utah.gov</a> — §VIII.B, D, E, H; §X.</li>
+    <li>Piper Sandler, Public Infrastructure Districts presentation, Virgin, Utah (Oct. 2023), <a href="https://www.utah.gov/pmn/files/1034349.pdf">utah.gov/pmn</a>.</li>
+    <li>Utah Legislature, Office of Legislative Research and General Counsel, <a href="https://le.utah.gov/interim/2026/pdf/00003180.pdf">Public Infrastructure District (PIDs) Summary</a> (Aug. 19, 2026).</li>
+    <li>KPCW: <a href="https://www.kpcw.org/state-regional/2026-03-20/why-utah-auditor-worries-about-developers-bonding-for-infrastructure">Why Utah auditor worries about developers bonding for infrastructure</a> (Mar. 20, 2026); <a href="https://www.kpcw.org/state-regional/2025-12-16/bankruptcy-in-summit-county-looms-over-growing-debate-about-popular-development-tool">Bankruptcy in Summit County looms over growing debate</a> (Dec. 16, 2025); <a href="https://www.kpcw.org/state-regional/2026-08-25/popular-utah-development-financing-tool-draws-sec-attention">Popular Utah development financing tool draws SEC attention</a> (Aug. 25, 2026); <a href="https://www.kpcw.org/wasatch-county/2026-09-25/midas-east-village-area-bonds-total-over-1b">MIDA's East Village-area bonds total over $1B</a> (Sept. 25, 2026).</li>
+    <li>Utah Investigative Journalism Project, <a href="https://www.utahinvestigative.org/hidden-developers-tax-is-zapping-utah-homebuyers-for-billions/">Hidden developers' tax is zapping Utah homebuyers for billions</a> (Apr. 28, 2026).</li>
+    <li>Box Elder County, <a href="https://www.boxeldercountyut.gov/DocumentCenter/View/2189/Box-Elder-County-MIDA-Stratos-Agreement-26-15-">MIDA Stratos Agreement 26-15</a> — §1, §6(a), §6(b), §6(e), Background.</li>
+    <li>MIDA Stratos Master Development Agreement (draft, unsigned) — §13, §15, as documented in the Hive's Stratos files.</li>
+    <li>MIDA budget filing, fiscal year ending June 30, 2027, <a href="https://www.utah.gov/pmn/files/1453633.pdf">utah.gov/pmn</a>; MIDA presentation to legislators, <a href="https://le.utah.gov/interim/2023/pdf/00003890.pdf">Sept. 18, 2023</a>; MIDA bond report to Executive Appropriations, <a href="https://le.utah.gov/interim/2026/pdf/00000492.pdf">$129.46M (Dec. 2025)</a>; <a href="https://transparent.utah.gov/mida/">Transparent Utah: MIDA</a>.</li>
+    <li>UIPA budget filing FY2025–FY2027, <a href="https://www.utah.gov/pmn/files/1452861.pdf">utah.gov/pmn</a>; <a href="https://inlandportauthority.utah.gov/wp-content/uploads/FY25-Budget.pdf">UIPA FY25 budget</a>; <a href="https://inlandportauthority.utah.gov/wp-content/uploads/Notice-of-Bonds.pdf">Notice of Bonds, Series 2021</a>; <a href="https://le.utah.gov/interim/2022/pdf/00004737.pdf">UIPA report to Executive Appropriations</a> (Nov. 30, 2022).</li>
+    <li>Fortune, <a href="https://fortune.com/2026/09/18/ai-data-centers-stranded-assets-silicon-belt/">Ricardo Semler on data centers becoming obsolete</a> (opinion, Sept. 18, 2026).</li>
+    <li>Williams/Meta: Project Aquila filing with the Utah Public Service Commission, as documented on the Hive's <a href="https://webercountyhive-coder.github.io/Data-Centers/data-center-industry-money.html">Data Center Industry Money</a> page.</li>
+    <li>Tooele Valley status: Utah News Dispatch (Sept. 3, 2026) and UIPA documents, as documented on the Hive's <a href="https://webercountyhive-coder.github.io/UIPA/uipa-tooele-zenith.html">Tooele Valley case file</a>.</li>
+    <li>Nordic Village figures, Weber County CRA 700 reports, Fannie Mae Selling Guide B4-1.4-09 and State Auditor correspondence: as documented and sourced on the <a href="nordic-village-case-file.html">Nordic Village case file</a> and <a href="pid_mechanism_map.html">PID Mechanism Map</a>.</li>
+  </ul>
+</details>
+
+<footer>
+  <p>Compiled by The Weber County Hive from public records, state law and published reporting, Oct. 5, 2026. This page describes what the documents say and does not assert any legal conclusion. Figures will be updated as bond documents and audited reports are reviewed.</p>
+  <p><a href="index.html">PID Research index</a> · webercountyhive.substack.com · webercountyhive@gmail.com</p>
+</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+document.querySelectorAll('.tile').forEach(t=>{
+  const f=()=>t.classList.toggle('flipped');
+  t.addEventListener('click',e=>{if(e.target.tagName!=='A')f();});
+  t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f();}});
+});
+(function(){
+  const hv=document.getElementById('hv'),rate=document.getElementById('rate'),use=document.getElementById('use');
+  const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
+  function calc(){
+    const v=+hv.value,y=v*(+use.value)*(+rate.value);
+    document.getElementById('hvOut').textContent=fmt(v);
+    document.getElementById('perYear').textContent=fmt(y);
+    document.getElementById('per30').textContent=fmt(y*30);
+  }
+  [hv,rate,use].forEach(el=>el.addEventListener('input',calc));calc();
+})();
+(function(){
+  if(!window.L) return;
+  const map=L.map('map',{scrollWheelZoom:false}).setView([40.6,-112.2],7);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+  [[41.302,-111.822,'Nordic Village PID','Eden, Weber County · $39.38M bonds, $0 tax revenue as of 3/31/2026'],
+   [40.918,-111.400,'Wohali PID','Coalville, Summit County · developer in Chapter 11'],
+   [40.620,-111.430,'Deer Valley East Village (MIDA)','Wasatch County · about $1.1B borrowed since 2020'],
+   [40.715,-112.350,'Tooele Valley PID (UIPA)','Tooele County · $33M bonds · data center paused'],
+   [41.810,-112.520,'Stratos (MIDA)','Hansel Valley, Box Elder County · data center project area'],
+   [41.120,-112.000,'Falcon Hill (MIDA)','Next to Hill Air Force Base'],
+   [40.330,-112.010,'Eagle Mountain','Meta data center; Williams power plant'],
+   [37.168,-113.679,'Ivins','PID buyer quoted by the Utah Investigative Journalism Project']
+  ].forEach(p=>L.marker([p[0],p[1]]).addTo(map).bindPopup('<strong>'+p[2]+'</strong><br>'+p[3]));
+})();
+if(window.mermaid){mermaid.initialize({startOnLoad:true,theme:'base',securityLevel:'strict',flowchart:{useMaxWidth:false,htmlLabels:true},
+  themeVariables:{fontSize:'24px',fontFamily:'Georgia, serif',primaryColor:'#e6edf4',primaryBorderColor:'#2a4a6b',primaryTextColor:'#1d2430',lineColor:'#1d2430'}});}
+</script>
+</body>
+</html>

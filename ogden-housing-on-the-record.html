@@ -3,6 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Weber County&#x27;s own housing data, prices against paychecks, what &quot;affordable&quot; means in Ogden&#x27;s new apartments, and where the area&#x27;s tax growth goes.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Weber County Hive">
+<meta property="og:title" content="Ogden and Weber County: Which Homes Are Short?">
+<meta property="og:description" content="Weber County&#x27;s own housing data, prices against paychecks, what &quot;affordable&quot; means in Ogden&#x27;s new apartments, and where the area&#x27;s tax growth goes.">
+<meta property="og:url" content="https://weber-county-hive.github.io/PIDS-Utah/ogden-housing-on-the-record.html">
+<meta property="og:image" content="https://weber-county-hive.github.io/graphics/ogden-housing-on-the-record-share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://weber-county-hive.github.io/graphics/ogden-housing-on-the-record-share.png">
 <title>Ogden Housing on the Record</title>
 <style>
 /* Layout: PIDS-Utah civic-document system — navy masthead with gold rule, cream page, one reading column with full-width tables */
@@ -132,6 +143,7 @@ footer.foot a{color:var(--gold-bright);}
     <a href="#tax">Where tax growth goes</a>
     <a href="#homeowners">What it means for homeowners</a>
     <a href="#map">Map</a>
+    <a href="#people">Who's involved</a>
     <a href="#questions">Questions</a>
     <a href="#sources">Sources</a>
     <a href="housing-promises-vs-record.html">Statewide case file</a>
@@ -241,6 +253,18 @@ footer.foot a{color:var(--gold-bright);}
 </svg>
   </div>
   <p class="note">Utah State Tax Commission, Table 13. Weber paid $146,077,585 as tax increment from 2015 to 2024. The county's own CRA reports show $52,388,037 diverted from all Weber taxing entities in 2021–2024, $6,843,935 of it from the county general fund.</p>
+  <div class="mermaidbox" role="img" aria-label="Flow chart: new property tax growth in a project area goes to the project for its term; schools, county and districts keep what is left and cover growth costs from everyone else's rates">
+<pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'22px','primaryColor':'#ffffff','primaryBorderColor':'#10233f','primaryTextColor':'#10233f','lineColor':'#b8863b'}}}%%
+flowchart TB
+  A["New property tax growth<br/>inside a project area"] --> B{"Project area<br/>CRA · PID · UIPA"}
+  B -->|"agreed share, for the term"| C["The project<br/>bonds, developer costs"]
+  B -->|"what is left"| D["Schools, county,<br/>fire, water, sewer"]
+  D --> E["Growth costs covered from<br/>everyone else's rates"]
+  F["Weber, 2015–2024:<br/>$146,077,585 paid as increment"] -.-> C
+</pre>
+  </div>
+  <p class="note">How tax increment works, in one picture. The share and term differ by project: West Weber's UIPA plan, for example, runs 25 years with a possible 15-year extension.</p>
   <div class="tablebox">
     <table>
       <thead><tr><th>Project area</th><th>Where</th><th>Amount on record</th><th>Notes</th></tr></thead>
@@ -286,6 +310,34 @@ footer.foot a{color:var(--gold-bright);}
   <p>Gold markers are project areas in this file. Navy circles are a half mile around Ogden and Roy FrontRunner stations, the distance the federal Build HUBS bill would use. Tap a marker for details.</p>
   <div id="ogdenmap" style="height:520px;border:1.5px solid var(--rule);border-radius:4px;margin-top:12px;background:#eef2f7;"></div>
   <p class="note">Marker locations are approximate (project centers), not boundaries.</p>
+  <p class="note">Every Wasatch Front station with its half-mile circle: <a href="https://weber-county-hive.github.io/utah-maps/transit-half-mile-stations.html">MAP 010: The Half-Mile Around Every Station</a> (Utah Maps).</p>
+</section>
+
+<section class="block people" id="people">
+  <div class="eyebrow">People and groups in the record</div>
+  <h2>Who is connected, and why</h2>
+  <p>Everyone listed here appears in the records this page uses. Where the Hive has covered them before, the links go to that work.</p>
+  <div class="cards">
+    <div class="card"><div class="k">J. Fisher Companies</div><p>Sole private partner in the Continental CRA (WonderBlock), funded by an up-to-$75 million bond that pledges tax increment and sales and franchise tax. Also one of four development team members for Union Station Neighborhood, next to Ogden's FrontRunner station.</p><p class="role">Hive pages: <a href="https://weber-county-hive.github.io/utah-maps/utah-tax-increment-map.html">Map: Where Utah's Tax Increment Goes</a></p></div>
+    <div class="card"><div class="k">Lotus Company</div><p>Operates about 500 income-restricted units in Ogden, with about 300 more planned, at 60% of area median income (KUER, Jan. 2, 2026).</p></div>
+    <div class="card"><div class="k">Pedcor Development Associates</div><p>Railyard Lofts, Ogden: $17,370,650 in private activity bonds for 168 units (July 8, 2026).</p></div>
+    <div class="card"><div class="k">Related Affordable</div><p>Golden Links Manor, Ogden: $2,639,000 in private activity bonds for 31 existing Section 8 senior and disabled units (July 8, 2026).</p></div>
+    <div class="card"><div class="k">Clyde Capital Group</div><p>Holds 45% of Nordic Village Venture LLC, the developer entity behind the Nordic Village CRA and PIDs, according to the project's Master Development Agreement beneficiary document.</p><p class="role">Hive pages: <a href="nordic-village-case-file.html">Nordic Village case file</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-ledger/clyde-companies-giving.html">Clyde Companies giving (The Ledger)</a></p></div>
+    <div class="card"><div class="k">Utah Inland Port Authority</div><p>Runs the West Weber project area (about 9,000 acres), projected to receive about $343 million over 25 years. Its plan claims about 14,000 housing units.</p><p class="role">Hive pages: <a href="https://weber-county-hive.github.io/Unelected-Power/uipa-hearing-fact-check.html">Inland Port Hearing Check</a> · <a href="https://weber-county-hive.github.io/utah-maps/utah-tax-increment-map.html">Map: Where Utah's Tax Increment Goes</a></p></div>
+    <div class="card"><div class="k">Weber School District</div><p>Gives up growth revenue inside project areas, and has raised its rate since 2023.</p><p class="role">Hive pages: <a href="weber-pid-school-funds.html">Where Does Your School-Tax Dollar Go?</a> · <a href="https://weber-county-hive.github.io/Taxation/weber-county-taxes-2026.html">Weber County Taxes in 2026</a></p></div>
+    <div class="card"><div class="k">Ogden City Council</div><p>Approved the Wildcat Square CRA survey 4-2 in May 2026 for 513-bed student housing near Weber State.</p></div>
+    <div class="card"><div class="k">Jenny Gnagey, Ph.D.</div><p>Presented Ogden's Sept. 10, 2019 housing presentation to the City Council, the source of the unit-gap numbers on this page.</p></div>
+  </div>
+  <div class="card" style="margin-top:14px"><div class="k">More Hive work on Weber housing and taxes</div>
+    <ul class="clean">
+      <li><a href="nordic-village-case-file.html">Case File: Nordic Village</a> (PIDs, the CRA and the school and fire district agreements)</li>
+      <li><a href="ogden-valley-boundary-exclusion.html">The Boundary That Left Them Out</a> (Ogden Valley)</li>
+      <li><a href="https://weber-county-hive.github.io/developments/pleasant-plains.html">Pleasant Plains: Up to 3,500 Homes Proposed in Plain City</a></li>
+      <li><a href="https://weber-county-hive.github.io/Taxation/weber-county-taxes-2026.html">Weber County Taxes in 2026</a> (the new sales tax and the property tax increases)</li>
+      <li><a href="https://weber-county-hive.github.io/utah-maps/ogden-valley-development.html">Map: Ogden Valley Development</a> and <a href="https://weber-county-hive.github.io/utah-maps/weber-county-tax-increases-2026.html">Map: Who's Raising Taxes This Year</a></li>
+      <li><a href="housing-promises-vs-record.html">Statewide case file: the Build HUBS Act and Utah's housing record</a></li>
+    </ul>
+  </div>
 </section>
 
 <section class="block" id="questions">
@@ -1008,5 +1060,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
 </script>
 
 <script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.esm.min.mjs"; mermaid.initialize({startOnLoad:true});</script>
 </body>
 </html>

@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ogden Housing on the Record</title>
+<style>
+/* Layout: PIDS-Utah civic-document system — navy masthead with gold rule, cream page, one reading column with full-width tables */
+:root{
+  --cream:#f6f1e6; --paper:#fbf8f1; --white:#ffffff;
+  --navy:#10233f; --navy-deep:#0a1626; --navy-soft:#cdd6e4;
+  --gold:#b8863b; --gold-bright:#d6a752;
+  --flag:#9c3b2e; --ok:#3f6b4a;
+  --ink:#1c1c1c; --ink-soft:#4a4a48; --rule:#d8cfba;
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+  --font-body: 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Courier New', ui-monospace, monospace;
+  color-scheme: light;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.6;}
+a{color:var(--navy);}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+header.masthead{background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%);color:var(--cream);border-bottom:6px solid var(--gold);}
+header.masthead .wrap{padding-block:44px 34px;text-align:center;}
+.brandline{font-family:var(--font-mono);letter-spacing:.24em;font-size:12px;text-transform:uppercase;color:var(--gold-bright);margin-bottom:10px;}
+header.masthead h1{font-family:var(--font-display);font-weight:400;font-size:clamp(28px,5vw,46px);margin:0 0 12px;text-wrap:balance;line-height:1.2;}
+header.masthead p.sub{max-width:660px;margin:0 auto;color:var(--navy-soft);font-size:17px;}
+.dates{margin-top:16px;font-family:var(--font-mono);font-size:13px;color:var(--gold-bright);letter-spacing:.06em;}
+nav.jump{background:var(--paper);border-bottom:1px solid var(--rule);}
+nav.jump .wrap{padding-block:12px;display:flex;flex-wrap:wrap;gap:8px;}
+nav.jump a{font-family:var(--font-mono);font-size:13px;text-decoration:none;border:1.5px solid var(--rule);border-radius:3px;padding:6px 10px;background:var(--white);color:var(--navy);}
+nav.jump a:hover{border-color:var(--gold);}
+main .wrap{padding-block:8px 80px;}
+section.block{margin-top:52px;}
+.eyebrow{font-family:var(--font-mono);color:var(--gold);font-size:13px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;}
+h2{font-family:var(--font-display);font-weight:400;font-size:clamp(24px,3.6vw,32px);margin:0 0 10px;color:var(--navy);text-wrap:balance;line-height:1.25;}
+h3{font-family:var(--font-display);font-weight:400;font-size:22px;color:var(--navy);margin:0 0 6px;}
+p{margin:0 0 14px;max-width:68ch;}
+.lede{font-size:20px;}
+.counter{margin-top:28px;background:var(--white);border:1.5px solid var(--rule);border-radius:4px;padding:14px 18px;}
+.counter .t{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.counter .row{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:16px;}
+.counter b{font-family:var(--font-mono);font-size:20px;color:var(--navy);font-variant-numeric:tabular-nums;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:18px;}
+.stat{background:var(--navy);color:var(--cream);border-radius:4px;padding:18px 20px;}
+.stat .n{font-family:var(--font-mono);font-size:30px;color:var(--gold-bright);font-variant-numeric:tabular-nums;line-height:1.1;}
+.stat .l{font-size:15px;color:var(--navy-soft);margin-top:6px;}
+.stat .s{font-family:var(--font-mono);font-size:11px;color:var(--gold);margin-top:8px;letter-spacing:.04em;}
+.tablebox{overflow-x:auto;margin-top:14px;border:1.5px solid var(--rule);border-radius:4px;background:var(--white);}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:16px;}
+th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--rule);}
+th{background:var(--navy);color:var(--cream);font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:400;}
+td.say{font-family:var(--font-display);font-size:18px;color:var(--navy);width:28%;}
+td.src{font-size:13px;color:var(--ink-soft);width:20%;}
+tr:last-child td{border-bottom:none;}
+.chartbox{background:var(--white);border:1.5px solid var(--rule);border-radius:4px;padding:18px;margin-top:14px;overflow-x:auto;}
+.chartbox svg{display:block;width:100%;min-width:520px;height:auto;}
+.note{font-size:14px;color:var(--ink-soft);margin-top:8px;}
+.tool{background:var(--paper);border:2px solid var(--navy);border-radius:4px;padding:20px;margin-top:16px;}
+.tool label{display:block;font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);margin-bottom:6px;}
+.tool input[type=range]{width:100%;accent-color:var(--gold);}
+.tool .val{font-family:var(--font-mono);font-size:26px;color:var(--navy);font-variant-numeric:tabular-nums;}
+.tool .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
+.bar{height:22px;background:var(--rule);border-radius:3px;overflow:hidden;margin-top:6px;}
+.bar span{display:block;height:100%;background:var(--gold);transition:width .3s;}
+.result{font-size:18px;margin-top:12px;}
+.result b{font-family:var(--font-mono);color:var(--flag);}
+.result b.okc{color:var(--ok);}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px;}
+.card{background:var(--white);border:1.5px solid var(--rule);border-radius:4px;padding:16px 18px;min-width:0;}
+.card .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
+.card p{font-size:16px;margin:6px 0 0;}
+.card a{font-size:15px;}
+.fair{border:2px solid var(--ok);background:var(--white);border-radius:4px;padding:16px 18px;margin-top:14px;}
+.fair .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ok);margin-bottom:6px;}
+.reform{border:2px dashed var(--gold);background:var(--paper);border-radius:4px;padding:16px 18px;margin-top:14px;}
+.reform .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+ul.clean{margin:8px 0 0;padding-left:22px;}
+ul.clean li{margin-bottom:8px;max-width:68ch;}
+.mermaidbox{background:var(--white);border:1.5px solid var(--rule);border-radius:4px;padding:12px;margin-top:14px;overflow-x:auto;}
+pre.mermaid{margin:0;font-size:20px;}
+.qa{display:grid;gap:10px;margin-top:14px;}
+.qa div{background:var(--white);border-left:4px solid var(--navy);padding:12px 16px;}
+.qa .who{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
+details.card summary{cursor:pointer;font-size:18px;color:var(--navy);}
+.people .card .role{font-size:14px;color:var(--ink-soft);}
+details.sources{margin-top:16px;background:var(--white);border:1.5px solid var(--rule);border-radius:4px;}
+details.sources summary{cursor:pointer;padding:14px 18px;font-family:var(--font-mono);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);}
+details.sources ol{margin:0;padding:0 18px 18px 40px;font-size:15px;}
+details.sources li{margin-bottom:8px;}
+.mapbox{background:var(--white);border:1.5px solid var(--rule);border-radius:4px;padding:12px;margin-top:14px;}
+.mapbox svg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto;}
+footer.foot{background:var(--navy);color:var(--navy-soft);border-top:6px solid var(--gold);}
+footer.foot .wrap{padding-block:26px;font-size:15px;}
+footer.foot a{color:var(--gold-bright);}
+.kids{display:grid;gap:12px;margin-top:14px;}
+.kid{display:flex;gap:16px;align-items:flex-start;background:var(--white);border:1.5px solid var(--rule);border-radius:4px;padding:16px 18px;}
+.kid > div:last-child{min-width:0;}
+.kid .kn{flex:0 0 46px;height:46px;border-radius:50%;background:var(--navy);color:var(--gold-bright);font-family:var(--font-mono);font-size:24px;display:flex;align-items:center;justify-content:center;}
+.kid p{font-size:18px;margin:4px 0 0;}
+.jars{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px;}
+.jar{background:var(--navy);color:var(--cream);border-radius:4px;padding:18px 20px;text-align:center;}
+.jar.half{background:var(--paper);color:var(--ink);border:2px solid var(--gold);}
+.jar .jt{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-bright);}
+.jar.half .jt{color:var(--gold);}
+.jar .jn{font-family:var(--font-display);font-size:26px;margin:6px 0;}
+.jar .jb{font-size:18px;}
+.jar b{font-family:var(--font-mono);font-size:24px;}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="brandline">Utah Hive Politics · The Weber County Hive · PIDS-Utah</div>
+    <h1>Ogden and Weber County: Which Homes Are Short?</h1>
+    <p class="sub">Weber County's own housing data, prices against paychecks, what "affordable" means in Ogden's new apartments, and where the area's tax growth goes.</p>
+    <div class="dates">Posted Oct. 27, 2026 · Updated Oct. 27, 2026</div>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Jump to section">
+  <div class="wrap">
+    <a href="#gap">The unit gap</a>
+    <a href="#growth">Who's moving in</a>
+    <a href="#prices">Prices vs. paychecks</a>
+    <a href="#apartments">"Affordable" apartments</a>
+    <a href="#tax">Where tax growth goes</a>
+    <a href="#homeowners">What it means for homeowners</a>
+    <a href="#map">Map</a>
+    <a href="#questions">Questions</a>
+    <a href="#sources">Sources</a>
+    <a href="housing-promises-vs-record.html">Statewide case file</a>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="counter" aria-label="Behind this piece">
+  <div class="t">Behind this piece</div>
+  <div class="row">
+    <span><b>14</b> records read</span>
+    <span><b>63</b> figures checked</span>
+    <span><b>6</b> records checked but not used</span>
+    <span><b>~12</b> searches run (estimate)</span>
+  </div>
+</div>
+
+<section class="block" id="gap">
+  <div class="eyebrow">The unit gap</div>
+  <h2>Weber County's data showed surpluses in the middle and a shortage at the bottom</h2>
+  <p class="lede">Ogden's 2019 housing presentation to the City Council cited the Utah Affordable Housing Report 2018 for Weber County, broken out by household income.</p>
+  <div class="chartbox" role="img" aria-label="Bar chart: shortage of 2,540 units at 0 to 30 percent of area income; surpluses of 3,745 and 6,750 units at 30 to 50 and 50 to 80 percent">
+<svg viewBox="0 0 640 172" xmlns="http://www.w3.org/2000/svg">
+<text x="10" y="20" font-family="Courier New, monospace" font-size="13" fill="#10233f">WEBER COUNTY UNIT GAP BY INCOME LEVEL (2018)</text>
+<text x="222" y="58" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">0–30% of area income (shortage)</text>
+<rect x="230" y="44" width="112.9" height="20" fill="#9c3b2e"/>
+<text x="348.9" y="59" font-family="Courier New, monospace" font-size="14" fill="#10233f">2,540 units</text>
+<text x="222" y="102" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">30–50% (surplus)</text>
+<rect x="230" y="88" width="166.4" height="20" fill="#3f6b4a"/>
+<text x="402.4" y="103" font-family="Courier New, monospace" font-size="14" fill="#10233f">3,745 units</text>
+<text x="222" y="146" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">50–80% (surplus)</text>
+<rect x="230" y="132" width="300.0" height="20" fill="#3f6b4a"/>
+<text x="536.0" y="147" font-family="Courier New, monospace" font-size="14" fill="#10233f">6,750 units</text>
+</svg>
+  </div>
+  <p class="note">An earlier OgdenCAN assessment (2016) found a similar 2,322-unit shortage at 0–30% of area income. These are the most recent county breakdowns the Hive has found; they are dated 2016 and 2018.</p>
+  <div class="stats">
+    <div class="stat"><div class="n">49%</div><div class="l">Ogden renters paying more than 30% of income for housing</div><div class="s">ACS, in Ogden's 2019 presentation</div></div>
+    <div class="stat"><div class="n">23.5%</div><div class="l">Ogden renters paying more than half their income</div><div class="s">ACS, in Ogden's 2019 presentation</div></div>
+    <div class="stat"><div class="n">44.4%</div><div class="l">Ogden households that rent, vs. 28% countywide</div><div class="s">ACS 2012–16</div></div>
+    <div class="stat"><div class="n">+2%/yr</div><div class="l">How much faster East Central Ogden home prices rose than incomes, for decades</div><div class="s">Ogden's 2019 presentation</div></div>
+  </div>
+</section>
+
+<section class="block" id="growth">
+  <div class="eyebrow">Who's moving in</div>
+  <h2>Weber grows mostly from births, not newcomers</h2>
+  <p>Census population estimates put Weber among Utah's lowest net-migration counties. Net migration was negative in 2022–2023, and in 2023–2024 it made up about 9% of growth. The rest was births. A "too many newcomers" explanation for Weber prices doesn't match those numbers.</p>
+</section>
+
+<section class="block" id="prices">
+  <div class="eyebrow">Prices vs. paychecks</div>
+  <h2>Home prices outran incomes</h2>
+  <div class="chartbox" role="img" aria-label="Bar chart: Weber County median income up 25 percent, Ogden Valley median home price up 98 percent, 2019 to 2024">
+<svg viewBox="0 0 640 128" xmlns="http://www.w3.org/2000/svg">
+<text x="10" y="20" font-family="Courier New, monospace" font-size="13" fill="#10233f">GROWTH, 2019 TO 2024</text>
+<text x="222" y="58" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">Weber County median income</text>
+<rect x="230" y="44" width="74.0" height="20" fill="#10233f"/>
+<text x="309.9" y="59" font-family="Courier New, monospace" font-size="14" fill="#10233f">+25%</text>
+<text x="222" y="102" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">Ogden Valley median home price</text>
+<rect x="230" y="88" width="292.8" height="20" fill="#b8863b"/>
+<text x="528.8" y="103" font-family="Courier New, monospace" font-size="14" fill="#10233f">+98%</text>
+</svg>
+  </div>
+  <p class="note">Weber County median household income $72,206 (2019) to $90,005 (2024), Census ACS. Ogden Valley median single-family sale $577,000 (2019) to $1,140,000 (2024), Mountain Luxury market reports. County income is used because no Ogden Valley income figure is published.</p>
+  <div class="cards">
+    <div class="card"><div class="k">Ogden Valley</div><p>Ogden Valley City's draft General Plan (March 2026) puts the median home value at $839,800 (2024 ACS) against a county area income of $88,515. Moderate-income households can afford homes up to about $300,000; only 709 homes, 17% of the valley's housing, are at or below that.</p></div>
+    <div class="card"><div class="k">Ogden city</div><p>December 2025: median sale price $495,000, median rent $1,655. Buying took an income of $125,216; renting took $66,196, an 89% gap. Nationally the gap was 46% (Redfin, via Stacker).</p></div>
+  </div>
+</section>
+
+<section class="block" id="apartments">
+  <div class="eyebrow">"Affordable" apartments</div>
+  <h2>What income-restricted means in Ogden</h2>
+  <ul class="clean">
+    <li><b>Lotus Company</b> operates about 500 income-restricted units in Ogden, with about 300 more in the pipeline, targeting 60% of area median income (KUER, Jan. 2, 2026).</li>
+    <li><b>The rent:</b> a one-bedroom at 60% of area income rents for $1,356 a month. A single renter at the top of the eligible income range ($73,860, based on HUD's 2025 Ogden-Clearfield median of $123,100) pays 32% of gross income, above the 30% guide.</li>
+    <li><b>Flat rent:</b> in these tax-credit buildings, rent is set at the income limit, not each tenant's income, so renters who earn less pay a larger share.</li>
+    <li><b>New bond allocations (July 8, 2026):</b> Railyard Lofts, Ogden, $17,370,650 for 168 units (Pedcor Development Associates); Golden Links Manor, Ogden, $2,639,000 for 31 units (Related Affordable).</li>
+    <li><b>A different model:</b> Golden Links Manor is existing Section 8 senior and disabled housing where rent is based on each tenant's income, so it works differently from new tax-credit construction.</li>
+  </ul>
+</section>
+
+<section class="block" id="tax">
+  <div class="eyebrow">Where tax growth goes</div>
+  <h2>Weber's tax increment and project areas</h2>
+  <div class="chartbox" role="img" aria-label="Bar chart of Weber County property tax paid as increment: 18.1 million in 2015, 14.2 million in 2024">
+<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
+<text x="10" y="20" font-family="Courier New, monospace" font-size="13" fill="#10233f">PROPERTY TAX PAID AS INCREMENT, WEBER COUNTY ($M)</text>
+<text x="222" y="58" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">2015</text>
+<rect x="230" y="44" width="271.7" height="20" fill="#10233f"/>
+<text x="507.7" y="59" font-family="Courier New, monospace" font-size="14" fill="#10233f">$18.1M</text>
+<text x="222" y="102" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">2018</text>
+<rect x="230" y="88" width="232.0" height="20" fill="#10233f"/>
+<text x="468.0" y="103" font-family="Courier New, monospace" font-size="14" fill="#10233f">$15.5M</text>
+<text x="222" y="146" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">2020</text>
+<rect x="230" y="132" width="145.7" height="20" fill="#10233f"/>
+<text x="381.7" y="147" font-family="Courier New, monospace" font-size="14" fill="#10233f">$9.7M</text>
+<text x="222" y="190" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">2022</text>
+<rect x="230" y="176" width="195.6" height="20" fill="#10233f"/>
+<text x="431.6" y="191" font-family="Courier New, monospace" font-size="14" fill="#10233f">$13.0M</text>
+<text x="222" y="234" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">2024</text>
+<rect x="230" y="220" width="213.7" height="20" fill="#b8863b"/>
+<text x="449.7" y="235" font-family="Courier New, monospace" font-size="14" fill="#10233f">$14.2M</text>
+</svg>
+  </div>
+  <p class="note">Utah State Tax Commission, Table 13. Weber paid $146,077,585 as tax increment from 2015 to 2024. The county's own CRA reports show $52,388,037 diverted from all Weber taxing entities in 2021–2024, $6,843,935 of it from the county general fund.</p>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Project area</th><th>Where</th><th>Amount on record</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Airport CRA</td><td>Ogden-Hinckley Airport, 837 acres</td><td>Up to $119.32 million over 25 years</td><td class="src">Ogden RDA records; Standard-Examiner</td></tr>
+        <tr><td>Continental CRA (WonderBlock)</td><td>26th St., Grant to Lincoln</td><td>Up to $75 million bond (Nov. 15, 2022)</td><td class="src">Sole private partner J. Fisher Companies; bond pledges tax increment and sales/franchise tax</td></tr>
+        <tr><td>Adams CRA</td><td>150 acres, Ogden</td><td>About $124 million planned redevelopment</td><td class="src">Ogden RDA, Jan. 2018</td></tr>
+        <tr><td>Wildcat Square CRA (survey)</td><td>Near Weber State</td><td>Not yet set</td><td class="src">513-bed student housing; City Council 4-2, May 2026</td></tr>
+        <tr><td>Union Station Neighborhood</td><td>Downtown Ogden</td><td>None disclosed yet</td><td class="src">J. Fisher Companies is one of four team members; still in master planning</td></tr>
+        <tr><td>Nordic Village CRA and PIDs</td><td>Ogden Valley</td><td>CRA up to $55 million; about $39.4 million in PID bonds issued</td><td class="src">Approved before Ogden Valley City was seated</td></tr>
+        <tr><td>West Weber UIPA project area</td><td>About 9,000 acres, west Weber</td><td>About $343 million projected to UIPA over 25 years</td><td class="src">Plan claims about 14,000 housing units "over the course of development"</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="margin-top:14px"><div class="k">Other increases on Weber bills since 2023</div><p>Weber School District, Central Weber Sewer and Weber Basin Water have raised rates since 2023. Weber County's own rate held flat in 2025 and 2026.</p></div>
+</section>
+
+<section class="block" id="homeowners">
+  <div class="eyebrow">What it means for Ogden homeowners</div>
+  <h2>How would the Build HUBS bill help homeowners in Ogden?</h2>
+  <p class="lede">For people who already own homes in Ogden, the bill text has nothing aimed at them. It gives no property tax relief, does nothing about PID assessments or disclosure, and offers no help buying a home. Every benefit in it goes to the borrower building the project.</p>
+  <h3>What could reach Ogden</h3>
+  <ul class="clean">
+    <li><b>Union Station Neighborhood fits the bill closely.</b> It sits right next to Ogden's FrontRunner station, with UTA and J. Fisher Companies on the team. If it borrowed under Build HUBS, the builder would get a federal loan, at half the Treasury rate if most units are at or below 80% of area income. That's about $100,900 for a family of four in the Salt Lake metro.</li>
+    <li><b>Those units would mostly be rentals,</b> priced in the same 60–80% band as Lotus's buildings. That's not the 0–30% level where Weber's own data showed the shortage, and the bill sets no time limit on keeping them affordable.</li>
+    <li><b>New apartments can ease rents a bit.</b> Statewide, apartment rents fell 2.3% over two years as new supply opened. Ogden renters might feel that; homeowners wouldn't see it on their bills.</li>
+  </ul>
+  <h3>What could cost Ogden homeowners</h3>
+  <ul class="clean">
+    <li><b>Stacking with local tools:</b> if a project pairs the federal loan with a CRA or HTRZ, new property tax growth around the station goes back to the project for decades. Schools, the county and other districts then cover growth costs from everyone else's rates. That's the same pattern in Weber's $146 million paid as increment since 2015.</li>
+    <li><b>Less review:</b> projects near the station that convert offices or build on rail and road land would skip federal environmental review, so neighbors get less notice.</li>
+    <li><b>The loan discount:</b> the half-price interest is money the federal government doesn't collect, and every taxpayer, Ogden homeowners included, covers that.</li>
+  </ul>
+  <div class="fair">
+    <div class="k">Bottom line from the record</div>
+    <p>The bill helps builders borrow cheaply near stations. Ogden homeowners get no direct benefit. What they pay depends on whether the city stacks a CRA or HTRZ on top, and the Union Station plans haven't disclosed one yet.</p>
+  </div>
+</section>
+
+<section class="block" id="map">
+  <div class="eyebrow">Map</div>
+  <h2>Ogden-area project areas and FrontRunner stations</h2>
+  <p>Gold markers are project areas in this file. Navy circles are a half mile around Ogden and Roy FrontRunner stations, the distance the federal Build HUBS bill would use. Tap a marker for details.</p>
+  <div id="ogdenmap" style="height:520px;border:1.5px solid var(--rule);border-radius:4px;margin-top:12px;background:#eef2f7;"></div>
+  <p class="note">Marker locations are approximate (project centers), not boundaries.</p>
+</section>
+
+<section class="block" id="questions">
+  <div class="eyebrow">Questions to ask, and to whom</div>
+  <h2>Questions readers can ask</h2>
+  <div class="qa">
+    <div><div class="who">Ogden City Council and RDA board</div>How much tax increment have Ogden's project areas collected in total, and what has each delivered? Will Union Station use a CRA?</div>
+    <div><div class="who">Weber County Commission</div>Has the county updated its housing gap numbers by income since 2018, and where is the shortage today?</div>
+    <div><div class="who">Weber School District</div>How much growth revenue does the district give up each year to project areas, and how does that affect its tax rate?</div>
+    <div><div class="who">Utah Inland Port Authority</div>Where are the 14,000 housing units in the West Weber plan, and at what prices?</div>
+  </div>
+</section>
+
+<section class="block" id="sources">
+  <div class="eyebrow">Sources</div>
+  <details class="sources">
+    <summary>Show all sources (tap to open)</summary>
+    <ol>
+      <li>Ogden City, "Housing Trends in Ogden," Jenny Gnagey, Ph.D., Sept. 10, 2019 (citing Utah Affordable Housing Report 2018, OgdenCAN 2016 assessment and ACS). <a href="https://www.ogdencity.gov/DocumentCenter/View/10344/02-Housing-Presentation-Ogden-City-Council">ogdencity.gov</a></li>
+      <li>Utah State Tax Commission, 2024 Annual Property Tax Statistical Report, Tables 13–14. <a href="https://files.tax.utah.gov/propertytax/annual-reports/2024annual.pdf">tax.utah.gov</a></li>
+      <li>Weber County CRA 700 Reports, 2021–2024 (as compiled in the Hive's Nordic Village case file).</li>
+      <li>U.S. Census Bureau ACS, Weber County median household income, 2019 and 2024; Census population estimates (net migration), as used in prior Hive research.</li>
+      <li>Mountain Luxury market reports, Ogden Valley (Eden, Huntsville, Liberty) 2019–2025.</li>
+      <li>Ogden Valley City Draft General Plan, March 7, 2026 (utah.gov/pmn).</li>
+      <li>Stacker/Redfin, "Is it cheaper to buy or rent in Ogden in 2026?", Jan. 30, 2026. <a href="https://stacker.com/stories/utah/ogden/it-cheaper-buy-or-rent-ogden-2026">stacker.com</a></li>
+      <li>KUER, "Ogden apartments are coming in hot," Jan. 2, 2026; HUD 2025 Ogden-Clearfield income limits.</li>
+      <li>Utah Private Activity Bond Board, July 8, 2026 meeting notice (utah.gov/pmn notice 1092715).</li>
+      <li>Ogden RDA records and Standard-Examiner coverage (Airport, Continental/WonderBlock, Adams CRAs); Ogden City WonderBlock page; Union Station Neighborhood project materials.</li>
+      <li>Weber County Nordic Village CRA interlocal agreements and PID bond records; UIPA West Weber Project Area Plan.</li>
+      <li>Hive statewide case file: <a href="housing-promises-vs-record.html">A Shortage of Homes, or a Shortage of Homes People Can Afford?</a></li>
+    </ol>
+  </details>
+</section>
+
+</div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">The Weber County Hive · Utah Hive Politics · Public records only. Tips: webercountyhive@gmail.com · <a href="index.html">All PIDS-Utah pages</a></div>
+</footer>
+<style>
+/* required styles */
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	}
+.leaflet-container {
+	overflow: hidden;
+	}
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	        user-select: none;
+	  -webkit-user-drag: none;
+	}
+/* Prevents IE11 from highlighting tiles in blue */
+.leaflet-tile::selection {
+	background: transparent;
+}
+/* Safari renders non-retina tile on retina better with this, but Chrome is worse */
+.leaflet-safari .leaflet-tile {
+	image-rendering: -webkit-optimize-contrast;
+	}
+/* hack that prevents hw layers "stretching" when loading new tiles */
+.leaflet-safari .leaflet-tile-container {
+	width: 1600px;
+	height: 1600px;
+	-webkit-transform-origin: 0 0;
+	}
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	display: block;
+	}
+/* .leaflet-container svg: reset svg max-width decleration shipped in Joomla! (joomla.org) 3.x */
+/* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
+.leaflet-container .leaflet-overlay-pane svg {
+	max-width: none !important;
+	max-height: none !important;
+	}
+.leaflet-container .leaflet-marker-pane img,
+.leaflet-container .leaflet-shadow-pane img,
+.leaflet-container .leaflet-tile-pane img,
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
+	max-width: none !important;
+	max-height: none !important;
+	width: auto;
+	padding: 0;
+	}
+
+.leaflet-container img.leaflet-tile {
+	/* See: https://bugs.chromium.org/p/chromium/issues/detail?id=600120 */
+	mix-blend-mode: plus-lighter;
+}
+
+.leaflet-container.leaflet-touch-zoom {
+	-ms-touch-action: pan-x pan-y;
+	touch-action: pan-x pan-y;
+	}
+.leaflet-container.leaflet-touch-drag {
+	-ms-touch-action: pinch-zoom;
+	/* Fallback for FF which doesn't support pinch-zoom */
+	touch-action: none;
+	touch-action: pinch-zoom;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.leaflet-container {
+	-webkit-tap-highlight-color: transparent;
+}
+.leaflet-container a {
+	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
+}
+.leaflet-tile {
+	filter: inherit;
+	visibility: hidden;
+	}
+.leaflet-tile-loaded {
+	visibility: inherit;
+	}
+.leaflet-zoom-box {
+	width: 0;
+	height: 0;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	z-index: 800;
+	}
+/* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
+.leaflet-overlay-pane svg {
+	-moz-user-select: none;
+	}
+
+.leaflet-pane         { z-index: 400; }
+
+.leaflet-tile-pane    { z-index: 200; }
+.leaflet-overlay-pane { z-index: 400; }
+.leaflet-shadow-pane  { z-index: 500; }
+.leaflet-marker-pane  { z-index: 600; }
+.leaflet-tooltip-pane   { z-index: 650; }
+.leaflet-popup-pane   { z-index: 700; }
+
+.leaflet-map-pane canvas { z-index: 100; }
+.leaflet-map-pane svg    { z-index: 200; }
+
+.leaflet-vml-shape {
+	width: 1px;
+	height: 1px;
+	}
+.lvml {
+	behavior: url(#default#VML);
+	display: inline-block;
+	position: absolute;
+	}
+
+
+/* control positioning */
+
+.leaflet-control {
+	position: relative;
+	z-index: 800;
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+.leaflet-top,
+.leaflet-bottom {
+	position: absolute;
+	z-index: 1000;
+	pointer-events: none;
+	}
+.leaflet-top {
+	top: 0;
+	}
+.leaflet-right {
+	right: 0;
+	}
+.leaflet-bottom {
+	bottom: 0;
+	}
+.leaflet-left {
+	left: 0;
+	}
+.leaflet-control {
+	float: left;
+	clear: both;
+	}
+.leaflet-right .leaflet-control {
+	float: right;
+	}
+.leaflet-top .leaflet-control {
+	margin-top: 10px;
+	}
+.leaflet-bottom .leaflet-control {
+	margin-bottom: 10px;
+	}
+.leaflet-left .leaflet-control {
+	margin-left: 10px;
+	}
+.leaflet-right .leaflet-control {
+	margin-right: 10px;
+	}
+
+
+/* zoom and fade animations */
+
+.leaflet-fade-anim .leaflet-popup {
+	opacity: 0;
+	-webkit-transition: opacity 0.2s linear;
+	   -moz-transition: opacity 0.2s linear;
+	        transition: opacity 0.2s linear;
+	}
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+	opacity: 1;
+	}
+.leaflet-zoom-animated {
+	-webkit-transform-origin: 0 0;
+	    -ms-transform-origin: 0 0;
+	        transform-origin: 0 0;
+	}
+svg.leaflet-zoom-animated {
+	will-change: transform;
+}
+
+.leaflet-zoom-anim .leaflet-zoom-animated {
+	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
+	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
+	        transition:         transform 0.25s cubic-bezier(0,0,0.25,1);
+	}
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	        transition: none;
+	}
+
+.leaflet-zoom-anim .leaflet-zoom-hide {
+	visibility: hidden;
+	}
+
+
+/* cursors */
+
+.leaflet-interactive {
+	cursor: pointer;
+	}
+.leaflet-grab {
+	cursor: -webkit-grab;
+	cursor:    -moz-grab;
+	cursor:         grab;
+	}
+.leaflet-crosshair,
+.leaflet-crosshair .leaflet-interactive {
+	cursor: crosshair;
+	}
+.leaflet-popup-pane,
+.leaflet-control {
+	cursor: auto;
+	}
+.leaflet-dragging .leaflet-grab,
+.leaflet-dragging .leaflet-grab .leaflet-interactive,
+.leaflet-dragging .leaflet-marker-draggable {
+	cursor: move;
+	cursor: -webkit-grabbing;
+	cursor:    -moz-grabbing;
+	cursor:         grabbing;
+	}
+
+/* marker & overlays interactivity */
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-image-layer,
+.leaflet-pane > svg path,
+.leaflet-tile-container {
+	pointer-events: none;
+	}
+
+.leaflet-marker-icon.leaflet-interactive,
+.leaflet-image-layer.leaflet-interactive,
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+
+/* visual tweaks */
+
+.leaflet-container {
+	background: #ddd;
+	outline-offset: 1px;
+	}
+.leaflet-container a {
+	color: #0078A8;
+	}
+.leaflet-zoom-box {
+	border: 2px dotted #38f;
+	background: rgba(255,255,255,0.5);
+	}
+
+
+/* general typography */
+.leaflet-container {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1.5;
+	}
+
+
+/* general toolbar styles */
+
+.leaflet-bar {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	border-radius: 4px;
+	}
+.leaflet-bar a {
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	}
+.leaflet-bar a,
+.leaflet-control-layers-toggle {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	display: block;
+	}
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+	background-color: #f4f4f4;
+	}
+.leaflet-bar a:first-child {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	}
+.leaflet-bar a:last-child {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom: none;
+	}
+.leaflet-bar a.leaflet-disabled {
+	cursor: default;
+	background-color: #f4f4f4;
+	color: #bbb;
+	}
+
+.leaflet-touch .leaflet-bar a {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	}
+.leaflet-touch .leaflet-bar a:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	}
+.leaflet-touch .leaflet-bar a:last-child {
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	}
+
+/* zoom control */
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	font: bold 18px 'Lucida Console', Monaco, monospace;
+	text-indent: 1px;
+	}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
+	font-size: 22px;
+	}
+
+
+/* layers control */
+
+.leaflet-control-layers {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+	background: #fff;
+	border-radius: 5px;
+	}
+.leaflet-control-layers-toggle {
+	background-image: url(images/layers.png);
+	width: 36px;
+	height: 36px;
+	}
+.leaflet-retina .leaflet-control-layers-toggle {
+	background-image: url(images/layers-2x.png);
+	background-size: 26px 26px;
+	}
+.leaflet-touch .leaflet-control-layers-toggle {
+	width: 44px;
+	height: 44px;
+	}
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+	display: none;
+	}
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+	display: block;
+	position: relative;
+	}
+.leaflet-control-layers-expanded {
+	padding: 6px 10px 6px 6px;
+	color: #333;
+	background: #fff;
+	}
+.leaflet-control-layers-scrollbar {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-right: 5px;
+	}
+.leaflet-control-layers-selector {
+	margin-top: 2px;
+	position: relative;
+	top: 1px;
+	}
+.leaflet-control-layers label {
+	display: block;
+	font-size: 13px;
+	font-size: 1.08333em;
+	}
+.leaflet-control-layers-separator {
+	height: 0;
+	border-top: 1px solid #ddd;
+	margin: 5px -10px 5px -6px;
+	}
+
+/* Default icon URLs */
+.leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
+	background-image: url(images/marker-icon.png);
+	}
+
+
+/* attribution and scale controls */
+
+.leaflet-container .leaflet-control-attribution {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.8);
+	margin: 0;
+	}
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
+	padding: 0 5px;
+	color: #333;
+	line-height: 1.4;
+	}
+.leaflet-control-attribution a {
+	text-decoration: none;
+	}
+.leaflet-control-attribution a:hover,
+.leaflet-control-attribution a:focus {
+	text-decoration: underline;
+	}
+.leaflet-attribution-flag {
+	display: inline !important;
+	vertical-align: baseline !important;
+	width: 1em;
+	height: 0.6669em;
+	}
+.leaflet-left .leaflet-control-scale {
+	margin-left: 5px;
+	}
+.leaflet-bottom .leaflet-control-scale {
+	margin-bottom: 5px;
+	}
+.leaflet-control-scale-line {
+	border: 2px solid #777;
+	border-top: none;
+	line-height: 1.1;
+	padding: 2px 5px 1px;
+	white-space: nowrap;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	background: rgba(255, 255, 255, 0.8);
+	text-shadow: 1px 1px #fff;
+	}
+.leaflet-control-scale-line:not(:first-child) {
+	border-top: 2px solid #777;
+	border-bottom: none;
+	margin-top: -2px;
+	}
+.leaflet-control-scale-line:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid #777;
+	}
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	box-shadow: none;
+	}
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	border: 2px solid rgba(0,0,0,0.2);
+	background-clip: padding-box;
+	}
+
+
+/* popup */
+
+.leaflet-popup {
+	position: absolute;
+	text-align: center;
+	margin-bottom: 20px;
+	}
+.leaflet-popup-content-wrapper {
+	padding: 1px;
+	text-align: left;
+	border-radius: 12px;
+	}
+.leaflet-popup-content {
+	margin: 13px 24px 13px 20px;
+	line-height: 1.3;
+	font-size: 13px;
+	font-size: 1.08333em;
+	min-height: 1px;
+	}
+.leaflet-popup-content p {
+	margin: 17px 0;
+	margin: 1.3em 0;
+	}
+.leaflet-popup-tip-container {
+	width: 40px;
+	height: 20px;
+	position: absolute;
+	left: 50%;
+	margin-top: -1px;
+	margin-left: -20px;
+	overflow: hidden;
+	pointer-events: none;
+	}
+.leaflet-popup-tip {
+	width: 17px;
+	height: 17px;
+	padding: 1px;
+
+	margin: -10px auto 0;
+	pointer-events: auto;
+
+	-webkit-transform: rotate(45deg);
+	   -moz-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+	}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: white;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	}
+.leaflet-container a.leaflet-popup-close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	font: 16px/24px Tahoma, Verdana, sans-serif;
+	color: #757575;
+	text-decoration: none;
+	background: transparent;
+	}
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus {
+	color: #585858;
+	}
+.leaflet-popup-scrolled {
+	overflow: auto;
+	}
+
+.leaflet-oldie .leaflet-popup-content-wrapper {
+	-ms-zoom: 1;
+	}
+.leaflet-oldie .leaflet-popup-tip {
+	width: 24px;
+	margin: 0 auto;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
+	}
+
+.leaflet-oldie .leaflet-control-zoom,
+.leaflet-oldie .leaflet-control-layers,
+.leaflet-oldie .leaflet-popup-content-wrapper,
+.leaflet-oldie .leaflet-popup-tip {
+	border: 1px solid #999;
+	}
+
+
+/* div icon */
+
+.leaflet-div-icon {
+	background: #fff;
+	border: 1px solid #666;
+	}
+
+
+/* Tooltip */
+/* Base styles for the element that has a tooltip */
+.leaflet-tooltip {
+	position: absolute;
+	padding: 6px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	color: #222;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+	}
+.leaflet-tooltip.leaflet-interactive {
+	cursor: pointer;
+	pointer-events: auto;
+	}
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	position: absolute;
+	pointer-events: none;
+	border: 6px solid transparent;
+	background: transparent;
+	content: "";
+	}
+
+/* Directions */
+
+.leaflet-tooltip-bottom {
+	margin-top: 6px;
+}
+.leaflet-tooltip-top {
+	margin-top: -6px;
+}
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-top:before {
+	left: 50%;
+	margin-left: -6px;
+	}
+.leaflet-tooltip-top:before {
+	bottom: 0;
+	margin-bottom: -12px;
+	border-top-color: #fff;
+	}
+.leaflet-tooltip-bottom:before {
+	top: 0;
+	margin-top: -12px;
+	margin-left: -6px;
+	border-bottom-color: #fff;
+	}
+.leaflet-tooltip-left {
+	margin-left: -6px;
+}
+.leaflet-tooltip-right {
+	margin-left: 6px;
+}
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	top: 50%;
+	margin-top: -6px;
+	}
+.leaflet-tooltip-left:before {
+	right: 0;
+	margin-right: -12px;
+	border-left-color: #fff;
+	}
+.leaflet-tooltip-right:before {
+	left: 0;
+	margin-left: -12px;
+	border-right-color: #fff;
+	}
+
+/* Printing */
+
+@media print {
+	/* Prevent printers from removing background-images of controls. */
+	.leaflet-control {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		}
+	}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>
+(function(){
+  var el=document.getElementById('ogdenmap'); if(!el||!window.L) return;
+  var map=L.map(el,{scrollWheelZoom:false});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+  var b=[];
+  [['Ogden FrontRunner',41.2244,-111.9807],['Roy FrontRunner',41.1887,-112.0394]].forEach(function(s){
+    L.circle([s[1],s[2]],{radius:804.67,color:'#10233f',weight:2,fillColor:'#10233f',fillOpacity:0.2}).bindPopup('<b>'+s[0]+'</b><br>half-mile circle').addTo(map); b.push([s[1],s[2]]);
+  });
+  [['Airport CRA (up to $119.32M)',41.1960,-112.0120],['WonderBlock / Continental CRA (up to $75M bond)',41.2175,-111.9735],['Union Station Neighborhood (no TIF disclosed yet)',41.2201,-111.9813],['Wildcat Square CRA survey (513 beds)',41.1930,-111.9440],['Nordic Village CRA + PIDs',41.3100,-111.8650],['West Weber UIPA project area (~$343M projected)',41.2550,-112.2000]].forEach(function(p){
+    L.marker([p[1],p[2]]).bindPopup('<b>'+p[0]+'</b>').addTo(map); b.push([p[1],p[2]]);
+  });
+  map.fitBounds(b,{padding:[30,30]});
+})();
+</script>
+
+<script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

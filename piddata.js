@@ -24,6 +24,30 @@
 
 const PID_PAGES = [
   {
+    id: "housing-promises-vs-record",
+    order: 14,
+    title: "A Shortage of Homes, or a Shortage of Homes People Can Afford?",
+    region: "Statewide",
+    summary: "Sen. Curtis's Build HUBS Act checked against the record: prices up 124% vs. income up 52% since 2016, 'attainable' reaching 120% of area income with no time limit, half-rate federal loans, the Utah housing-banner bills, and $304.7 million paid as tax increment statewide in 2024.",
+    date: "2026-10-27",
+    updated: "2026-10-27",
+    tags: ["statewide", "housing", "tax increment", "legislation", "homebuyers", "transit"],
+    page: "housing-promises-vs-record.html",
+    status: "live"
+  },
+  {
+    id: "ogden-housing-on-the-record",
+    order: 15,
+    title: "Ogden and Weber County: Which Homes Are Short?",
+    region: "Weber County",
+    summary: "Weber County's own data showed a 2,540-unit shortage at the lowest incomes and surpluses at 30-80% of area income. Prices vs. paychecks, what income-restricted rent costs in Ogden, $146 million paid as tax increment since 2015, and what Build HUBS would mean for Ogden homeowners.",
+    date: "2026-10-27",
+    updated: "2026-10-27",
+    tags: ["weber county", "ogden", "housing", "tax increment", "homebuyers"],
+    page: "ogden-housing-on-the-record.html",
+    status: "live"
+  },
+  {
     id: "who-holds-the-risk",
     order: 13,
     title: "Who Holds the Risk?",

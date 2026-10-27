@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Housing Promises vs. the Record</title>
+<style>
+/* Layout: PIDS-Utah civic-document system — navy masthead with gold rule, cream page, one reading column with full-width tables */
+:root{
+  --cream:#f6f1e6; --paper:#fbf8f1; --white:#ffffff;
+  --navy:#10233f; --navy-deep:#0a1626; --navy-soft:#cdd6e4;
+  --gold:#b8863b; --gold-bright:#d6a752;
+  --flag:#9c3b2e; --ok:#3f6b4a;
+  --ink:#1c1c1c; --ink-soft:#4a4a48; --rule:#d8cfba;
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+  --font-body: 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Courier New', ui-monospace, monospace;
+  color-scheme: light;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.6;}
+a{color:var(--navy);}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+header.masthead{background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%);color:var(--cream);border-bottom:6px solid var(--gold);}
+header.masthead .wrap{padding-block:44px 34px;text-align:center;}
+.brandline{font-family:var(--font-mono);letter-spacing:.24em;font-size:12px;text-transform:uppercase;color:var(--gold-bright);margin-bottom:10px;}
+header.masthead h1{font-family:var(--font-display);font-weight:400;font-size:clamp(28px,5vw,46px);margin:0 0 12px;text-wrap:balance;line-height:1.2;}
+header.masthead p.sub{max-width:660px;margin:0 auto;color:var(--navy-soft);font-size:17px;}
+.dates{margin-top:16px;font-family:var(--font-mono);font-size:13px;color:var(--gold-bright);letter-spacing:.06em;}
+nav.jump{background:var(--paper);border-bottom:1px solid var(--rule);}
+nav.jump .wrap{padding-block:12px;display:flex;flex-wrap:wrap;gap:8px;}
+nav.jump a{font-family:var(--font-mono);font-size:13px;text-decoration:none;border:1.5px solid var(--rule);border-radius:3px;padding:6px 10px;background:var(--white);color:var(--navy);}
+nav.jump a:hover{border-color:var(--gold);}
+main .wrap{padding-block:8px 80px;}
+section.block{margin-top:52px;}
+.eyebrow{font-family:var(--font-mono);color:var(--gold);font-size:13px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;}
+h2{font-family:var(--font-display);font-weight:400;font-size:clamp(24px,3.6vw,32px);margin:0 0 10px;color:var(--navy);text-wrap:balance;line-height:1.25;}
+h3{font-family:var(--font-display);font-weight:400;font-size:22px;color:var(--navy);margin:0 0 6px;}
+p{margin:0 0 14px;max-width:68ch;}
+.lede{font-size:20px;}
+.counter{margin-top:28px;background:var(--white);border:1.5px solid var(--rule);border-radius:4px;padding:14px 18px;}
+.counter .t{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.counter .row{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:16px;}
+.counter b{font-family:var(--font-mono);font-size:20px;color:var(--navy);font-variant-numeric:tabular-nums;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:18px;}
+.stat{background:var(--navy);color:var(--cream);border-radius:4px;padding:18px 20px;}
+.stat .n{font-family:var(--font-mono);font-size:30px;color:var(--gold-bright);font-variant-numeric:tabular-nums;line-height:1.1;}
+.stat .l{font-size:15px;color:var(--navy-soft);margin-top:6px;}
+.stat .s{font-family:var(--font-mono);font-size:11px;color:var(--gold);margin-top:8px;letter-spacing:.04em;}
+.tablebox{overflow-x:auto;margin-top:14px;border:1.5px solid var(--rule);border-radius:4px;background:var(--white);}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:16px;}
+th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--rule);}
+th{background:var(--navy);color:var(--cream);font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:400;}
+td.say{font-family:var(--font-display);font-size:18px;color:var(--navy);width:28%;}
+td.src{font-size:13px;color:var(--ink-soft);width:20%;}
+tr:last-child td{border-bottom:none;}
+.chartbox{background:var(--white);border:1.5px solid var(--rule);border-radius:4px;padding:18px;margin-top:14px;overflow-x:auto;}
+.chartbox svg{display:block;width:100%;min-width:520px;height:auto;}
+.note{font-size:14px;color:var(--ink-soft);margin-top:8px;}
+.tool{background:var(--paper);border:2px solid var(--navy);border-radius:4px;padding:20px;margin-top:16px;}
+.tool label{display:block;font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);margin-bottom:6px;}
+.tool input[type=range]{width:100%;accent-color:var(--gold);}
+.tool .val{font-family:var(--font-mono);font-size:26px;color:var(--navy);font-variant-numeric:tabular-nums;}
+.tool .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
+.bar{height:22px;background:var(--rule);border-radius:3px;overflow:hidden;margin-top:6px;}
+.bar span{display:block;height:100%;background:var(--gold);transition:width .3s;}
+.result{font-size:18px;margin-top:12px;}
+.result b{font-family:var(--font-mono);color:var(--flag);}
+.result b.okc{color:var(--ok);}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px;}
+.card{background:var(--white);border:1.5px solid var(--rule);border-radius:4px;padding:16px 18px;min-width:0;}
+.card .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
+.card p{font-size:16px;margin:6px 0 0;}
+.card a{font-size:15px;}
+.fair{border:2px solid var(--ok);background:var(--white);border-radius:4px;padding:16px 18px;margin-top:14px;}
+.fair .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ok);margin-bottom:6px;}
+.reform{border:2px dashed var(--gold);background:var(--paper);border-radius:4px;padding:16px 18px;margin-top:14px;}
+.reform .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+ul.clean{margin:8px 0 0;padding-left:22px;}
+ul.clean li{margin-bottom:8px;max-width:68ch;}
+.mermaidbox{background:var(--white);border:1.5px solid var(--rule);border-radius:4px;padding:12px;margin-top:14px;overflow-x:auto;}
+pre.mermaid{margin:0;font-size:20px;}
+.qa{display:grid;gap:10px;margin-top:14px;}
+.qa div{background:var(--white);border-left:4px solid var(--navy);padding:12px 16px;}
+.qa .who{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
+details.card summary{cursor:pointer;font-size:18px;color:var(--navy);}
+.people .card .role{font-size:14px;color:var(--ink-soft);}
+details.sources{margin-top:16px;background:var(--white);border:1.5px solid var(--rule);border-radius:4px;}
+details.sources summary{cursor:pointer;padding:14px 18px;font-family:var(--font-mono);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);}
+details.sources ol{margin:0;padding:0 18px 18px 40px;font-size:15px;}
+details.sources li{margin-bottom:8px;}
+.mapbox{background:var(--white);border:1.5px solid var(--rule);border-radius:4px;padding:12px;margin-top:14px;}
+.mapbox svg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto;}
+footer.foot{background:var(--navy);color:var(--navy-soft);border-top:6px solid var(--gold);}
+footer.foot .wrap{padding-block:26px;font-size:15px;}
+footer.foot a{color:var(--gold-bright);}
+.kids{display:grid;gap:12px;margin-top:14px;}
+.kid{display:flex;gap:16px;align-items:flex-start;background:var(--white);border:1.5px solid var(--rule);border-radius:4px;padding:16px 18px;}
+.kid > div:last-child{min-width:0;}
+.kid .kn{flex:0 0 46px;height:46px;border-radius:50%;background:var(--navy);color:var(--gold-bright);font-family:var(--font-mono);font-size:24px;display:flex;align-items:center;justify-content:center;}
+.kid p{font-size:18px;margin:4px 0 0;}
+.jars{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px;}
+.jar{background:var(--navy);color:var(--cream);border-radius:4px;padding:18px 20px;text-align:center;}
+.jar.half{background:var(--paper);color:var(--ink);border:2px solid var(--gold);}
+.jar .jt{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-bright);}
+.jar.half .jt{color:var(--gold);}
+.jar .jn{font-family:var(--font-display);font-size:26px;margin:6px 0;}
+.jar .jb{font-size:18px;}
+.jar b{font-family:var(--font-mono);font-size:24px;}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="brandline">Utah Hive Politics · The Weber County Hive · PIDS-Utah</div>
+    <h1>A Shortage of Homes, or a Shortage of Homes People Can Afford?</h1>
+    <p class="sub">What leaders say about "building more" near transit, set next to the public record: prices, incomes, the bill text, and what Utah's own transit-zone projects delivered.</p>
+    <div class="dates">Posted Oct. 27, 2026 · Updated Oct. 27, 2026</div>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Jump to section">
+  <div class="wrap">
+    <a href="#status">Bill status</a>
+    <a href="#numbers">The numbers</a>
+    <a href="#calc">Can you buy?</a>
+    <a href="#claims">Claims vs. record</a>
+    <a href="#kid">The bill, simply</a>
+    <a href="#bill">The bill</a>
+    <a href="#weigh">Help or harm</a>
+    <a href="#money">Follow the money</a>
+    <a href="#bills">Housing bills</a>
+    <a href="#increment">Tax increment totals</a>
+    <a href="#utah">Utah's tools</a>
+    <a href="#pays">Who pays</a>
+    <a href="#otherstates">Other states</a>
+    <a href="#map">Map</a>
+    <a href="#questions">Questions</a>
+    <a href="#glossary">Glossary</a>
+    <a href="#sources">Sources</a>
+    <a href="housing-promises-plain.html">Plain-words version</a>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<div class="counter" aria-label="Behind this piece">
+  <div class="t">Behind this piece</div>
+  <div class="row">
+    <span><b>27</b> records read</span>
+    <span><b>142</b> figures checked</span>
+    <span><b>31</b> records checked but not used</span>
+    <span><b>~40</b> searches run (estimate)</span>
+  </div>
+</div>
+
+<section class="block" id="start">
+  <div class="eyebrow">What prompted this</div>
+  <h2>The post</h2>
+  <p class="lede">On Oct. 26, 2026, Sen. John Curtis posted on X that Utah's housing shortage keeps pushing up costs, that building near existing transit can add housing "without adding to traffic," and that the Build HUBS Act, by "cutting some burdensome red tape," can help Utah families afford to stay.</p>
+  <p>The Build HUBS Act is S. 3636, introduced Jan. 14, 2026 by Sen. Lisa Blunt Rochester (D-Del.) for herself and Sen. Curtis (R-Utah), with a House companion, H.R. 7062. This page reads the bill and checks each claim in the post against public records, including Utah's own transit-zone projects that the Hive has already documented.</p>
+</section>
+
+<section class="block" id="status">
+  <div class="eyebrow">Where the bill stands</div>
+  <h2>It is not law</h2>
+  <div class="cards">
+    <div class="card"><div class="k">Senate</div><p>S. 3636 was introduced Jan. 14, 2026 and referred to the Senate Committee on Environment and Public Works. No hearing, committee vote or floor vote is listed.</p></div>
+    <div class="card"><div class="k">House</div><p>The House companion is H.R. 7062.</p></div>
+    <div class="card"><div class="k">The path to watch</div><p>Supporters are asking Congress to fold the bill into the next federal surface transportation bill. That is how it could become law without a stand-alone vote.</p></div>
+  </div>
+</section>
+
+<section class="block" id="numbers">
+  <div class="eyebrow">The numbers</div>
+  <h2>Prices ran away from paychecks</h2>
+  <div class="stats">
+    <div class="stat"><div class="n">+124%</div><div class="l">Utah single-family median price, 2016 ($249,900) to Q1 2026 ($559,900)</div><div class="s">Gardner Institute</div></div>
+    <div class="stat"><div class="n">+52%</div><div class="l">Utah median household income, 2016 ($67,480) to 2025 ($102,900)</div><div class="s">Census via FRED</div></div>
+    <div class="stat"><div class="n">91%</div><div class="l">Utah renters who can't afford a median-priced home in 2026, up from 59% in 2015</div><div class="s">Gardner Institute</div></div>
+    <div class="stat"><div class="n">4.9%</div><div class="l">Share of 2025 home sales a renter earning the median $64,000 could afford</div><div class="s">Gardner Institute</div></div>
+  </div>
+
+  <div class="chartbox" role="img" aria-label="Bar chart: home price index 224 versus income index 152, with 2016 equal to 100">
+    <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg">
+      <text x="20" y="24" font-family="Courier New, monospace" font-size="14" fill="#10233f">GROWTH SINCE 2016 (2016 = 100)</text>
+      <!-- scale: 0..250 -> y 260..40 ; 1 unit = 0.88px -->
+      <line x1="80" y1="260" x2="620" y2="260" stroke="#4a4a48" stroke-width="1"/>
+      <line x1="80" y1="172" x2="620" y2="172" stroke="#d8cfba" stroke-dasharray="4 4"/>
+      <text x="72" y="264" text-anchor="end" font-family="Courier New, monospace" font-size="13" fill="#4a4a48">0</text>
+      <text x="72" y="176" text-anchor="end" font-family="Courier New, monospace" font-size="13" fill="#4a4a48">100</text>
+      <line x1="80" y1="84" x2="620" y2="84" stroke="#d8cfba" stroke-dasharray="4 4"/>
+      <text x="72" y="88" text-anchor="end" font-family="Courier New, monospace" font-size="13" fill="#4a4a48">200</text>
+      <!-- price 224 -> height 197 -> y 63 -->
+      <rect x="140" y="63" width="140" height="197" fill="#b8863b"/>
+      <text x="210" y="55" text-anchor="middle" font-family="Courier New, monospace" font-size="20" fill="#10233f">224</text>
+      <text x="210" y="284" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" fill="#1c1c1c">Single-family price</text>
+      <!-- income 152 -> height 134 -> y 126 -->
+      <rect x="380" y="126" width="140" height="134" fill="#10233f"/>
+      <text x="450" y="118" text-anchor="middle" font-family="Courier New, monospace" font-size="20" fill="#10233f">152</text>
+      <text x="450" y="284" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" fill="#1c1c1c">Household income</text>
+    </svg>
+  </div>
+  <p class="note">The math: $559,900 ÷ $249,900 = 2.24 (price index 224). $102,900 ÷ $67,480 = 1.52 (income index 152). Price ends at Q1 2026 and income at 2025, the latest year in each source. Price-to-income went from 3.7 years of income in 2016 to 5.4 now. The Hive's Taxation repo found the same pattern for Weber County from 2018: home prices +82.4%, income +34.9%.</p>
+
+  <h3 style="margin-top:26px">What the monthly payment eats</h3>
+  <p>Gardner's estimated payment on a median-priced home is <b>$3,669 a month</b> ($44,028 a year). That is <b>45.6%</b> of the Gardner median household income of $96,658, and <b>68.8%</b> of the median renter income of $64,000. The common lending guide is 30%. Gardner puts the income needed at <b>$146,800</b>, which is <b>$50,142 (52%) more</b> than the median household earns.</p>
+  <h3 style="margin-top:26px">What "80%" and "120%" of area income mean in dollars</h3>
+  <p>The bill measures "attainable" by area median income (AMI), set each year by HUD. Here is what those levels are locally.</p>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Level</th><th>1 person</th><th>4 people</th><th>Area and year</th></tr></thead>
+      <tbody>
+        <tr><td>50% of AMI</td><td>$44,150</td><td>$63,050</td><td class="src">Salt Lake City HUD Metro, 2026</td></tr>
+        <tr><td>80% of AMI (the bill's "majority" level)</td><td>$70,650</td><td>$100,900</td><td class="src">Salt Lake City HUD Metro, 2026</td></tr>
+        <tr><td>100% of AMI</td><td>—</td><td>$126,100</td><td class="src">Salt Lake City HUD Metro, 2026</td></tr>
+        <tr><td>120% of AMI (the bill's top level)</td><td>—</td><td>$151,320</td><td class="src">Hive math: 1.2 × $126,100</td></tr>
+        <tr><td>80% of AMI</td><td>$67,500</td><td>$96,400</td><td class="src">Weber County, effective June 1, 2025</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">For a family of four in the Salt Lake metro, the bill's top "attainable" level ($151,320) is higher than the $146,800 Gardner says it takes to buy the median Utah home. Its 80% level ($100,900) is higher than Utah's median household income ($96,658). HUD's area figures and Gardner's statewide median are measured differently, so treat these as close comparisons, not exact ones.</p>
+
+</section>
+
+<section class="block" id="calc">
+  <div class="eyebrow">Try it</div>
+  <h2>Can your household buy the median Utah home?</h2>
+  <div class="tool">
+    <div class="grid2">
+      <div>
+        <label for="inc">Your household income per year</label>
+        <input type="range" id="inc" min="30000" max="250000" step="1000" value="96658">
+        <div class="val" id="incOut">$96,658</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy)">How far to the $146,800 needed</div>
+        <div class="bar" aria-hidden="true"><span id="incBar" style="width:66%"></span></div>
+        <div class="result" id="incRes"></div>
+      </div>
+    </div>
+    <p class="note">Uses Gardner's 2026 figures: $146,800 income needed with 10% down, $3,669 monthly payment. Rough guide only; your rate, down payment and debts change the answer.</p>
+  </div>
+</section>
+
+<section class="block" id="claims">
+  <div class="eyebrow">Claims vs. record</div>
+  <h2>What the post says, and what the record shows</h2>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>What they say</th><th>What the record shows</th><th>Record</th></tr></thead>
+      <tbody>
+        <tr><td class="say">"Increasing the housing supply will help" costs.</td><td>Utah built more homes in 2020–2022 than at any time in its history. Over the decade prices still rose 124% while income rose 52%. Supply did help rents: apartment asking rents fell 2.3% from March 2024 to March 2026. It has not brought buying within reach: 91% of renters are priced out.</td><td class="src">KUTV/Gardner (building); Gardner 2026 State of the State's Housing Market</td></tr>
+        <tr><td class="say">Transit routes let us add housing "without adding to traffic."</td><td>Kimball Junction, a Utah transit zone, includes a 1,000-vehicle parking podium and a pedestrian bridge over SR-224, and construction waits on UDOT road improvements not expected to bid until late 2027. It qualifies through a planned bus rapid transit line, not rail.</td><td class="src">GOEO HTRZ approval release; Hive Taxation case file</td></tr>
+        <tr><td class="say">"Giving communities the tools to build near transit."</td><td>Utah already has the tools. Kimball Junction was the 9th Housing and Transit Reinvestment Zone approved statewide. There, S.B. 84 (2023) overrode county approval, and a developer PAC reported spending $94,435 against the citizen referendum.</td><td class="src">GOEO release; S.B. 84; disclosures.utah.gov</td></tr>
+        <tr><td class="say">"Cutting some burdensome red tape."</td><td>The bill adds federal environmental-review (NEPA) categorical exclusions for office-to-housing conversions in the same footprint and for building on land already disturbed for transportation. Land bought before a loan application is exempt from NEPA unless a public entity will own it.</td><td class="src">S. 3636, Secs. 3–4</td></tr>
+        <tr><td class="say">The bill can help Utah families "afford to stay."</td><td>The bill's "attainable" housing serves incomes up to 120% of area median, with a majority of units at or below 80%. The text sets no time limit and no deed restriction. Ordinary transit projects can borrow with no affordable units at all.</td><td class="src">S. 3636, TIFIA §601(a)(1)</td></tr>
+        <tr><td class="say">(Not in the post) Who pays.</td><td>"Attainable" projects borrow at half the U.S. Treasury rate, and projects no longer need an investment-grade credit rating. In Utah's own zones, up to 80% of new property tax growth stays in the project for 25 years instead of going to schools, the county and fire districts.</td><td class="src">S. 3636 §603(b)(4)(D), §612(c); GOEO Kimball release</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block" id="kid">
+  <div class="eyebrow">S. 3636 in plain words</div>
+  <h2>What the Build HUBS Act does, step by step</h2>
+  <div class="kids">
+    <div class="kid"><div class="kn">1</div><div><h3>The government has a big lending piggy bank</h3><p>Washington keeps money it lends out to build roads and train tracks. People who borrow it have to pay it back, plus a little extra called <b>interest</b>.</p></div></div>
+    <div class="kid"><div class="kn">2</div><div><h3>This bill lets builders borrow it for homes and stores</h3><p>If they build within a half mile of a train or bus station (about a 10-minute walk), builders could borrow from that piggy bank to put up apartments, homes and shops.</p></div></div>
+    <div class="kid"><div class="kn">3</div><div><h3>Some homes have to cost less to get a discount</h3><p>If <b>more than half</b> of the homes are priced for families who earn less than most of their neighbors (80% of the area's middle income or less), the builder pays only <b>half the normal interest</b>.</p></div></div>
+    <div class="kid"><div class="kn">4</div><div><h3>But the bill doesn't say for how long</h3><p>Nothing in the bill says those homes must stay cheaper for 5 years, 30 years, or any number of years. No promise is written on the property.</p></div></div>
+    <div class="kid"><div class="kn">5</div><div><h3>Builders with no cheaper homes can still borrow</h3><p>They just don't get the half-price interest. A project near a station can use the loans even if every home is full price.</p></div></div>
+    <div class="kid"><div class="kn">6</div><div><h3>Some checking gets skipped</h3><p>Usually the government checks how a project affects nature and neighbors. The bill skips that check when an old office is turned into homes, or when building on land already used for roads or trains.</p></div></div>
+    <div class="kid"><div class="kn">7</div><div><h3>Your town still makes the rules</h3><p>The bill says it does not change your city's or county's rules about what can be built where.</p></div></div>
+  </div>
+
+  <div class="jars" role="img" aria-label="Borrowing 100 dollars: normal interest 4 dollars and 50 cents a year, half interest 2 dollars and 25 cents a year">
+    <div class="jar"><div class="jt">Normal loan</div><div class="jn">Borrow $100</div><div class="jb">Pay about <b>$4.50</b> extra each year</div></div>
+    <div class="jar half"><div class="jt">Build HUBS discount</div><div class="jn">Borrow $100</div><div class="jb">Pay about <b>$2.25</b> extra each year</div></div>
+  </div>
+  <p class="note">Example uses a 4.5% rate to show the idea. The $2.25 the government doesn't collect is money it would otherwise have earned for all taxpayers.</p>
+
+  <div class="fair">
+    <div class="k">The short version</div>
+    <p><b>Who is cheering for it:</b> home builders, Realtors, apartment owners and city planning groups. <b>What it gives builders:</b> cheaper loans and less paperwork near stations. <b>What it doesn't promise families:</b> that the cheaper homes stay cheaper.</p>
+  </div>
+</section>
+
+<section class="block" id="bill">
+  <div class="eyebrow">Read the bill</div>
+  <h2>What S. 3636 actually does</h2>
+  <ul class="clean">
+    <li><b>Extends two federal loan programs</b> (TIFIA for transportation, RRIF for railroads) for fiscal years 2027–2031 and lets them lend for transit-oriented development within a half mile of a rail, bus rapid transit or multimodal station. No dollar amount is written into the bill.</li>
+    <li><b>Defines "attainable housing"</b> as serving households up to 120% of area median income, with a majority of units affordable at or below 80%. No time limit, no deed restriction in the text.</li>
+    <li><b>Half-price interest:</b> attainable housing loans are set at one-half the Treasury rate when the loan is signed.</li>
+    <li><b>Lower credit bar:</b> TIFIA projects "shall not be required to have an investment-grade rating." Private lenders approved as "originator-servicers" can underwrite the loans for the government, modeled on HUD's multifamily system.</li>
+    <li><b>NEPA exclusions</b> for office conversions and building on already-disturbed transportation land.</li>
+    <li><b>No zoning takeover:</b> Section 5 says nothing in the Act preempts state or local zoning.</li>
+    <li><b>Backers</b> named on the sponsors' one-pager include the National Association of Home Builders, the National Association of REALTORS, the National Apartment Association, The Real Estate Roundtable and planning groups. Utah Transit Authority board chair Carlton Christensen is quoted in support.</li>
+  </ul>
+
+  <div class="tool" id="ratecalc">
+    <h3>What half the Treasury rate is worth to a borrower</h3>
+    <div class="grid2">
+      <div>
+        <label for="loan">Loan amount</label>
+        <input type="range" id="loan" min="5000000" max="200000000" step="5000000" value="50000000">
+        <div class="val" id="loanOut">$50,000,000</div>
+      </div>
+      <div>
+        <label for="tr">Treasury rate (example)</label>
+        <input type="range" id="tr" min="2" max="6" step="0.25" value="4.5">
+        <div class="val" id="trOut">4.50%</div>
+      </div>
+      <div>
+        <label for="yrs">Loan length</label>
+        <input type="range" id="yrs" min="10" max="35" step="5" value="35">
+        <div class="val" id="yrsOut">35 years</div>
+      </div>
+    </div>
+    <div class="result" id="rateRes"></div>
+    <p class="note">Example inputs, not a real loan. Simple level payments, full Treasury rate compared with half of it. The difference is interest the borrower doesn't pay to the federal lender.</p>
+  </div>
+
+  <div class="fair">
+    <div class="k">What the bill requires, and what it leaves out</div>
+    <p>Requires: the half rate only for projects where most units are at or below 80% of area median income; coordination with the regional planning organization; federal labor standards; local zoning stays local. Leaves out: any time limit or deed restriction on "attainable" units, any affordable share for ordinary transit-project loans, and any public report of which projects get loans.</p>
+  </div>
+</section>
+
+<section class="block" id="weigh">
+  <div class="eyebrow">Help, harm or neutral</div>
+  <h2>How the bill measures against the Hive's three tests</h2>
+  <p>The Hive judges deals and bills on transparency, financial accountability to the public, and environmental impact. Here is where S. 3636 lands on each, from its own text.</p>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Test</th><th>Could help</th><th>Could harm</th><th>Neutral or unknown</th></tr></thead>
+      <tbody>
+        <tr><td class="say">Transparency</td><td>Bill text, one-pager and section-by-section are public. Fee structures and loan guidance (debt coverage, loan-to-value) must be published.</td><td>Private "originator-servicer" lenders would underwrite loans for the government. The bill does not require public reporting of which projects get loans or how many units stay affordable.</td><td>Projects must coordinate with the regional planning organization (in Weber, Davis and Salt Lake counties, the Wasatch Front Regional Council).</td></tr>
+        <tr><td class="say">Financial accountability</td><td>Loans are repaid, not grants. The half rate only applies when most units are at or below 80% of area income.</td><td>Half-Treasury-rate loans are interest the federal lender does not collect. No investment-grade rating is required, so riskier projects can qualify. No time limit or deed restriction keeps units affordable.</td><td>No dollar amount is in the bill; the cost depends on what Congress funds later.</td></tr>
+        <tr><td class="say">Environmental impact</td><td>Building on land already used for roads and rail, and converting empty offices, uses land that is already disturbed instead of open land.</td><td>Those projects skip a federal environmental review (NEPA categorical exclusion), so the public may get less notice and study.</td><td>Water, traffic and school capacity stay with local governments, which keep their zoning power.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fair">
+    <div class="k">Bottom line from the record</div>
+    <p>The bill can add homes near transit with cheaper federal loans. Whether those homes stay within reach of the families the label names depends on rules the bill leaves out: how long units stay affordable and who reports on them. Utah's own transit zones show what happens when those rules are loose.</p>
+  </div>
+</section>
+
+<section class="block" id="money">
+  <div class="eyebrow">Follow the money</div>
+  <h2>Who lobbied for it, and who gave to Sen. Curtis</h2>
+  <h3>Federal lobbying reports that name Build HUBS (2026)</h3>
+  <p>These groups listed the Build HUBS Act among the issues they lobbied on in their 2026 quarterly reports to Congress. The dollar figures are each group's total lobbying for the quarter on all issues, not money spent on this bill alone.</p>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Group</th><th>Quarters naming the bill</th><th>Total lobbying reported those quarters (all issues)</th></tr></thead>
+      <tbody>
+        <tr><td>National Association of REALTORS</td><td>Q1, Q2, Q3</td><td>$15,460,000 · $14,580,000 · $27,400,000</td></tr>
+        <tr><td>National Multifamily Housing Council</td><td>Q1, Q2, Q3</td><td>$2,650,000 · $2,330,000 · $1,670,000</td></tr>
+        <tr><td>Mortgage Bankers Association</td><td>Q1, Q2, Q3</td><td>$770,000 · $1,220,000 · $840,000</td></tr>
+        <tr><td>American Public Transportation Association</td><td>Q1, Q2, Q3</td><td>$350,000 · $660,000 · $420,000</td></tr>
+        <tr><td>Up for Growth Action</td><td>Q3</td><td>$50,000</td></tr>
+        <tr><td>Niskanen Center</td><td>Q1, Q2, Q3</td><td>(not listed) · (not listed) · $10,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3 style="margin-top:22px">Bill backers' PACs that gave to John Curtis for Utah (2023–2024)</h3>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>PAC</th><th>Dates</th><th>Total</th></tr></thead>
+      <tbody>
+        <tr><td>BUILD PAC, National Association of Home Builders</td><td>Dec. 18, 2023; Sept. 27, 2024</td><td>$10,000</td></tr>
+        <tr><td>Realtors PAC (RPAC), National Association of REALTORS</td><td>Oct. 6, 2023; Aug. 23, 2024; Sept. 6, 2024</td><td>$7,000</td></tr>
+        <tr><td>National Multifamily Housing Council PAC</td><td>June 26, 2023; July 31, 2024</td><td>$6,000</td></tr>
+        <tr><td>National Apartment Association PAC</td><td>Dec. 10, 2024</td><td>$5,000</td></tr>
+        <tr><td><b>Total</b></td><td></td><td><b>$28,000</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">From FEC itemized receipts for John Curtis for Utah (committee C00647339), searched Oct. 26, 2026. These are routine, legal PAC contributions, reported as required. They are listed so readers can see the overlap between the bill's backers and the sponsor's donors. Curtis's next Senate election is 2030; no 2025–2026 receipts from these PACs appeared in the search.</p>
+  <h3 style="margin-top:22px">Utah Transit Authority's federal lobbyists</h3>
+  <p>UTA, whose board chair is quoted supporting the bill, reported paying two federal lobbying firms in 2026: Barker Leavitt PLLC ($55,000 a quarter) and Cardinal Infrastructure LLC ($30,000 a quarter), $255,000 for the first three quarters. The issue descriptions in those reports name transit grants and the surface transportation bill; they do not name Build HUBS, TIFIA or housing (read from the LDA.gov filing data, Oct. 26, 2026).</p>
+</section>
+
+<section class="block" id="bills">
+  <div class="eyebrow">Bills passed under the housing banner</div>
+  <h2>Utah bills sold as housing or affordability, and what the record shows</h2>
+  <p>Each of these was presented as helping housing supply or affordability. The right column is what the public record shows about cost and who pays. Sponsors are the primary sponsors.</p>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Bill</th><th>What it did</th><th>What the record shows about cost</th></tr></thead>
+      <tbody>
+        <tr><td class="say">S.B. 228 (2019)<br><span class="src">Public Infrastructure District Act</span></td><td>Created Utah's PIDs, which let developer-led boards issue bonds repaid by assessments on homes inside the district.</td><td>PID bonds issued statewide reached $5.267 billion as of Aug. 7, 2026, up from about $4 billion in fall 2025 (State Auditor's office). The Treasurer's office testified PID interest runs 2–3% higher than state or city borrowing. Only 62.5% of districts filed required reports (Auditor, Jan. 2026). Buyers and renters pay the assessments.</td></tr>
+        <tr><td class="say">S.B. 217 (2021)<br><span class="src">HTRZ · Sen. Wayne Harper</span></td><td>Lets a project near a station keep most of its new property tax growth.</td><td>Kimball Junction: up to 80% for 25 years, 385 of 885 units at market rate. Vineyard RDA plus HTRZ: about $900 million diverted from schools.</td></tr>
+        <tr><td class="say">S.B. 84 (2023)<br><span class="src">Sen. Wayne Harper</span></td><td>Changed the approval path the Kimball Junction project used, over the county's own approval.</td><td>A developer PAC reported spending $94,435 against the citizen referendum; Summit County's share of the project is about $55 million, backed by a new sales tax.</td></tr>
+        <tr><td class="say">S.B. 268 (2024)<br><span class="src">FHIZ · Sen. Harper / Rep. Musselman</span></td><td>First Home Investment Zones for starter homes, also paid for with captured tax growth.</td><td>Utah PTA opposed it because it takes tax increment that would go to school districts.</td></tr>
+        <tr><td class="say">S.B. 168 (2024)<br><span class="src">HOPZ · Sen. Lincoln Fillmore</span></td><td>Home Ownership Promotion Zones on small sites, same captured-growth method.</td><td>Same cost path: growth revenue goes to the project instead of schools, county and other taxing entities.</td></tr>
+        <tr><td class="say">H.B. 37 (2025)<br><span class="src">Rep. Jim Dunnigan · Sen. Fillmore</span></td><td>Density bonuses in exchange for owner-occupancy deed restrictions; also changed the preliminary-municipality incorporation statute.</td><td>Passed the House 58-9; the House vote on Senate changes was closer, 39-30. Its deed restrictions are the kind Build HUBS leaves out.</td></tr>
+        <tr><td class="say">H.B. 492 (2026)<br><span class="src">Rep. Calvin Roberts · Sen. Kirk Cullimore</span></td><td>Created a $100 million "State Housing Infrastructure Partnership Fund."</td><td>$18 million of it is a loan to the Point of the Mountain State Land Authority that the introduced bill labeled "for prison infrastructure projects"; that label was removed in the first substitute. The bill also moves $50 million a year from the Transportation Investment Fund to convention center reserves and raises transportation bonds for housing infrastructure grants from $70 million to $150 million.</td></tr>
+        <tr><td class="say">S.B. 39 (2026)<br><span class="src">Sen. Wayne Harper</span></td><td>Put HTRZ, FHIZ, HOPZ and the other zone tools under one chapter of state code.</td><td>Kept the captured-growth method in place for all of them.</td></tr>
+        <tr><td class="say">H.B. 507 (2026)</td><td>First law requiring PID costs be disclosed to buyers, and stops new HTRZ/FHIZ/HOPZ after Jan. 1, 2028.</td><td>Disclosure can come "at or before closing," after earnest money is down. The zones it stops are replaced by a broader tool (RSDZ).</td></tr>
+        <tr><td class="say">Did not pass (2026)</td><td>H.B. 422 (Rep. Jill Koford): public conflict-of-interest disclosure for PID board members. HJR 7: raise the residential property tax exemption from 45% to 60%.</td><td>H.B. 422 passed the House 66-1. Both died at the 11:59 p.m. end of session on March 6, 2026.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fair">
+    <div class="k">What the record shows about the "fixes"</div>
+    <p>Three bills get pointed to as protections. H.B. 507's PID disclosure can come at or before closing, after a buyer's earnest money is already down. H.B. 37's deed restrictions apply only where a city or county opts into its density bonus. S.B. 23 (2025) changed FHIZ density and affordability rules but kept the captured-tax-growth method in place. The bills that would have shown the public the cost up front (H.B. 422) or lowered homeowners' property taxes (HJR 7) did not pass.</p>
+  </div>
+</section>
+
+<section class="block" id="increment">
+  <div class="eyebrow">Where the tax increment goes</div>
+  <h2>How much growth revenue these tools have taken, project by project</h2>
+  <p>Tax increment is the new property tax a project generates after a base year. Under these tools, most of it goes back to the project instead of to schools, counties, fire and water districts. These are the amounts already documented in Hive research files. Housing-labeled tools are gold; the others are navy.</p>
+  <div class="chartbox" role="img" aria-label="Bar chart of tax increment by project, largest Vineyard at 900 million dollars">
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+<text x="10" y="20" font-family="Courier New, monospace" font-size="13" fill="#10233f">TAX INCREMENT NAMED IN THE RECORD (MILLIONS OF DOLLARS)</text>
+<text x="242" y="58" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">Vineyard RDA + HTRZ</text>
+<rect x="250" y="44" width="310.0" height="20" fill="#b8863b"/>
+<text x="566.0" y="59" font-family="Courier New, monospace" font-size="14" fill="#10233f">$900.0M</text>
+<text x="242" y="102" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">Eagle Mountain Sweetwater #4</text>
+<rect x="250" y="88" width="268.2" height="20" fill="#10233f"/>
+<text x="524.2" y="103" font-family="Courier New, monospace" font-size="14" fill="#10233f">$778.5M</text>
+<text x="242" y="146" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">West Weber UIPA</text>
+<rect x="250" y="132" width="118.1" height="20" fill="#10233f"/>
+<text x="374.1" y="147" font-family="Courier New, monospace" font-size="14" fill="#10233f">$343.0M</text>
+<text x="242" y="190" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">Golden Spike UIPA</text>
+<rect x="250" y="176" width="45.2" height="20" fill="#10233f"/>
+<text x="301.2" y="191" font-family="Courier New, monospace" font-size="14" fill="#10233f">$131.2M</text>
+<text x="242" y="234" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">Lehi Thanksgiving Station HTRZ</text>
+<rect x="250" y="220" width="42.0" height="20" fill="#b8863b"/>
+<text x="298.0" y="235" font-family="Courier New, monospace" font-size="14" fill="#10233f">$122.0M</text>
+<text x="242" y="278" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">Eagle Mountain Sweetwater #2</text>
+<rect x="250" y="264" width="26.8" height="20" fill="#10233f"/>
+<text x="282.8" y="279" font-family="Courier New, monospace" font-size="14" fill="#10233f">$77.9M</text>
+<text x="242" y="322" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">Nordic Village CRA</text>
+<rect x="250" y="308" width="18.9" height="20" fill="#10233f"/>
+<text x="274.9" y="323" font-family="Courier New, monospace" font-size="14" fill="#10233f">$55.0M</text>
+<text x="242" y="366" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">Weber County CRA areas 2021–24</text>
+<rect x="250" y="352" width="18.0" height="20" fill="#10233f"/>
+<text x="274.0" y="367" font-family="Courier New, monospace" font-size="14" fill="#10233f">$52.4M</text>
+<text x="242" y="410" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">Eagle Mountain Sweetwater #3</text>
+<rect x="250" y="396" width="7.0" height="20" fill="#10233f"/>
+<text x="263.0" y="411" font-family="Courier New, monospace" font-size="14" fill="#10233f">$20.4M</text>
+<text x="242" y="454" text-anchor="end" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">Kimball Junction HTRZ</text>
+<rect x="250" y="440" width="2.8" height="20" fill="#b8863b"/>
+<text x="258.8" y="455" font-family="Courier New, monospace" font-size="14" fill="#10233f">$8.0M</text>
+</svg>
+  </div>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Project</th><th>Tool</th><th>Amount</th><th>What the figure is</th></tr></thead>
+      <tbody>
+        <tr><td>Vineyard RDA + HTRZ (Utah Co.)</td><td>HTRZ / RDA</td><td style="font-family:var(--font-mono);white-space:nowrap">$900,000,000</td><td class="src">Increment diverted from Alpine and Timpanogos school districts and other entities, per Hive Utah County research</td></tr>
+        <tr><td>Eagle Mountain Sweetwater #4 CRA (Meta expansion)</td><td>CRA (data center)</td><td style="font-family:var(--font-mono);white-space:nowrap">$778,540,678</td><td class="src">Total increment approved, 2026</td></tr>
+        <tr><td>West Weber UIPA project area (Weber Co.)</td><td>UIPA tax differential</td><td style="font-family:var(--font-mono);white-space:nowrap">$343,000,000</td><td class="src">Projected to UIPA over 25 years (75% of growth)</td></tr>
+        <tr><td>Golden Spike UIPA project area (Box Elder Co.)</td><td>UIPA tax differential</td><td style="font-family:var(--font-mono);white-space:nowrap">$131,250,000</td><td class="src">75% of the $175 million projected over 25 years (Amendment #3, May 21, 2026, p. 22); Hive math for the 75% share</td></tr>
+        <tr><td>Lehi Thanksgiving Station HTRZ</td><td>HTRZ</td><td style="font-family:var(--font-mono);white-space:nowrap">$122,000,000</td><td class="src">Approved by the state HTRZ committee Nov. 13, 2023</td></tr>
+        <tr><td>Eagle Mountain Sweetwater #2 CRA</td><td>CRA (data center)</td><td style="font-family:var(--font-mono);white-space:nowrap">$77,854,134</td><td class="src">Total increment, 2021</td></tr>
+        <tr><td>Nordic Village CRA (Ogden Valley)</td><td>CRA / PID</td><td style="font-family:var(--font-mono);white-space:nowrap">$55,000,000</td><td class="src">Maximum from county, school, fire and water over 15 years</td></tr>
+        <tr><td>Weber County CRA areas, 2021–2024</td><td>CRA (about 21 areas)</td><td style="font-family:var(--font-mono);white-space:nowrap">$52,388,037</td><td class="src">Already diverted, all taxing entities, per the county's CRA 700 reports</td></tr>
+        <tr><td>Eagle Mountain Sweetwater #3 CRA (QTS)</td><td>CRA (data center)</td><td style="font-family:var(--font-mono);white-space:nowrap">$20,419,625</td><td class="src">Total increment, 2023</td></tr>
+        <tr><td>Kimball Junction HTRZ (Summit Co.)</td><td>HTRZ</td><td style="font-family:var(--font-mono);white-space:nowrap">$8,000,000</td><td class="src">Low end of the $8–12 million estimate (up to 80% for 25 years)</td></tr>
+        <tr><td><b>Total named in these records</b></td><td></td><td style="font-family:var(--font-mono);white-space:nowrap"><b>$2,488,452,474</b></td><td class="src">About $2.49 billion. A mix of amounts already diverted, approved caps and official projections, added together only to show scale.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="k">Stratos (MIDA), Box Elder County: total not disclosed</div><p>Stratos, the 40,000-acre data center project area MIDA approved April 24, 2026 in Hansel Valley, sits in the same county as Golden Spike. MIDA has not published a project area budget, projected tax differential or the share it keeps; its Stratos page lists no budget and says more information is "coming soon." What is on record: a 50-year interlocal term with Box Elder County; MIDA's energy tax on data center campuses set at 0.5% instead of 6%; $16.2 million in upfront payments to the county; county revenue estimated at about $30 million a year (first 3 GW) and $108 million a year (9 GW); and, per The Salt Lake Tribune, an estimated $49 million a year in property taxes to MIDA at full buildout, with about 80% of the property tax at the reduced rate rebated to the developer. Because no total has been disclosed, Stratos is not in the $2.49 billion figure.</p></div>
+    <div class="card"><div class="k">Not counted in the total</div><p>PID bonds ($5.267 billion statewide) are debt repaid by property owners inside districts, not tax increment. UIPA's Crossroads PID sold $150 million in tax-differential bonds. UIPA pays $120,000 a month ($1.44 million a year) to a private landowner in West Weber. These are separate from the increment above.</p></div>
+    <div class="card"><div class="k">What isn't public yet</div><p>Eagle Mountain's Sweetwater #1 increment, Pole Canyon's dollar total (its 2019 budget gives the 60% share and the city's "approximately $3 million" benefit, but no agency total), the Mid-Valley CRA, Weber County's 2025–2026 CRA reports, Nordic Village's actual diversion, and amounts for Utah's other HTRZs have not been published in records the Hive has found. The real total is higher than this table.</p></div>
+  </div>
+  <h3 style="margin-top:22px">The statewide total, from the Utah State Tax Commission</h3>
+  <p>The Tax Commission reports how much property tax is paid as tax increment each year. In 2024 it was <b>$304,668,763</b>, or <b>6.00%</b> of all property taxes collected in Utah ($5,080,088,841). That is up <b>83%</b> from $166,509,138 in 2015. Over the 10 years from 2015 to 2024, <b>$2,150,295,962</b> was paid as increment.</p>
+  <div class="chartbox" role="img" aria-label="Bar chart of statewide tax increment, 166.5 million dollars in 2015 rising to 304.7 million in 2024">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg">
+<text x="10" y="22" font-family="Courier New, monospace" font-size="13" fill="#10233f">PROPERTY TAX PAID AS TAX INCREMENT, ALL OF UTAH</text>
+<line x1="70" y1="260.0" x2="620" y2="260.0" stroke="#d8cfba" stroke-dasharray="4 4"/>
+<text x="64" y="264.0" text-anchor="end" font-family="Courier New, monospace" font-size="12" fill="#4a4a48">$0M</text>
+<line x1="70" y1="191.2" x2="620" y2="191.2" stroke="#d8cfba" stroke-dasharray="4 4"/>
+<text x="64" y="195.2" text-anchor="end" font-family="Courier New, monospace" font-size="12" fill="#4a4a48">$100M</text>
+<line x1="70" y1="122.5" x2="620" y2="122.5" stroke="#d8cfba" stroke-dasharray="4 4"/>
+<text x="64" y="126.5" text-anchor="end" font-family="Courier New, monospace" font-size="12" fill="#4a4a48">$200M</text>
+<line x1="70" y1="53.8" x2="620" y2="53.8" stroke="#d8cfba" stroke-dasharray="4 4"/>
+<text x="64" y="57.8" text-anchor="end" font-family="Courier New, monospace" font-size="12" fill="#4a4a48">$300M</text>
+<rect x="76.0" y="145.5" width="43.0" height="114.5" fill="#10233f"/>
+<text x="97.5" y="276" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#1c1c1c">2015</text>
+<text x="97.5" y="139.5" text-anchor="middle" font-family="Courier New, monospace" font-size="13" fill="#10233f">$166.5M</text>
+<rect x="131.0" y="143.8" width="43.0" height="116.2" fill="#10233f"/>
+<text x="152.5" y="276" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#1c1c1c">2016</text>
+<rect x="186.0" y="142.4" width="43.0" height="117.6" fill="#10233f"/>
+<text x="207.5" y="276" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#1c1c1c">2017</text>
+<rect x="241.0" y="138.8" width="43.0" height="121.2" fill="#10233f"/>
+<text x="262.5" y="276" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#1c1c1c">2018</text>
+<rect x="296.0" y="115.0" width="43.0" height="145.0" fill="#10233f"/>
+<text x="317.5" y="276" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#1c1c1c">2019</text>
+<rect x="351.0" y="113.2" width="43.0" height="146.8" fill="#10233f"/>
+<text x="372.5" y="276" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#1c1c1c">2020</text>
+<rect x="406.0" y="106.0" width="43.0" height="154.0" fill="#10233f"/>
+<text x="427.5" y="276" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#1c1c1c">2021</text>
+<rect x="461.0" y="95.3" width="43.0" height="164.7" fill="#10233f"/>
+<text x="482.5" y="276" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#1c1c1c">2022</text>
+<rect x="516.0" y="71.1" width="43.0" height="188.9" fill="#10233f"/>
+<text x="537.5" y="276" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#1c1c1c">2023</text>
+<rect x="571.0" y="50.5" width="43.0" height="209.5" fill="#b8863b"/>
+<text x="592.5" y="276" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#1c1c1c">2024</text>
+<text x="592.5" y="44.5" text-anchor="middle" font-family="Courier New, monospace" font-size="13" fill="#10233f">$304.7M</text>
+</svg>
+  </div>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Year</th><th>All of Utah</th><th>Weber County</th></tr></thead>
+      <tbody>
+        <tr><td>2015</td><td style="font-family:var(--font-mono)">$166,509,138</td><td style="font-family:var(--font-mono)">$18,114,800</td></tr>
+        <tr><td>2016</td><td style="font-family:var(--font-mono)">$168,976,603</td><td style="font-family:var(--font-mono)">$17,683,824</td></tr>
+        <tr><td>2017</td><td style="font-family:var(--font-mono)">$171,045,549</td><td style="font-family:var(--font-mono)">$16,244,195</td></tr>
+        <tr><td>2018</td><td style="font-family:var(--font-mono)">$176,361,578</td><td style="font-family:var(--font-mono)">$15,468,363</td></tr>
+        <tr><td>2019</td><td style="font-family:var(--font-mono)">$210,935,557</td><td style="font-family:var(--font-mono)">$16,468,328</td></tr>
+        <tr><td>2020</td><td style="font-family:var(--font-mono)">$213,517,674</td><td style="font-family:var(--font-mono)">$9,710,026</td></tr>
+        <tr><td>2021</td><td style="font-family:var(--font-mono)">$223,979,978</td><td style="font-family:var(--font-mono)">$10,712,651</td></tr>
+        <tr><td>2022</td><td style="font-family:var(--font-mono)">$239,546,488</td><td style="font-family:var(--font-mono)">$13,041,275</td></tr>
+        <tr><td>2023</td><td style="font-family:var(--font-mono)">$274,754,634</td><td style="font-family:var(--font-mono)">$14,387,636</td></tr>
+        <tr><td>2024</td><td style="font-family:var(--font-mono)">$304,668,763</td><td style="font-family:var(--font-mono)">$14,246,487</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Share of 2024 property taxes paid as increment, by county: Beaver 18.20%, Box Elder 9.31%, Salt Lake 9.12%, Tooele 6.47%, Utah 5.88%, Davis 4.06%, Weber 3.87%, Wasatch 2.37%, Summit 1.86%, Washington 0.75%. Source: 2024 Annual Property Tax Statistical Report, Tables 13 and 14. The Tax Commission describes these as property tax dollars paid to redevelopment agencies; a 2022 legislative audit said the comparable figure it used left out MIDA, the Inland Port Authority and the convention center hotel, so the full total is likely higher.</p>
+</section>
+
+<section class="block" id="utah">
+  <div class="eyebrow">We've seen this model</div>
+  <h2>Utah's transit and housing zone tools, 2018–2028</h2>
+  <p>Utah created a new tax-increment zone tool almost every session. Each one sends future tax growth back into a project. Over the same years, the single-family median more than doubled.</p>
+  <div class="mermaidbox">
+<pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'20px','primaryColor':'#ffffff','primaryBorderColor':'#10233f','primaryTextColor':'#10233f','lineColor':'#b8863b'}}}%%
+flowchart TB
+  A["2018 · Transportation Reinvestment Zone"] --> B["2021 · HTRZ, S.B. 217<br/>primary sponsor Sen. Wayne Harper"]
+  B --> C["2024 · First Home Investment Zone, S.B. 268<br/>Sen. Harper / Rep. Musselman"]
+  C --> D["2024 · Home Ownership Promotion Zone, S.B. 168<br/>Sen. Lincoln Fillmore"]
+  D --> E["2025 · Convention Center Reinvestment Zone, S.B. 26"]
+  E --> F["2026 · S.B. 39 puts them under one chapter<br/>Sen. Harper"]
+  F --> G["2026 · H.B. 507: no new zones after 1/1/2028<br/>replaced by a broader tool (RSDZ)"]
+  G --> H["2026 · Build HUBS Act adds federal loans<br/>for the same kind of transit projects"]
+</pre>
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="k">Kimball Junction HTRZ · Summit County</div><p>885 units: 385 market rate (43.5%), 315 at 60% of area median (35.6%). Other "deed-restricted" tiers run up to 120% of area median, about $128,520 a year for one person. Up to 80% of new tax revenue stays in the project for 25 years; Summit County's own share is about $55 million.</p><a href="https://weber-county-hive.github.io/Taxation/">Taxation repo · Cheap on Paper</a></div>
+    <div class="card"><div class="k">The Point · Draper</div><p>400 tax-credit units at about $1,289 rent, but PID taxes and unbundled fees bring tenant costs to about $1,600–$1,900 a month. Affordable units are about 0.5–1% of the 600-acre project. The River District solicitation seeks 800–900 market-rate for-sale homes with no affordable requirement.</p><a href="https://weber-county-hive.github.io/Transparency/">Transparency repo</a></div>
+    <div class="card"><div class="k">Vineyard · Utah County</div><p>An older redevelopment area plus an HTRZ divert about $900 million in tax growth that would otherwise reach Alpine School District and, later, Timpanogos School District.</p><a href="utah-county-explainer.html">Utah County PID explainer</a></div>
+  </div>
+</section>
+
+<section class="block" id="pays">
+  <div class="eyebrow">Who pays</div>
+  <h2>Where the money goes</h2>
+  <div class="mermaidbox">
+<pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'20px','primaryColor':'#ffffff','primaryBorderColor':'#10233f','primaryTextColor':'#10233f','lineColor':'#b8863b'}}}%%
+flowchart TB
+  P["New project near transit"] --> T["New property tax growth"]
+  T -->|"up to 80% for 25 years"| Z["Stays in the project (HTRZ)"]
+  T -->|"what's left"| S["Schools, county, fire district"]
+  S --> R["Residents cover growth costs<br/>through rates and taxes"]
+  P --> PID["PID assessment on each home"]
+  PID --> B["Buyer or renter pays it"]
+  P --> L["Federal loan at half the Treasury rate<br/>(Build HUBS)"]
+  L --> F["Interest the federal lender doesn't collect"]
+</pre>
+  </div>
+  <div class="reform">
+    <div class="k">Reform proposal · clearly labeled, not a finding</div>
+    <p>The Hive's PID payoff-at-sale proposal: in new districts, residential PID assessments are paid in full before a home goes to its end user (the model in St. George's Tech Ridge PID governing document), with a fallback of written disclosure before earnest money and a public hearing when a district annexes beyond a set size. See <a href="affordable-house-story.html">The Story of the "Affordable" House</a>.</p>
+  </div>
+</section>
+
+<section class="block" id="otherstates">
+  <div class="eyebrow">Not just Utah</div>
+  <h2>How many other states this reaches</h2>
+  <div class="cards">
+    <div class="card"><div class="k">Build HUBS</div><p>It is a federal bill, so it would apply in every state with rail, bus rapid transit or multimodal stations that qualify for TIFIA or RRIF loans.</p></div>
+    <div class="card"><div class="k">Tax increment financing</div><p>Every state except Arizona, plus Washington, D.C., has a law allowing tax increment financing. Arizona repealed its TIF law in 1999.</p></div>
+    <div class="card"><div class="k">Special districts on new homes</div><p>The same homeowner-assessment model is used in other states under other names, such as Public Improvement Districts and Municipal Utility Districts in Texas and Community Development Districts in Florida.</p></div>
+  </div>
+  <p class="note">The TIF count comes from a secondary summary (Wikipedia, citing state enabling laws); the special-district examples from RCLCO's review of master-planned community financing.</p>
+</section>
+
+<section class="block" id="map">
+  <div class="eyebrow">Map</div>
+  <h2>Where these projects sit</h2>
+  <h3>Every Wasatch Front rail station, with the half-mile circle</h3>
+  <p>The bill's loans reach projects within a half mile of a station (about a 10-minute walk). Each circle below is a true half-mile radius. Navy circles are FrontRunner; gold are TRAX. Tap a circle for the station name.</p>
+  <div id="stationmap" style="height:560px;border:1.5px solid var(--rule);border-radius:4px;margin-top:12px;background:#eef2f7;"></div>
+  <p class="note">65 FrontRunner and TRAX stations. Station locations from OpenStreetMap, U.S. DOT and Wikipedia coordinates. Bus rapid transit stops (Ogden's OGX and Utah County's UVX) also qualify under the bill but are not shown yet. The closed Pleasant View FrontRunner station is left off.</p>
+  <h3 style="margin-top:22px">Projects in this file</h3>
+
+  <div class="mapbox">
+    <svg viewBox="0 0 420 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of the Wasatch Front showing the FrontRunner line from Ogden to Provo, with Kimball Junction, The Point and Vineyard marked">
+      <rect x="0" y="0" width="420" height="500" fill="#fbf8f1"/>
+      <path d="M 18 160 C 40 200, 60 260, 70 330" stroke="#cdd6e4" stroke-width="18" fill="none" stroke-linecap="round"/>
+      <text x="22" y="140" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#4a4a48">Great Salt Lake</text>
+      <polyline points="92,52 104,120 116,180 124,236 124,300 124,348 150,390 180,420 216,448" fill="none" stroke="#10233f" stroke-width="4"/>
+      <text x="138" y="300" font-family="Courier New, monospace" font-size="13" fill="#10233f">FrontRunner</text>
+      <circle cx="92" cy="52" r="7" fill="#10233f"/><text x="104" y="48" font-family="Helvetica Neue, Arial, sans-serif" font-size="15" fill="#1c1c1c">Ogden (Weber Co.)</text>
+      <circle cx="124" cy="236" r="7" fill="#10233f"/><text x="56" y="232" font-family="Helvetica Neue, Arial, sans-serif" font-size="15" fill="#1c1c1c" text-anchor="end"></text><text x="136" y="240" font-family="Helvetica Neue, Arial, sans-serif" font-size="15" fill="#1c1c1c">Salt Lake City</text>
+      <circle cx="124" cy="348" r="10" fill="#b8863b"/><text x="138" y="352" font-family="Helvetica Neue, Arial, sans-serif" font-size="15" fill="#1c1c1c">The Point (Draper)</text>
+      <circle cx="180" cy="420" r="10" fill="#b8863b"/><text x="194" y="424" font-family="Helvetica Neue, Arial, sans-serif" font-size="15" fill="#1c1c1c">Vineyard</text>
+      <circle cx="216" cy="448" r="7" fill="#10233f"/><text x="228" y="460" font-family="Helvetica Neue, Arial, sans-serif" font-size="15" fill="#1c1c1c">Provo</text>
+      <circle cx="300" cy="252" r="10" fill="#b8863b"/><text x="300" y="282" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="15" fill="#1c1c1c">Kimball Junction</text>
+      <text x="300" y="300" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#4a4a48">(planned bus rapid transit)</text>
+      <circle cx="30" cy="470" r="8" fill="#b8863b"/><text x="44" y="475" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#1c1c1c">Project in this file</text>
+    </svg>
+  </div>
+  <p class="note">Approximate locations from latitude and longitude; lake outline simplified.</p>
+</section>
+
+<section class="block" id="questions">
+  <div class="eyebrow">Questions to ask, and to whom</div>
+  <h2>Questions readers can ask</h2>
+  <div class="qa">
+    <div><div class="who">Sen. John Curtis's office</div>How long must "attainable" units stay attainable, since the bill text sets no time limit or deed restriction? Would you add one?</div>
+    <div><div class="who">Sen. John Curtis's office</div>Why can ordinary transit projects borrow under the bill with no affordable units at all?</div>
+    <div><div class="who">Your state senator and representative</div>How many units in Utah's HTRZs are priced at or below 60% of area median income, and how much tax growth has gone to the projects so far?</div>
+    <div><div class="who">Governor's Office of Economic Opportunity (approves HTRZs)</div>When will Kimball Junction's first affordable units open, and who checks that they stay affordable?</div>
+    <div><div class="who">Your city council or county commission</div>Is our city planning a transit zone or PID near a station, and will buyers learn about the assessment before they put down earnest money?</div>
+    <div><div class="who">Utah Transit Authority board</div>Which station areas is UTA planning to finance under Build HUBS if it passes?</div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="k">How to reach Sen. Curtis's office</div>
+    <p>Salt Lake City office: 125 S. State Street, Suite 8402, Salt Lake City, UT 84138 · (801) 524-4380<br>
+    Provo office: 3601 N. University Ave., Suite 250, Provo, UT 84604 · (801) 841-2665<br>
+    Washington: SH-502 Hart Senate Office Building, Washington, DC 20510 · (202) 224-5251<br>
+    Online: curtis.senate.gov/contact/share-your-opinion/</p>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <div class="k">What to watch</div>
+    <p>1. The federal surface transportation bill, where supporters want Build HUBS added.<br>
+    2. Your city's station area plan. Utah's H.B. 462 (2022) already requires cities with FrontRunner, TRAX or BRT stations to adopt plans for the half mile around rail stations, including housing availability and affordability.<br>
+    3. The 2027 Utah Legislature, including the PID payoff-at-sale proposal on this page.</p>
+  </div>
+</section>
+
+<section class="block people" id="people">
+  <div class="eyebrow">People in the record</div>
+  <h2>Who is connected, and why</h2>
+  <div class="cards">
+    <div class="card"><h3>Sen. John Curtis (R-Utah)</h3><div class="role">Co-sponsor of S. 3636; wrote the Oct. 26 post</div></div>
+    <div class="card"><h3>Sen. Lisa Blunt Rochester (D-Del.)</h3><div class="role">Introduced S. 3636</div></div>
+    <div class="card"><h3>Sen. Wayne A. Harper (R-Utah)</h3><div class="role">Primary sponsor of HTRZ (2021), FHIZ (2024) and S.B. 39 (2026); on H.B. 507's conference committee; quoted praising Kimball Junction at its approval meeting</div><a href="https://weber-county-hive.github.io/utah-senators/">Utah Senators repo</a></div>
+    <div class="card"><h3>Jefferson Moss</h3><div class="role">GOEO executive director who announced the Kimball Junction HTRZ approval; Point of the Mountain board member</div><a href="https://weber-county-hive.github.io/Transparency/">Transparency repo</a></div>
+    <div class="card"><h3>Carlton Christensen</h3><div class="role">Utah Transit Authority board chair, quoted supporting Build HUBS</div></div>
+  </div>
+</section>
+
+<section class="block" id="glossary">
+  <div class="eyebrow">Words in this file</div>
+  <h2>Glossary (tap a word)</h2>
+  <div class="cards">
+    <details class="card"><summary><b>TIFIA</b></summary><p>A federal loan program for transportation projects. The bill would let it lend for homes and shops near stations.</p></details>
+    <details class="card"><summary><b>RRIF</b></summary><p>A federal loan program for railroads and rail stations, changed the same way.</p></details>
+    <details class="card"><summary><b>NEPA</b></summary><p>The National Environmental Policy Act. It requires federal review of how a federally funded project affects the environment.</p></details>
+    <details class="card"><summary><b>Categorical exclusion</b></summary><p>A type of project the government decides can skip the full NEPA review.</p></details>
+    <details class="card"><summary><b>AMI</b></summary><p>Area median income. Half the households in an area earn more, half earn less. HUD sets it each year.</p></details>
+    <details class="card"><summary><b>Treasury rate</b></summary><p>The interest rate the U.S. government pays to borrow. TIFIA loans are normally priced near it.</p></details>
+    <details class="card"><summary><b>Transit-oriented development (TOD)</b></summary><p>Homes, shops and offices built close to a train or bus rapid transit station.</p></details>
+    <details class="card"><summary><b>HTRZ</b></summary><p>Housing and Transit Reinvestment Zone, a Utah tool (2021) that lets a project near a station keep most of its new property tax growth.</p></details>
+    <details class="card"><summary><b>PID</b></summary><p>Public Infrastructure District. Homeowners inside it pay a yearly assessment that repays bonds for roads, pipes and other infrastructure.</p></details>
+    <details class="card"><summary><b>Deed restriction</b></summary><p>A promise written on the property records that keeps a home affordable for a set number of years, even after it sells.</p></details>
+  </div>
+</section>
+
+<section class="block" id="sources">
+  <div class="eyebrow">Sources</div>
+  <details class="sources">
+    <summary>Show all sources (tap to open)</summary>
+    <ol>
+      <li>Sen. John Curtis, post on X, Oct. 26, 2026 (screenshot on file).</li>
+      <li>S. 3636, Build Housing, Unlock Benefits and Services Act, 119th Congress, introduced Jan. 14, 2026. <a href="https://www.congress.gov/119/bills/s3636/BILLS-119s3636is.htm">congress.gov</a></li>
+      <li>H.R. 7062, House companion. <a href="https://www.govinfo.gov/content/pkg/BILLS-119hr7062ih/html/BILLS-119hr7062ih.htm">govinfo.gov</a></li>
+      <li>Build HUBS one-pager, offices of Sens. Blunt Rochester and Curtis. <a href="https://www.bluntrochester.senate.gov/wp-content/uploads/2026/01/Build-HUBS-Final-One-Pager-4.pdf">bluntrochester.senate.gov</a></li>
+      <li>Sen. Curtis press release on Build HUBS (UTA quote). <a href="https://www.curtis.senate.gov/?p=8884">curtis.senate.gov</a></li>
+      <li>Construction Dive, Build HUBS Act summary. <a href="https://www.constructiondive.com/news/transit-oriented-development-bill-build-hubs/811195/">constructiondive.com</a></li>
+      <li>Kem C. Gardner Policy Institute, State of the State's Housing Market, Sept. 2026, as reported by <a href="https://propmodo.com/median-home-price-surge-locks-out-nine-in-ten-utah-renters/">Propmodo</a>, <a href="https://www.fox13now.com/news/local-news/despite-housing-market-stabilizing-91-of-utah-renters-cannot-afford-to-buy">FOX 13</a> and <a href="https://www.utahbusiness.com/press-releases/2026/09/09/utah-housing-market-stabilizes-slightly-affordability-barriers-remain/">Utah Business</a>.</li>
+      <li>U.S. Census Bureau, Median Household Income in Utah (MEHOINUSUTA646N), via <a href="https://fred.stlouisfed.org/data/MEHOINUSUTA646N">FRED</a>.</li>
+      <li>KUTV, Utah's housing market faces construction labor shortage (record building 2020–2022). <a href="https://kutv.com/news/utahs-growing-pains/utahs-housing-market-faces-construction-labor-shortage">kutv.com</a></li>
+      <li>Deseret News, 2026 Utah Community Quality of Life Index (91% vs. 59%). <a href="https://www.deseret.com/utah/2026/10/13/utah-quality-of-life-index-shows-housing-affordability-as-top-concern/">deseret.com</a></li>
+      <li>Governor's Office of Economic Opportunity, Kimball Junction HTRZ approval release, April 15, 2026 (as documented in the Hive's Taxation case file).</li>
+      <li>S.B. 217 (2021), S.B. 268 (2024), S.B. 168 (2024), S.B. 26 (2025), S.B. 39 (2026), H.B. 507 (2026), S.B. 84 (2023), le.utah.gov.</li>
+      <li>Point of the Mountain State Land Authority board minutes, Feb.–May 2026; River District solicitation RA26-157 (as documented in Hive files).</li>
+      <li>Hive Taxation repo, "Cheap on Paper" (Weber County price vs. income; Kimball Junction tiers). <a href="https://weber-county-hive.github.io/Taxation/">Taxation repo</a></li>
+      <li>Hive PIDS-Utah pages: <a href="affordable-house-story.html">The Story of the "Affordable" House</a>, <a href="utah-county-explainer.html">Utah County PID explainer</a>, <a href="pid_mechanism_map.html">PID Mechanism Map</a>.</li>
+      <li>Tech Ridge PID Governing Document (10/17/2024) and Second Amendment to Assessment Ordinance (6/13/2025), utah.gov/pmn/files/1286609.pdf.</li>
+      <li>HUD FY2026 Income Limits Summary, Salt Lake City UT HUD Metro (city of Salt Lake posted copy). <a href="https://www.slc.gov/housingstability/wp-content/uploads/sites/59/2026/05/Salt-Lake-City-UT-HUD-Metro-2026-Income-Limits-Summary.pdf">slc.gov</a></li>
+      <li>Utah Dept. of Workforce Services, HUD income limits by county, effective 06/01/2025. <a href="https://jobs.utah.gov/housing/community/cdbg/documents/hudincomelimits.pdf">jobs.utah.gov</a></li>
+      <li>S. 3636 status: referred to Senate Environment and Public Works. <a href="https://www.congress.gov/bill/119th-congress/senate-bill/3636/all-info">congress.gov</a></li>
+      <li>Smart Growth America, coalition letter urging Build HUBS in transportation reauthorization. <a href="https://www.smartgrowthamerica.org/knowledge-hub/news/nearly-100-organizations-urge-congress-to-include-the-bipartisan-build-hubs-act-in-transportation-negotiations/">smartgrowthamerica.org</a></li>
+      <li>Lobbying Disclosure Act reports (LD-2), 2026, searched for "Build HUBS," "S. 3636" and "H.R. 7062"; and UTA's 2026 LD-2 reports. <a href="https://lda.gov/">lda.gov</a></li>
+      <li>FEC itemized receipts, John Curtis for Utah (C00647339), 2023–2024 and 2025–2026 periods. <a href="https://www.fec.gov/data/committee/C00647339/">fec.gov</a></li>
+      <li>Sen. Curtis office contact page. <a href="https://www.curtis.senate.gov/contact/">curtis.senate.gov</a></li>
+      <li>Utah H.B. 462 (2022) station area plans, LUAU presentation. <a href="https://luau.utah.gov/wp-content/uploads/HB462-Station-Area-Plans-Presentation-2022.pdf">luau.utah.gov</a></li>
+      <li>Station locations: OpenStreetMap contributors; U.S. DOT light rail stations layer; Wikipedia coordinates for four TRAX stations.</li>
+      <li>Hive research files on H.B. 492 (2026): introduced bill, 1st substitute (2/18/2026), enrolled bill and Legislative Fiscal Analyst fiscal note, le.utah.gov.</li>
+      <li>State Auditor's office PID debt figure ($5.267 billion, as of 8/7/2026) and Jan. 2026 testimony to the Rules Review and General Government Oversight Committee (62.5% report submission).</li>
+      <li>H.B. 37 (2025), S.B. 262 (2025), S.B. 23 (2025), H.B. 422 (2026), HJR 7 (2026), le.utah.gov bill status and vote records.</li>
+      <li>Weber County CRA 700 Reports, tax years 2021–2024 (county filings, as compiled in the Hive's Nordic Village case file).</li>
+      <li>Nordic Village CRA interlocal agreements and Project Area Plan (Weber County, signed April 2, 2026).</li>
+      <li>West Weber Project Area Plan and Amendment #1, Utah Inland Port Authority (projected $343 million tax differential).</li>
+      <li>Utah HTRZ Committee minutes, Nov. 13, 2023 (Lehi Thanksgiving Station, $122 million).</li>
+      <li>Eagle Mountain RDA records and Report 700 (Sweetwater CRAs #2–#4).</li>
+      <li>Utah State Tax Commission, 2024 Annual Property Tax Statistical Report, Table 13 (Property Tax Revenue Paid as Tax Increment by County, 2015–2024) and Table 14 (Increment as a Percentage of Property Taxes Collected). <a href="https://files.tax.utah.gov/propertytax/annual-reports/2024annual.pdf">tax.utah.gov</a></li>
+      <li>Office of the Legislative Auditor General, Report 2022-10, performance audit of tax increment financing (246 project areas; $17.2 million unexpended). <a href="https://le.utah.gov/interim/2023/pdf/00002533.pdf">le.utah.gov</a></li>
+      <li>Golden Spike Project Area Plan &amp; Budget, Amendment #3, May 21, 2026, p. 22. <a href="https://inlandportauthority.utah.gov/wp-content/uploads/Golden-Spike-County-Project-Area-Plan-Amendment-3.pdf">inlandportauthority.utah.gov</a></li>
+      <li>Eagle Mountain RDA, Pole Canyon Project Area Budget, adopted May 7, 2019. <a href="https://www.utah.gov/pmn/files/498887.pdf">utah.gov/pmn</a></li>
+      <li>Wikipedia, "Tax increment financing" (state TIF laws); RCLCO, "Infrastructure Financing in Master-Planned Communities." <a href="https://en.wikipedia.org/wiki/Tax_increment_financing">wikipedia.org</a> · <a href="https://rclco.com/publication/infrastructure-financing-in-master-planned-communities">rclco.com</a></li>
+      <li>MIDA, Stratos Project Area page (documents posted; no budget listed). <a href="https://www.midaut.org/stratos">midaut.org</a></li>
+      <li>Interlocal Cooperation Agreement between MIDA and Box Elder County (Stratos), effective May 4, 2026, §§ 1, 6. <a href="https://www.boxeldercountyut.gov/DocumentCenter/View/2189/Box-Elder-County-MIDA-Stratos-Agreement-26-15-">boxeldercountyut.gov</a></li>
+      <li>The Salt Lake Tribune, Box Elder County hyperscale data center vote, May 4, 2026. <a href="https://www.sltrib.com/news/2026/05/04/hyperscale-data-center-project/">sltrib.com</a></li>
+    </ol>
+  </details>
+</section>
+
+</div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">The Weber County Hive · Utah Hive Politics · Public records only. Tips: webercountyhive@gmail.com · <a href="index.html">All PIDS-Utah pages</a></div>
+</footer>
+
+
+<style>
+/* required styles */
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	}
+.leaflet-container {
+	overflow: hidden;
+	}
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	        user-select: none;
+	  -webkit-user-drag: none;
+	}
+/* Prevents IE11 from highlighting tiles in blue */
+.leaflet-tile::selection {
+	background: transparent;
+}
+/* Safari renders non-retina tile on retina better with this, but Chrome is worse */
+.leaflet-safari .leaflet-tile {
+	image-rendering: -webkit-optimize-contrast;
+	}
+/* hack that prevents hw layers "stretching" when loading new tiles */
+.leaflet-safari .leaflet-tile-container {
+	width: 1600px;
+	height: 1600px;
+	-webkit-transform-origin: 0 0;
+	}
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	display: block;
+	}
+/* .leaflet-container svg: reset svg max-width decleration shipped in Joomla! (joomla.org) 3.x */
+/* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
+.leaflet-container .leaflet-overlay-pane svg {
+	max-width: none !important;
+	max-height: none !important;
+	}
+.leaflet-container .leaflet-marker-pane img,
+.leaflet-container .leaflet-shadow-pane img,
+.leaflet-container .leaflet-tile-pane img,
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
+	max-width: none !important;
+	max-height: none !important;
+	width: auto;
+	padding: 0;
+	}
+
+.leaflet-container img.leaflet-tile {
+	/* See: https://bugs.chromium.org/p/chromium/issues/detail?id=600120 */
+	mix-blend-mode: plus-lighter;
+}
+
+.leaflet-container.leaflet-touch-zoom {
+	-ms-touch-action: pan-x pan-y;
+	touch-action: pan-x pan-y;
+	}
+.leaflet-container.leaflet-touch-drag {
+	-ms-touch-action: pinch-zoom;
+	/* Fallback for FF which doesn't support pinch-zoom */
+	touch-action: none;
+	touch-action: pinch-zoom;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.leaflet-container {
+	-webkit-tap-highlight-color: transparent;
+}
+.leaflet-container a {
+	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
+}
+.leaflet-tile {
+	filter: inherit;
+	visibility: hidden;
+	}
+.leaflet-tile-loaded {
+	visibility: inherit;
+	}
+.leaflet-zoom-box {
+	width: 0;
+	height: 0;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	z-index: 800;
+	}
+/* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
+.leaflet-overlay-pane svg {
+	-moz-user-select: none;
+	}
+
+.leaflet-pane         { z-index: 400; }
+
+.leaflet-tile-pane    { z-index: 200; }
+.leaflet-overlay-pane { z-index: 400; }
+.leaflet-shadow-pane  { z-index: 500; }
+.leaflet-marker-pane  { z-index: 600; }
+.leaflet-tooltip-pane   { z-index: 650; }
+.leaflet-popup-pane   { z-index: 700; }
+
+.leaflet-map-pane canvas { z-index: 100; }
+.leaflet-map-pane svg    { z-index: 200; }
+
+.leaflet-vml-shape {
+	width: 1px;
+	height: 1px;
+	}
+.lvml {
+	behavior: url(#default#VML);
+	display: inline-block;
+	position: absolute;
+	}
+
+
+/* control positioning */
+
+.leaflet-control {
+	position: relative;
+	z-index: 800;
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+.leaflet-top,
+.leaflet-bottom {
+	position: absolute;
+	z-index: 1000;
+	pointer-events: none;
+	}
+.leaflet-top {
+	top: 0;
+	}
+.leaflet-right {
+	right: 0;
+	}
+.leaflet-bottom {
+	bottom: 0;
+	}
+.leaflet-left {
+	left: 0;
+	}
+.leaflet-control {
+	float: left;
+	clear: both;
+	}
+.leaflet-right .leaflet-control {
+	float: right;
+	}
+.leaflet-top .leaflet-control {
+	margin-top: 10px;
+	}
+.leaflet-bottom .leaflet-control {
+	margin-bottom: 10px;
+	}
+.leaflet-left .leaflet-control {
+	margin-left: 10px;
+	}
+.leaflet-right .leaflet-control {
+	margin-right: 10px;
+	}
+
+
+/* zoom and fade animations */
+
+.leaflet-fade-anim .leaflet-popup {
+	opacity: 0;
+	-webkit-transition: opacity 0.2s linear;
+	   -moz-transition: opacity 0.2s linear;
+	        transition: opacity 0.2s linear;
+	}
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+	opacity: 1;
+	}
+.leaflet-zoom-animated {
+	-webkit-transform-origin: 0 0;
+	    -ms-transform-origin: 0 0;
+	        transform-origin: 0 0;
+	}
+svg.leaflet-zoom-animated {
+	will-change: transform;
+}
+
+.leaflet-zoom-anim .leaflet-zoom-animated {
+	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
+	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
+	        transition:         transform 0.25s cubic-bezier(0,0,0.25,1);
+	}
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	        transition: none;
+	}
+
+.leaflet-zoom-anim .leaflet-zoom-hide {
+	visibility: hidden;
+	}
+
+
+/* cursors */
+
+.leaflet-interactive {
+	cursor: pointer;
+	}
+.leaflet-grab {
+	cursor: -webkit-grab;
+	cursor:    -moz-grab;
+	cursor:         grab;
+	}
+.leaflet-crosshair,
+.leaflet-crosshair .leaflet-interactive {
+	cursor: crosshair;
+	}
+.leaflet-popup-pane,
+.leaflet-control {
+	cursor: auto;
+	}
+.leaflet-dragging .leaflet-grab,
+.leaflet-dragging .leaflet-grab .leaflet-interactive,
+.leaflet-dragging .leaflet-marker-draggable {
+	cursor: move;
+	cursor: -webkit-grabbing;
+	cursor:    -moz-grabbing;
+	cursor:         grabbing;
+	}
+
+/* marker & overlays interactivity */
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-image-layer,
+.leaflet-pane > svg path,
+.leaflet-tile-container {
+	pointer-events: none;
+	}
+
+.leaflet-marker-icon.leaflet-interactive,
+.leaflet-image-layer.leaflet-interactive,
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+
+/* visual tweaks */
+
+.leaflet-container {
+	background: #ddd;
+	outline-offset: 1px;
+	}
+.leaflet-container a {
+	color: #0078A8;
+	}
+.leaflet-zoom-box {
+	border: 2px dotted #38f;
+	background: rgba(255,255,255,0.5);
+	}
+
+
+/* general typography */
+.leaflet-container {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1.5;
+	}
+
+
+/* general toolbar styles */
+
+.leaflet-bar {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	border-radius: 4px;
+	}
+.leaflet-bar a {
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	}
+.leaflet-bar a,
+.leaflet-control-layers-toggle {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	display: block;
+	}
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+	background-color: #f4f4f4;
+	}
+.leaflet-bar a:first-child {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	}
+.leaflet-bar a:last-child {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom: none;
+	}
+.leaflet-bar a.leaflet-disabled {
+	cursor: default;
+	background-color: #f4f4f4;
+	color: #bbb;
+	}
+
+.leaflet-touch .leaflet-bar a {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	}
+.leaflet-touch .leaflet-bar a:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	}
+.leaflet-touch .leaflet-bar a:last-child {
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	}
+
+/* zoom control */
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	font: bold 18px 'Lucida Console', Monaco, monospace;
+	text-indent: 1px;
+	}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
+	font-size: 22px;
+	}
+
+
+/* layers control */
+
+.leaflet-control-layers {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+	background: #fff;
+	border-radius: 5px;
+	}
+.leaflet-control-layers-toggle {
+	background-image: url(images/layers.png);
+	width: 36px;
+	height: 36px;
+	}
+.leaflet-retina .leaflet-control-layers-toggle {
+	background-image: url(images/layers-2x.png);
+	background-size: 26px 26px;
+	}
+.leaflet-touch .leaflet-control-layers-toggle {
+	width: 44px;
+	height: 44px;
+	}
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+	display: none;
+	}
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+	display: block;
+	position: relative;
+	}
+.leaflet-control-layers-expanded {
+	padding: 6px 10px 6px 6px;
+	color: #333;
+	background: #fff;
+	}
+.leaflet-control-layers-scrollbar {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-right: 5px;
+	}
+.leaflet-control-layers-selector {
+	margin-top: 2px;
+	position: relative;
+	top: 1px;
+	}
+.leaflet-control-layers label {
+	display: block;
+	font-size: 13px;
+	font-size: 1.08333em;
+	}
+.leaflet-control-layers-separator {
+	height: 0;
+	border-top: 1px solid #ddd;
+	margin: 5px -10px 5px -6px;
+	}
+
+/* Default icon URLs */
+.leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
+	background-image: url(images/marker-icon.png);
+	}
+
+
+/* attribution and scale controls */
+
+.leaflet-container .leaflet-control-attribution {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.8);
+	margin: 0;
+	}
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
+	padding: 0 5px;
+	color: #333;
+	line-height: 1.4;
+	}
+.leaflet-control-attribution a {
+	text-decoration: none;
+	}
+.leaflet-control-attribution a:hover,
+.leaflet-control-attribution a:focus {
+	text-decoration: underline;
+	}
+.leaflet-attribution-flag {
+	display: inline !important;
+	vertical-align: baseline !important;
+	width: 1em;
+	height: 0.6669em;
+	}
+.leaflet-left .leaflet-control-scale {
+	margin-left: 5px;
+	}
+.leaflet-bottom .leaflet-control-scale {
+	margin-bottom: 5px;
+	}
+.leaflet-control-scale-line {
+	border: 2px solid #777;
+	border-top: none;
+	line-height: 1.1;
+	padding: 2px 5px 1px;
+	white-space: nowrap;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	background: rgba(255, 255, 255, 0.8);
+	text-shadow: 1px 1px #fff;
+	}
+.leaflet-control-scale-line:not(:first-child) {
+	border-top: 2px solid #777;
+	border-bottom: none;
+	margin-top: -2px;
+	}
+.leaflet-control-scale-line:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid #777;
+	}
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	box-shadow: none;
+	}
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	border: 2px solid rgba(0,0,0,0.2);
+	background-clip: padding-box;
+	}
+
+
+/* popup */
+
+.leaflet-popup {
+	position: absolute;
+	text-align: center;
+	margin-bottom: 20px;
+	}
+.leaflet-popup-content-wrapper {
+	padding: 1px;
+	text-align: left;
+	border-radius: 12px;
+	}
+.leaflet-popup-content {
+	margin: 13px 24px 13px 20px;
+	line-height: 1.3;
+	font-size: 13px;
+	font-size: 1.08333em;
+	min-height: 1px;
+	}
+.leaflet-popup-content p {
+	margin: 17px 0;
+	margin: 1.3em 0;
+	}
+.leaflet-popup-tip-container {
+	width: 40px;
+	height: 20px;
+	position: absolute;
+	left: 50%;
+	margin-top: -1px;
+	margin-left: -20px;
+	overflow: hidden;
+	pointer-events: none;
+	}
+.leaflet-popup-tip {
+	width: 17px;
+	height: 17px;
+	padding: 1px;
+
+	margin: -10px auto 0;
+	pointer-events: auto;
+
+	-webkit-transform: rotate(45deg);
+	   -moz-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+	}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: white;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	}
+.leaflet-container a.leaflet-popup-close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	font: 16px/24px Tahoma, Verdana, sans-serif;
+	color: #757575;
+	text-decoration: none;
+	background: transparent;
+	}
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus {
+	color: #585858;
+	}
+.leaflet-popup-scrolled {
+	overflow: auto;
+	}
+
+.leaflet-oldie .leaflet-popup-content-wrapper {
+	-ms-zoom: 1;
+	}
+.leaflet-oldie .leaflet-popup-tip {
+	width: 24px;
+	margin: 0 auto;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
+	}
+
+.leaflet-oldie .leaflet-control-zoom,
+.leaflet-oldie .leaflet-control-layers,
+.leaflet-oldie .leaflet-popup-content-wrapper,
+.leaflet-oldie .leaflet-popup-tip {
+	border: 1px solid #999;
+	}
+
+
+/* div icon */
+
+.leaflet-div-icon {
+	background: #fff;
+	border: 1px solid #666;
+	}
+
+
+/* Tooltip */
+/* Base styles for the element that has a tooltip */
+.leaflet-tooltip {
+	position: absolute;
+	padding: 6px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	color: #222;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+	}
+.leaflet-tooltip.leaflet-interactive {
+	cursor: pointer;
+	pointer-events: auto;
+	}
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	position: absolute;
+	pointer-events: none;
+	border: 6px solid transparent;
+	background: transparent;
+	content: "";
+	}
+
+/* Directions */
+
+.leaflet-tooltip-bottom {
+	margin-top: 6px;
+}
+.leaflet-tooltip-top {
+	margin-top: -6px;
+}
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-top:before {
+	left: 50%;
+	margin-left: -6px;
+	}
+.leaflet-tooltip-top:before {
+	bottom: 0;
+	margin-bottom: -12px;
+	border-top-color: #fff;
+	}
+.leaflet-tooltip-bottom:before {
+	top: 0;
+	margin-top: -12px;
+	margin-left: -6px;
+	border-bottom-color: #fff;
+	}
+.leaflet-tooltip-left {
+	margin-left: -6px;
+}
+.leaflet-tooltip-right {
+	margin-left: 6px;
+}
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	top: 50%;
+	margin-top: -6px;
+	}
+.leaflet-tooltip-left:before {
+	right: 0;
+	margin-right: -12px;
+	border-left-color: #fff;
+	}
+.leaflet-tooltip-right:before {
+	left: 0;
+	margin-left: -12px;
+	border-right-color: #fff;
+	}
+
+/* Printing */
+
+@media print {
+	/* Prevent printers from removing background-images of controls. */
+	.leaflet-control {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		}
+	}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>
+(function(){
+  var S=[["Ogden", "F", 41.2244, -111.9807], ["Roy", "F", 41.1887, -112.0394], ["Clearfield", "F", 41.0947, -112.0138], ["Layton", "F", 41.057, -111.9651], ["Farmington", "F", 40.9873, -111.9038], ["Woods Cross", "F", 40.8808, -111.903], ["North Temple", "F", 40.7725, -111.9051], ["Salt Lake Central", "F", 40.7616, -111.909], ["Murray Central", "F", 40.6598, -111.8964], ["South Jordan", "F", 40.5634, -111.9007], ["Draper", "F", 40.5156, -111.9044], ["Lehi", "F", 40.4256, -111.8969], ["American Fork", "F", 40.3748, -111.8206], ["Vineyard", "F", 40.3128, -111.7502], ["Orem Central", "F", 40.2803, -111.7256], ["Provo Central", "F", 40.2254, -111.6604], ["Courthouse", "T", 40.7591, -111.8911], ["900 South", "T", 40.7504, -111.8968], ["University Medical Center", "T", 40.7695, -111.8389], ["Gallivan Plaza", "T", 40.7635, -111.8911], ["Arena", "T", 40.7694, -111.9006], ["City Center", "T", 40.7678, -111.8911], ["Library", "T", 40.7606, -111.8845], ["Old GreekTown", "T", 40.765, -111.9063], ["Planetarium", "T", 40.7665, -111.9026], ["Temple Square", "T", 40.7694, -111.8948], ["Trolley", "T", 40.7607, -111.873], ["900 East", "T", 40.7607, -111.8662], ["Decker Lake", "T", 40.7046, -111.9487], ["Redwood Junction", "T", 40.7111, -111.9398], ["River Trail", "T", 40.7202, -111.9238], ["West Valley Central", "T", 40.6944, -111.9594], ["Historic Sandy", "T", 40.5895, -111.8857], ["Midvale Center", "T", 40.6103, -111.8929], ["Millcreek", "T", 40.7007, -111.897], ["Murray North", "T", 40.6769, -111.8941], ["Sandy Expo", "T", 40.5814, -111.8863], ["Jordan Valley", "T", 40.5948, -111.9718], ["South Jordan Parkway", "T", 40.5587, -112.0247], ["West Jordan City Center", "T", 40.6049, -111.9365], ["4800 West Old Bingham Hwy", "T", 40.5815, -112.0042], ["5600 West Old Bingham Hwy", "T", 40.5691, -112.0249], ["2700 West Sugar Factory Rd", "T", 40.5991, -111.9568], ["Kimballs Lane", "T", 40.5362, -111.8721], ["Sandy Civic Center", "T", 40.5707, -111.8846], ["Fashion Place West", "T", 40.6337, -111.8981], ["Ballpark", "T", 40.7422, -111.8968], ["Crescent View", "T", 40.5449, -111.8786], ["Daybreak Parkway", "T", 40.5441, -112.0141], ["1940 West North Temple", "T", 40.7715, -111.9461], ["600 South", "T", 40.7555, -111.8911], ["Power", "T", 40.7715, -111.934], ["Fairpark", "T", 40.7715, -111.9243], ["Jackson/Euclid", "T", 40.7715, -111.9149], ["Airport", "T", 40.7843, -111.9827], ["Central Pointe", "T", 40.7245, -111.8969], ["Stadium", "T", 40.7597, -111.8522], ["University South Campus", "T", 40.7603, -111.8396], ["Fort Douglas", "T", 40.7644, -111.8366], ["South Jordan Downtown", "T", 40.55, -112.0199], ["Meadowbrook", "T", 40.6876, -111.8966], ["Midvale Fort Union", "T", 40.6191, -111.8983], ["Bingham Junction", "T", 40.6173, -111.915], ["Historic Gardner", "T", 40.6082, -111.9241], ["Draper Town Center", "T", 40.5256, -111.8592]]
+;
+  var el=document.getElementById('stationmap'); if(!el||!window.L) return;
+  var map=L.map(el,{scrollWheelZoom:false}).setView([40.75,-111.92],9);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+  var b=[];
+  S.forEach(function(r){
+    var col=r[1]==='F'?'#10233f':'#b8863b';
+    L.circle([r[2],r[3]],{radius:804.67,color:col,weight:2,fillColor:col,fillOpacity:0.22}).bindPopup('<b>'+r[0]+'</b><br>'+(r[1]==='F'?'FrontRunner':'TRAX')+' · half-mile circle').addTo(map);
+    L.circleMarker([r[2],r[3]],{radius:3,color:col,fillColor:col,fillOpacity:1}).addTo(map);
+    b.push([r[2],r[3]]);
+  });
+  [['Kimball Junction HTRZ (planned bus rapid transit)',40.7245,-111.5420],['The Point (Draper)',40.4806,-111.9020]].forEach(function(p){
+    L.marker([p[1],p[2]]).bindPopup('<b>'+p[0]+'</b>').addTo(map); b.push([p[1],p[2]]);
+  });
+  map.fitBounds(b,{padding:[20,20]});
+})();
+</script>
+<script>
+(function(){
+  var fmt=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
+  var NEED=146800, PAY=3669;
+  var inc=document.getElementById('inc');
+  function upd(){
+    var v=+inc.value;
+    document.getElementById('incOut').textContent=fmt(v);
+    var pct=Math.min(100,v/NEED*100);
+    document.getElementById('incBar').style.width=pct+'%';
+    var share=(PAY*12)/v*100;
+    var r=document.getElementById('incRes');
+    if(v>=NEED){
+      r.innerHTML='You reach the <b class="okc">'+fmt(NEED)+'</b> mark. The median payment would be <b class="okc">'+share.toFixed(1)+'%</b> of your income.';
+    } else {
+      r.innerHTML='You are <b>'+fmt(NEED-v)+'</b> short. The $3,669 median payment would take <b>'+share.toFixed(1)+'%</b> of your income (the guide is 30%).';
+    }
+  }
+  inc.addEventListener('input',upd); upd();
+
+  var loan=document.getElementById('loan'), tr=document.getElementById('tr'), yrs=document.getElementById('yrs');
+  function pmt(P,r,n){ if(r===0) return P/n; return P*r/(1-Math.pow(1+r,-n)); }
+  function upd2(){
+    var P=+loan.value, R=+tr.value/100, N=+yrs.value;
+    document.getElementById('loanOut').textContent=fmt(P);
+    document.getElementById('trOut').textContent=(+tr.value).toFixed(2)+'%';
+    document.getElementById('yrsOut').textContent=N+' years';
+    var full=pmt(P,R,N)*N-P, half=pmt(P,R/2,N)*N-P;
+    document.getElementById('rateRes').innerHTML='Interest at the full rate: <b>'+fmt(full)+'</b>. At half the rate: <b class="okc">'+fmt(half)+'</b>. Difference over the loan: <b>'+fmt(full-half)+'</b>.';
+  }
+  [loan,tr,yrs].forEach(function(el){el.addEventListener('input',upd2);}); upd2();
+})();
+</script>
+
+<script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.esm.min.mjs"; mermaid.initialize({startOnLoad:true});</script>
+</body>
+</html>

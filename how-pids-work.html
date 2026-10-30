@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How PIDs Work: Who Pays, and a Fix Already Working in Utah — Utah Hive Politics</title>
+<meta name="description" content="How Utah's Public Infrastructure Districts start, grow and bill homeowners; what the SEC and the State Auditor said at the Capitol; what UIPA and MIDA told lawmakers, checked against the record; and a payoff-first rule already used in three Utah districts.">
+<link rel="icon" type="image/png" href="hive-bee.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<style>
+:root{
+  --paper:#f2ede2; --panel:#fbf8f1; --white:#ffffff;
+  --ink:#20241f; --ink-soft:#3f443b;
+  --line:#c9c0a8; --rule-strong:#8a8265;
+  --flag:#8a2e1f; --flag-soft:#f4e2dc;
+  --gold:#8a6a1f; --gold-soft:#f4ecdc;
+  --slate:#2a4a6b; --slate-soft:#e4eaf0;
+  --green:#2f6b3a; --green-soft:#e2efe4;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:21px/1.65 Georgia,'Iowan Old Style','Times New Roman',serif}
+a{color:var(--slate);font-weight:700}
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:10px 20px}
+.hb-bar a{display:flex;align-items:center;gap:12px;max-width:1100px;margin:0 auto;text-decoration:none}
+.hb-bar img{width:52px;height:52px;border-radius:4px;display:block;flex:none}
+.hb-name{font-family:'Cinzel','Trajan Pro',Georgia,serif;color:#d4af37;font-size:17px;letter-spacing:.14em;text-transform:uppercase;line-height:1.2;display:block}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:14px;display:block;margin-top:2px}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 20px 30px;font-family:Georgia,serif}
+.hb-foot img{width:52px;height:52px;display:block;margin:0 auto 10px}
+.hb-tag{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px 70px}
+header{border-bottom:3px double var(--rule-strong);padding:40px 0 24px;margin-bottom:24px}
+.kicker{font:700 14px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--slate)}
+h1{font-family:Georgia,serif;font-size:clamp(32px,6vw,48px);line-height:1.15;margin:.3em 0 .3em}
+.dates{font:18px ui-monospace,Menlo,Consolas,monospace;color:var(--ink-soft);margin:0 0 14px}
+.lede{font-size:23px;color:var(--ink-soft);margin:0 0 14px}
+.plainlink{display:inline-block;background:var(--slate);color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;font-size:20px;margin-top:6px}
+.toc{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 20px;margin:20px 0}
+.toc summary{cursor:pointer;font-weight:700;font-size:21px}
+.toc ol{margin:10px 0 0;padding-left:1.3em}.toc li{margin:6px 0}
+section{margin:44px 0}
+h2{font-family:Georgia,serif;font-size:clamp(28px,4.5vw,36px);line-height:1.2;margin:0 0 14px;padding-top:12px;border-top:2px solid var(--rule-strong)}
+h3{font-size:25px;margin:26px 0 10px}
+p{margin:0 0 16px}
+ul,ol{padding-left:1.3em}li{margin:8px 0}
+.short{background:var(--white);border:2px solid var(--slate);border-radius:10px;padding:22px 24px}
+.short h2{border-top:none;padding-top:0}
+.callout{background:var(--gold-soft);border-left:8px solid var(--gold);border-radius:8px;padding:18px 20px;margin:18px 0}
+.callout.red{background:var(--flag-soft);border-left-color:var(--flag)}
+.callout.blue{background:var(--slate-soft);border-left-color:var(--slate)}
+.callout.green{background:var(--green-soft);border-left-color:var(--green)}
+.big-num{font-size:clamp(60px,12vw,96px);font-weight:700;line-height:1;color:var(--ink);margin:4px 0 8px}
+.tablewrap{overflow-x:auto;margin:14px 0 18px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;background:var(--white);font-size:19px;min-width:560px}
+th{background:var(--slate);color:#fff;text-align:left;padding:12px 12px;font-size:18px}
+td{border-bottom:1px solid var(--line);padding:12px 12px;vertical-align:top}
+tr:nth-child(even) td{background:#f7f4ec}
+td.yes{color:var(--green);font-weight:700}td.no{color:var(--flag);font-weight:700}
+.note{font-size:19px;color:var(--ink-soft)}
+.flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:16px 0}
+.flip{perspective:1000px;height:230px;cursor:pointer;border:none;background:none;padding:0;font:inherit;text-align:left}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;padding:20px;display:flex;flex-direction:column;justify-content:center}
+.front{background:var(--slate);color:#fff}.front b{font-size:40px;display:block;line-height:1.1}.front span{font-size:19px;margin-top:8px}
+.back{background:var(--white);border:2px solid var(--slate);transform:rotateY(180deg);font-size:18px;line-height:1.45;overflow:auto}
+.tap{font-size:15px;opacity:.85;margin-top:10px}
+.claim{background:var(--white);border:1px solid var(--line);border-left:8px solid var(--rule-strong);border-radius:8px;padding:18px 20px;margin:16px 0}
+.claim.ctx{border-left-color:var(--gold)}.claim.no{border-left-color:var(--flag)}.claim.ok{border-left-color:var(--green)}.claim.part{border-left-color:#6b5aa8}
+.who{font:700 17px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.said{font-size:24px;font-weight:700;margin:6px 0 8px}
+.verdict{display:inline-block;font:700 18px ui-monospace,Menlo,Consolas,monospace;padding:4px 10px;border-radius:4px;color:#fff;margin-bottom:10px}
+.v-ctx{background:var(--gold)}.v-no{background:var(--flag)}.v-ok{background:var(--green)}.v-part{background:#6b5aa8}.v-note{background:var(--slate)}
+.flow{max-width:520px;margin:18px auto;text-align:center}.step{background:var(--slate-soft);border:2px solid var(--slate);border-radius:10px;padding:16px 18px;font-size:22px;line-height:1.4}.arrow{font-size:34px;line-height:1.1;color:var(--slate);margin:4px 0}
+.mermaid{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:16px;margin:16px 0;overflow-x:auto;text-align:center}
+.mermaid svg{max-width:340px!important;width:100%;height:auto}
+#pidmap{height:520px;border:2px solid var(--line);border-radius:8px;margin:12px 0}
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.person{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:16px 18px}
+.person b{font-size:22px;display:block}
+details.gl{background:var(--white);border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:0}
+details.gl summary{cursor:pointer;padding:14px 18px;font-weight:700;font-size:21px}
+details.gl div{padding:0 18px 14px}
+.hs-counter{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:12px 0}
+.hs-counter>div{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center}
+.hs-counter .n{font-size:40px;font-weight:700;color:var(--slate)}.hs-counter .l{font-size:19px}
+details.sources{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:0 18px}
+details.sources summary{cursor:pointer;padding:16px 0;font-weight:700;font-size:22px}
+details.sources li{font-size:19px}
+.connect li span{display:block;font-size:19px;color:var(--ink-soft)}
+footer.pg{font-size:18px;color:var(--ink-soft);border-top:3px double var(--rule-strong);padding-top:16px;margin-top:40px}
+@media (max-width:600px){body{font-size:20px}.hb-bar{padding:8px 16px}.hb-bar img{width:40px;height:40px}.hb-name{font-size:14px}.hb-sub{font-size:12px}#pidmap{height:420px}.flip{height:250px}}
+</style>
+</head>
+<body>
+<div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span></span></a></div>
+<div class="wrap">
+<header>
+  <div class="kicker">Utah Hive Politics · PID Research</div>
+  <h1>How PIDs Work: Who Pays, and a Fix Already Working in Utah</h1>
+  <p class="dates">Posted Oct. 29, 2026 · Updated Oct. 29, 2026</p>
+  <p class="lede">A Public Infrastructure District, or PID, borrows money to build roads and pipes for a new development, and the people who later own the land pay it back. This page shows how that works in Utah today, who carries the cost, what federal regulators and the State Auditor said at the Capitol on Oct. 19, what the Inland Port and MIDA told lawmakers on Oct. 21, and a rule three Utah districts already use so families don't inherit the bill.</p>
+  <a class="plainlink" href="how-pids-work-plain.html">Read the plain-words version →</a>
+  <p style="margin-top:14px"><a href="index.html">← All PID research</a></p>
+</header>
+
+<details class="toc" open><summary>On this page</summary><ol>
+<li><a href="#short">The short version</a></li>
+<li><a href="#what">What a PID is</a></li>
+<li><a href="#grow">How a district starts and grows</a></li>
+<li><a href="#today">Who carries the cost today</a></li>
+<li><a href="#household">What every household already pays</a></li>
+<li><a href="#doubled">Costs nearly doubled since 2018: cause and effect</a></li>
+<li><a href="#sec">What the SEC and the State Auditor said</a></li>
+<li><a href="#claims">What UIPA and MIDA told lawmakers, checked</a></li>
+<li><a href="#weber">Weber County's districts</a></li>
+<li><a href="#fail">When a project fails, and closer to home</a></li>
+<li><a href="#fix">A fix already working in Utah</a></li>
+<li><a href="#reform">The reform, in four parts</a></li>
+<li><a href="#map">Map</a></li>
+<li><a href="#people">People connected to the record</a></li>
+<li><a href="#ask">Questions to ask, and whom to ask</a></li>
+<li><a href="#words">Words to know</a></li>
+<li><a href="#sources">Sources</a></li>
+</ol></details>
+
+<section class="short" id="short">
+<h2>The short version</h2>
+<ul>
+<li><b>A PID's bill rides with the house.</b> Utah law does not require a seller to pay it off. It only requires showing the buyer the yearly cost at or before closing (Utah Code 57-1-49).</li>
+<li><b>Households already carry about $529 a year</b> from 15 property-tax hikes that took effect in Weber County since 2022, on a median home. A PID bill comes on top of that.</li>
+<li><b>The SEC's municipal securities director came to the Capitol on Oct. 19</b> and said PIDs have "real potential to become a problem if not handled correctly." He called it surprising that Utah lets state development authorities collect sales tax to repay bonds.</li>
+<li><b>Nine Weber County taxing bodies' property tax budgets rose 92% from 2018 to 2026</b>, while about $12 million to $14 million a year in growth went to project areas instead.</li>
+<li><b>The State Auditor counts nearly 250 PIDs and similar districts</b>, $5.3 billion borrowed, and fewer than half meeting state transparency rules.</li>
+<li><b>Three Utah districts already require payoff first:</b> Tech Ridge (St. George), Firefly (Eagle Mountain) and Sawmill (Wasatch County). The reform would make that the rule for new PIDs.</li>
+</ul>
+</section>
+
+<section id="what">
+<h2>What a PID is</h2>
+<p>A <b>Public Infrastructure District</b> is a small public district that borrows money to build roads, water and sewer for a new development. It starts on raw land. Utah law requires consent from 100% of the surface property owners (easements held by utilities and public bodies don't count), and at that point the developer is usually the only owner (Utah Code 17D-4-201(1)(a)).</p>
+<p>The debt is repaid by the property, through a yearly bill tied to the land. The board is appointed at first, often people who represent the property owners; seats can later move to elections (17D-4-202).</p>
+<h3>Two kinds of PID bills</h3>
+<div class="flips">
+<button class="flip" type="button"><div class="flip-in"><div class="face front"><b>An assessment</b><span>A set dollar amount on each lot</span><span class="tap">Tap to turn over</span></div><div class="face back">Paid in yearly installments. It <b>can be paid off</b>. Some districts require that; most only allow it. Examples: Tech Ridge, Sage Creek, Avian Shores.</div></div></button>
+<button class="flip" type="button"><div class="flip-in"><div class="face front"><b>A mill levy</b><span>An extra property tax rate</span><span class="tap">Tap to turn over</span></div><div class="face back">Added to the yearly tax bill for as long as the bonds last. There is <b>no balance to pay off</b>, and it rises as the home's value rises. Example: Nordic Village PID No. 1, 5 mills ($5 per $1,000 of taxable value).</div></div></button>
+<button class="flip" type="button"><div class="flip-in"><div class="face front"><b>The limit</b><span>How high can it go?</span><span class="tap">Tap to turn over</span></div><div class="face back">A regular PID: up to $15 per $1,000 of taxable value for everything, including limited-tax bonds; levies for general obligation bonds fall outside that cap (17D-4-303). A PID created by MIDA: up to $15 for operations plus a separate bond levy up to $20 per $1,000 (63H-1-202(10)).</div></div></button>
+</div>
+<div class="callout"><b>The idea behind the reform, in one line:</b> help the developer up front, clear each lot's share at the first sale, and every home sells on equal footing after that. The cost doesn't disappear. It's paid once, up front, usually inside the home price, instead of year after year.</div>
+</section>
+
+<section id="grow">
+<h2>How a district starts and grows</h2>
+<div class="flow" role="list" aria-label="How a PID starts and grows"><div class="step" role="listitem"><b>1.</b> City or county approves the PID and its map</div><div class="arrow" aria-hidden="true">↓</div><div class="step" role="listitem"><b>2.</b> Developer signs as 100% of the owners</div><div class="arrow" aria-hidden="true">↓</div><div class="step" role="listitem"><b>3.</b> Appointed board borrows (bonds)</div><div class="arrow" aria-hidden="true">↓</div><div class="step" role="listitem"><b>4.</b> Roads, water and sewer are built</div><div class="arrow" aria-hidden="true">↓</div><div class="step" role="listitem"><b>5.</b> Homes sell; the yearly bill goes with each home</div><div class="arrow" aria-hidden="true">↓</div><div class="step" role="listitem"><b>6.</b> Board adds more land the developer owns. No new city or county vote. <b>Back to step 3.</b></div></div>
+<p><b>How it grows:</b> the governing document pre-sets an annexation area. The developer signs for the new land as its only owner, and the board approves it by resolution. No new city or county vote is needed, unless the land is outside the city or county that created it (Utah Code 17D-4-201(3)).</p>
+<div class="callout blue"><b>Weber County example:</b> on Jan. 20, 2026, the Promontory Commerce Center PID No. 1 board annexed about 329.5 acres this way (Resolution 2026-01). The same clause is in Pine View No. 2, Three Bridges, BZI Innovation Park and Oquirrh Point.</div>
+</section>
+
+<section id="today">
+<h2>Who carries the cost today</h2>
+<p>The assessment is recorded against the land. When the house sells, the bill goes with it to the next owner, and the next, for decades.</p>
+<ul>
+<li>Of 8 districts we checked, 5 let an owner pay it off early only if they choose to. Utah has many more; we have not checked them all.</li>
+<li>Utah law does not require a seller to clear it. It only requires showing the buyer the yearly cost of the PID's tax rate <b>at or before closing</b> (H.B. 507, 2026; Utah Code 57-1-49). A buyer who learns that late and backs out can lose their earnest money.</li>
+<li>An early version of a 2026 bill (H.B. 422) let a buyer who wasn't told back out and keep their earnest money. That was dropped, and the bill did not pass.</li>
+</ul>
+<h3>Two homes for sale</h3>
+<div class="tablewrap"><table>
+<tr><th>When it sells</th><th>Home outside a PID</th><th>PID home today</th><th>PID home, with the reform</th></tr>
+<tr><td>First sale (from builder)</td><td>No extra bill</td><td class="no">Bill passes to buyer</td><td class="yes">Paid off. Balance $0</td></tr>
+<tr><td>Resale</td><td>No extra bill</td><td class="no">Bill still owed</td><td class="yes">No extra bill</td></tr>
+<tr><td>Resale again</td><td>No extra bill</td><td class="no">Bill still owed</td><td class="yes">No extra bill</td></tr>
+</table></div>
+<div class="callout red"><b>Make this make sense:</b> the developer sells you the land. The bill for the developer's roads and pipes comes with it. Then that bill makes your home harder to sell. The developer got the benefit; you carry the bill, and the next owner does too.</div>
+<h3>Who's on the hook: you vs. the developer</h3>
+<p>The city and state are not liable. The debt is a lien on the land, so whoever owns the land carries it.</p>
+<div class="tablewrap"><table>
+<tr><th></th><th>You, the homeowner</th><th>The developer who signed</th></tr>
+<tr><td><b>Signed for the PID?</b></td><td>No</td><td>Yes, as the only owner</td></tr>
+<tr><td><b>What you get</b></td><td>The roads and pipes your street uses</td><td>Money to build now, usually at public-bond rates</td></tr>
+<tr><td><b>Yearly bill</b></td><td>Yes, on top of county hikes</td><td>Only on lots it still owns</td></tr>
+<tr><td><b>If it goes unpaid</b></td><td>A lien on your home; tax sale or foreclosure</td><td>A lien on its unsold land; Wohali's developer filed bankruptcy</td></tr>
+<tr><td><b>When it ends</b></td><td>When paid off, or passed to your buyer</td><td>When each lot sells</td></tr>
+<tr><td><b>Say in growth</b></td><td>None; most annexations need no new public vote</td><td>Signs the annexation petitions; its agents can sit on the board</td></tr>
+</table></div>
+<p class="note">Utah Code 11-42-501 (an assessment lien ranks ahead of a mortgage), 502–504 (enforcement), 606 (bonds are not the city's debt); 17D-4-201(6)(c). Checked Oct. 29, 2026.</p>
+<h3>Who else feels it</h3>
+<p>The PID assessment itself stays inside the district line. But when a project is also paired with <b>tax increment</b> (a CRA or TIF), the growth in property tax goes to the project for years instead of to the county, schools and fire district. Those entities still serve the new homes. The gap shows up as rate pressure on everyone else, or as fewer services.</p>
+<div class="callout blue"><b>Nordic Village example:</b> the financing plan shows Weber Fire District getting $428,158 a year while it participates, then $856,315 a year once participation ends. Double, in the agency's own model.</div>
+<h3>Condos and apartments</h3>
+<p><b>Condos</b> are sold unit by unit, so the bill passes to each buyer the same way it does with a house. <b>Apartments</b> are never sold to the people living there. The owner pays the bill, and that cost can be built into the rent. A rule for rentals already exists: Sawmill IFD in Wasatch County requires homes to be paid off at final inspection, and apartments about a year after they open, or sooner if sold to an unrelated buyer.</p>
+<p><b>Second homes:</b> owners vote where they live. If homes are sold as second homes, those owners pay these bills but cannot vote for the local officials who set them.</p>
+</section>
+
+<section id="household">
+<h2>What every household already pays</h2>
+<p>Before any PID bill, a Weber County household already carries the tax hikes its local governments adopted. We added up every hike that actually took effect from 2022 to 2026, using the state's own rates.</p>
+<div class="callout"><div class="big-num">$529</div>a year, from 15 property-tax hikes that took effect since 2022, on a $434,583 median Weber County home (a home in Weber School District, Weber Fire District and Central Weber Sewer).</div>
+<div class="tablewrap"><table>
+<tr><th>Who raised it</th><th>Years it took effect</th><th>What it adds each year now</th></tr>
+<tr><td>Weber School District</td><td>2022, 2023, 2025</td><td><b>$319</b></td></tr>
+<tr><td>Weber Fire District</td><td>2022, 2023, 2026</td><td><b>$94</b></td></tr>
+<tr><td>Weber County</td><td>2022, 2024</td><td><b>$47</b></td></tr>
+<tr><td>Central Weber Sewer</td><td>2022, 2023, 2024</td><td><b>$39</b></td></tr>
+<tr><td>Weber Basin Water</td><td>2022, 2023, 2026</td><td><b>$29</b></td></tr>
+<tr><td>Weber Area Dispatch 911</td><td>2026</td><td><b>$1</b></td></tr>
+<tr><td><b>Total</b></td><td></td><td><b>$529</b></td></tr>
+</table></div>
+<details class="gl"><summary>How we figured it (tap to open)</summary><div>
+<p>For each year: the final adopted rate minus the State Tax Commission's certified rate (the "no tax increase" rate), times $239,020.65, which is the taxable value (55%) of the $434,583 median home. A hike raises that entity's revenue for every year after, so the yearly cost adds up.</p>
+<div class="tablewrap"><table>
+<tr><th>Year</th><th>Entity</th><th>Final rate</th><th>Certified rate</th><th>Per year</th></tr>
+<tr><td>2022</td><td>Weber School District</td><td>0.005514</td><td>0.005054</td><td>$109.95</td></tr>
+<tr><td>2022</td><td>Weber Fire District</td><td>0.001071</td><td>0.000981</td><td>$21.51</td></tr>
+<tr><td>2022</td><td>Weber County</td><td>0.001922</td><td>0.001847</td><td>$17.93</td></tr>
+<tr><td>2022</td><td>Central Weber Sewer</td><td>0.000482</td><td>0.000407</td><td>$17.93</td></tr>
+<tr><td>2022</td><td>Weber Basin Water</td><td>0.000167</td><td>0.000103</td><td>$15.30</td></tr>
+<tr><td>2023</td><td>Weber School District</td><td>0.005564†</td><td>0.005088</td><td>$113.77</td></tr>
+<tr><td>2023</td><td>Weber Fire District</td><td>0.001144</td><td>0.001058</td><td>$20.56</td></tr>
+<tr><td>2023</td><td>Weber Basin Water</td><td>0.000200</td><td>0.000154</td><td>$10.99</td></tr>
+<tr><td>2023</td><td>Central Weber Sewer</td><td>0.000523</td><td>0.000481</td><td>$10.04</td></tr>
+<tr><td>2024</td><td>Weber County</td><td>0.001980</td><td>0.001858</td><td>$29.16</td></tr>
+<tr><td>2024</td><td>Central Weber Sewer</td><td>0.000550</td><td>0.000505</td><td>$10.76</td></tr>
+<tr><td>2025</td><td>Weber School District</td><td>0.005792</td><td>0.005392</td><td>$95.61</td></tr>
+<tr><td>2026</td><td>Weber Fire District</td><td>0.001301</td><td>0.001083*</td><td>$52.11</td></tr>
+<tr><td>2026</td><td>Weber Basin Water</td><td>0.000200</td><td>0.000187*</td><td>$3.11</td></tr>
+<tr><td>2026</td><td>Weber Area Dispatch 911</td><td>0.000166</td><td>0.000163*</td><td>$0.72</td></tr>
+</table></div>
+<p class="note">*The state has not posted 2026 certified rates by area. These base rates come from each entity's own tax-increase notice: Weber Fire ($402.66 on a $676,000 home; hearing Nov. 11, 2025), Weber Basin (county's 2026 combined notice: $54.82 to $58.63 on $533,000), Dispatch 911 ($2.25 increase to $48.51 on $516,000, KSL Nov. 7, 2025). No 2026 hike notice was found for Weber County, Weber School District or Central Weber Sewer; the Hive's tracker also shows the county skipped increases for 2025 and 2026.</p>
+<p class="note">†Weber School District's 2023 final rate was 0.005585, which includes a 0.000021 court-judgment levy. That levy is left out here because it isn't a Truth in Taxation increase. The 2025 figure matches the Standard-Examiner's report that the district adopted "four tax increments above the certified tax rate" (0.000400).</p>
+<p class="note"><b>Cross-checked</b> against the Hive's <a href="https://weber-county-hive.github.io/Transparency/weber-county-tax-increases-since-2019.html">Every Weber County Property Tax Increase Since 2019</a>. The state's rates also confirm Weber Fire District's 2023 increase took effect (final 0.001144 vs. certified 0.001058); the tracker listed it as proposed.</p>
+<p class="note"><b>Check:</b> this method reproduces the Standard-Examiner's 2023 figures (Weber School District 9.8%; Weber Basin $41.16 to $53.46; Central Weber Sewer $126.19 to $137.21). It uses today's median value for every year, so it shows today's cost of past hikes, not what was paid each year. Homes in Ogden, the North View Fire District or other districts carry a different mix.</p>
+<p class="note"><b>Updated Oct. 29, 2026:</b> an earlier version of this figure said $255, and a first recalculation said $534 before the judgment levy was taken out. It counted 2025 hikes that never took effect and left out others. A 2046 projection built on the $255 ($878) is retired, because a projection of future hikes can't be checked against records.</p>
+</div></details>
+<div class="callout"><h3 style="margin-top:0">What the $529 is, and what it isn't</h3>
+<ul>
+<li><b>It is not a PID bill.</b> These increases were adopted by the school district, fire district, county, sewer district, water district and dispatch center, and every household in those districts pays them, inside a PID or not.</li>
+<li><b>But growth deals and these hikes are connected.</b> When a project is paired with tax increment (a CRA, TIF, or an Inland Port or MIDA project area), the growth in property tax goes to the project for years. The school district, fire district and county still have to serve the new homes and businesses, without that growth money. When the money isn't coming in, the difference has to be made up somewhere: by higher rates on everyone else, or by fewer services. In the Nordic Village plan, Weber Fire District gets $428,158 a year while it shares its increment and $856,315 once that ends. The records show how much is held back; they don't show how much of any single hike came from it.</li>
+<li><b>How much growth money is held back in Weber County, from the Hive's research:</b>
+<ul>
+<li><b>Nordic Village CRA</b> (adopted Dec. 2024): Weber County shares 75% of its increment for 15 years; Weber School District, Weber Fire District and Weber Basin Water each share 50% for 15 years. Weber Basin's projected share is about $965,000 over the agreement. Weber Fire's own model: $428,158 a year while it shares, $856,315 once that ends.</li>
+<li><b>Chromalox CRA</b>: about $4.13 million in projected property tax for infrastructure, incentives and administration; the county shares for 15 years, the school and fire districts for 10.</li>
+<li><b>Inland Port, West Weber</b> (about 8,968 acres): 75% of the growth goes to UIPA for 25 years per parcel once triggered; the trigger date has slid from 2025 to 2027.</li>
+<li><b>MIDA, Falcon Hill</b>: about 525 acres touching Roy, Clearfield, Riverdale and Sunset.</li>
+<li><b>West Bench RDA</b>: increment collected 2020 through 2025.</li>
+</ul>
+None of the increase notices the Hive reviewed names increment sharing as a reason; they cite pay, staffing, inflation, required upgrades and new buildings. But sharing reduces the growth money these entities would otherwise have to meet those costs, and for most of these projects it has only just begun. Sources: <a href="https://weber-county-hive.github.io/Taxation/quiet-machine.html">The Quiet Machine</a>; <a href="https://weber-county-hive.github.io/Transparency/weber-county-tax-increases-since-2019.html">Every Weber County Property Tax Increase Since 2019</a>.</li>
+<li><b>It is the starting point.</b> A family that buys a home inside a PID pays this $529 <b>and</b> the PID's own yearly bill on top of it. For example, a 5-mill PID levy like Nordic Village's would add about <b>$1,195 a year</b> on this same median home (0.005 × $239,020.65 taxable value).</li>
+<li><b>It leaves things out, so the real total is higher:</b>
+<ul>
+<li>City tax increases, such as Roy's 2026 increase (about $133 a year on a $439,000 home)</li>
+<li>Utility fees, such as Central Weber Sewer's 8% service fee that started July 1, 2026</li>
+<li>Weber County's 0.20% sales tax, added in 2026</li>
+<li>Any PID assessment or levy</li>
+</ul></li>
+</ul></div>
+<h3>Proposed vs. what took effect</h3>
+<p>Some hikes are proposed and never happen. These are the city and district proposals we checked:</p>
+<div class="tablewrap"><table>
+<tr><th>Entity</th><th>Year</th><th>Proposed</th><th>Took effect?</th></tr>
+<tr><td>Uintah City</td><td>2025</td><td>99.64% ($91.58 on $619,000)</td><td class="yes">Yes</td></tr>
+<tr><td>Roy City</td><td>2025</td><td>27.96% ($108.10 on $432,000)</td><td class="no">No</td></tr>
+<tr><td>North Ogden City</td><td>2025</td><td>15.61% ($60.62 on $535,000)</td><td class="no">No</td></tr>
+<tr><td>South Ogden City</td><td>2025</td><td>4.87% ($32.68 on $483,000)</td><td class="no">No</td></tr>
+<tr><td>Harrisville City</td><td>2025</td><td>1.67% ($6.55 on $425,000)</td><td class="no">No</td></tr>
+<tr><td>North View Fire District</td><td>2025</td><td>7.26% ($24.24 on $544,000)</td><td class="no">No</td></tr>
+<tr><td>Central Weber Sewer</td><td>2025</td><td>9.14% tax increase</td><td class="no">No; an 8% service fee started July 1, 2026 instead</td></tr>
+<tr><td>Roy City</td><td>2026</td><td>Advertised 54.99%; cut to 34.29% before the vote</td><td class="yes">Yes, 34.25% (rate 0.002159)</td></tr>
+<tr><td>Weber Fire District</td><td>2026</td><td>23.58% ($94.95 on $676,000)</td><td class="yes">Yes, rate 0.001301 (proposal was about 0.001338)</td></tr>
+<tr><td>Weber Area Dispatch 911</td><td>2026</td><td>4.87% ($275,000 a year)</td><td class="yes">Yes, rate 0.000166</td></tr>
+<tr><td>Ogden City / Ogden School District</td><td>2024 / 2023</td><td>5.36% / 5.3%</td><td>Not yet checked</td></tr>
+</table></div>
+<p class="note">School bond: Weber School District voters approved $279 million of borrowing in 2021. That is debt, not counted here as a rate hike.</p>
+<h3>And it's not only property tax</h3>
+<p>In 2026, Weber County also added a <b>0.20% sales tax</b> for public safety and transportation, approved by the three commissioners with no public vote. It's expected to bring in about $13.1 million a year: $2 more for every $1,000 of taxable purchases, or about $40 a year for a household spending $20,000. Sales tax does not require a Truth in Taxation notice or hearing.</p>
+<h3>The median home, 20 years apart</h3>
+<p>Weber County home values grew 2.9 times from 2005 to 2025, about 5.5% a year (FHFA House Price Index: 110.35 in 2005, 323.73 in 2025). Today's $434,583 median would have been about $148,000 in 2005. If the next 20 years match the last 20, it would be about $1.27 million in 2045. That's a what-if, not a forecast.</p>
+</section>
+
+<section id="doubled">
+<h2>Costs nearly doubled since 2018: what the records show about cause and effect</h2>
+<p>We pulled the property tax budget of every major taxing body on a Weber County bill from the State Tax Commission's yearly reports, and set it next to the growth money each one handed to redevelopment areas, CRAs and MIDA, from the Weber County Auditor's yearly increment reports (the "700 reports").</p>
+<div class="callout"><div class="big-num">+92%</div>Nine Weber County taxing bodies together budgeted <b>$186.6 million</b> in property tax for 2018 and <b>$358.8 million</b> for 2026. Their combined property tax budgets nearly doubled in eight years.</div>
+<div class="tablewrap"><table>
+<tr><th>Taxing body</th><th>2018 budget</th><th>2026 budget</th><th>Change</th><th>Growth money it handed to project areas in 2024</th></tr>
+<tr><td>Weber School District</td><td>$69.50M</td><td>$151.01M</td><td><b>+117%</b></td><td>$3.28M</td></tr>
+<tr><td>Ogden School District</td><td>$34.84M</td><td>$69.36M</td><td><b>+99%</b></td><td>$4.07M</td></tr>
+<tr><td>Weber County</td><td>$46.38M</td><td>$67.45M</td><td><b>+45%</b></td><td>$2.99M</td></tr>
+<tr><td>Ogden City</td><td>$13.29M</td><td>$21.88M</td><td><b>+65%</b></td><td>$1.48M</td></tr>
+<tr><td>Weber Fire District</td><td>$7.40M</td><td>$16.27M</td><td><b>+120%</b></td><td>$0.06M</td></tr>
+<tr><td>Central Weber Sewer</td><td>$7.00M</td><td>$13.74M</td><td><b>+96%</b></td><td>$0.37M</td></tr>
+<tr><td>Weber Basin Water (Weber County part)</td><td>$2.52M</td><td>$7.33M</td><td><b>+192%</b></td><td>$0.27M</td></tr>
+<tr><td>Weber Area Dispatch 911</td><td>$3.59M</td><td>$6.12M</td><td><b>+70%</b></td><td>$0.15M</td></tr>
+<tr><td>North View Fire District</td><td>$2.09M</td><td>$5.60M</td><td><b>+168%</b></td><td>$0.03M</td></tr>
+<tr><td><b>Total</b></td><td><b>$186.6M</b></td><td><b>$358.8M</b></td><td><b>+92%</b></td><td><b>$12.7M</b></td></tr>
+</table></div>
+<h3>How much growth money was held back</h3>
+<ul>
+<li><b>$62.1 million</b> in property tax growth went to Weber County project areas from 2020 through 2024: $9.71M (2020), $10.71M (2021), $13.04M (2022), $14.39M (2023) and $14.25M (2024).</li>
+<li><b>MIDA's Falcon Hill area grew fastest:</b> $0 in 2020, $0.41M in 2021, $1.86M in 2022, $2.67M in 2023 and <b>$2.87M in 2024</b>, $7.8 million in four years.</li>
+<li>The county's own Summit-Eden area (Ogden Valley) took $1.13M in 2024.</li>
+<li>The 2016–2019 reports show $15.5M to $17.7M a year, but those years count the state's basic school levy, so they aren't compared here.</li>
+</ul>
+<h3>Set side by side: the money held back vs. the increases</h3>
+<div class="tablewrap"><table>
+<tr><th>Taxing body</th><th>Held back in 2024</th><th>Its most recent increase</th><th>Held back, compared with that increase</th></tr>
+<tr><td>Weber County</td><td>$2.99M</td><td>2024: about $3.9M</td><td>About 77%</td></tr>
+<tr><td>Weber School District</td><td>$3.28M</td><td>2025: $9.72M</td><td>About a third</td></tr>
+<tr><td>Weber Basin Water (Weber County part)</td><td>$0.27M</td><td>2026: $0.48M in Weber County</td><td>More than half</td></tr>
+<tr><td>Central Weber Sewer</td><td>$0.37M</td><td>2024: $1.53M</td><td>About a quarter</td></tr>
+<tr><td>Weber Fire District</td><td>$0.06M</td><td>2026: $2.96M</td><td>About 2%</td></tr>
+</table></div>
+<div class="callout blue">
+<p><b>What the records show:</b> budgets nearly doubled while about $12 million to $14 million a year in growth went to project areas instead. For Weber County, the money held back in 2024 came close to the size of its 2024 increase; for Weber School District, about a third of its 2025 increase. Each year that money is held back, these bodies serve the new homes and businesses without that growth.</p>
+<p><b>What the records don't show:</b> that the held-back money caused the increases. The held-back money is about 4% of these budgets. Most of the budget growth came from new construction, which adds revenue without a hearing, and from the increases themselves. None of the increase notices names increment sharing as a reason. And the biggest new layers are only starting: Nordic Village's CRA began recently, Inland Port West Weber's 75% has not triggered yet (now 2027), and the Promontory PIDs have not borrowed. Those will add to the held-back total in the years ahead.</p>
+<p class="note">A PID by itself does not take money from these budgets: it adds its own tax on top. The held-back money comes from CRAs, RDAs, MIDA and the Inland Port, which are often paired with PIDs.</p>
+</div>
+<p class="note">Sources: Utah State Tax Commission, Approved Property Tax Rates and Budgets, 2018–2025, and 2026 approved rates and budgets; Weber County Auditor, 700 reports on project areas, tax years 2016–2024 (the 2025 report is due by March 31, 2026 under Utah Code 17C-1-606 and wasn't posted when checked). Read Oct. 29, 2026 from the posted spreadsheets and PDFs. Increase amounts from the Hive's tracker and each entity's notice.</p>
+</section>
+
+<section id="sec">
+<h2>What the SEC and the State Auditor said at the Capitol</h2>
+<p>On <b>Monday, Oct. 19, 2026</b>, State Auditor Tina Cannon hosted a transparency conference for local officials at the Utah State Capitol. She invited <b>Dave Sanchez</b>, director of the U.S. Securities and Exchange Commission's Office of Municipal Securities, to speak about PIDs.</p>
+
+<div class="callout red">
+<h3 style="margin-top:0">⚠️ The sales tax point</h3>
+<p>Utah's state development authorities can collect <b>sales tax</b> to repay bonds. Sanchez called that <b>surprising</b>, and said few other states allow it.</p>
+<p><b>What the law says:</b></p>
+<ul>
+<li><b>S.B. 316 (2025)</b>, primary sponsor Sen. Jerry W. Stevenson, House sponsor Rep. Val L. Peterson, deals with "the distribution of certain sales tax revenues related to certain authorities and zones."</li>
+<li><b>The Inland Port Authority (UIPA)</b> gets 20% of the local sales tax collected inside its project areas, beginning July 1, 2024.</li>
+<li><b>The Point of the Mountain State Land Authority</b> gets 50% of the state's 4.7% sales tax on sales on its land.</li>
+<li><b>MIDA</b> gets a share of sales tax in its project areas. Its board can also levy its own resort communities sales tax, energy tax, telecommunications tax and hotel-room tax (Utah Code 63H-1-203).</li>
+<li><b>The Utah Lake Authority</b> gets 50% of the local sales tax inside its boundary.</li>
+</ul>
+<p><b>How many other states?</b> No official count was found, and the SEC did not name any. In some states a local district can add its <i>own</i> sales tax to repay bonds: a Kansas community improvement district can add up to 2 cents on the dollar, a Missouri community improvement district up to 1%, and Colorado metro districts can levy a sales tax inside the district. The difference in Utah: the Legislature also hands a share of the <i>regular</i> sales tax to appointed state authorities.</p>
+</div>
+
+<h3>What Sanchez said</h3>
+<ul>
+<li>PIDs have "real potential to become a problem if not handled correctly." The SEC is "agnostic" on whether they are good policy.</li>
+<li>"These unelected boards have the ability to issue bonds, impose taxes and pass those costs onto taxpayers in your state." Being further removed from accountable officials creates "elevated risk."</li>
+<li>"We can bring charges not just against the PID, but also against the creating entity." He asked officials to think about "control person liability": "If you have any ability to control that entity, you may be responsible for their securities law violations."</li>
+<li>"Indirect risks may not be appreciated by folks making these policy decisions," and advisers or bond counsel may not explain them.</li>
+<li>Recommending a PID amounts to recommending bonds, which can make that person a "municipal adviser" who must register with the SEC.</li>
+</ul>
+
+<h3>What State Auditor Tina Cannon said</h3>
+<div class="callout blue">
+<p>"We hear from municipalities that they're being told ... 'this is what we want, and this is what we want you to use.' ... They feel like they have no choice."</p>
+<p>PIDs are "one of the No. 1 topics for hotline complaints over misuse."</p>
+<p>"You really have a hidden second mortgage payment."</p>
+<p>On whether cheaper district financing reaches homebuyers and renters: "Nothing's impossible to measure. However, the reality is: it's not part of the discussion at this point in Utah."</p>
+</div>
+
+<h3>The numbers from the Auditor's office</h3>
+<div class="flips">
+<button class="flip" type="button"><div class="flip-in"><div class="face front"><b>Nearly 250</b><span>PIDs and infrastructure financing districts since 2019</span><span class="tap">Tap to turn over</span></div><div class="face back">About 150 of them haven't borrowed yet. In August, the office counted 221 PIDs, 71 with debt. The office projects about 500 more over the next decade.</div></div></button>
+<button class="flip" type="button"><div class="flip-in"><div class="face front"><b>$5.3 billion</b><span>borrowed so far</span><span class="tap">Tap to turn over</span></div><div class="face back">Up from $3.6 billion a year earlier. About $13.8 billion once the unbonded districts borrow, and about $44.9 billion projected over the next decade. Bonds often take 30 to 40 years to repay.</div></div></button>
+<button class="flip" type="button"><div class="flip-in"><div class="face front"><b>Fewer than half</b><span>meet the state's transparency rules</span><span class="tap">Tap to turn over</span></div><div class="face back">Per Auditor Tina Cannon. Coalville and the Auditor's office have disputed whether Wohali's PID finances belong on the city's financial reports.</div></div></button>
+</div>
+<p class="note"><b>A correction to the news coverage:</b> the Salt Lake Tribune reported that PIDs may levy $1.50 per $1,000 of value. The law says 0.015 per dollar, which is <b>$15 per $1,000</b> (Utah Code 17D-4-303(1)). This page uses the law's number.</p>
+
+<h3>What the SEC did not say</h3>
+<div class="callout green">No investigation of any Utah PID, city, county or developer was reported, and no violations were found. Sanchez said the SEC does not enforce PIDs' compliance with state law; it mainly regulates how governments communicate with investors. In a sample of Utah PIDs he reviewed, he found no conflict-of-interest disclosure problems. Coalville Mayor Rory Swensen called the conference "highly technical," with few "concrete answers."</div>
+<p>Background: in August, Cannon told the Political Subdivisions Interim Committee the SEC had noticed developers issuing government bonds. Bond attorney Randy Larsen of GilmoreBell called that "the beauty of the tool," because it draws out-of-state capital to projects local banks could not finance, and said the development itself is the only collateral.</p>
+</section>
+
+<section id="claims">
+<h2>What UIPA and MIDA told lawmakers, checked against the record</h2>
+<p>Two days after the SEC visit, on <b>Oct. 21, 2026</b>, the Legislature's Economic Development and Workforce Services Interim Committee heard from the Utah Inland Port Authority (UIPA) and the Military Installation Development Authority (MIDA). Both can create PIDs, and both have appointed boards. MIDA helped create one of the state's first PIDs in 2020, for Extell's development near Park City (Salt Lake Tribune). These are the statements that touch PIDs and who pays.</p>
+
+<div class="claim ctx"><div class="who">UIPA · Executive Director Ben Hart</div>
+<div class="said">"No new taxes at all. It's future growth."</div>
+<span class="verdict v-ctx">True, with context left out</span>
+<p>No new tax rate is created. But UIPA keeps 75% of the growth in property tax that the county, schools and others would otherwise collect, for 25 years per parcel or up to 40. UIPA pledges its share to PIDs, and a PID can put assessments or a property tax on owners inside it. Tooele Valley's PID has issued $33 million in bonds. UIPA also receives 20% of local sales tax in its project areas (S.B. 316, 2025).</p></div>
+
+<div class="claim ctx"><div class="who">UIPA · Ben Hart</div>
+<div class="said">The money "stays in the project area."</div>
+<span class="verdict v-ctx">True, with context left out</span>
+<p>Mostly. Utah Code 11-58-602 also lets UIPA spend its share on its own overhead, on infrastructure outside a project area if its board decides it benefits the area (and the board's decision is final), and on housing "within or near" the area.</p></div>
+
+<div class="claim ctx"><div class="who">UIPA · presentation</div>
+<div class="said">A community has to invite UIPA in.</div>
+<span class="verdict v-ctx">True, with context left out</span>
+<p>True for the newer project areas. The first and largest, the Northwest Quadrant, was drawn by the Legislature in 2018, not by invitation.</p></div>
+
+<div class="claim part"><div class="who">MIDA · Executive Director Dan Hemmert</div>
+<div class="said">Counties keep control of land use.</div>
+<span class="verdict v-part">Partly true</span>
+<p>Utah Code 63H-1-202(2) says land in a MIDA project area is not subject to county or city land-use law or ordinances. In Box Elder, the county recommends review committee members, but the MIDA board appoints them and they "serve at the pleasure of the MIDA Board" (Agreement 26-15). Wasatch County's 2023 agreement says MIDA keeps "full and exclusive jurisdiction, including all land use authority."</p></div>
+
+<div class="claim no"><div class="who">MIDA · Dan Hemmert</div>
+<div class="said">If a project finishes early, a "waterfall" returns the money to all taxing entities.</div>
+<span class="verdict v-no">Not supported by records found</span>
+<p>We did not find that clause in state law or the Box Elder agreement. State law lets MIDA use the money "before, during, and after" the collection period. (Falcon Hill and Wasatch East Side agreements not yet checked.)</p></div>
+
+<div class="claim no"><div class="who">MIDA · Dan Hemmert</div>
+<div class="said">"We get zero state money."</div>
+<span class="verdict v-no">Not supported by records found</span>
+<p>MIDA's own Sept. 18, 2023 presentation to the Legislature lists $71,194,600 in legislative appropriations for fiscal years 2022 through 2024. We did not find whether MIDA received state money this year.</p></div>
+
+<div class="claim"><div class="who">MIDA · notice</div>
+<div class="said">Posting meetings on MIDA's website is enough notice.</div>
+<span class="verdict v-note">What was said</span>
+<p>Rep. James Dunnigan told Hemmert website posting is "not adequate notice to the public." Hemmert answered that a local notice requirement "might be a great modification." State law says MIDA is "not required to physically post notice."</p></div>
+
+<div class="claim ok"><div class="who">From the record · MIDA's PIDs</div>
+<div class="said">A PID created by MIDA can tax at a higher limit than a regular PID.</div>
+<span class="verdict v-ok">Matches the record</span>
+<p>Utah Code 63H-1-202(10): a MIDA-created PID may levy up to 0.015 for operations and maintenance, and a separate bond levy up to 0.02. A regular PID is limited to 0.015 for all purposes, including limited-tax bonds (17D-4-303).</p></div>
+<p>All 27 UIPA statements are in the <a href="https://weber-county-hive.github.io/Unelected-Power/uipa-hearing-fact-check.html">Inland Port hearing fact check</a>.</p>
+</section>
+
+<section id="weber">
+<h2>Weber County's districts</h2>
+<div class="tablewrap"><table>
+<tr><th>District</th><th>Kind of bill</th><th>Can it be paid off?</th><th>Debt</th></tr>
+<tr><td><b>Nordic Village PID</b><br>Ogden Valley</td><td>Mill levy, 5 mills (plus county tax increment)</td><td>No</td><td>$39.38M issued (2025)</td></tr>
+<tr><td><b>Lomond Heights PID</b><br>Harrisville</td><td>Mill levy up to 5 mills, plus planned assessments</td><td>Levy part: no</td><td>Up to $20M levy bonds and up to $20M assessment bonds approved (2026)</td></tr>
+<tr><td><b>Farr West Landing</b><br>Farr West</td><td>Mill levy up to 6 mills, plus city tax increment</td><td>No</td><td>Not found yet</td></tr>
+<tr><td><b>Promontory Commerce Center PID</b><br>West Weber</td><td>Assessment</td><td>Rules not read yet</td><td>Up to $33.42M approved; $0 issued as of March 2026</td></tr>
+<tr><td><b>Sage Creek IFD</b><br>West Weber</td><td>Assessment</td><td>Yes, if the owner chooses</td><td>$8.155M</td></tr>
+<tr><td><b>Mount Ogden PIDs</b><br>Snowbasin</td><td>Not checked</td><td>—</td><td>Up to $300M authorized; none issued</td></tr>
+</table></div>
+<p class="note">Also: Brook View IFD (assessment; about $59,298 per home in April 2025, $137,816 in Dec. 2025, $93,868 in Jan. 2026; $10.7M bonds issued), Peak View Plaza IFD (not checked), Longhorn IFD (no borrowing found), Eden Crossing (PID option reserved; no district found yet). "Not found" means not in the records reviewed.</p>
+</section>
+
+<section id="fail">
+<h2>When a project fails, and closer to home</h2>
+<h3>Wohali, Coalville (Summit County)</h3>
+<p>Wohali Land Estates, a golf resort development, filed Chapter 11 bankruptcy on <b>Aug. 8, 2025</b>. Its PID had issued almost $35 million in debt. To avoid foreclosure on a <b>$3.3 million</b> PID payment, the developer needed a court-approved loan of more than $4 million. Landowners stepped in with about $160,000 to cover payroll. Utah law says a PID's debts are not the city's, county's or state's (17D-4-201(6)(c)). The State Auditor began raising concerns about PIDs after this bankruptcy.</p>
+<h3>Nordic Village, Eden (Weber County)</h3>
+<p>No homes have sold yet. On one parcel of the developer's commercial land, the first PID line shows up on the 2026 tax bill:</p>
+<div class="tablewrap"><table>
+<tr><th>Year</th><th>Total property tax</th><th>Nordic Village PID line</th></tr>
+<tr><td>2023</td><td>$2,103.11</td><td>None</td></tr>
+<tr><td>2024</td><td>$20,760.98</td><td>None</td></tr>
+<tr><td>2025</td><td>$10,800.89</td><td>None</td></tr>
+<tr><td>2026</td><td>$18,546.54</td><td><b>$6,222.00</b> (5 mills), due Nov. 30, 2026</td></tr>
+</table></div>
+<p class="note">Weber County tax notices for parcel 22-023-0173 (commercial land, taxable value $1,244,400 in 2026). One parcel, not a typical home. The 2026 notice also says prior taxes on this parcel are delinquent. The State Tax Commission's 2026 approved rates list Nordic Village PID No. 1 at 0.005, with $54,757 budgeted.</p>
+</section>
+
+<section id="fix">
+<h2>A fix already working in Utah</h2>
+<p>Three districts already require payoff before a family takes the home:</p>
+<div class="tablewrap"><table>
+<tr><th>District</th><th>When it must be paid</th><th>Who pays, per the documents</th></tr>
+<tr><td><b>Tech Ridge</b><br>St. George</td><td>Before the home goes to the person who lives there, owner or renter</td><td>Not stated. The bill must be cleared by closing, so the builder may pay it or build it into the price.</td></tr>
+<tr><td><b>Firefly No. 1</b><br>Eagle Mountain</td><td>At or before the home goes to the person who lives there (2024 change)</td><td>Not stated. Eagle Mountain approved the change 5-0 on June 18, 2024; the district's own vote record is not yet read.</td></tr>
+<tr><td><b>Sawmill</b><br>Wasatch County</td><td>Homes: at final inspection. Apartments: about 1 year after opening, or when sold to an unrelated buyer</td><td>Homes: the builder, before anyone moves in. Apartments: the owner who rents them out.</td></tr>
+</table></div>
+<h3>How much do builders save? An estimate</h3>
+<div class="callout"><p><b>⚠️ This is an estimate, not a figure from any record.</b> It uses Nordic Village PID's bonds and a national average loan rate to show the size of the difference.</p>
+<ul>
+<li><b>Cheaper money:</b> Nordic Village PID's $39.38 million in bonds carry a 6.5% rate (district financial statements). The average private loan for land development was <b>10.15%</b> in early 2026 (National Association of Home Builders survey). The gap, 3.65 points, is about <b>$1.4 million a year</b> in lower interest on $39.38 million.</li>
+<li><b>The bigger difference is who pays it back.</b> With a private loan, the developer repays the $39.38 million plus interest out of its own lot sales, usually within a few years (about $12 million in interest over three years at 10.15%). With the PID, the bonds run to 2055. Repaid evenly over 30 years at 6.5%, that is about <b>$3.0 million a year, or about $90 million in all</b> ($39.4 million borrowed plus about $51 million in interest), paid through district taxes by whoever owns the land. Once homes sell, that's the homeowners.</li>
+<li><b>Statewide, the same gap on $5.3 billion</b> of PID debt would be roughly <b>$190 million a year</b> in lower interest. PID bond rates vary, so this is only a size estimate.</li>
+</ul>
+<p class="note">State Auditor Tina Cannon on PID bonds: "for a developer, this is a gift," because developers can "pass that cost on in 30 to 40 years of additional tax payments" (Utah Investigative Journalism Project, April 28, 2026). State Treasurer Marlo Oaks gave a hypothetical: PID taxes adding $50,000 over decades to a $450,000 home. The math above assumes level payments; the actual bond schedule may differ.</p></div>
+<h3>Does the developer still benefit?</h3>
+<p><b>Yes.</b> District bonds are usually cheaper money than a private construction loan, and the developer pays each lot's share when that lot sells, out of the sale. <b>What changes:</b> unsold lots stay the developer's bill, so expanding only pays off if the new lots will sell. <b>Fair caveat:</b> the cost moves into the home price, so buyers still pay it, once, up front, and knowingly.</p>
+</section>
+
+<section id="reform">
+<h2>The reform, in four parts</h2>
+<ol>
+<li><b>Payoff at first sale.</b> For new PIDs, every home's assessment is paid in full before it goes to the person who will live there (the Tech Ridge rule). Apartments pay off within a set time after opening (the Sawmill rule). Utah already requires this for IFD homes (H.B. 13, 2024; now Utah Code 17D-5-102(2)(d)).</li>
+<li><b>Fallback: disclosure first.</b> If part 1 stalls, bring back the early H.B. 422 rule: a written PID notice, and a buyer who doesn't get it can walk away and keep their earnest money.</li>
+<li><b>A hearing on big annexations.</b> Above a set size, the city or county that created the district holds a public hearing first.</li>
+<li><b>Everything tied to the land, paid off up front.</b> When a lot is sold, the developer pays off everything tied to that land in full: its share of the PID debt <b>and</b> its share of any tax increment pledged to the project (a CRA, TIF, Inland Port or MIDA project area). Once a lot is paid off, its property tax goes back in full to the general funds of the county, schools, fire and water districts that serve it, instead of being held back for 15, 20 or 25 years.</li>
+</ol>
+<div class="callout green">This is a proposal built on the records above. It is clearly labeled as the Hive's proposal, separate from the records themselves.</div>
+</section>
+
+<section id="map">
+<h2>Map: districts and places on this page</h2>
+<p class="note">Pins are placed at the town or area, not at an exact boundary. Tap a pin for details.</p>
+<div id="pidmap" role="img" aria-label="Map of Utah districts named on this page"></div>
+</section>
+
+<section id="people">
+<h2>People connected to the record</h2>
+<div class="people">
+<div class="person"><b>Dave Sanchez</b>Director, SEC Office of Municipal Securities. Spoke at the State Auditor's conference, Oct. 19, 2026.</div>
+<div class="person"><b>Tina Cannon</b>Utah State Auditor. Hosted the conference and invited the SEC; her office tracks PID debt and transparency.</div>
+<div class="person"><b>Ben Hart</b>Executive Director, Utah Inland Port Authority. Testified Oct. 21. <a href="https://weber-county-hive.github.io/Unelected-Power/uipa-hearing-fact-check.html">UIPA fact check</a></div>
+<div class="person"><b>Dan Hemmert</b>Executive Director, MIDA, since Aug. 1, 2026; former state senator. Testified Oct. 21. <a href="https://weber-county-hive.github.io/Unelected-Power/dan-hemmert.html">His Hive file</a></div>
+<div class="person"><b>Sen. Jerry W. Stevenson</b>Primary sponsor of S.B. 316 (2025), which sends sales tax to UIPA, MIDA, Point of the Mountain and others. <a href="https://weber-county-hive.github.io/utah-senators/jerry-stevenson.html">His Hive file</a></div>
+<div class="person"><b>Rep. Val L. Peterson</b>House sponsor of S.B. 316 (2025).</div>
+<div class="person"><b>Rep. Calvin Roberts and Sen. Kirk Cullimore</b>Sponsors of H.B. 507 (2026), the "at or before closing" PID disclosure law (57-1-49). <a href="https://weber-county-hive.github.io/utah-senators/kirk-cullimore.html">Cullimore's Hive file</a></div>
+<div class="person"><b>Rep. Jill Koford and Sen. Daniel McCay</b>Sponsors of H.B. 422 (2026), whose early version let an uninformed buyer keep earnest money; the bill did not pass.</div>
+<div class="person"><b>Rep. James Dunnigan</b>Told MIDA on Oct. 21 that website-only notice is "not adequate notice to the public."</div>
+</div>
+</section>
+
+<section id="ask">
+<h2>Questions to ask, and whom to ask</h2>
+<div class="tablewrap"><table>
+<tr><th>Ask</th><th>The question</th></tr>
+<tr><td>Your state legislators</td><td>Tech Ridge requires payoff before a family moves in. Will you carry a bill to make that the rule for new PIDs?</td></tr>
+<tr><td>Your state legislators</td><td>Why does Utah send a share of regular sales tax to appointed authorities like UIPA and MIDA, when the SEC called that surprising?</td></tr>
+<tr><td>Your city council or county commission</td><td>Does our PID's governing document let it annex land without coming back to you? Who gave you the advice to approve it, and is that adviser registered with the SEC?</td></tr>
+<tr><td>The PID board</td><td>Can owners prepay, and what does it cost? Does the district meet the state's transparency rules?</td></tr>
+<tr><td>Your agent or title company, before you buy</td><td>Is this home in a PID, what is the yearly cost, and what balance is owed?</td></tr>
+</table></div>
+</section>
+
+<section id="words">
+<h2>Words to know</h2>
+<details class="gl"><summary>Certified tax rate</summary><div>The rate that would bring in the same property tax as last year, plus new growth. Going above it requires a Truth in Taxation notice and hearing.</div></details>
+<details class="gl"><summary>Assessment</summary><div>A set dollar charge on each lot to repay district bonds, paid in yearly installments. It can be paid off.</div></details>
+<details class="gl"><summary>Mill levy</summary><div>A tax rate. One mill is $1 per $1,000 of taxable value. A Utah primary home is taxed on 55% of its value.</div></details>
+<details class="gl"><summary>Tax increment (TIF, CRA)</summary><div>The growth in property tax in an area, captured for years by a project instead of going to the county, schools and other local governments.</div></details>
+<details class="gl"><summary>IFD (infrastructure financing district)</summary><div>A newer cousin of the PID, created in 2024 under a different part of state law (17D-5). IFD homes must be paid off before anyone moves in.</div></details>
+<details class="gl"><summary>Municipal adviser</summary><div>Under federal law, someone who advises a government on bonds. The SEC says recommending a PID can count, and municipal advisers must register.</div></details>
+<details class="gl"><summary>Control person liability</summary><div>Under securities law, a person or body that controls an entity can be responsible for that entity's violations. The SEC raised it about cities and counties that create PIDs.</div></details>
+</section>
+
+<section id="related">
+<h2>Connected Hive work</h2>
+<ul class="connect">
+<li><a href="who-holds-the-risk.html">Who Holds the Risk?</a><span>Stratos, Tooele Valley, Wohali, Nordic Village and Deer Valley: who is on the hook when a district's project stalls.</span></li>
+<li><a href="affordable-house-story.html">The hidden bill on an "affordable" house</a><span>Step by step: how a PID bill lands on a buyer at closing.</span></li>
+<li><a href="nordic-village-case-file.html">Nordic Village case file</a><span>The district, its bonds and its land, in full.</span></li>
+<li><a href="weber-pid-guide.html">Start here: the PID guide</a><span>Every page in this project, in reading order.</span></li>
+<li><a href="https://weber-county-hive.github.io/Taxation/quiet-machine.html">The Quiet Machine</a><span>Seven development-finance layers in Weber County, and what each holds back.</span></li>
+<li><a href="https://weber-county-hive.github.io/Transparency/weber-county-tax-increases-since-2019.html">Every Weber County Property Tax Increase Since 2019</a><span>The full tracker, 2019 to 2026.</span></li>
+<li><a href="pid_mechanism_map.html">The PID mechanism map</a><span>How the money moves, and the statewide total.</span></li>
+<li><a href="https://weber-county-hive.github.io/Unelected-Power/uipa-hearing-fact-check.html">The Inland Port told legislators its side</a><span>All 27 UIPA statements from Oct. 21, checked.</span></li>
+</ul>
+</section>
+
+<section id="updates">
+<h2>Updates since this was posted</h2>
+<p><b>Oct. 29, 2026:</b> Posted. The household figure was recalculated from the state's final rates ($529, replacing an earlier $255), and the Nordic Village rows were rebuilt from the county's tax notices.</p>
+</section>
+
+<section id="behind">
+<h2>Behind this piece</h2>
+<div class="hs-counter">
+<div><div class="n">15+</div><div class="l">Utah Code sections read</div></div>
+<div><div class="n">5</div><div class="l">years of state tax-rate reports checked</div></div>
+<div><div class="n">4</div><div class="l">county tax notices read for one parcel</div></div>
+<div><div class="n">2</div><div class="l">outside reviews checked against the records</div></div>
+<div><div class="n">~60</div><div class="l">records and articles read (estimate)</div></div>
+</div>
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<details class="sources"><summary>Sources — tap to open (with links)</summary>
+<h3>Laws and bills</h3>
+<ul>
+<li><a href="https://le.utah.gov/xcode/Title17D/Chapter4/17D-4.html">Utah Code 17D-4, Public Infrastructure District Act</a> (201, 202, 303); <a href="https://le.utah.gov/xcode/Title17D/Chapter4/17D-4-S303.html">17D-4-303, levy limit</a></li>
+<li><a href="https://le.utah.gov/xcode/Title17D/Chapter5/17D-5-S102.html">17D-5-102, IFD payoff before occupancy</a></li>
+<li><a href="https://le.utah.gov/xcode/Title11/Chapter42/11-42-S501.html">11-42-501 to 504 and 606, assessment liens and bonds</a></li>
+<li><a href="https://le.utah.gov/xcode/Title63H/Chapter1/63H-1-S202.html">63H-1-202, MIDA project areas and MIDA-created PIDs</a>; <a href="https://le.utah.gov/xcode/Title63H/Chapter1/63H-1-S203.html">63H-1-203, MIDA tax levies</a></li>
+<li><a href="https://le.utah.gov/Session/2025/bills/enrolled/SB0316.pdf">S.B. 316 (2025), enrolled: sales tax to MIDA, UIPA, Point of the Mountain and the Utah Lake Authority</a> (lines 4–6, 576–578, 609–612, 650–660)</li>
+<li><a href="https://le.utah.gov/~2026/bills/static/HB0507.html">H.B. 507 (2026), enacting Utah Code 57-1-49</a> · <a href="https://le.utah.gov/~2026/bills/static/HB0422.html">H.B. 422 (2026), versions and status</a></li>
+</ul>
+<h3>SEC and State Auditor</h3>
+<ul>
+<li><a href="https://www.kpcw.org/state-regional/2026-10-21/sec-warns-of-indirect-risks-from-tool-financing-ski-resort-development">KPCW, "SEC warns of 'indirect risks' from tool financing ski resort development" (Oct. 21, 2026)</a></li>
+<li><a href="https://www.sltrib.com/news/politics/2026/10/20/sec-regulators-warn-risks-quasi/">Salt Lake Tribune, "SEC regulators warn of risks from quasi-government agencies across Utah" (Oct. 20, 2026)</a> · <a href="https://www.moabtimes.com/articles/utah-has-created-hundreds-of-quasi-government-agencies-feds-say-they-could-become-a-problem/">Moab Times reprint (Tribune/Grist)</a></li>
+<li><a href="https://www.kpcw.org/state-regional/2026-08-25/popular-utah-development-financing-tool-draws-sec-attention">KPCW, "Popular Utah development financing tool draws SEC attention" (Aug. 25, 2026)</a></li>
+<li><a href="https://www.sltrib.com/opinion/editorial/2026/10/23/tribune-editorial-public/">Salt Lake Tribune editorial (Oct. 23, 2026)</a> (opinion)</li>
+</ul>
+<h3>Other states (sales tax examples)</h3>
+<ul>
+<li><a href="https://www.wichitaliberty.org/kansas-government/community-improvement-districts-kansas/">Kansas community improvement districts</a></li>
+<li><a href="https://documents.house.mo.gov/billtracking/bills061/bilsum/truly/sSB1056t.htm">Missouri S.B. 1056 summary, community improvement district sales tax</a></li>
+<li><a href="https://sovos.com/regulatory-updates/sut/colorado-expands-metro-district-authority-to-allow-sales-tax-funding-for-parks/">Colorado H.B. 23-1062, metro district sales tax</a></li>
+</ul>
+<h3>Oct. 21, 2026 hearing</h3>
+<ul>
+<li><a href="https://www.utleg.gov/event-streaming/committee/20650">Official video, Economic Development and Workforce Services Interim Committee, Oct. 21, 2026</a></li>
+<li><a href="https://weber-county-hive.github.io/Unelected-Power/uipa-hearing-fact-check.html">The Hive's UIPA hearing fact check</a></li>
+<li><a href="https://le.utah.gov/interim/2023/pdf/00003890.pdf">MIDA presentation to the Legislature, Sept. 18, 2023 (legislative appropriations table)</a></li>
+<li><a href="https://www.boxeldercountyut.gov/DocumentCenter/View/2189/">Box Elder County–MIDA Agreement 26-15</a> · <a href="https://www.utah.gov/pmn/files/952129.pdf">MIDA Res. 2023-01, Wasatch West Side agreement</a></li>
+</ul>
+<h3>Tax rates and the household figure</h3>
+<ul>
+<li><a href="https://files.tax.utah.gov/propertytax/tax-rates/area-rates/taxarearates2025.pdf">Utah State Tax Commission, Tax Rates by Tax Area, 2025</a> (also <a href="https://files.tax.utah.gov/propertytax/tax-rates/area-rates/taxarearates2024.pdf">2024</a>, <a href="https://files.tax.utah.gov/propertytax/tax-rates/area-rates/taxarearates2023.pdf">2023</a>, <a href="https://files.tax.utah.gov/propertytax/tax-rates/area-rates/taxarearates2022.pdf">2022</a>)</li>
+<li><a href="https://tax.utah.gov/propertytax/rates/approved-rates/">Utah State Tax Commission, 2026 approved rates and budgets</a></li>
+<li><a href="https://webercountyutah.gov/Clerk_Auditor/rda/">Weber County Auditor, 700 reports on community reinvestment project areas, 2016–2024</a></li>
+<li><a href="https://files.tax.utah.gov/propertytax/tax-rates/approved-rates/budgetratesbyentity2018.pdf">Utah State Tax Commission, Approved Property Tax Rates and Budgets, 2018</a> (and 2019–2025 in the same folder)</li>
+<li><a href="https://eyeonhousing.org/2026/05/credit-for-builders-tightens-in-the-first-quarter-but-only-slightly/">NAHB, AD&amp;C Financing Survey, first quarter 2026 (land development loans 10.15%)</a></li>
+<li><a href="https://www.utahinvestigative.org/hidden-developers-tax-is-zapping-utah-homebuyers-for-billions/">Utah Investigative Journalism Project, "Hidden developers' tax is zapping Utah homebuyers for billions" (April 28, 2026)</a></li>
+
+<li><a href="https://www.utah.gov/pmn/files/1335781.pdf">Weber Fire District notice of proposed tax increase (hearing Nov. 11, 2025)</a></li>
+<li><a href="https://www.webercountyutah.gov/Clerk_Auditor/documents/2026FY%20Notice%20of%20Proposed%20Tax%20Increases.pdf">Weber County 2026 combined notice of proposed tax increases</a> · <a href="https://www.webercountyutah.gov/Clerk_Auditor/documents/fy-combined-ad-2025.pdf">2025 combined notice</a></li>
+<li><a href="https://www.ksl.com/article/51402320/weber-fire-district-proposing-236-tax-hike-weber-county-dispatch-center-mulling-49-bump">KSL, Weber Fire District and Dispatch 911 proposals (Nov. 7, 2025)</a></li>
+<li><a href="https://www.standard.net/news/government/2023/jul/21/ogden-and-weber-school-districts-three-weber-county-cities-seek-tax-hikes/">Standard-Examiner, 2023 proposed hikes (used to check the method)</a></li>
+<li><a href="https://www.utah.gov/pmn/files/1471580.pdf">Roy City Council packet, Aug. 11, 2026 (54.99% advertised; 34.29% alternative)</a></li>
+<li><a href="https://www.centralweberut.gov/files/f514d2e5f/FY%2B2027%2BApproved%2BBudget.pdf">Central Weber Sewer FY2027 approved budget</a></li>
+<li><a href="https://fred.stlouisfed.org/series/ATNHPIUS49057A">FHFA House Price Index, Weber County (FRED)</a></li>
+</ul>
+<h3>District records</h3>
+<ul>
+<li><a href="https://www.utah.gov/pmn/files/1286609.pdf">Tech Ridge PID, Second Amendment to Assessment Ordinance (June 13, 2025)</a></li>
+<li><a href="https://www.utah.gov/pmn/files/1286951.pdf">Sawmill IFD, First Amendment to Assessment Ordinance (June 12, 2025)</a></li>
+<li><a href="https://www.utah.gov/pmn/files/1107813.pdf">Firefly PID No. 1, First Amendment to Assessment Ordinance (April 9, 2024)</a> · <a href="https://www.utah.gov/pmn/files/1135315.pdf">Eagle Mountain council packet, June 18, 2024 (Firefly amendment)</a> · <a href="https://www.utah.gov/pmn/files/1143145.pdf">approved minutes</a> · <a href="https://www.utah.gov/pmn/files/1146062.pdf">Firefly PID July 16, 2024 agenda</a></li>
+<li><a href="https://www.utah.gov/pmn/files/1362329.pdf">Nordic Village PID No. 1, 2026 final budget</a> · <a href="https://www.utah.gov/pmn/files/1299213.pdf">2025 budget</a> · <a href="https://www.webercountyutah.gov/taxnotice/2026/22-023-0173.pdf">2026 tax notice, parcel 22-023-0173</a></li>
+<li><a href="https://www.utah.gov/pmn/files/1447291.pdf">Lomond Heights PID bond notice (June 12, 2026)</a> · <a href="https://www.utah.gov/pmn/files/1412033.pdf">Promontory Commerce Center PID No. 1 bond notice (March 30, 2026)</a> · <a href="https://www.utah.gov/pmn/files/1379313.docx">PCC Resolution 2026-01</a></li>
+<li><a href="https://www.utah.gov/pmn/files/1330619.docx">Pine View PID No. 2 annexation</a> · <a href="https://www.utah.gov/pmn/files/1174301.docx">Three Bridges PID No. 1</a> · <a href="https://www.utah.gov/pmn/files/1373383.docx">BZI Innovation Park PID No. 1</a></li>
+<li><a href="https://www.utah.gov/pmn/files/1188089.pdf">Sage Creek IFD assessment area</a> · <a href="https://www.utah.gov/pmn/files/1139949.docx">Pointe West PID assessment area</a> · <a href="https://www.utah.gov/pmn/files/1273013.pdf">Brook View IFD (April 2025)</a> · <a href="https://www.utah.gov/pmn/files/1370769.pdf">Brook View IFD (Dec. 2025)</a></li>
+<li><a href="https://files.tax.utah.gov/propertytax/nomenclature/weber.pdf">Utah State Tax Commission, Weber County taxing entities</a></li>
+</ul>
+<h3>News</h3>
+<ul>
+<li>Wohali, KPCW: <a href="https://www.kpcw.org/summit-county/2025-08-08/summit-county-luxury-community-wohali-files-for-bankruptcy">Aug. 8, 2025</a> · <a href="https://www.kpcw.org/enespanol/2025-08-19/wohali-landowners-pay-to-keep-summit-county-golf-course-open-amid-bankruptcy">Aug. 19, 2025</a> · <a href="https://www.kpcw.org/summit-county/2025-12-08/bankrupt-coalville-resort-gets-loan-to-pay-off-infrastructure-debt">Dec. 8, 2025</a> · <a href="https://www.kpcw.org/state-regional/2026-04-21/summit-county-golf-resort-bankruptcy-ignites-debate-over-development-financing">April 21, 2026</a></li>
+<li><a href="https://www.ksl.com/article/51484981/hidden-developers-tax-is-zapping-utah-homebuyers-for-billions">KSL / Utah Investigative Journalism Project, April 26, 2026 (disclosure at or before closing)</a></li>
+<li><a href="https://www.ksl.com/article/51005205/weber-school-district-projects-outlined-in-279m-bond-move-ahead--but-theyll-cost-60m-more">KSL, Weber School District $279M bond</a></li>
+</ul>
+</details>
+</section>
+
+<footer class="pg">Utah Hive Politics · Every figure on this page comes from public records, linked above. We report public records. You decide.</footer>
+</div>
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent · Accountability · Journalism</span></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+document.querySelectorAll('.flip').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('on');});});
+try{
+var m=L.map('pidmap',{scrollWheelZoom:false}).setView([40.3,-111.9],7);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'}).addTo(m);
+var pts=[
+[41.316,-111.866,'Nordic Village PID (Eden)','Mill levy, 5 mills. First PID line on a 2026 tax bill: $6,222 on one commercial parcel.'],
+[41.287,-111.988,'Lomond Heights PID (Harrisville)','Up to $20M levy bonds and up to $20M assessment bonds approved (2026).'],
+[41.297,-112.027,'Farr West Landing (Farr West)','Mill levy up to 6 mills, plus city tax increment.'],
+[41.22,-112.10,'Promontory Commerce Center PID and Sage Creek IFD (West Weber)','PCC annexed about 329.5 acres by board resolution on Jan. 20, 2026.'],
+[41.216,-111.857,'Mount Ogden PIDs (Snowbasin)','Up to $300M authorized; none issued.'],
+[40.919,-111.399,'Wohali (Coalville)','Developer filed Chapter 11 on Aug. 8, 2025; almost $35M in PID debt.'],
+[40.507,-111.413,'Sawmill IFD (Wasatch County)','Homes paid off at final inspection; apartments about a year after opening.'],
+[40.62,-111.44,'MIDA: Mayflower / Deer Valley East Village (Wasatch County)','MIDA project area; MIDA-created PIDs can levy up to 0.015 plus a bond levy up to 0.02.'],
+[40.314,-112.006,'Firefly PID No. 1 (Eagle Mountain)','Payoff at or before the home goes to the person who lives there (2024 change).'],
+[37.104,-113.585,'Tech Ridge PID (St. George)','Payoff before the home goes to the owner or renter who lives there.'],
+[40.70,-112.30,'Tooele Valley (UIPA project area)','Its PID has issued $33M in bonds.'],
+[40.777,-111.888,'Utah State Capitol','SEC and State Auditor, Oct. 19, 2026. UIPA and MIDA before lawmakers, Oct. 21, 2026.']
+];
+pts.forEach(function(p){L.marker([p[0],p[1]]).addTo(m).bindPopup('<b style="font-size:17px">'+p[2]+'</b><br><span style="font-size:16px">'+p[3]+'</span>');});
+}catch(e){document.getElementById('pidmap').textContent='Map could not load.';}
+</script>
+</body>
+</html>

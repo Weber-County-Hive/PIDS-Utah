@@ -24,6 +24,17 @@
 
 const PID_PAGES = [
   {
+    id: "how-pids-work",
+    title: "How PIDs Work: Who Pays, and a Fix Already Working in Utah",
+    region: "Statewide",
+    summary: "How a PID starts, grows and bills homeowners; the $534 a year Weber households already carry from tax hikes; what the SEC and the State Auditor said at the Capitol, including the sales-tax point; what UIPA and MIDA told lawmakers, checked; and the payoff-first rule used by Tech Ridge, Firefly and Sawmill.",
+    date: "2026-10-29",
+    updated: "2026-10-29",
+    tags: ["explainer", "reform", "homebuyers", "mida"],
+    page: "how-pids-work.html",
+    status: "live"
+  },
+  {
     id: "housing-promises-vs-record",
     order: 14,
     title: "A Shortage of Homes, or a Shortage of Homes People Can Afford?",

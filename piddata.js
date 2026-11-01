@@ -53,9 +53,21 @@ const PID_PAGES = [
     region: "Weber County",
     summary: "Weber County's own data showed a 2,540-unit shortage at the lowest incomes and surpluses at 30-80% of area income. Prices vs. paychecks, what income-restricted rent costs in Ogden, $146 million paid as tax increment since 2015, and what Build HUBS would mean for Ogden homeowners.",
     date: "2026-10-27",
-    updated: "2026-10-27",
+    updated: "2026-10-31",
     tags: ["weber county", "ogden", "housing", "tax increment", "homebuyers"],
     page: "ogden-housing-on-the-record.html",
+    status: "live"
+  },
+  {
+    id: "wildcat-square-cra-ogden",
+    order: 16,
+    title: "Wildcat Square: $3.3 Million in Future Taxes for Student Housing at Weber State",
+    region: "Weber County",
+    summary: "Ogden's RDA plans to collect up to $3,330,116 in future taxes over 15 years to help build student housing on a Weber State practice field. Ogden School District gives the most: $2,194,353, about 2 of every 3 dollars. Five places the city's own papers don't match. Hearing Nov. 17, 2026.",
+    date: "2026-10-31",
+    updated: "2026-10-31",
+    tags: ["weber county", "ogden", "tax increment", "housing", "school districts"],
+    page: "wildcat-square-cra-ogden.html",
     status: "live"
   },
   {
@@ -137,7 +149,7 @@ const PID_PAGES = [
     region: "Weber County",
     summary: "A full case file on one Weber County PID — interactive cost calculators, a 40-year cost trajectory, and the county's own tax-diversion numbers going back to 2021, all built from primary-source budgets and disclosures.",
     date: "2026-08-27",
-    updated: "2026-08-27",
+    updated: "2026-10-31",
     tags: ["weber county", "case file", "calculator", "tax increment"],
     page: "nordic-village-case-file.html",
     status: "live"

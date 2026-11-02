@@ -1,10 +1,11 @@
+<meta charset="UTF-8">
 <title>What the New Boards Inherit</title>
 <style>
 :root{
-  --paper:#f2ede2; --panel:#fbf8f1;
-  --ink:#20241f; --ink-soft:#4a4f45;
-  --line:#c9c0a8; --rule-strong:#8a8265;
-  --flag:#8a2e1f; --flag-soft:#f4e2dc;
+  --paper:#f6f1e6; --panel:#fbf8f1;
+  --ink:#1c1c1c; --ink-soft:#4a4a48;
+  --line:#d8cfba; --rule-strong:#8a8265;
+  --flag:#b3261e; --flag-soft:#fbe3df;
   --gold:#8a6a1f; --gold-soft:#f4ecdc;
   --slate:#2a4a6b; --slate-soft:#e4eaf0;
   --accent:var(--slate); --soft:var(--slate-soft); --muted:var(--ink-soft); --rule:var(--line);
@@ -80,7 +81,64 @@ ol.src li{margin-bottom:10px;color:var(--ink-soft)}
 footer{border-top:3px double var(--rule-strong);margin-top:64px;padding-top:20px;
   font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--muted);letter-spacing:.05em}
 @media(max-width:600px){body{font-size:15.5px}.wrap{padding:0 16px 70px}}
+.hbx-top{margin:0}
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:10px 20px}
+.hb-bar a{display:flex;align-items:center;gap:12px;max-width:1100px;margin:0 auto;text-decoration:none}
+.hb-bar img{width:52px;height:52px;border-radius:4px;display:block;flex:none}
+.hb-name{font-family:'Cinzel','Trajan Pro',Georgia,serif;color:#d4af37;font-size:16px;letter-spacing:.14em;text-transform:uppercase;line-height:1.2;display:block}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12.5px;display:block;margin-top:2px}
+.hb-line-top{font-family:Georgia,serif;color:#e8d9b5;font-size:12.5px;display:block;margin-top:3px;line-height:1.4}
+.hbx-slim{background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hbx-slim a{color:#F3E3B3;text-decoration:underline}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 20px 30px;font-family:Georgia,serif;line-height:1.5}
+.hb-foot img{width:52px;height:52px;display:block;margin:0 auto 10px}
+.hb-foot .hb-name,.hb-foot .hb-sub{display:block}
+.hb-foot .hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block}
+.hb-line{max-width:720px;margin:14px auto 0;color:#e8d9b5;font-size:15.5px;line-height:1.5}
+.hb-tips{margin:16px 0 4px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hb-btn{display:inline-block;border:2px solid #d4af37;background:#d4af37;color:#0d0b0a!important;font:700 15px Georgia,serif;padding:10px 18px;border-radius:6px;text-decoration:none!important}
+.hb-btn2{background:transparent;color:#d4af37!important}
+.hb-small{font-size:12.5px;color:#8a7650;margin:6px 0 0}
+.hb-small a{color:#d4af37;text-decoration:underline}
+.hb-foot p{max-width:720px;margin-left:auto!important;margin-right:auto!important}
+.hbx-tools{max-width:980px;margin:14px auto 4px;padding:0 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;font-family:Arial,sans-serif;position:relative;z-index:2}
+.hbx-tool{display:inline-block;font:700 15px Arial,sans-serif;color:#13233F!important;background:#fff;border:1px solid #c8cfd6;border-radius:6px;padding:9px 13px;text-decoration:none!important;cursor:pointer;line-height:1.2}
+.hbx-tool:hover{border-color:#13233F}.hbx-cnchip b{color:#1f5f9e;font-family:ui-monospace,Menlo,monospace}
+.hbx-jump{flex-basis:100%;order:5;border:1px solid #c8cfd6;border-radius:6px;background:#fff;color:#13233F}.hbx-jump summary{cursor:pointer;padding:9px 13px;font:700 15px Arial,sans-serif}
+.hbx-jump ol{margin:0;padding:4px 16px 12px 36px}.hbx-jump li{margin:6px 0;font-size:16.5px}.hbx-jump a{color:#13233F}
+.hbx-shelfwrap{background:#0e2438;color:#dbe7f0;padding:26px 20px 30px;font:16px/1.5 Arial,sans-serif;margin-top:48px;position:relative;z-index:1}
+.hbx-shelfwrap .in{max-width:900px;margin:0 auto}
+.hbx-shelf{border:2px dashed #9fd0ee;border-radius:10px;padding:16px 18px}
+.hbx-cn-big{font:600 17px ui-monospace,Menlo,monospace;margin-bottom:12px;color:#fff}.hbx-cn-big b{color:#9fd0ee}
+.hbx-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.hbx-nav-btn{flex:1;min-width:220px;background:#12304a;border:1px solid #4d86ad;border-radius:8px;padding:12px 14px;color:#fff!important;text-decoration:none!important;font-size:16px}.hbx-nav-btn b{color:#9fd0ee;font-family:ui-monospace,Menlo,monospace}.hbx-off{opacity:.5}
+.hbx-list summary{cursor:pointer;font-weight:700;padding:6px 0}.hbx-list ol{list-style:none;margin:6px 0 0;padding:0}.hbx-list li{padding:6px 0;border-bottom:1px solid #2b4a63}.hbx-list a{color:#fff!important;text-decoration:none}
+.hbx-shelf-head{color:#9fd0ee;font:600 13px ui-monospace,Menlo,monospace;letter-spacing:.1em}.hbx-cn{font-family:ui-monospace,Menlo,monospace;color:#9fd0ee;margin-right:6px}
+.hbx-find{margin:14px 0 4px}.hbx-find label{display:block;font-weight:700;margin-bottom:6px}.hbx-find div{display:flex;gap:8px;flex-wrap:wrap}.hbx-find input{flex:1;min-width:0;width:100%;padding:12px 14px;font-size:17px;border:2px solid #4d86ad;border-radius:6px;color:#13233F;background:#fff}.hbx-find button{padding:12px 18px;font-size:16px;font-weight:700;background:#9fd0ee;color:#0e2438;border:0;border-radius:6px;cursor:pointer}
+.hbx-search{font-size:15px;margin-top:12px}.hbx-search a,.hbx-search b{color:#9fd0ee}
+.hbx-totop{display:none;position:fixed;right:16px;bottom:16px;z-index:50;background:#0e2438;color:#fff!important;border:2px solid #9fd0ee;border-radius:24px;padding:10px 16px;font:700 15px Arial,sans-serif;text-decoration:none!important;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.hbx-dates{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+@media(max-width:600px){.hb-bar img{width:38px;height:38px}.hb-line-top{font-size:11.5px}}
+@media print{.hbx-tools,.hbx-totop{display:none}}
+/* Text sizes matched to the other Hive repos (Nov. 2, 2026): 19px reading text */
+main p:not(.hbx-dates),main li,section p,section li,article p,article li,.wrap > p:not(.hbx-dates),.callout p,.note p,.step p{font-size:19px!important;line-height:1.6}
+details li,details p,td,.flip-back,.card p,dl dd{font-size:17px!important;line-height:1.55}
+.dek,.sub,.standfirst,.lede{font-size:19px!important;line-height:1.55}
+.tracking-list li,.tracking-inner p,.role,.role-desc,.tl-body,.tl-body .d,.tl-body .t,.mech-detail,blockquote.cannon,.flip-card-back p,.closing-open p,.flow-text,.drow .v,.frozen-row div,.face div,.r-d,.pstat{font-size:17px!important;line-height:1.55}
+.ploc,.hypothesis-card .tag,.map-note,.calc-metric .k,.stat .s,.ghost-note,header .meta,.fair .k,.step .k,.controls p,.tower-caption,.sec-label,.board-card .date{font-size:14px!important}
+.source-list,.source-list *,footer p,footer .note,.stat .l,.stat-box .l,.cap,.ratekey,.who,.card .k,.hs-lab{font-size:15px!important}
+.hbx-dates{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px!important;font-weight:400;letter-spacing:.03em;margin:12px 0 0;opacity:.85}
+.pub-mark .circ-bee{width:46px;height:46px;display:block}
+body:has(.topbtn) .hbx-totop{display:none!important}
+.hb-foot .hb-name{font-size:16px}
+.hb-foot .hb-sub{font-size:12.5px}
+.hbx-tools{margin-top:16px;margin-bottom:14px}
+.hbx-shelfwrap+.hb-foot{margin-top:0}
+.hbx-shelf details.hbx-list li,.hbx-shelf details.hbx-list p{font-size:16px!important}
+@media(max-width:700px){main table,.wrap table,section table{display:block;overflow-x:auto;max-width:100%}main svg,section svg{max-width:100%;height:auto}}
 </style>
+<div class="hbx-top"><div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-line-top">The people's publication. We investigate what's best for the public as a whole, not any party or special interest.</span></span></a></div>
+<div class="hbx-slim"><span>PIDS-Utah · PD 100.06</span><span><a href="index.html">← PID Research home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/">← Hive library (every repo)</a></span></div></div>
 
 <div class="wrap">
 
@@ -91,7 +149,7 @@ footer{border-top:3px double var(--rule-strong);margin-top:64px;padding-top:20px
   delivery were seated in January 2026, and two things were already waiting for them: revenue
   committed away for decades, and $201 million of debt issued without an election. Both were made
   possible by a law passed in 2025. Not one legislator voted against it.</p>
-  <div class="meta">Utah County · Schools &amp; Bonding · Published September 2026</div>
+  <div class="meta">Utah County · Schools &amp; Bonding · Published September 2026 · Page look updated Nov. 2, 2026</div>
 </header>
 
 <section>
@@ -112,38 +170,38 @@ footer{border-top:3px double var(--rule-strong);margin-top:64px;padding-top:20px
     million of lease revenue bonds to market. November 2025: new district boards elected. January
     2026: boards seated. July 1, 2027: the split takes effect.</desc>
 
-    <line x1="26" y1="40" x2="26" y2="392" stroke="#c9c0a8" stroke-width="2"/>
+    <line x1="26" y1="40" x2="26" y2="392" stroke="#d8cfba" stroke-width="2"/>
 
     <circle cx="26" cy="48" r="7" fill="#2a4a6b"/>
     <text x="48" y="44" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#2a4a6b">FEB 4, 2025 — SENATE EDUCATION</text>
-    <text x="48" y="62" font-family="Georgia,serif" font-size="13" fill="#20241f">Three sitting Alpine School Board members address the committee. Substitute #1 adopted, 5–0–2.</text>
+    <text x="48" y="62" font-family="Georgia,serif" font-size="13" fill="#1c1c1c">Three sitting Alpine School Board members address the committee. Substitute #1 adopted, 5–0–2.</text>
 
-    <circle cx="26" cy="98" r="7" fill="#8a2e1f"/>
-    <text x="48" y="94" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#8a2e1f">FEB 27, 2025 — HOUSE EDUCATION</text>
-    <text x="48" y="112" font-family="Georgia,serif" font-size="13" fill="#20241f">Amendment #2 adds the lease revenue bond cap exemption. Adopted 12–0–4.</text>
+    <circle cx="26" cy="98" r="7" fill="#b3261e"/>
+    <text x="48" y="94" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#b3261e">FEB 27, 2025 — HOUSE EDUCATION</text>
+    <text x="48" y="112" font-family="Georgia,serif" font-size="13" fill="#1c1c1c">Amendment #2 adds the lease revenue bond cap exemption. Adopted 12–0–4.</text>
 
     <circle cx="26" cy="148" r="7" fill="#8a6a1f"/>
     <text x="48" y="144" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#8a6a1f">MAR 7, 2025 — LAST DAY OF SESSION</text>
-    <text x="48" y="162" font-family="Georgia,serif" font-size="13" fill="#20241f">Chambers disagree. A conference committee substitutes the bill at 3:19 p.m.</text>
-    <text x="48" y="180" font-family="Georgia,serif" font-size="13" fill="#20241f">House passes 4:43 p.m. (68–0–7). Senate passes 5:52 p.m. (24–0–5).</text>
+    <text x="48" y="162" font-family="Georgia,serif" font-size="13" fill="#1c1c1c">Chambers disagree. A conference committee substitutes the bill at 3:19 p.m.</text>
+    <text x="48" y="180" font-family="Georgia,serif" font-size="13" fill="#1c1c1c">House passes 4:43 p.m. (68–0–7). Senate passes 5:52 p.m. (24–0–5).</text>
 
     <circle cx="26" cy="216" r="7" fill="#2a4a6b"/>
     <text x="48" y="212" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#2a4a6b">MAR 17, 2025 — SIGNED</text>
 
-    <circle cx="26" cy="252" r="7" fill="#8a2e1f"/>
-    <text x="48" y="248" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#8a2e1f">JULY 2025 — THE BONDS</text>
-    <text x="48" y="266" font-family="Georgia,serif" font-size="13" fill="#20241f">Alpine brings $201 million to market, of up to $238 million approved. Terms to 31 years.</text>
+    <circle cx="26" cy="252" r="7" fill="#b3261e"/>
+    <text x="48" y="248" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#b3261e">JULY 2025 — THE BONDS</text>
+    <text x="48" y="266" font-family="Georgia,serif" font-size="13" fill="#1c1c1c">Alpine brings $201 million to market, of up to $238 million approved. Terms to 31 years.</text>
 
     <circle cx="26" cy="302" r="7" fill="#2a4a6b"/>
     <text x="48" y="298" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#2a4a6b">NOV 2025 — ELECTIONS</text>
-    <text x="48" y="316" font-family="Georgia,serif" font-size="13" fill="#20241f">21 seats filled across three new districts. One is uncontested.</text>
+    <text x="48" y="316" font-family="Georgia,serif" font-size="13" fill="#1c1c1c">21 seats filled across three new districts. One is uncontested.</text>
 
     <circle cx="26" cy="348" r="7" fill="#2a4a6b"/>
     <text x="48" y="344" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#2a4a6b">JAN 2026 — BOARDS SEATED</text>
 
     <circle cx="26" cy="384" r="8" fill="#8a6a1f"/>
     <text x="48" y="380" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="700" fill="#8a6a1f">JULY 1, 2027 — THE SPLIT TAKES EFFECT</text>
-    <text x="48" y="398" font-family="Georgia,serif" font-size="13" fill="#20241f">Assets, liabilities and commitments transfer to Aspen Peaks, Lake Mountain and Timpanogos.</text>
+    <text x="48" y="398" font-family="Georgia,serif" font-size="13" fill="#1c1c1c">Assets, liabilities and commitments transfer to Aspen Peaks, Lake Mountain and Timpanogos.</text>
   </svg>
   </div>
 </section>
@@ -428,51 +486,51 @@ footer{border-top:3px double var(--rule-strong);margin-top:64px;padding-top:20px
 
     <text x="0" y="14" font-family="ui-monospace,Menlo,monospace" font-size="10.5" letter-spacing="1.4"
       fill="#2a4a6b" font-weight="700">STREAM ONE — STATE MONEY, FOLLOWS THE STUDENT</text>
-    <rect x="0" y="26" width="230" height="72" fill="#fbf8f1" stroke="#c9c0a8"/>
-    <text x="115" y="54" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="700" fill="#20241f">STATE</text>
-    <text x="115" y="74" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4f45">Uniform School Fund,</text>
-    <text x="115" y="90" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4f45">distributed per student (WPU)</text>
+    <rect x="0" y="26" width="230" height="72" fill="#fbf8f1" stroke="#d8cfba"/>
+    <text x="115" y="54" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="700" fill="#1c1c1c">STATE</text>
+    <text x="115" y="74" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4a48">Uniform School Fund,</text>
+    <text x="115" y="90" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4a48">distributed per student (WPU)</text>
     <line x1="240" y1="62" x2="470" y2="62" stroke="#2a4a6b" stroke-width="8" opacity="0.5"/>
     <path d="M470 62 l-12 -7 v14 z" fill="#2a4a6b" opacity="0.5"/>
-    <text x="355" y="46" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4f45">arrives in full</text>
+    <text x="355" y="46" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4a48">arrives in full</text>
     <rect x="484" y="26" width="276" height="72" fill="#e4eaf0" stroke="#2a4a6b"/>
     <text x="622" y="60" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="700" fill="#2a4a6b">SCHOOL DISTRICT BUDGET</text>
-    <text x="622" y="80" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#20241f">teachers · buildings · buses · debt</text>
+    <text x="622" y="80" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#1c1c1c">teachers · buildings · buses · debt</text>
 
     <text x="0" y="140" font-family="ui-monospace,Menlo,monospace" font-size="10.5" letter-spacing="1.4"
-      fill="#8a2e1f" font-weight="700">STREAM TWO — LOCAL PROPERTY TAX, FOLLOWS THE LAND</text>
-    <rect x="0" y="152" width="230" height="72" fill="#fbf8f1" stroke="#c9c0a8"/>
-    <text x="115" y="180" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="700" fill="#20241f">LOCAL</text>
-    <text x="115" y="200" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4f45">the district's own levy on</text>
-    <text x="115" y="216" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4f45">property inside its boundaries</text>
-    <line x1="240" y1="188" x2="330" y2="188" stroke="#8a2e1f" stroke-width="8" opacity="0.45"/>
-    <rect x="330" y="160" width="120" height="56" fill="#f4e2dc" stroke="#8a2e1f"/>
-    <text x="390" y="184" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="11" font-weight="700" fill="#8a2e1f">PROJECT AREA</text>
-    <text x="390" y="202" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#8a2e1f">a share captured</text>
-    <line x1="450" y1="188" x2="470" y2="188" stroke="#8a2e1f" stroke-width="4" opacity="0.45"/>
-    <path d="M478 188 l-12 -7 v14 z" fill="#8a2e1f" opacity="0.45"/>
-    <text x="530" y="184" font-family="Georgia,serif" font-size="12" fill="#4a4f45">what is left arrives</text>
-    <line x1="390" y1="216" x2="390" y2="268" stroke="#8a2e1f" stroke-width="8" opacity="0.65"/>
-    <path d="M390 276 l-7 -12 h14 z" fill="#8a2e1f" opacity="0.65"/>
-    <rect x="250" y="280" width="280" height="56" fill="#8a2e1f" opacity="0.10" stroke="#8a2e1f"/>
-    <text x="390" y="304" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="12" font-weight="700" fill="#8a2e1f">COMMITTED TO THE PROJECT</text>
-    <text x="390" y="324" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#20241f">20 years per phase, 40-year maximum</text>
+      fill="#b3261e" font-weight="700">STREAM TWO — LOCAL PROPERTY TAX, FOLLOWS THE LAND</text>
+    <rect x="0" y="152" width="230" height="72" fill="#fbf8f1" stroke="#d8cfba"/>
+    <text x="115" y="180" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="700" fill="#1c1c1c">LOCAL</text>
+    <text x="115" y="200" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4a48">the district's own levy on</text>
+    <text x="115" y="216" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#4a4a48">property inside its boundaries</text>
+    <line x1="240" y1="188" x2="330" y2="188" stroke="#b3261e" stroke-width="8" opacity="0.45"/>
+    <rect x="330" y="160" width="120" height="56" fill="#fbe3df" stroke="#b3261e"/>
+    <text x="390" y="184" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="11" font-weight="700" fill="#b3261e">PROJECT AREA</text>
+    <text x="390" y="202" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#b3261e">a share captured</text>
+    <line x1="450" y1="188" x2="470" y2="188" stroke="#b3261e" stroke-width="4" opacity="0.45"/>
+    <path d="M478 188 l-12 -7 v14 z" fill="#b3261e" opacity="0.45"/>
+    <text x="530" y="184" font-family="Georgia,serif" font-size="12" fill="#4a4a48">what is left arrives</text>
+    <line x1="390" y1="216" x2="390" y2="268" stroke="#b3261e" stroke-width="8" opacity="0.65"/>
+    <path d="M390 276 l-7 -12 h14 z" fill="#b3261e" opacity="0.65"/>
+    <rect x="250" y="280" width="280" height="56" fill="#b3261e" opacity="0.10" stroke="#b3261e"/>
+    <text x="390" y="304" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="12" font-weight="700" fill="#b3261e">COMMITTED TO THE PROJECT</text>
+    <text x="390" y="324" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#1c1c1c">20 years per phase, 40-year maximum</text>
 
-    <line x1="0" y1="374" x2="760" y2="374" stroke="#c9c0a8"/>
+    <line x1="0" y1="374" x2="760" y2="374" stroke="#d8cfba"/>
     <text x="0" y="402" font-family="ui-monospace,Menlo,monospace" font-size="10.5" letter-spacing="1.4"
       fill="#8a6a1f" font-weight="700">WHY IT SQUEEZES — THE PART THE WPU ANSWER DOES NOT REACH</text>
     <rect x="0" y="414" width="236" height="80" fill="#f4ecdc" stroke="#8a6a1f"/>
-    <text x="118" y="440" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#20241f">New rooftops inside the area</text>
-    <text x="118" y="458" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#20241f">bring students the district</text>
-    <text x="118" y="476" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-weight="700" fill="#20241f">must serve.</text>
+    <text x="118" y="440" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#1c1c1c">New rooftops inside the area</text>
+    <text x="118" y="458" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#1c1c1c">bring students the district</text>
+    <text x="118" y="476" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-weight="700" fill="#1c1c1c">must serve.</text>
     <text x="252" y="460" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#8a8265">+</text>
     <rect x="268" y="414" width="236" height="80" fill="#f4ecdc" stroke="#8a6a1f"/>
-    <text x="386" y="440" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#20241f">Their property tax growth</text>
-    <text x="386" y="458" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#20241f">is captured above the</text>
-    <text x="386" y="476" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-weight="700" fill="#20241f">frozen base value.</text>
+    <text x="386" y="440" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#1c1c1c">Their property tax growth</text>
+    <text x="386" y="458" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#1c1c1c">is captured above the</text>
+    <text x="386" y="476" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-weight="700" fill="#1c1c1c">frozen base value.</text>
     <text x="520" y="460" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#8a8265">=</text>
     <rect x="536" y="414" width="224" height="80" fill="#8a6a1f" opacity="0.12" stroke="#8a6a1f"/>
-    <text x="648" y="440" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#20241f">Costs rise. Base does not.</text>
+    <text x="648" y="440" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" fill="#1c1c1c">Costs rise. Base does not.</text>
     <text x="648" y="460" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-weight="700" fill="#8a6a1f">The levers left are a rate</text>
     <text x="648" y="478" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-weight="700" fill="#8a6a1f">increase, or a cut.</text>
     <text x="0" y="524" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#8a8265">Term and structure from adopted project area budgets and Utah Code.</text>
@@ -688,4 +746,7 @@ footer{border-top:3px double var(--rule-strong);margin-top:64px;padding-top:20px
 </footer>
 
 </div>
+<div class="hbx-shelfwrap"><div class="in"><div class="hbx-shelf" id="hbx-shelf"></div></div></div>
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent &middot; Accountability &middot; Journalism</span><p class="hb-line">The Weber County Hive and Utah Hive Politics: the people's publication. We investigate what's best for the public as a whole, not for any party or special interest group. We report public records. You decide.</p><p class="hb-tips"><a class="hb-btn" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">Send a tip</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html">Tips we checked</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">See a mistake? Tell us</a></p><p class="hb-small">We never name tipsters. When we correct a page, the fix and its date are shown on the page.</p><p class="hb-small"><a href="index.html">PID Research home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/">Master Index (Hive library)</a> · <a href="https://webercountyhive.substack.com/">Read on Substack</a></p></div>
+<script src="pd-shelf.js?v=1"></script>
 <script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

@@ -7,7 +7,7 @@
 <style>
   :root{
     --cream:#f6f1e6; --paper:#fbf8f1; --navy:#10233f; --navy-deep:#0a1626;
-    --gold:#b8863b; --gold-bright:#d6a752; --flag:#9c3b2e; --flag-bright:#c14e3a;
+    --gold:#b8863b; --gold-bright:#d6a752; --flag:#b3261e; --flag-bright:#c14e3a;
     --ink:#1c1c1c; --ink-soft:#4a4a48; --rule:#d8cfba; --green-ok:#3f6b4a;
     --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
     --font-body: 'Helvetica Neue', Arial, sans-serif;
@@ -114,14 +114,72 @@
   .calc-metric{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:12px 14px;}
   .calc-metric .k{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;}
   .calc-metric .v{font-size:20px;font-weight:700;color:var(--navy);margin-top:2px;}
+.hbx-top{margin:0}
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:10px 20px}
+.hb-bar a{display:flex;align-items:center;gap:12px;max-width:1100px;margin:0 auto;text-decoration:none}
+.hb-bar img{width:52px;height:52px;border-radius:4px;display:block;flex:none}
+.hb-name{font-family:'Cinzel','Trajan Pro',Georgia,serif;color:#d4af37;font-size:16px;letter-spacing:.14em;text-transform:uppercase;line-height:1.2;display:block}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12.5px;display:block;margin-top:2px}
+.hb-line-top{font-family:Georgia,serif;color:#e8d9b5;font-size:12.5px;display:block;margin-top:3px;line-height:1.4}
+.hbx-slim{background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hbx-slim a{color:#F3E3B3;text-decoration:underline}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 20px 30px;font-family:Georgia,serif;line-height:1.5}
+.hb-foot img{width:52px;height:52px;display:block;margin:0 auto 10px}
+.hb-foot .hb-name,.hb-foot .hb-sub{display:block}
+.hb-foot .hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block}
+.hb-line{max-width:720px;margin:14px auto 0;color:#e8d9b5;font-size:15.5px;line-height:1.5}
+.hb-tips{margin:16px 0 4px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hb-btn{display:inline-block;border:2px solid #d4af37;background:#d4af37;color:#0d0b0a!important;font:700 15px Georgia,serif;padding:10px 18px;border-radius:6px;text-decoration:none!important}
+.hb-btn2{background:transparent;color:#d4af37!important}
+.hb-small{font-size:12.5px;color:#8a7650;margin:6px 0 0}
+.hb-small a{color:#d4af37;text-decoration:underline}
+.hb-foot p{max-width:720px;margin-left:auto!important;margin-right:auto!important}
+.hbx-tools{max-width:980px;margin:14px auto 4px;padding:0 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;font-family:Arial,sans-serif;position:relative;z-index:2}
+.hbx-tool{display:inline-block;font:700 15px Arial,sans-serif;color:#13233F!important;background:#fff;border:1px solid #c8cfd6;border-radius:6px;padding:9px 13px;text-decoration:none!important;cursor:pointer;line-height:1.2}
+.hbx-tool:hover{border-color:#13233F}.hbx-cnchip b{color:#1f5f9e;font-family:ui-monospace,Menlo,monospace}
+.hbx-jump{flex-basis:100%;order:5;border:1px solid #c8cfd6;border-radius:6px;background:#fff;color:#13233F}.hbx-jump summary{cursor:pointer;padding:9px 13px;font:700 15px Arial,sans-serif}
+.hbx-jump ol{margin:0;padding:4px 16px 12px 36px}.hbx-jump li{margin:6px 0;font-size:16.5px}.hbx-jump a{color:#13233F}
+.hbx-shelfwrap{background:#0e2438;color:#dbe7f0;padding:26px 20px 30px;font:16px/1.5 Arial,sans-serif;margin-top:48px;position:relative;z-index:1}
+.hbx-shelfwrap .in{max-width:900px;margin:0 auto}
+.hbx-shelf{border:2px dashed #9fd0ee;border-radius:10px;padding:16px 18px}
+.hbx-cn-big{font:600 17px ui-monospace,Menlo,monospace;margin-bottom:12px;color:#fff}.hbx-cn-big b{color:#9fd0ee}
+.hbx-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.hbx-nav-btn{flex:1;min-width:220px;background:#12304a;border:1px solid #4d86ad;border-radius:8px;padding:12px 14px;color:#fff!important;text-decoration:none!important;font-size:16px}.hbx-nav-btn b{color:#9fd0ee;font-family:ui-monospace,Menlo,monospace}.hbx-off{opacity:.5}
+.hbx-list summary{cursor:pointer;font-weight:700;padding:6px 0}.hbx-list ol{list-style:none;margin:6px 0 0;padding:0}.hbx-list li{padding:6px 0;border-bottom:1px solid #2b4a63}.hbx-list a{color:#fff!important;text-decoration:none}
+.hbx-shelf-head{color:#9fd0ee;font:600 13px ui-monospace,Menlo,monospace;letter-spacing:.1em}.hbx-cn{font-family:ui-monospace,Menlo,monospace;color:#9fd0ee;margin-right:6px}
+.hbx-find{margin:14px 0 4px}.hbx-find label{display:block;font-weight:700;margin-bottom:6px}.hbx-find div{display:flex;gap:8px;flex-wrap:wrap}.hbx-find input{flex:1;min-width:0;width:100%;padding:12px 14px;font-size:17px;border:2px solid #4d86ad;border-radius:6px;color:#13233F;background:#fff}.hbx-find button{padding:12px 18px;font-size:16px;font-weight:700;background:#9fd0ee;color:#0e2438;border:0;border-radius:6px;cursor:pointer}
+.hbx-search{font-size:15px;margin-top:12px}.hbx-search a,.hbx-search b{color:#9fd0ee}
+.hbx-totop{display:none;position:fixed;right:16px;bottom:16px;z-index:50;background:#0e2438;color:#fff!important;border:2px solid #9fd0ee;border-radius:24px;padding:10px 16px;font:700 15px Arial,sans-serif;text-decoration:none!important;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.hbx-dates{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+@media(max-width:600px){.hb-bar img{width:38px;height:38px}.hb-line-top{font-size:11.5px}}
+@media print{.hbx-tools,.hbx-totop{display:none}}
+/* Text sizes matched to the other Hive repos (Nov. 2, 2026): 19px reading text */
+main p:not(.hbx-dates),main li,section p,section li,article p,article li,.wrap > p:not(.hbx-dates),.callout p,.note p,.step p{font-size:19px!important;line-height:1.6}
+details li,details p,td,.flip-back,.card p,dl dd{font-size:17px!important;line-height:1.55}
+.dek,.sub,.standfirst,.lede{font-size:19px!important;line-height:1.55}
+.tracking-list li,.tracking-inner p,.role,.role-desc,.tl-body,.tl-body .d,.tl-body .t,.mech-detail,blockquote.cannon,.flip-card-back p,.closing-open p,.flow-text,.drow .v,.frozen-row div,.face div,.r-d,.pstat{font-size:17px!important;line-height:1.55}
+.ploc,.hypothesis-card .tag,.map-note,.calc-metric .k,.stat .s,.ghost-note,header .meta,.fair .k,.step .k,.controls p,.tower-caption,.sec-label,.board-card .date{font-size:14px!important}
+.source-list,.source-list *,footer p,footer .note,.stat .l,.stat-box .l,.cap,.ratekey,.who,.card .k,.hs-lab{font-size:15px!important}
+.hbx-dates{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px!important;font-weight:400;letter-spacing:.03em;margin:12px 0 0;opacity:.85}
+.pub-mark .circ-bee{width:46px;height:46px;display:block}
+body:has(.topbtn) .hbx-totop{display:none!important}
+.hb-foot .hb-name{font-size:16px}
+.hb-foot .hb-sub{font-size:12.5px}
+.hbx-tools{margin-top:16px;margin-bottom:14px}
+.hbx-shelfwrap+.hb-foot{margin-top:0}
+.hbx-shelf details.hbx-list li,.hbx-shelf details.hbx-list p{font-size:16px!important}
+@media(max-width:700px){main table,.wrap table,section table{display:block;overflow-x:auto;max-width:100%}main svg,section svg{max-width:100%;height:auto}}
 </style>
 </head>
 <body>
+<div class="hbx-top"><div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-line-top">The people's publication. We investigate what's best for the public as a whole, not any party or special interest.</span></span></a></div>
+<div class="hbx-slim"><span>PIDS-Utah · PD 100.03</span><span><a href="index.html">← PID Research home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/">← Hive library (every repo)</a></span></div></div>
 
 <header class="masthead">
   <div class="eyebrow">UTAH COUNTY — FIELD NOTES</div>
   <h1>Utah County Explanation: Where the Growth Money Goes</h1>
   <p class="sub">A working explainer, specific to Utah County, on Public Infrastructure Districts (PIDs), tax increment financing, and what happens when the frozen base can't keep up with what growth actually costs.</p>
+  <p class="hbx-dates">Posted Aug. 19, 2026 &middot; Updated Aug. 22, 2026 &middot; Page look updated Nov. 2, 2026</p>
 </header>
 
 <nav class="site-nav">
@@ -308,8 +366,8 @@
         <svg viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg">
           <rect x="40" y="20" width="220" height="280" rx="4" fill="#eee6d3" stroke="#b8a888" stroke-width="1.5"/>
           <text x="150" y="290" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#8c8471">UTAH COUNTY (schematic)</text>
-          <g class="pid-pin" data-key="utahcity" transform="translate(110,90)"><circle r="7" fill="#9c3b2e"/><text x="12" y="4" font-family="Courier New, monospace" font-size="10" fill="#10233f">Utah City PID / RDA</text></g>
-          <g class="pid-pin" data-key="sweetwater" transform="translate(90,190)"><circle r="7" fill="#9c3b2e"/><text x="12" y="4" font-family="Courier New, monospace" font-size="10" fill="#10233f">Sweetwater CRA</text></g>
+          <g class="pid-pin" data-key="utahcity" transform="translate(110,90)"><circle r="7" fill="#b3261e"/><text x="12" y="4" font-family="Courier New, monospace" font-size="10" fill="#10233f">Utah City PID / RDA</text></g>
+          <g class="pid-pin" data-key="sweetwater" transform="translate(90,190)"><circle r="7" fill="#b3261e"/><text x="12" y="4" font-family="Courier New, monospace" font-size="10" fill="#10233f">Sweetwater CRA</text></g>
         </svg>
         <div class="map-note">Approximate placement · Vineyard &amp; Eagle Mountain, Utah County</div>
       </div>
@@ -380,7 +438,7 @@
         <desc>A visual showing Utah's mobility ladder being weakened by school fragmentation, housing cost inflation, and tax diversion.</desc>
         <defs>
           <marker id="arrowUp" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M5 9L1 1L9 1Z" fill="#3f6b4a"/></marker>
-          <marker id="arrowDown" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M5 1L9 9L1 9Z" fill="#9c3b2e"/></marker>
+          <marker id="arrowDown" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M5 1L9 9L1 9Z" fill="#b3261e"/></marker>
         </defs>
         <text x="20" y="30" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:600;fill:#10233f;">Utah's upward mobility advantage under pressure</text>
         <rect x="20" y="55" width="290" height="320" rx="8" fill="#fbf8f1" stroke="#d8cfba" stroke-width="1"/>
@@ -394,16 +452,16 @@
         <line x1="60" y1="310" x2="290" y2="310" stroke="#b8863b" stroke-width="1"/><text x="40" y="305" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#1c1c1c;">Stable communities</text>
         <path d="M170 340 L170 360" stroke="#3f6b4a" stroke-width="2" fill="none" marker-end="url(#arrowUp)"/><text x="180" y="355" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#3f6b4a;">Upward mobility</text>
         <rect x="340" y="55" width="290" height="320" rx="8" fill="#fbf8f1" stroke="#d8cfba" stroke-width="1"/>
-        <text x="360" y="80" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:600;fill:#9c3b2e;">What's breaking it now</text>
+        <text x="360" y="80" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:600;fill:#b3261e;">What's breaking it now</text>
         <text x="360" y="98" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#4a4a48;">TIF and PID diversion hollow the</text>
         <text x="360" y="112" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#4a4a48;">conditions the ladder depends on</text>
-        <line x1="380" y1="150" x2="610" y2="150" stroke="#9c3b2e" stroke-width="2" stroke-dasharray="4,4"/><text x="360" y="145" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#9c3b2e;">Schools split, funding diverted</text>
-        <line x1="380" y1="190" x2="610" y2="190" stroke="#9c3b2e" stroke-width="2" stroke-dasharray="4,4"/><text x="360" y="185" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#9c3b2e;">Housing costs inflate with growth</text>
+        <line x1="380" y1="150" x2="610" y2="150" stroke="#b3261e" stroke-width="2" stroke-dasharray="4,4"/><text x="360" y="145" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#b3261e;">Schools split, funding diverted</text>
+        <line x1="380" y1="190" x2="610" y2="190" stroke="#b3261e" stroke-width="2" stroke-dasharray="4,4"/><text x="360" y="185" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#b3261e;">Housing costs inflate with growth</text>
         <line x1="380" y1="230" x2="610" y2="230" stroke="#b8b09a" stroke-width="1"/><text x="360" y="225" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#1c1c1c;">Families stretched thin</text>
         <line x1="380" y1="270" x2="610" y2="270" stroke="#b8b09a" stroke-width="1"/><text x="360" y="265" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#1c1c1c;">Networks weakened</text>
-        <line x1="380" y1="310" x2="610" y2="310" stroke="#9c3b2e" stroke-width="2" stroke-dasharray="4,4"/><text x="360" y="305" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#9c3b2e;">Enrollment without funds</text>
-        <path d="M470 340 L470 360" stroke="#9c3b2e" stroke-width="2" fill="none" marker-end="url(#arrowDown)"/><text x="480" y="355" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#9c3b2e;">Decline in opportunity</text>
-        <rect x="20" y="395" width="610" height="45" rx="6" fill="#fdf1ee" stroke="#9c3b2e" stroke-width="0.5"/>
+        <line x1="380" y1="310" x2="610" y2="310" stroke="#b3261e" stroke-width="2" stroke-dasharray="4,4"/><text x="360" y="305" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#b3261e;">Enrollment without funds</text>
+        <path d="M470 340 L470 360" stroke="#b3261e" stroke-width="2" fill="none" marker-end="url(#arrowDown)"/><text x="480" y="355" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;fill:#b3261e;">Decline in opportunity</text>
+        <rect x="20" y="395" width="610" height="45" rx="6" fill="#fdf1ee" stroke="#b3261e" stroke-width="0.5"/>
         <text x="40" y="415" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;fill:#1c1c1c;">TIF and PID diversion capture the tax growth needed to sustain the rungs above. Without</text>
         <text x="40" y="431" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;fill:#1c1c1c;">intervention, Utah County's mobility advantage erodes — and it becomes another unequal metro.</text>
       </svg>
@@ -589,7 +647,7 @@
     const verdictEl = document.getElementById('calc-verdict');
     if(diff > 0){
       verdictEl.textContent = calcFmt(diff) + ' more';
-      verdictEl.style.color = '#9c3b2e';
+      verdictEl.style.color = '#b3261e';
     } else {
       verdictEl.textContent = 'about the same';
       verdictEl.style.color = '#10233f';
@@ -604,7 +662,7 @@
         type: 'line',
         data: { labels: years, datasets: [
             { label:'Non-PID home', data: nonpidCum, borderColor:'#2a78d6', backgroundColor:'rgba(42,120,214,0.08)', borderWidth:2, pointRadius:0, fill:true, tension:0 },
-            { label:'PID home', data: pidCum, borderColor:'#9c3b2e', backgroundColor:'rgba(156,59,46,0.08)', borderWidth:2, pointRadius:0, fill:true, tension:0 }
+            { label:'PID home', data: pidCum, borderColor:'#b3261e', backgroundColor:'rgba(156,59,46,0.08)', borderWidth:2, pointRadius:0, fill:true, tension:0 }
         ] },
         options: { responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false}, plugins:{ legend:{display:false} }, scales:{ y:{ ticks:{ callback:(v)=>'$'+(v/1000).toFixed(0)+'k' } } } }
       });
@@ -632,6 +690,9 @@
   computeRenter();
 </script>
 
+<div class="hbx-shelfwrap"><div class="in"><div class="hbx-shelf" id="hbx-shelf"></div></div></div>
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent &middot; Accountability &middot; Journalism</span><p class="hb-line">The Weber County Hive and Utah Hive Politics: the people's publication. We investigate what's best for the public as a whole, not for any party or special interest group. We report public records. You decide.</p><p class="hb-tips"><a class="hb-btn" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">Send a tip</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html">Tips we checked</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">See a mistake? Tell us</a></p><p class="hb-small">We never name tipsters. When we correct a page, the fix and its date are shown on the page.</p><p class="hb-small"><a href="index.html">PID Research home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/">Master Index (Hive library)</a> · <a href="https://webercountyhive.substack.com/">Read on Substack</a></p></div>
+<script src="pd-shelf.js?v=1"></script>
 <script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

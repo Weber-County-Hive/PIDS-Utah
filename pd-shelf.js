@@ -111,6 +111,16 @@ var HBX = {
       "callNumber": "PD 200.10",
       "slug": "wildcat-square-cra-ogden-plain",
       "name": "Wildcat Square, in Plain Words"
+    },
+    {
+      "callNumber": "PD 200.11",
+      "slug": "west-weber-7500-black-pine",
+      "name": "$7,500 a Home: Who Gets the West Weber Parks Money?"
+    },
+    {
+      "callNumber": "PD 200.12",
+      "slug": "west-weber-7500-black-pine-plain",
+      "name": "$7,500 a Home, in Plain Words"
     }
   ],
   "shelves": {

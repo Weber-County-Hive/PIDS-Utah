@@ -24,6 +24,28 @@
 
 const PID_PAGES = [
   {
+    id: "west-weber-7500-black-pine",
+    title: "$7,500 a Home: Who Gets the West Weber Parks Money?",
+    region: "Weber County",
+    summary: "In 2024 Weber County said the $7,500-per-home rezone donation was set by and paid to the park districts; in 2026 county staff called it the county's. Records show BlackPine's partners running the Promontory Commerce Center PID, the business park moved into an Inland Port area after its park deal, and about $360.8 million in local tax growth estimated to go to the port over 25 years.",
+    date: "2026-11-09",
+    updated: "2026-11-09",
+    tags: ["weber county", "case file", "tax increment", "inland port", "parks"],
+    page: "west-weber-7500-black-pine.html",
+    status: "live"
+  },
+  {
+    id: "west-weber-7500-black-pine-plain",
+    title: "$7,500 a Home, in Plain Words",
+    region: "Weber County",
+    summary: "The short, simple version of the West Weber $7,500 parks money case file.",
+    date: "2026-11-09",
+    updated: "2026-11-09",
+    tags: ["weber county", "plain words", "inland port", "parks"],
+    page: "west-weber-7500-black-pine-plain.html",
+    status: "live"
+  },
+  {
     id: "how-pids-work",
     title: "How PIDs Work: Who Pays, and a Fix Already Working in Utah",
     region: "Statewide",
